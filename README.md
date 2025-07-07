@@ -51,6 +51,8 @@ git push
 
 3. **Create a PR!**
 
+> 🚨 IMPORTANT: At this stage, your branch should run **perfectly fine with no errors**. 
+
 Go to the GitHub repo in the browser and navigate to "Pull Requests > New Pull Request"
 
 You can optionally (but should) include information about what the PR is about inside the description
