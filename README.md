@@ -10,7 +10,7 @@ This was made as part of Ontario Tech University's Tech For Good program.
 > [!NOTE]
 > *this section will be removed once the project is finished*
 
-You must PR a feature branch in order to make changes to the `master` branch.
+You must open a PR to merge your changes into the master branch.
 
 <details>
 <summary>Click here if you're not sure what that means</summary>
