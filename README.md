@@ -1,4 +1,14 @@
+# Welcome to Universus!
+
+Universus is a **long-form × plinko × battle-sim** with deployable arcade machines in mind, built in [Godot 4.4 + .NET](https://godotengine.org/download/)
+
+This was made as part of Ontario Tech University's Tech For Good program.
+
+
 # how to github
+
+> [!NOTE]
+> *this section will be removed once the project is finished*
 
 You must PR a feature branch in order to make changes to the `master` branch.
 
@@ -11,7 +21,6 @@ headache if we all could push directly to the `master` branch 😅
 To solve this issue, pushing to `master` is **🚫blocked**, and can only be committed
 to via pull requests (PRs):
 
-> [!NOTE]
 > Git commands are written below, but you can easily follow with the GitHub Desktop
 > interface
 
@@ -36,7 +45,6 @@ git commit -m 'biggest commit'
 git push
 ```
 
-> [!NOTE]
 > Since this is your branch, do whatever you want to it! Force-push, rebase, etc.
 
 <br/>
