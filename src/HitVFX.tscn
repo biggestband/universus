@@ -1,15 +1,15 @@
 [gd_scene load_steps=24 format=3 uid="uid://bidrib3fcmkfq"]
 
-[ext_resource type="Texture2D" uid="uid://qieor3wmtf55" path="res://Pngs/FlashMaterial.png" id="1_5wiyh"]
-[ext_resource type="Texture2D" uid="uid://cde0ytnqthhlr" path="res://Pngs/FlashMaterial2.png" id="1_ntjik"]
-[ext_resource type="Texture2D" uid="uid://d4do4a2s87nka" path="res://Pngs/FlashMaterial3.png" id="3_d10r6"]
+[ext_resource type="Texture2D" uid="uid://qieor3wmtf55" path="res://Pngs/FlashMaterial.png" id="1_6l55g"]
+[ext_resource type="Texture2D" uid="uid://cde0ytnqthhlr" path="res://Pngs/FlashMaterial2.png" id="2_e6g10"]
+[ext_resource type="Texture2D" uid="uid://d4do4a2s87nka" path="res://Pngs/FlashMaterial3.png" id="3_oqer6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d10r6"]
 transparency = 1
 cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.502614, 0.369099, 2.98411e-06, 1)
-albedo_texture = ExtResource("1_5wiyh")
+albedo_texture = ExtResource("1_6l55g")
 billboard_keep_scale = true
 
 [sub_resource type="Curve" id="Curve_ntjik"]
@@ -56,7 +56,7 @@ transparency = 1
 cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.849392, 0.472294, 0.225081, 1)
-albedo_texture = ExtResource("1_ntjik")
+albedo_texture = ExtResource("2_e6g10")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -90,7 +90,7 @@ transparency = 1
 cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.844416, 0.492973, 0.205411, 1)
-albedo_texture = ExtResource("1_5wiyh")
+albedo_texture = ExtResource("1_6l55g")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -114,7 +114,7 @@ transparency = 1
 cull_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.765999, 0.432901, 0.129891, 1)
-albedo_texture = ExtResource("3_d10r6")
+albedo_texture = ExtResource("3_oqer6")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
