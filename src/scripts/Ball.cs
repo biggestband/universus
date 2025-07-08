@@ -2,11 +2,15 @@ using System;
 using Godot;
 
 public partial class Ball : RigidBody2D {
+    
     [Export]
     float randomAngleDegrees;
 
     [Export]
-    float bounceStrength;
+    float bounceFactor;
+    
+    [Export]
+    float minSpeed = 40f;
     
     Random random;
     float randomAngle;
@@ -20,11 +24,13 @@ public partial class Ball : RigidBody2D {
         var normal = state.GetContactLocalNormal(0);
         var offsetFactor = 2 * random.NextSingle() - 1;
         var bounceAngle = normal.Rotated(randomAngle * offsetFactor);
-        state.LinearVelocity = bounceAngle * bounceStrength;
+        var currentSpeed = state.LinearVelocity.Length();
+        currentSpeed = Math.Max(currentSpeed, minSpeed);
+        state.LinearVelocity = bounceAngle * bounceFactor * currentSpeed;
     }
 
     public override void _Process(double delta) {
-        if (Position.Y > 350) {
+        if (Position.Y > 1000) {
             GetTree().ReloadCurrentScene();
         }
     }

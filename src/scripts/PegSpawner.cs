@@ -10,10 +10,13 @@ public partial class PegSpawner : Node {
     int columns = 10;
 
     [Export]
-    float inSpacing = 50f;
+    float rowSpacing = 50f;
 
     [Export]
-    float betweenSpacing = 50f;
+    float columnSpacing = 50f;
+
+    [Export]
+    float evenRowOffset = 25f;
 
     [Export]
     Node PegContainer {
@@ -61,13 +64,14 @@ public partial class PegSpawner : Node {
                     continue;
                 }
                 peg.Name = $"Peg {y}x{x}";
-                GetTree().EditedSceneRoot.FindChild("Peg Container") .AddChild(peg); // i wish pegContainer.SceneFilePath worked but it doesn't work in editor. WTF godot ??
+                GetTree().EditedSceneRoot.FindChild("Peg Container")
+                    .AddChild(peg); // i wish pegContainer.SceneFilePath worked but it doesn't work in editor. WTF godot ??
                 peg.SetOwner(GetTree().EditedSceneRoot);
-                var offsetX = ((columns - 1) * inSpacing + (betweenSpacing / 2)) / 2f;
-                var offsetY = ((rows - 1) * betweenSpacing) / 2f;
+                var offsetX = ((columns - 1) * rowSpacing + (columnSpacing / 2)) / 2f;
+                var offsetY = ((rows - 1) * columnSpacing) / 2f;
                 peg.Position = new(
-                    x * inSpacing + (y % 2 == 0 ? 0 : betweenSpacing / 2) - offsetX,
-                    y * betweenSpacing - offsetY
+                    x * rowSpacing + (y % 3 == 0 ? evenRowOffset * 1.5f : y % 2 == 0 ? evenRowOffset * 0.75f : 0) - offsetX,
+                    y * columnSpacing - offsetY
                 );
             }
         }
