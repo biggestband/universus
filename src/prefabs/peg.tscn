@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://tiabcg0wvd6p"]
+[gd_scene load_steps=4 format=3 uid="uid://tiabcg0wvd6p"]
 
+[ext_resource type="Script" uid="uid://cmqqg21hfeote" path="res://scripts/Peg.cs" id="1_4sk7o"]
 [ext_resource type="Texture2D" uid="uid://c3bogfsntncek" path="res://assets/2D/circle8.png" id="1_4utp2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4utp2"]
 radius = 4.0
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_4sk7o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_4utp2")
