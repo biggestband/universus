@@ -35,6 +35,10 @@ to via pull requests (PRs):
 git checkout -b 'feature/mycoolfeature'  
 ```
 
+As the name suggests, these are **feature branches**, meaning they should be relatively
+short lived and meant for one feature. Make a new feature branch if you need to. It'll 
+probably be less of a headache.
+
 <br/>
 
 2. **Commit and push all your changes to that branch**
