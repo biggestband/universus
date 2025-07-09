@@ -39,7 +39,9 @@ public partial class Ball : RigidBody2D {
         var incomingVelocity = state.LinearVelocity.Normalized();
         var bounceDirection = incomingVelocity.Bounce(normal);
         var offsetFactor = 2 * random.NextSingle() - 1;
-        var bounceAngle = normal.Rotated(randomAngle * offsetFactor).Slerp(bounceDirection, preferDownwardAngleFactor);
+        var bounceAngle = normal
+            .Rotated(randomAngle * offsetFactor) // add random angle to the bounce direction
+            .Slerp(bounceDirection, preferDownwardAngleFactor); // add a downward bias to the bounce direction
         var currentSpeed = state.LinearVelocity.Length();
         currentSpeed = Math.Max(currentSpeed, minSpeed); // this could be combined with the above line but im separating it for clarity
         state.LinearVelocity = bounceAngle * bounceFactor * currentSpeed;
