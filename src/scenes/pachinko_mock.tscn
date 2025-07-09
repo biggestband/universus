@@ -9,6 +9,17 @@
 
 [node name="pachinko-mock" type="Node2D"]
 
+[node name="Systems" type="Node" parent="."]
+
+[node name="Peg Spawner" type="Node" parent="Systems" node_paths=PackedStringArray("PegContainer")]
+script = ExtResource("4_se8mc")
+rows = 12
+rowSpacing = 45.0
+columnSpacing = 35.0
+evenRowOffset = 20.0
+PegContainer = NodePath("../../Peg Container")
+pegPrefab = ExtResource("1_ax1vs")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 
@@ -388,17 +399,6 @@ linear_velocity = Vector2(4.41, 0)
 randomAngleDegrees = 20.0
 bounceFactor = 1.2
 minSpeed = 90.0
-
-[node name="Systems" type="Node" parent="."]
-
-[node name="Peg Spawner" type="Node" parent="Systems" node_paths=PackedStringArray("PegContainer")]
-script = ExtResource("4_se8mc")
-rows = 12
-rowSpacing = 45.0
-columnSpacing = 35.0
-evenRowOffset = 20.0
-PegContainer = NodePath("../../Peg Container")
-pegPrefab = ExtResource("1_ax1vs")
 
 [node name="Left Bound" type="StaticBody2D" parent="."]
 position = Vector2(-183, 0)
