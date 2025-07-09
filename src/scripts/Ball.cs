@@ -38,7 +38,6 @@ public partial class Ball : RigidBody2D {
         var normal = state.GetContactLocalNormal(0);
         var incomingVelocity = state.LinearVelocity.Normalized();
         var bounceDirection = incomingVelocity.Bounce(normal);
-        GD.Print($"direction is {incomingVelocity}, normal is {normal}, bounce direction is {bounceDirection}");
         var offsetFactor = 2 * random.NextSingle() - 1;
         var bounceAngle = normal.Rotated(randomAngle * offsetFactor).Slerp(bounceDirection, preferDownwardAngleFactor);
         var currentSpeed = state.LinearVelocity.Length();
