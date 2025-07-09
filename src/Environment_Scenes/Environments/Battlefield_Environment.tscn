@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ty41fgd80gqy"]
+[gd_scene load_steps=8 format=3 uid="uid://ty41fgd80gqy"]
 
 [ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_aufuh"]
 [ext_resource type="Script" uid="uid://bvuy0mcotc85" path="res://Enemies/Enemy_Scripts/EnemyManager.gd" id="2_8vr15"]
+[ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Environment_Scenes/Environments/FPSCounter.gd" id="3_tag4l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aufuh"]
+bounce = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q213"]
 
@@ -9,14 +13,22 @@
 material = SubResource("StandardMaterial3D_7q213")
 size = Vector2(100, 100)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_aufuh"]
+
 [node name="BattlefieldEnvironment" type="Node3D"]
 
 [node name="Level" type="Node" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Level"]
+physics_material_override = SubResource("PhysicsMaterial_aufuh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D"]
 material_override = ExtResource("1_aufuh")
 mesh = SubResource("PlaneMesh_1medq")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_aufuh")
 
 [node name="GFX" type="Node" parent="."]
 
@@ -29,3 +41,13 @@ light_energy = 1.5
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("2_8vr15")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+modulate = Color(0, 1, 0, 1)
+offset_right = 289.0
+offset_bottom = 101.0
+theme_override_font_sizes/normal_font_size = 70
+text = "Balls"
+script = ExtResource("3_tag4l")

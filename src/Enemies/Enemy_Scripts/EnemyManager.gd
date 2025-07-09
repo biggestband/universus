@@ -5,13 +5,13 @@ const _maxArmySize : int = 256 # Hard cap army sizes for performance
 const _unitSeparation : float = 2
 const _offsetFromCenter : float = 3 
 
-var _armyAUnit : Resource = preload("res://Enemies/Enemy_Prefabs/EnemyA.tscn")
+var _armyAUnit : Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback.tscn")
 var _armyBUnit : Resource = preload("res://Enemies/Enemy_Prefabs/EnemyB.tscn")
 
 func _ready() -> void:
 	
 	# Get networked values from signleton
-	var armyASize : int = 64
+	var armyASize : int = 256
 	var armyBSize : int = 64
 	var randSeed : int = 64
 	
