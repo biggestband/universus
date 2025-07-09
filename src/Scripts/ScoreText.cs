@@ -34,7 +34,7 @@ public partial class ScoreText : RichTextLabel {
             .From(new Vector2(random.Next(-POSITION_OFFSET, POSITION_OFFSET), random.Next(-POSITION_OFFSET, POSITION_OFFSET)));
         Modulate = color;
         tween.TweenProperty(this, "modulate", startColor,  0.75).SetDelay(0.1f);
-        Text = $"[b]{data.Score:F2}[/b]";
+        Text = $"[b]{data.Score:F1}[/b]";
     }
     void ChangeFontSize(int value) => AddThemeFontSizeOverride("bold_font_size", value);
 }
