@@ -32,17 +32,18 @@ func _generateArmy(armySize: int, isTeamA : bool) -> void:
 	var fieldSide: int = 1 if isTeamA else -1
 	var gridSize = ceil(sqrt(armySize))
 	var offsetFromCenter = _offsetFromCenter * fieldSide
+	var zOffset = gridSize * .5
 	
 	# Create unit instances on each side of the field
 	var id : int = 0
 	for x in gridSize:
-			for z in gridSize:
-				if id <= armySize:
-					_spawnUnit(id, 
-					_getRandOffset(Vector3(offsetFromCenter + (x * _unitSeparation) * fieldSide, 1, z * _unitSeparation))
-					)
+		for z in gridSize:
+			if id <= armySize:
+				_spawnUnit(id, 
+				_getRandOffset(Vector3(offsetFromCenter + (x * _unitSeparation) * fieldSide, 1, (zOffset - z) * _unitSeparation))
+				)
 					
-					id += 1
+				id += 1
 
 func _spawnUnit(id: int, pos: Vector3) -> void:
 	var instance = _armyAUnit.instantiate()
