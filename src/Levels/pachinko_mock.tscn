@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://6qy1hcogkdih"]
+[gd_scene load_steps=12 format=3 uid="uid://6qy1hcogkdih"]
 
 [ext_resource type="Script" uid="uid://bhu0skt2crass" path="res://Scripts/PegSpawner.cs" id="1_7v7sl"]
 [ext_resource type="PackedScene" uid="uid://tiabcg0wvd6p" path="res://Prefabs/peg.tscn" id="2_dn3v3"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://b7rmsfy01hvyy" path="res://Prefabs/killzone.tscn" id="5_dn3v3"]
 [ext_resource type="Script" uid="uid://drhvbk4j4b65t" path="res://Scripts/ScoreText.cs" id="8_oxjyi"]
 [ext_resource type="Script" uid="uid://dalxnqq33ph8s" path="res://Scripts/HighscoreText.cs" id="9_vqhnx"]
-[ext_resource type="Script" uid="uid://cpifuqhrmnvyh" path="res://Scripts/LandingRegion.cs" id="10_32jtq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ax1vs"]
 
@@ -470,45 +469,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("RectangleShape2D_dn3v3")
 
-[node name="Landing Region" type="Area2D" parent="." node_paths=PackedStringArray("text", "textMovePosition")]
-position = Vector2(-4, 276)
-collision_mask = 2
-script = ExtResource("10_32jtq")
-text = NodePath("Node2D/RichTextLabel")
-textMovePosition = NodePath("../Ball Holder")
-Height = 102.22
-Width = 294.0
-snapDistance = 10.0
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Landing Region"]
-shape = SubResource("RectangleShape2D_32jtq")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Landing Region"]
-z_index = -1
-scale = Vector2(294, 102.22)
-texture = SubResource("CanvasTexture_vqhnx")
-metadata/_edit_lock_ = true
-
-[node name="Node2D" type="Node2D" parent="Landing Region"]
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Landing Region/Node2D"]
-modulate = Color(0, 0, 0, 1)
-offset_left = -26.12
-offset_top = -34.53
-offset_right = 32.88
-offset_bottom = 34.47
-pivot_offset = Vector2(100.02, 50.79)
-theme_override_font_sizes/bold_font_size = 50
-bbcode_enabled = true
-text = "[b]20[/b]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
@@ -518,7 +478,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -539,11 +498,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -208.0
-offset_right = -22.0
-offset_bottom = 42.0
+offset_left = -95.0
+offset_bottom = 23.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 text = "Highscore:  0"
 horizontal_alignment = 2
 vertical_alignment = 1
