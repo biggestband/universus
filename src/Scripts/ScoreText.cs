@@ -20,13 +20,13 @@ public partial class ScoreText : RichTextLabel {
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Back)
             .SetParallel();
-        var fontSize = data.Amount switch {
-            >= 2 => 140,
-            _ => 85,
+        var fontSize = data.Type switch {
+            HitType.NewHit => 120,
+            _ => 80,
         };
         const int POSITION_OFFSET = 20;
-        Color color = data.Amount switch {
-            >= 2 => new(0.5f, 1f, 0.5f),
+        Color color = data.Type switch {
+            HitType.NewHit => new(0.5f, 1f, 0.5f),
             _ => new(1,1,1),
         };
         tween.TweenMethod(Callable.From<int>(ChangeFontSize), fontSize, 75, 0.5f);
@@ -34,7 +34,7 @@ public partial class ScoreText : RichTextLabel {
             .From(new Vector2(random.Next(-POSITION_OFFSET, POSITION_OFFSET), random.Next(-POSITION_OFFSET, POSITION_OFFSET)));
         Modulate = color;
         tween.TweenProperty(this, "modulate", startColor,  0.75).SetDelay(0.1f);
-        Text = $"[b]{data.Score}[/b]";
+        Text = $"[b]{data.Score:F2}[/b]";
     }
     void ChangeFontSize(int value) => AddThemeFontSizeOverride("bold_font_size", value);
 }
