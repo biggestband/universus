@@ -7,9 +7,10 @@ var currentState = HealthState.Healthy
 func _update_state():
 	if currentState == HealthState.Healthy:
 		currentState = HealthState.Dazed
-	
- 	if currentState == HealthState.Dazed:
+
+	if currentState == HealthState.Dazed:
 		currentState = HealthState.Injured
 		
-	if currentState == Healthstate.Injured:
+	if currentState == HealthState.Injured:
 		# Add death logic
+		pass
