@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhxuil1ibce85"
-path.s3tc="res://.godot/imported/T_UniVersusColorPalette_basecolor.png-000ac40a8d33a9b25f8ec224d00d0e19.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_UniVersusColorPalette_basecolor.png-4b813947adcacd8aa0f631c9d32897ef.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/3D/Textures/T_UniVersusColorPalette_basecolor.png"
-dest_files=["res://.godot/imported/T_UniVersusColorPalette_basecolor.png-000ac40a8d33a9b25f8ec224d00d0e19.s3tc.ctex"]
+source_file="res://Assets/3D/Textures/T_UniVersusColorPalette_basecolor.png"
+dest_files=["res://.godot/imported/T_UniVersusColorPalette_basecolor.png-4b813947adcacd8aa0f631c9d32897ef.s3tc.ctex"]
 
 [params]
 
