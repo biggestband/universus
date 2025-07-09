@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://bewiwga5vj5bq"]
+[gd_scene load_steps=3 format=3 uid="uid://bewiwga5vj5bq"]
+
+[ext_resource type="Material" uid="uid://b1rxujtyot8w1" path="res://Enemies/Enemy_Materials/Enemy_Material_Temp.tres" id="1_qf6kd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_erhbd"]
 
 [node name="Enemy" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_qf6kd")
+mesh = SubResource("CapsuleMesh_erhbd")
