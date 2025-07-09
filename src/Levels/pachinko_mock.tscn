@@ -1,11 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://6qy1hcogkdih"]
+[gd_scene load_steps=8 format=3 uid="uid://6qy1hcogkdih"]
 
 [ext_resource type="Script" uid="uid://bhu0skt2crass" path="res://Scripts/PegSpawner.cs" id="1_7v7sl"]
 [ext_resource type="PackedScene" uid="uid://tiabcg0wvd6p" path="res://Prefabs/peg.tscn" id="2_dn3v3"]
 [ext_resource type="Script" uid="uid://olh6s7hhmjlp" path="res://Scripts/BallHolder.cs" id="3_rc3no"]
 [ext_resource type="PackedScene" uid="uid://bwdqmoopixmik" path="res://Prefabs/ball.tscn" id="4_bs7w1"]
+[ext_resource type="PackedScene" uid="uid://b7rmsfy01hvyy" path="res://Prefabs/killzone.tscn" id="5_dn3v3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ax1vs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dn3v3"]
+size = Vector2(434, 20)
 
 [node name="pachinko-mock" type="Node2D"]
 
@@ -17,8 +21,8 @@ rows = 12
 rowSpacing = 45.0
 columnSpacing = 35.0
 evenRowOffset = 20.0
-pegPrefab = ExtResource("2_dn3v3")
 PegContainer = NodePath("../../Peg Container")
+pegPrefab = ExtResource("2_dn3v3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -413,3 +417,10 @@ rotation = -1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Bound"]
 shape = SubResource("WorldBoundaryShape2D_ax1vs")
+
+[node name="Killzone" parent="." instance=ExtResource("5_dn3v3")]
+position = Vector2(-1, 322)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_dn3v3")

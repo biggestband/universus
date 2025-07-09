@@ -46,10 +46,4 @@ public partial class Ball : RigidBody2D {
         currentSpeed = Math.Max(currentSpeed, minSpeed); // this could be combined with the above line but im separating it for clarity
         state.LinearVelocity = bounceAngle * bounceFactor * currentSpeed;
     }
-
-    public override void _Process(double delta) {
-        if (Position.Y > 1000) {
-            GetTree().ReloadCurrentScene();
-        }
-    }
 }
