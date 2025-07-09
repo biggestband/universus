@@ -5,6 +5,8 @@ public partial class Peg : Node2D {
     Color startColor;
     Tween punchTween;
 
+    bool alreadyHit;
+
     [Export]
     Color hitColor;
 
@@ -32,5 +34,8 @@ public partial class Peg : Node2D {
         
         punchTween.TweenProperty(sprite, "scale", Vector2.One, hitDuration).SetDelay(hitDelay);
         punchTween.TweenProperty(sprite, "modulate", startColor, hitDuration).SetDelay(hitDelay);
+        
+        ScoreManager.IncreaseScore(alreadyHit ? 1 : 2);
+        alreadyHit = true;
     }
 }

@@ -1,0 +1,1 @@
+public readonly record struct ScoreData(int Score, int Amount);
