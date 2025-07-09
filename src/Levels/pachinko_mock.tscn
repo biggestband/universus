@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://6qy1hcogkdih"]
+[gd_scene load_steps=15 format=3 uid="uid://6qy1hcogkdih"]
 
 [ext_resource type="Script" uid="uid://bhu0skt2crass" path="res://Scripts/PegSpawner.cs" id="1_7v7sl"]
 [ext_resource type="PackedScene" uid="uid://tiabcg0wvd6p" path="res://Prefabs/peg.tscn" id="2_dn3v3"]
@@ -9,11 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://b7rmsfy01hvyy" path="res://Prefabs/killzone.tscn" id="5_dn3v3"]
 [ext_resource type="Script" uid="uid://drhvbk4j4b65t" path="res://Scripts/ScoreText.cs" id="8_oxjyi"]
 [ext_resource type="Script" uid="uid://dalxnqq33ph8s" path="res://Scripts/HighscoreText.cs" id="9_vqhnx"]
+[ext_resource type="Script" uid="uid://cpifuqhrmnvyh" path="res://Scripts/LandingRegion.cs" id="10_32jtq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ax1vs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dn3v3"]
 size = Vector2(434, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32jtq"]
+size = Vector2(368, 77.4766)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vqhnx"]
 
 [node name="pachinko-mock" type="Node2D"]
 
@@ -457,13 +463,25 @@ rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_ax1vs")
 
 [node name="Killzone" parent="." instance=ExtResource("5_dn3v3")]
-position = Vector2(-1, 307)
+position = Vector2(-1, 379)
 scale = Vector2(3.25714, 3)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_dn3v3")
+
+[node name="Landing Region" type="Area2D" parent="."]
+position = Vector2(4, 281)
+collision_mask = 2
+script = ExtResource("10_32jtq")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Landing Region"]
+shape = SubResource("RectangleShape2D_32jtq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Landing Region"]
+z_index = -1
+texture = SubResource("CanvasTexture_vqhnx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
