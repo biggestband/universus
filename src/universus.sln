@@ -1,6 +1,8 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "universus", "universus.csproj", "{5F6D029C-BEC2-44A2-9F29-AEEF6358EF3C}"
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
