@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://6qy1hcogkdih"]
+[gd_scene load_steps=9 format=3 uid="uid://6qy1hcogkdih"]
 
 [ext_resource type="Script" uid="uid://bhu0skt2crass" path="res://Scripts/PegSpawner.cs" id="1_7v7sl"]
 [ext_resource type="PackedScene" uid="uid://tiabcg0wvd6p" path="res://Prefabs/peg.tscn" id="2_dn3v3"]
+[ext_resource type="Script" uid="uid://mnnxl1j7bwy7" path="res://Scripts/Restarter.cs" id="3_bs7w1"]
 [ext_resource type="Script" uid="uid://olh6s7hhmjlp" path="res://Scripts/BallHolder.cs" id="3_rc3no"]
 [ext_resource type="PackedScene" uid="uid://bwdqmoopixmik" path="res://Prefabs/ball.tscn" id="4_bs7w1"]
 [ext_resource type="PackedScene" uid="uid://b7rmsfy01hvyy" path="res://Prefabs/killzone.tscn" id="5_dn3v3"]
@@ -17,12 +18,15 @@ size = Vector2(434, 20)
 
 [node name="Peg Spawner" type="Node" parent="Systems" node_paths=PackedStringArray("PegContainer")]
 script = ExtResource("1_7v7sl")
-rows = 12
+rows = 13
 rowSpacing = 45.0
 columnSpacing = 35.0
 evenRowOffset = 20.0
 PegContainer = NodePath("../../Peg Container")
 pegPrefab = ExtResource("2_dn3v3")
+
+[node name="Restarter" type="Node" parent="Systems"]
+script = ExtResource("3_bs7w1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -31,364 +35,394 @@ zoom = Vector2(3, 3)
 position = Vector2(0, -15)
 
 [node name="Peg 0x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-181.25, -192.5)
+position = Vector2(-181.25, -210)
 
 [node name="Peg 0x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-136.25, -192.5)
+position = Vector2(-136.25, -210)
 
 [node name="Peg 0x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-91.25, -192.5)
+position = Vector2(-91.25, -210)
 
 [node name="Peg 0x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-46.25, -192.5)
+position = Vector2(-46.25, -210)
 
 [node name="Peg 0x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-1.25, -192.5)
+position = Vector2(-1.25, -210)
 
 [node name="Peg 0x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(43.75, -192.5)
+position = Vector2(43.75, -210)
 
 [node name="Peg 0x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(88.75, -192.5)
+position = Vector2(88.75, -210)
 
 [node name="Peg 0x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(133.75, -192.5)
+position = Vector2(133.75, -210)
 
 [node name="Peg 0x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(178.75, -192.5)
+position = Vector2(178.75, -210)
 
 [node name="Peg 0x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(223.75, -192.5)
+position = Vector2(223.75, -210)
 
 [node name="Peg 1x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-211.25, -157.5)
+position = Vector2(-211.25, -175)
 
 [node name="Peg 1x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-166.25, -157.5)
+position = Vector2(-166.25, -175)
 
 [node name="Peg 1x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-121.25, -157.5)
+position = Vector2(-121.25, -175)
 
 [node name="Peg 1x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-76.25, -157.5)
+position = Vector2(-76.25, -175)
 
 [node name="Peg 1x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-31.25, -157.5)
+position = Vector2(-31.25, -175)
 
 [node name="Peg 1x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(13.75, -157.5)
+position = Vector2(13.75, -175)
 
 [node name="Peg 1x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(58.75, -157.5)
+position = Vector2(58.75, -175)
 
 [node name="Peg 1x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(103.75, -157.5)
+position = Vector2(103.75, -175)
 
 [node name="Peg 1x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(148.75, -157.5)
+position = Vector2(148.75, -175)
 
 [node name="Peg 1x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(193.75, -157.5)
+position = Vector2(193.75, -175)
 
 [node name="Peg 2x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-196.25, -122.5)
+position = Vector2(-196.25, -140)
 
 [node name="Peg 2x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-151.25, -122.5)
+position = Vector2(-151.25, -140)
 
 [node name="Peg 2x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-106.25, -122.5)
+position = Vector2(-106.25, -140)
 
 [node name="Peg 2x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-61.25, -122.5)
+position = Vector2(-61.25, -140)
 
 [node name="Peg 2x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-16.25, -122.5)
+position = Vector2(-16.25, -140)
 
 [node name="Peg 2x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(28.75, -122.5)
+position = Vector2(28.75, -140)
 
 [node name="Peg 2x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(73.75, -122.5)
+position = Vector2(73.75, -140)
 
 [node name="Peg 2x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(118.75, -122.5)
+position = Vector2(118.75, -140)
 
 [node name="Peg 2x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(163.75, -122.5)
+position = Vector2(163.75, -140)
 
 [node name="Peg 2x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(208.75, -122.5)
+position = Vector2(208.75, -140)
 
 [node name="Peg 3x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-181.25, -87.5)
+position = Vector2(-181.25, -105)
 
 [node name="Peg 3x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-136.25, -87.5)
+position = Vector2(-136.25, -105)
 
 [node name="Peg 3x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-91.25, -87.5)
+position = Vector2(-91.25, -105)
 
 [node name="Peg 3x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-46.25, -87.5)
+position = Vector2(-46.25, -105)
 
 [node name="Peg 3x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-1.25, -87.5)
+position = Vector2(-1.25, -105)
 
 [node name="Peg 3x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(43.75, -87.5)
+position = Vector2(43.75, -105)
 
 [node name="Peg 3x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(88.75, -87.5)
+position = Vector2(88.75, -105)
 
 [node name="Peg 3x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(133.75, -87.5)
+position = Vector2(133.75, -105)
 
 [node name="Peg 3x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(178.75, -87.5)
+position = Vector2(178.75, -105)
 
 [node name="Peg 3x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(223.75, -87.5)
+position = Vector2(223.75, -105)
 
 [node name="Peg 4x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-196.25, -52.5)
+position = Vector2(-196.25, -70)
 
 [node name="Peg 4x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-151.25, -52.5)
+position = Vector2(-151.25, -70)
 
 [node name="Peg 4x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-106.25, -52.5)
+position = Vector2(-106.25, -70)
 
 [node name="Peg 4x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-61.25, -52.5)
+position = Vector2(-61.25, -70)
 
 [node name="Peg 4x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-16.25, -52.5)
+position = Vector2(-16.25, -70)
 
 [node name="Peg 4x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(28.75, -52.5)
+position = Vector2(28.75, -70)
 
 [node name="Peg 4x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(73.75, -52.5)
+position = Vector2(73.75, -70)
 
 [node name="Peg 4x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(118.75, -52.5)
+position = Vector2(118.75, -70)
 
 [node name="Peg 4x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(163.75, -52.5)
+position = Vector2(163.75, -70)
 
 [node name="Peg 4x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(208.75, -52.5)
+position = Vector2(208.75, -70)
 
 [node name="Peg 5x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-211.25, -17.5)
+position = Vector2(-211.25, -35)
 
 [node name="Peg 5x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-166.25, -17.5)
+position = Vector2(-166.25, -35)
 
 [node name="Peg 5x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-121.25, -17.5)
+position = Vector2(-121.25, -35)
 
 [node name="Peg 5x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-76.25, -17.5)
+position = Vector2(-76.25, -35)
 
 [node name="Peg 5x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-31.25, -17.5)
+position = Vector2(-31.25, -35)
 
 [node name="Peg 5x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(13.75, -17.5)
+position = Vector2(13.75, -35)
 
 [node name="Peg 5x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(58.75, -17.5)
+position = Vector2(58.75, -35)
 
 [node name="Peg 5x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(103.75, -17.5)
+position = Vector2(103.75, -35)
 
 [node name="Peg 5x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(148.75, -17.5)
+position = Vector2(148.75, -35)
 
 [node name="Peg 5x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(193.75, -17.5)
+position = Vector2(193.75, -35)
 
 [node name="Peg 6x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-181.25, 17.5)
+position = Vector2(-181.25, 0)
 
 [node name="Peg 6x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-136.25, 17.5)
+position = Vector2(-136.25, 0)
 
 [node name="Peg 6x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-91.25, 17.5)
+position = Vector2(-91.25, 0)
 
 [node name="Peg 6x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-46.25, 17.5)
+position = Vector2(-46.25, 0)
 
 [node name="Peg 6x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-1.25, 17.5)
+position = Vector2(-1.25, 0)
 
 [node name="Peg 6x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(43.75, 17.5)
+position = Vector2(43.75, 0)
 
 [node name="Peg 6x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(88.75, 17.5)
+position = Vector2(88.75, 0)
 
 [node name="Peg 6x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(133.75, 17.5)
+position = Vector2(133.75, 0)
 
 [node name="Peg 6x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(178.75, 17.5)
+position = Vector2(178.75, 0)
 
 [node name="Peg 6x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(223.75, 17.5)
+position = Vector2(223.75, 0)
 
 [node name="Peg 7x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-211.25, 52.5)
+position = Vector2(-211.25, 35)
 
 [node name="Peg 7x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-166.25, 52.5)
+position = Vector2(-166.25, 35)
 
 [node name="Peg 7x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-121.25, 52.5)
+position = Vector2(-121.25, 35)
 
 [node name="Peg 7x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-76.25, 52.5)
+position = Vector2(-76.25, 35)
 
 [node name="Peg 7x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-31.25, 52.5)
+position = Vector2(-31.25, 35)
 
 [node name="Peg 7x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(13.75, 52.5)
+position = Vector2(13.75, 35)
 
 [node name="Peg 7x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(58.75, 52.5)
+position = Vector2(58.75, 35)
 
 [node name="Peg 7x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(103.75, 52.5)
+position = Vector2(103.75, 35)
 
 [node name="Peg 7x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(148.75, 52.5)
+position = Vector2(148.75, 35)
 
 [node name="Peg 7x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(193.75, 52.5)
+position = Vector2(193.75, 35)
 
 [node name="Peg 8x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-196.25, 87.5)
+position = Vector2(-196.25, 70)
 
 [node name="Peg 8x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-151.25, 87.5)
+position = Vector2(-151.25, 70)
 
 [node name="Peg 8x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-106.25, 87.5)
+position = Vector2(-106.25, 70)
 
 [node name="Peg 8x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-61.25, 87.5)
+position = Vector2(-61.25, 70)
 
 [node name="Peg 8x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-16.25, 87.5)
+position = Vector2(-16.25, 70)
 
 [node name="Peg 8x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(28.75, 87.5)
+position = Vector2(28.75, 70)
 
 [node name="Peg 8x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(73.75, 87.5)
+position = Vector2(73.75, 70)
 
 [node name="Peg 8x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(118.75, 87.5)
+position = Vector2(118.75, 70)
 
 [node name="Peg 8x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(163.75, 87.5)
+position = Vector2(163.75, 70)
 
 [node name="Peg 8x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(208.75, 87.5)
+position = Vector2(208.75, 70)
 
 [node name="Peg 9x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-181.25, 122.5)
+position = Vector2(-181.25, 105)
 
 [node name="Peg 9x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-136.25, 122.5)
+position = Vector2(-136.25, 105)
 
 [node name="Peg 9x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-91.25, 122.5)
+position = Vector2(-91.25, 105)
 
 [node name="Peg 9x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-46.25, 122.5)
+position = Vector2(-46.25, 105)
 
 [node name="Peg 9x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-1.25, 122.5)
+position = Vector2(-1.25, 105)
 
 [node name="Peg 9x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(43.75, 122.5)
+position = Vector2(43.75, 105)
 
 [node name="Peg 9x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(88.75, 122.5)
+position = Vector2(88.75, 105)
 
 [node name="Peg 9x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(133.75, 122.5)
+position = Vector2(133.75, 105)
 
 [node name="Peg 9x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(178.75, 122.5)
+position = Vector2(178.75, 105)
 
 [node name="Peg 9x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(223.75, 122.5)
+position = Vector2(223.75, 105)
 
 [node name="Peg 10x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-196.25, 157.5)
+position = Vector2(-196.25, 140)
 
 [node name="Peg 10x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-151.25, 157.5)
+position = Vector2(-151.25, 140)
 
 [node name="Peg 10x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-106.25, 157.5)
+position = Vector2(-106.25, 140)
 
 [node name="Peg 10x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-61.25, 157.5)
+position = Vector2(-61.25, 140)
 
 [node name="Peg 10x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-16.25, 157.5)
+position = Vector2(-16.25, 140)
 
 [node name="Peg 10x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(28.75, 157.5)
+position = Vector2(28.75, 140)
 
 [node name="Peg 10x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(73.75, 157.5)
+position = Vector2(73.75, 140)
 
 [node name="Peg 10x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(118.75, 157.5)
+position = Vector2(118.75, 140)
 
 [node name="Peg 10x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(163.75, 157.5)
+position = Vector2(163.75, 140)
 
 [node name="Peg 10x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(208.75, 157.5)
+position = Vector2(208.75, 140)
 
 [node name="Peg 11x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-211.25, 192.5)
+position = Vector2(-211.25, 175)
 
 [node name="Peg 11x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-166.25, 192.5)
+position = Vector2(-166.25, 175)
 
 [node name="Peg 11x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-121.25, 192.5)
+position = Vector2(-121.25, 175)
 
 [node name="Peg 11x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-76.25, 192.5)
+position = Vector2(-76.25, 175)
 
 [node name="Peg 11x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(-31.25, 192.5)
+position = Vector2(-31.25, 175)
 
 [node name="Peg 11x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(13.75, 192.5)
+position = Vector2(13.75, 175)
 
 [node name="Peg 11x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(58.75, 192.5)
+position = Vector2(58.75, 175)
 
 [node name="Peg 11x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(103.75, 192.5)
+position = Vector2(103.75, 175)
 
 [node name="Peg 11x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(148.75, 192.5)
+position = Vector2(148.75, 175)
 
 [node name="Peg 11x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
-position = Vector2(193.75, 192.5)
+position = Vector2(193.75, 175)
+
+[node name="Peg 12x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(-181.25, 210)
+
+[node name="Peg 12x1" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(-136.25, 210)
+
+[node name="Peg 12x2" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(-91.25, 210)
+
+[node name="Peg 12x3" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(-46.25, 210)
+
+[node name="Peg 12x4" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(-1.25, 210)
+
+[node name="Peg 12x5" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(43.75, 210)
+
+[node name="Peg 12x6" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(88.75, 210)
+
+[node name="Peg 12x7" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(133.75, 210)
+
+[node name="Peg 12x8" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(178.75, 210)
+
+[node name="Peg 12x9" parent="Peg Container" instance=ExtResource("2_dn3v3")]
+position = Vector2(223.75, 210)
 
 [node name="Ball Holder" type="Node2D" parent="."]
 position = Vector2(4, -264)
@@ -397,12 +431,10 @@ range = 130.0
 tweenTime = 2.5
 
 [node name="Ball" parent="Ball Holder" instance=ExtResource("4_bs7w1")]
-position = Vector2(-1, 0)
 gravity_scale = 0.3
-linear_velocity = Vector2(4.41, 0)
-randomAngleDegrees = 20.0
+randomAngleDegrees = 30.0
 bounceFactor = 1.2
-minSpeed = 90.0
+minSpeed = 80.0
 
 [node name="Left Bound" type="StaticBody2D" parent="."]
 position = Vector2(-183, 0)
@@ -421,6 +453,7 @@ shape = SubResource("WorldBoundaryShape2D_ax1vs")
 [node name="Killzone" parent="." instance=ExtResource("5_dn3v3")]
 position = Vector2(-1, 307)
 scale = Vector2(3.25714, 3)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(0, 20)

@@ -2,17 +2,22 @@ using Godot;
 
 public partial class BallHolder : Node2D {
     Tween tween;
-    Ball ball;
+    Ball[] balls;
 
     [Export]
     float range = 100;
-    
+
     [Export]
     float tweenTime = 1;
 
     public override void _Ready() {
-        ball = GetNode<Ball>("Ball");
-        ball.Freeze = true;
+        var children = GetChildren();
+        balls = new Ball[children.Count];
+        for (int i = 0; i < children.Count; i++) {
+            if (children[i] is not Ball ball) continue;
+            balls[i] = ball;
+            ball.Freeze = true;
+        }
         tween = CreateTween().SetLoops().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Quad);
         tween.TweenProperty(this, "position:x", range, tweenTime).From(-range);
         tween.TweenProperty(this, "position:x", -range, tweenTime).From(range);
@@ -21,7 +26,9 @@ public partial class BallHolder : Node2D {
     public override void _Process(double delta) {
         if (Input.IsActionPressed("BiggestButton")) {
             tween.Kill();
-            ball.Freeze = false;
+            foreach (var ball in balls) {
+                ball.Freeze = false;
+            }
         }
     }
 }
