@@ -1,28 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://ty41fgd80gqy"]
+[gd_scene load_steps=6 format=3 uid="uid://ty41fgd80gqy"]
 
-[ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_7hi6f"]
+[ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_aufuh"]
+[ext_resource type="Material" uid="uid://b1rxujtyot8w1" path="res://Enemies/Enemy_Materials/Enemy_Material_Temp.tres" id="2_tag4l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q213"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1medq"]
 material = SubResource("StandardMaterial3D_7q213")
+size = Vector2(100, 100)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8vr15"]
 
 [node name="BattlefieldEnvironment" type="Node3D"]
 
 [node name="Level" type="Node" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level"]
-material_override = ExtResource("1_7hi6f")
+material_override = ExtResource("1_aufuh")
 mesh = SubResource("PlaneMesh_1medq")
 skeleton = NodePath("../..")
 
 [node name="GFX" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="GFX"]
-transform = Transform3D(1, 0, 0, 0, 0.873789, 0.486305, 0, -0.486305, 0.873789, 0, 0.21495, 1.11021)
+transform = Transform3D(1, 0, 0, 0, 0.873789, 0.486305, 0, -0.486305, 0.873789, 0, 3.215, 11.11)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="GFX"]
 transform = Transform3D(0.959668, 0.0941641, 0.264897, -0.281136, 0.321433, 0.904237, 0, -0.942239, 0.334942, 0, 0, 0)
 light_energy = 1.5
 
 [node name="Units" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Units"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("2_tag4l")
+mesh = SubResource("CapsuleMesh_8vr15")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Units"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+material_override = ExtResource("2_tag4l")
+mesh = SubResource("CapsuleMesh_8vr15")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Units"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
+material_override = ExtResource("2_tag4l")
+mesh = SubResource("CapsuleMesh_8vr15")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Units"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0)
+material_override = ExtResource("2_tag4l")
+mesh = SubResource("CapsuleMesh_8vr15")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Units"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 0)
+material_override = ExtResource("2_tag4l")
+mesh = SubResource("CapsuleMesh_8vr15")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Units"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
+material_override = ExtResource("2_tag4l")
+mesh = SubResource("CapsuleMesh_8vr15")
