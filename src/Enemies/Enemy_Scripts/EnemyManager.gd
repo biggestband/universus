@@ -1,5 +1,7 @@
 extends Node
 
+var _armyA : Array[RigidBody3D]
+var _armyB : Array[RigidBody3D]
 
 const _maxArmySize : int = 256 # Hard cap army sizes for performance
 const _unitSeparation : float = 2
@@ -20,6 +22,9 @@ func _ready() -> void:
 	
 	_generateArmy(armyASize, true)
 	_generateArmy(armyBSize, false)
+	
+	print("Army A Length: " + str(len(_armyA)))
+	print("Army B Length: " + str(len(_armyB)))
 
 func _process(delta: float) -> void:
 	pass
@@ -34,21 +39,26 @@ func _generateArmy(armySize: int, isTeamA : bool) -> void:
 	var offsetFromCenter = _offsetFromCenter * fieldSide
 	var zOffset = gridSize * .5
 	
+	var armyArr := _armyA if isTeamA else _armyB
+	
 	# Create unit instances on each side of the field
 	var id : int = 0
 	for x in gridSize:
 		for z in gridSize:
 			if id <= armySize:
 				_spawnUnit(id, 
-				_getRandOffset(Vector3(offsetFromCenter + (x * _unitSeparation) * fieldSide, 1, (zOffset - z) * _unitSeparation))
-				)
+				_getRandOffset(Vector3(offsetFromCenter + (x * _unitSeparation) * fieldSide, 1, (zOffset - z) * _unitSeparation)),
+				armyArr)
 					
 				id += 1
 
-func _spawnUnit(id: int, pos: Vector3) -> void:
+func _spawnUnit(id: int, pos: Vector3, armyArr: Array[RigidBody3D]) -> void:
 	var instance = _armyAUnit.instantiate()
 	instance.position = pos
 	add_child(instance)
+	
+	armyArr.push_back(instance)
+	
 
 func _getRandOffset(pos: Vector3) -> Vector3:
 	var offsetX : float = randf() * .5
