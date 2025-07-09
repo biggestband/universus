@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ty41fgd80gqy"]
+
+[ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_7hi6f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q213"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1medq"]
+material = SubResource("StandardMaterial3D_7q213")
+
+[node name="BattlefieldEnvironment" type="Node3D"]
+
+[node name="Level" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level"]
+material_override = ExtResource("1_7hi6f")
+mesh = SubResource("PlaneMesh_1medq")
+skeleton = NodePath("../..")
+
+[node name="GFX" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="GFX"]
+transform = Transform3D(1, 0, 0, 0, 0.873789, 0.486305, 0, -0.486305, 0.873789, 0, 0.21495, 1.11021)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="GFX"]
+transform = Transform3D(0.959668, 0.0941641, 0.264897, -0.281136, 0.321433, 0.904237, 0, -0.942239, 0.334942, 0, 0, 0)
+light_energy = 1.5
+
+[node name="Units" type="Node" parent="."]
