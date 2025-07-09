@@ -1,16 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk8fan3dmp2nt"]
+[gd_scene load_steps=3 format=3 uid="uid://bk8fan3dmp2nt"]
 
-[ext_resource type="Material" uid="uid://b1rxujtyot8w1" path="res://Enemies/Enemy_Materials/Enemy_Material_Temp.tres" id="1_sys20"]
+[ext_resource type="PackedScene" uid="uid://mr3pa3d1uv3d" path="res://Enemies/Enemy_Meshes/RidgebackTest.fbx" id="1_sys20"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1ncj"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8cdpa"]
-material = ExtResource("1_sys20")
 
 [node name="RidgeBack" type="RigidBody3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_r1ncj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_8cdpa")
+[node name="RidgebackTest" parent="." instance=ExtResource("1_sys20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
