@@ -9,6 +9,6 @@ public partial class HighscoreText : Label {
         ScoreManager.OnScoreChanged -= UpdateText;
     }
     void UpdateText(ScoreData data = default) {
-        Text = $"Highscore:   {ScoreManager.HighScore}";
+        Text = $"Highscore:   {ScoreManager.HighScore:F2}";
     }
 }
