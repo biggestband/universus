@@ -12,6 +12,9 @@ public partial class Ball : RigidBody2D {
     [Export]
     float minSpeed = 40f;
 
+    [Export]
+    float preferDownwardAngleFactor = 0.2f;
+
     Random random;
     float randomAngle;
 
@@ -26,23 +29,21 @@ public partial class Ball : RigidBody2D {
         BodyEntered -= OnBodyEntered;
     }
     void OnBodyEntered(Node body) {
-        if (!(body.GetParent() is Peg peg)) return;
-        pegTween = CreateTween()
-            .SetEase(Tween.EaseType.Out)
-            .SetTrans(Tween.TransitionType.Circ);
-        pegTween.TweenProperty(peg.Sprite, "scale", Vector2.One * 1.6f, 0);
-        pegTween.TweenProperty(peg.Sprite, "scale", Vector2.One, 0.25f).From(Vector2.One * 1.5f).SetDelay(0.05f);
+        if (body.GetParent() is not Peg peg) return;
+        peg.Punch();
     }
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state) {
         if (state.GetContactCount() == 0) return;
         var normal = state.GetContactLocalNormal(0);
+        var incomingVelocity = state.LinearVelocity.Normalized();
+        var bounceDirection = incomingVelocity.Bounce(normal);
+        GD.Print($"direction is {incomingVelocity}, normal is {normal}, bounce direction is {bounceDirection}");
         var offsetFactor = 2 * random.NextSingle() - 1;
-        var bounceAngle = normal.Rotated(randomAngle * offsetFactor);
+        var bounceAngle = normal.Rotated(randomAngle * offsetFactor).Slerp(bounceDirection, preferDownwardAngleFactor);
         var currentSpeed = state.LinearVelocity.Length();
-        currentSpeed = Math.Max(currentSpeed, minSpeed);
+        currentSpeed = Math.Max(currentSpeed, minSpeed); // this could be combined with the above line but im separating it for clarity
         state.LinearVelocity = bounceAngle * bounceFactor * currentSpeed;
-
     }
 
     public override void _Process(double delta) {
