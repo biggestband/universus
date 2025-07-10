@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b52xe5iya21wn" path="res://Enemies/Enemy_Scripts/Unit.gd" id="1_ro661"]
 [ext_resource type="PackedScene" uid="uid://mr3pa3d1uv3d" path="res://Enemies/Enemy_Meshes/RidgebackTest.fbx" id="2_l5d7r"]
 
-[node name="RidgebackUnit2" type="Node3D"]
+[node name="ridgeback_Unit" type="Node3D"]
 script = ExtResource("1_ro661")
 
-[node name="RidgebackTest" parent="." instance=ExtResource("2_l5d7r")]
+[node name="Mesh" parent="." instance=ExtResource("2_l5d7r")]
