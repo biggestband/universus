@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ty41fgd80gqy"]
+[gd_scene load_steps=9 format=3 uid="uid://ty41fgd80gqy"]
 
 [ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_aufuh"]
 [ext_resource type="Script" uid="uid://bvuy0mcotc85" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_8vr15"]
@@ -7,13 +7,18 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aufuh"]
 bounce = 1.0
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_aufuh"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_tag4l"]
+vertices = PackedVector3Array(-49.5, 0.5, -49.5, -49.5, 0.5, 49.5, 49.5, 0.5, 49.5, 49.5, 0.5, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q213"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1medq"]
 material = SubResource("StandardMaterial3D_7q213")
 size = Vector2(100, 100)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_aufuh"]
 
 [node name="BattlefieldEnvironment" type="Node3D"]
 
@@ -22,13 +27,16 @@ size = Vector2(100, 100)
 [node name="StaticBody3D" type="StaticBody3D" parent="Level"]
 physics_material_override = SubResource("PhysicsMaterial_aufuh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D"]
-material_override = ExtResource("1_aufuh")
-mesh = SubResource("PlaneMesh_1medq")
-skeleton = NodePath("../../..")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_aufuh")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Level/StaticBody3D"]
+navigation_mesh = SubResource("NavigationMesh_tag4l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D/NavigationRegion3D"]
+material_override = ExtResource("1_aufuh")
+mesh = SubResource("PlaneMesh_1medq")
+skeleton = NodePath("../../../..")
 
 [node name="GFX" type="Node" parent="."]
 
