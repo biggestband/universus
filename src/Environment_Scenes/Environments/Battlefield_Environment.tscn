@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ty41fgd80gqy"]
 
 [ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_aufuh"]
-[ext_resource type="Script" uid="uid://bvuy0mcotc85" path="res://Enemies/Enemy_Scripts/EnemyManager.gd" id="2_8vr15"]
+[ext_resource type="Script" uid="uid://bvuy0mcotc85" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_8vr15"]
 [ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Environment_Scenes/Environments/FPSCounter.gd" id="3_tag4l"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aufuh"]
@@ -42,9 +42,9 @@ light_energy = 1.5
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("2_8vr15")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="FPSCounter" type="RichTextLabel" parent="HUD"]
 modulate = Color(0, 1, 0, 1)
 offset_right = 289.0
 offset_bottom = 101.0
