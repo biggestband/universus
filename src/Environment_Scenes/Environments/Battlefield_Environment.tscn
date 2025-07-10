@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ty41fgd80gqy"]
 
 [ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_aufuh"]
-[ext_resource type="Script" uid="uid://bvuy0mcotc85" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_8vr15"]
+[ext_resource type="Script" uid="uid://b02n7ag6kuno8" path="res://Enemies/Enemy_Scripts/UnitManager2.gd" id="2_tag4l"]
 [ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Environment_Scenes/Environments/FPSCounter.gd" id="3_tag4l"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aufuh"]
@@ -48,7 +48,7 @@ transform = Transform3D(0.959668, 0.0941641, 0.264897, -0.281136, 0.321433, 0.90
 light_energy = 1.5
 
 [node name="EnemyManager" type="Node" parent="."]
-script = ExtResource("2_8vr15")
+script = ExtResource("2_tag4l")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
