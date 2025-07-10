@@ -90,13 +90,17 @@ func _getRandOffset(pos: Vector3) -> Vector3:
 func _onUnitRequireTarget(unit: Unit)-> void:
 	
 	# Find opposing army array
-	var armyArr := _armyA if unit.IsTeamA else _armyB
+	var oppArmy := _armyA if unit.IsTeamA else _armyB
+	var closestTarget: Unit = _findClosestUnit(unit, oppArmy)
 	
-func _findClosestUnit(currentUnit: Unit, opposingTeam: Array[Unit]) -> Unit:
+	if closestTarget != null:
+		unit.SetTarget(closestTarget)
+	
+func _findClosestUnit(currentUnit: Unit, oppArmy: Array[Unit]) -> Unit:
 	var closestUnit: Unit = null
 	var min_distance := INF
 	
-	for enemy in opposingTeam:
+	for enemy in oppArmy:
 		var distance = currentUnit.position.distance_to(enemy.position)
 		if distance < min_distance:
 			min_distance = distance

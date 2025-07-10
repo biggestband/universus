@@ -12,7 +12,10 @@ var currentState = HealthState.Healthy
 func Setup(isTeamA: bool, unitManager: UnitManager) -> void:
 	IsTeamA = isTeamA
 	unitManager.OnBattleStart.connect(_onBattleStart)
+	
 
+func SetTarget(target: Unit) -> void:
+	print("Found Target")
 func _onBattleStart():
 	print("Unit Ready For Battle!")
 	OnTargetRequired.emit(self)
