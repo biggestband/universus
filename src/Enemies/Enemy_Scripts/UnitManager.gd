@@ -15,8 +15,8 @@ const _maxArmySize : int = 256
 const _unitSeparation : float = 2
 const _offsetFromCenter : float = 3 
 
-var _armyAUnit : Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback.tscn")
-var _armyBUnit : Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback.tscn")
+var _armyAUnit : Resource = preload("res://Enemies/Enemy_Prefabs/Ridgeback_Unit.tscn")
+var _armyBUnit : Resource = preload("res://Enemies/Enemy_Prefabs/Ridgeback_Unit.tscn")
 
 func _ready() -> void:
 	

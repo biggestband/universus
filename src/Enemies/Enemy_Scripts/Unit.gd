@@ -1,10 +1,12 @@
 class_name Unit
 
-extends Node
+extends CharacterBody3D
 
+# Signals
 signal OnTargetRequired(unit: Unit)
 signal OnDie()
 
+# System Vars
 var IsTeamA : bool
 
 enum HealthState { Healthy, Dazed, Injured }
@@ -13,7 +15,6 @@ var currentState = HealthState.Healthy
 func Setup(isTeamA: bool, unitManager: UnitManager) -> void:
 	IsTeamA = isTeamA
 	unitManager.OnBattleStart.connect(_onBattleStart)
-	
 
 func _onBattleStart():
 	OnTargetRequired.emit(self)
@@ -35,3 +36,6 @@ func _update_state():
 	if currentState == HealthState.Injured:
 		# Add death logic
 		pass
+
+func _physics_process(delta: float) -> void:
+	move_and_slide()
