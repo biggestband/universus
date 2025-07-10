@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="universus"
-run/main_scene="uid://6qy1hcogkdih"
+run/main_scene="uid://bis033d21tiyq"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ArmySyncer="*res://Scripts/ArmySyncer.cs"
 
 [display]
 
