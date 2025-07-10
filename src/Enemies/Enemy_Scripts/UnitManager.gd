@@ -91,3 +91,14 @@ func _onUnitRequireTarget(unit: Unit)-> void:
 	
 	# Find opposing army array
 	var armyArr := _armyA if unit.IsTeamA else _armyB
+	
+func _findClosestUnit(currentUnit: Unit, opposingTeam: Array[Unit]) -> Unit:
+	var closestUnit: Unit = null
+	var min_distance := INF
+	
+	for enemy in opposingTeam:
+		var distance = currentUnit.position.distance_to(enemy.position)
+		if distance < min_distance:
+			min_distance = distance
+			closestUnit = enemy
+	return closestUnit
