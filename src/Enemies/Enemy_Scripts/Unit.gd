@@ -1,7 +1,14 @@
+class_name Unit
+
 extends Node
+
+signal OnTargetRequired
 
 enum HealthState { Healthy, Dazed, Injured }
 var currentState = HealthState.Healthy
+
+func Setup(unitManager: UnitManager) -> void:
+	OnTargetRequired.emit()
 
 # Increments enemy state each time function is called
 func _update_state():

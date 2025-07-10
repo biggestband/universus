@@ -1,14 +1,18 @@
+class_name UnitManager
+
 extends Node
 
-var _armyA : Array[RigidBody3D]
-var _armyB : Array[RigidBody3D]
+signal OnBattleStart
+
+var _armyA : Array[Unit]
+var _armyB : Array[Unit]
 
 const _maxArmySize : int = 256 # Hard cap army sizes for performance
 const _unitSeparation : float = 2
 const _offsetFromCenter : float = 3 
 
 var _armyAUnit : Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback.tscn")
-var _armyBUnit : Resource = preload("res://Enemies/Enemy_Prefabs/EnemyB.tscn")
+var _armyBUnit : Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback.tscn")
 
 func _ready() -> void:
 	
@@ -34,29 +38,36 @@ func _generateArmy(armySize: int, isTeamA : bool) -> void:
 	print("Generating army of : " + str(armySize) + " units")
 	
 	# Determine army size as a grid on the field
-	var fieldSide: int = 1 if isTeamA else -1
-	var gridSize = ceil(sqrt(armySize))
-	var offsetFromCenter = _offsetFromCenter * fieldSide
-	var zOffset = gridSize * .5
+	var gridSize: int = ceil(sqrt(armySize))
+	var zOffset: float = gridSize * .5
 	
+	# Determine team
+	var fieldSide: int = 1 if isTeamA else -1
+	var offsetFromCenter: float = _offsetFromCenter * fieldSide
 	var armyArr := _armyA if isTeamA else _armyB
+	var unitMesh:= _armyAUnit if isTeamA else _armyBUnit
 	
 	# Create unit instances on each side of the field
 	var id : int = 0
 	for x in gridSize:
 		for z in gridSize:
 			if id <= armySize:
-				_spawnUnit(id, 
+				_spawnUnit(id,
+				unitMesh, 
 				_getRandOffset(Vector3(offsetFromCenter + (x * _unitSeparation) * fieldSide, 1, (zOffset - z) * _unitSeparation)),
 				armyArr)
 					
 				id += 1
 
-func _spawnUnit(id: int, pos: Vector3, armyArr: Array[RigidBody3D]) -> void:
-	var instance = _armyAUnit.instantiate()
+func _spawnUnit(id: int, unitPrefab: Resource, pos: Vector3, armyArr: Array[Unit]) -> void:
+	
+	# Spawn and initialize the unit
+	var instance: Unit = unitPrefab.instantiate()
 	instance.position = pos
+	instance.Setup(self)
 	add_child(instance)
 	
+	# Add the unit to the corresponding team array
 	armyArr.push_back(instance)
 	
 
