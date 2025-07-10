@@ -76,7 +76,7 @@ func _generateArmy(armySize: int) -> void:
 	var id : int = 0
 	for x in gridASize:
 		for z in gridASize:
-			if id <= armyASize:
+			if id < armyASize:
 				_spawnUnit(id,
 				_getRandOffset(Vector3(offsetFromCenterA + (x * _unitSeparation) * fieldSideA, 1, (aZOffset - z) * _unitSeparation)),)
 					
@@ -84,7 +84,7 @@ func _generateArmy(armySize: int) -> void:
 	id = 0
 	for x in gridBSize:
 		for z in gridBSize:
-			if id <= armyBSize:
+			if id < armyBSize:
 				_spawnUnit(id + armyASize,
 				_getRandOffset(Vector3(offsetFromCenterB + (x * _unitSeparation) * fieldSideB, 1, (bZOffset - z) * _unitSeparation)),)
 					
