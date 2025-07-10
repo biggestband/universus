@@ -2,13 +2,20 @@ class_name Unit
 
 extends Node
 
-signal OnTargetRequired
+signal OnTargetRequired(unit: Unit)
+
+var IsTeamA : bool
 
 enum HealthState { Healthy, Dazed, Injured }
 var currentState = HealthState.Healthy
 
-func Setup(unitManager: UnitManager) -> void:
-	OnTargetRequired.emit()
+func Setup(isTeamA: bool, unitManager: UnitManager) -> void:
+	IsTeamA = isTeamA
+	unitManager.OnBattleStart.connect(_onBattleStart)
+
+func _onBattleStart():
+	print("Unit Ready For Battle!")
+	OnTargetRequired.emit(self)
 
 # Increments enemy state each time function is called
 func _update_state():
