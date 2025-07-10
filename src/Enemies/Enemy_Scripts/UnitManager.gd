@@ -93,6 +93,7 @@ func _onUnitRequireTarget(unit: Unit)-> void:
 	var oppArmy := _armyA if unit.IsTeamA else _armyB
 	var closestTarget: Unit = _findClosestUnit(unit, oppArmy)
 	
+	# Set closest target
 	if closestTarget != null:
 		unit.SetTarget(closestTarget)
 	

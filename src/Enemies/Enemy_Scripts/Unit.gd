@@ -3,6 +3,7 @@ class_name Unit
 extends Node
 
 signal OnTargetRequired(unit: Unit)
+signal OnDie()
 
 var IsTeamA : bool
 
@@ -14,10 +15,13 @@ func Setup(isTeamA: bool, unitManager: UnitManager) -> void:
 	unitManager.OnBattleStart.connect(_onBattleStart)
 	
 
-func SetTarget(target: Unit) -> void:
-	print("Found Target")
 func _onBattleStart():
-	print("Unit Ready For Battle!")
+	OnTargetRequired.emit(self)
+
+func SetTarget(target: Unit) -> void:
+	target.OnDie.connect(_targetKilled)
+
+func _targetKilled()-> void:
 	OnTargetRequired.emit(self)
 
 # Increments enemy state each time function is called
