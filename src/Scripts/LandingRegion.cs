@@ -30,9 +30,11 @@ public partial class LandingRegion : Area2D {
             GD.Print("VAR");
             ball.GravityScale = 0;
             ball.LinearVelocity = Vector2.Zero;
-            ball.Freeze = true;
+            CallDeferred(nameof(SetFreeze), ball, true);
         }
     }
+
+    static void SetFreeze(Ball ball, bool isFreezed) => ball.Freeze = isFreezed;
 
     public override void _Process(double delta) {
         if (Engine.IsEditorHint()) {
