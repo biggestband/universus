@@ -1,14 +1,14 @@
 [gd_scene load_steps=25 format=3 uid="uid://b40xrgmajnvso"]
 
-[ext_resource type="Texture2D" uid="uid://dn2h5g5b72hcr" path="res://Pngs/Flare00.PNG" id="1_er25u"]
-[ext_resource type="Material" uid="uid://c2go1i1lu2m33" path="res://DeathVFX.tres" id="2_ifv6g"]
+[ext_resource type="Texture2D" uid="uid://dn2h5g5b72hcr" path="res://Pngs/Flare00.PNG" id="1_eikt8"]
+[ext_resource type="Material" uid="uid://c2go1i1lu2m33" path="res://DeathVFX.tres" id="2_i4351"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifv6g"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_er25u")
+albedo_texture = ExtResource("1_eikt8")
 
 [sub_resource type="Curve" id="Curve_er25u"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -85,7 +85,7 @@ transparency = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_er25u")
+albedo_texture = ExtResource("1_eikt8")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -135,7 +135,7 @@ process_material = SubResource("ParticleProcessMaterial_xrikd")
 draw_pass_1 = SubResource("QuadMesh_gbgel")
 
 [node name="Flash" type="GPUParticles3D" parent="."]
-material_override = ExtResource("2_ifv6g")
+material_override = ExtResource("2_i4351")
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -146,7 +146,7 @@ process_material = SubResource("ParticleProcessMaterial_ifv6g")
 draw_pass_1 = SubResource("QuadMesh_xrikd")
 
 [node name="Fire" type="GPUParticles3D" parent="."]
-material_override = ExtResource("2_ifv6g")
+material_override = ExtResource("2_i4351")
 emitting = false
 amount = 13
 lifetime = 0.55
