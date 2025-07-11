@@ -7,6 +7,9 @@ public partial class Boot : Node
     private int expectedClientCount = 2;
     private int trackedClientCount = 0;
 
+    [Export]
+    private PackedScene launchGameScene; 
+
     public override void _Ready()
     {
         ArmySyncer.instance.expectedClientCount = expectedClientCount;
@@ -26,8 +29,7 @@ public partial class Boot : Node
 
             ArmySyncer.instance.AllClientNamesChosen += () => 
             {
-                GD.Print(Multiplayer.GetUniqueId() + ": " + "Finished boot, go to new scene");
-                //Add scene transition here
+                GetTree().ChangeSceneToPacked(launchGameScene);
             };
         }
     }

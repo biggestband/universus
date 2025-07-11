@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Utility;
 
@@ -8,6 +9,20 @@ public partial class LandingRegion : Area2D {
     Ball connectedBall;
 
     Tween textTween;
+
+    private int bucketValue = 20;
+    [Export]
+    int BucketBalue {
+        get => bucketValue;
+        set
+        {
+            bucketValue = value;
+            if (Engine.IsEditorHint()) text.Text = "[b]" + bucketValue.ToString() + "[/b]";
+        }
+    }
+
+    [Signal]
+    public delegate void SubmitScoreEventHandler(int bucketScore);
 
     [Export]
     RichTextLabel text;
@@ -97,6 +112,7 @@ public partial class LandingRegion : Area2D {
             textTween = CreateTween().SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Back);
             textTween.TweenProperty(text.GetParent<Node2D>(), "global_position", textMovePosition.GlobalPosition.With(x: 0), 1);
             textTween.TweenCallback(Callable.From(() => { text.Modulate = new(1, 1, 1, 0); }));
+            EmitSignal(SignalName.SubmitScore, bucketValue);
             return;
         }
         

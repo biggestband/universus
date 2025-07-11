@@ -1,7 +1,8 @@
 using System;
 using Godot;
 
-public partial class ScoreManager : Node {
+public partial class ScoreManager : Node
+{
     [Export]
     float newHitScore = 0.2f, reHitScore = 0.1f;
     public static event Action<ScoreData> OnScoreChanged = delegate { };
@@ -10,16 +11,19 @@ public partial class ScoreManager : Node {
 
     public static float NewHitScore, ReHitScore;
 
-    public override void _Ready() {
+    public override void _Ready()
+    {
         Score = 0;
         NewHitScore = newHitScore;
         ReHitScore = reHitScore;
     }
 
-    public static void IncreaseScore(HitType type) {
-        var amount = type switch {
+    public static void IncreaseScore(HitType type)
+    {
+        var amount = type switch
+        {
             HitType.NewHit => NewHitScore,
-            HitType.ReHit =>  ReHitScore,
+            HitType.ReHit => ReHitScore,
             _ => 0,
         };
         Score += amount;
@@ -27,8 +31,17 @@ public partial class ScoreManager : Node {
         OnScoreChanged.Invoke(new(Score, amount, type));
     }
 
-    public static void EvaluateHighScore() {
+    public static void EvaluateHighScore()
+    {
         HighScore = Mathf.Max(Score, HighScore);
+    }
+
+    public void BucketScoreSubmission(int bucketScore)
+    {
+        int output = bucketScore;
+        //Some math here to multiply the bucket score with the high score?
+
+        ArmySyncer.instance.IncrementArmyCount(output);
     }
 }
 

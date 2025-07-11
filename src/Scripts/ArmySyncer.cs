@@ -23,10 +23,15 @@ public partial class ArmySyncer : Node
         Multiplayer.ConnectedToServer += AskUserForName;
     }
 
+    public void IncrementArmyCount(int additionalCount)
+    {
+        SetArmyCount(teamArmyCounts[clientTeamName] + additionalCount);
+    }
+
     public void SetArmyCount(int newCount)
     {
-        if(OS.HasFeature("Server")) return;
-        if(clientTeamName == null || clientTeamName == string.Empty) return;
+        if (OS.HasFeature("Server")) return;
+        if (clientTeamName == null || clientTeamName == string.Empty) return;
 
         teamArmyCounts[clientTeamName] = newCount;
         Rpc(MethodName.AddTeamToServerRpc, clientTeamName, newCount);
