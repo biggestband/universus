@@ -9,6 +9,7 @@ var targets : PackedInt32Array
 
 # Movement scalars
 const _unitMoveSpeed : float = 2
+const _unitRotSpeed : float = .5
 
 # Offset scalars
 const _unitSeparation : float = 2
@@ -136,10 +137,23 @@ func _updateUnitNodes() -> void:
 	for n in range(unitPositions.size()):
 		if unitNodes[n] == null:
 			continue
-		var prev := prevUnitPositions[n]
-		var curr := unitPositions[n]
-		var interp := prev.lerp(curr, fract)
-		unitNodes[n].position = Vector3(interp.x, 0, interp.y)
+		var prev : Vector2 = prevUnitPositions[n]
+		var curr : Vector2 = unitPositions[n]
+		var interp : Vector2 = prev.lerp(curr, fract)
+		
+		# Set position
+		var unit: Unit = unitNodes[n]
+		unit.position = Vector3(interp.x, 0, interp.y)
+		
+		# Set rotation
+		var moveDir := (curr - prev).normalized()
+		
+		if moveDir.length() > 0.1:
+			var targetDir : Vector3 = Vector3(moveDir.x, 0, moveDir.y)
+			var unitTransform : Transform3D = unit.transform
+			var targetBasis : Basis = Basis().looking_at(targetDir, Vector3.UP)
+			unitTransform.basis = unitTransform.basis.slerp(targetBasis, fract * _unitRotSpeed)
+			unit.transform = unitTransform
 
 func _isDead(id: int) -> bool:
 	return false

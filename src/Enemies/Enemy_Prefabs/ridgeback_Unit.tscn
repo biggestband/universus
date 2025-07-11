@@ -7,6 +7,7 @@
 script = ExtResource("1_ro661")
 
 [node name="Mesh" parent="." instance=ExtResource("2_l5d7r")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="_1_0_node_001" parent="Mesh" index="0"]
 cast_shadow = 0
