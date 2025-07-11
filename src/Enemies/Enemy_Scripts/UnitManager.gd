@@ -46,19 +46,7 @@ func _ready() -> void:
 	_generateArmies(units.size())
 
 func _process(delta: float) -> void:
-	# calculate positions
-	for n in range(0, units.size()):
-		var posfx : float = move_toward(units[n].x, 0, delta * _unitMoveSpeed)
-		var posfy : float = move_toward(units[n].y, 0, delta * _unitMoveSpeed)
-		var pos : Vector2 = Vector2(posfx, posfy)
-		units[n] = pos
-	
-	# send position data to units (node)
-	for n in range(0, units.size()):
-		var pos : Vector2 = units[n]
-		if unitNodes[n] == null:
-			continue
-		unitNodes[n].position = Vector3(pos.x, 0, pos.y)
+	_calculateUnitPosition(delta)
 
 func _generateArmies(armySize: int) -> void:
 	var armyBSize := armySize - armyASize
@@ -124,3 +112,18 @@ func _findClosestUnit(unitID: int) -> int:
 
 func _isDead(id: int) -> bool:
 	return false
+
+func _calculateUnitPosition(time: float):
+	# calculate positions
+	for n in range(0, units.size()):
+		var posfx : float = move_toward(units[n].x, 0, time)
+		var posfy : float = move_toward(units[n].y, 0, time)
+		var pos : Vector2 = Vector2(posfx, posfy)
+		units[n] = pos
+		
+		# send position data to units (node)
+	for n in range(0, units.size()):
+		var pos : Vector2 = units[n]
+		if unitNodes[n] == null:
+			continue
+		unitNodes[n].position = Vector3(pos.x, 0, pos.y)
