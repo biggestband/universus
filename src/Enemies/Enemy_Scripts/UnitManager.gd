@@ -24,8 +24,8 @@ var armyASize: int
 func _ready() -> void:
 	
 	# Get networked values from singleton
-	armyASize = 1000
-	var armyBSize : int = 1000
+	armyASize = 512
+	var armyBSize : int = 512
 	var randSeed : int = 64
 	
 	# Init ECS arrays

@@ -10,7 +10,7 @@ script = ExtResource("1_ro661")
 
 [node name="_1_0_node_001" parent="Mesh" index="0"]
 cast_shadow = 0
-lod_bias = 0.001
+lod_bias = 0.4
 gi_mode = 0
 
 [editable path="Mesh"]
