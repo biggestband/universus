@@ -3,6 +3,7 @@ class_name UnitManager
 extends Node
 
 var unitPositions: PackedVector2Array
+var startingUnitPositions: PackedVector2Array
 var prevUnitPositions: PackedVector2Array
 var unitNodes: Array[Unit]
 var targets: PackedInt32Array
@@ -38,6 +39,9 @@ func _ready() -> void:
 	
 	unitPositions.clear()
 	unitPositions.resize(totalUnits)
+	
+	startingUnitPositions.clear()
+	startingUnitPositions.resize(totalUnits)
 	
 	prevUnitPositions.clear()
 	prevUnitPositions.resize(totalUnits)
@@ -100,6 +104,7 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	instance.OnRequireTarget.connect(_onUnitRequireTarget)
 	
 	unitPositions[id] = Vector2(pos.x, pos.z)
+	startingUnitPositions[id] = Vector2(pos.x, pos.z)
 	unitNodes[id] = instance
 
 #endregion
@@ -174,6 +179,7 @@ func _onUnitRequireTarget(unitID: int)-> void:
 #region Helper Functions
 
 func _isDead(id: int) -> bool:
+	unitPositions[id] = startingUnitPositions[id]
 	return false
 
 func _getRandOffset(pos: Vector3) -> Vector3:

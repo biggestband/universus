@@ -5,6 +5,7 @@ extends Node3D
 # System vars
 var _id: int = -1
 var _targetID: int = -1
+var timer = 0
 
 # Signals
 signal OnRequireTarget(id: int)
@@ -37,6 +38,13 @@ func _onBattleBegin() -> void:
 	
 func _onTargetDie() -> void:
 	OnRequireTarget.emit(_id)
+
+func _process(delta: float) -> void:
+	# Tick every 1 second and update unit target
+	timer += delta
+	if timer > 1:
+		OnRequireTarget.emit(_id)
+		timer = 0
 
 #endregion
 
