@@ -23,8 +23,8 @@ var armyASize: int
 func _ready() -> void:
 	
 	# Get networked values from singleton
-	armyASize = 256
-	var armyBSize : int = 64
+	armyASize = 1000
+	var armyBSize : int = 1000
 	var randSeed : int = 64
 	
 	# Init ECS arrays
@@ -45,8 +45,8 @@ func _ready() -> void:
 	# Generate the armies
 	_generateArmies(units.size())
 
-func _process(delta: float) -> void:
-	_calculateUnitPosition(delta)
+func _physics_process(delta: float) -> void:
+	_updateUnitPositions(delta)
 
 func _generateArmies(armySize: int) -> void:
 	var armyBSize := armySize - armyASize
@@ -110,20 +110,20 @@ func _findClosestUnit(unitID: int) -> int:
 			closestUnit = u
 	return closestUnit
 
-func _isDead(id: int) -> bool:
-	return false
-
-func _calculateUnitPosition(time: float):
+func _updateUnitPositions(time: float):
 	# calculate positions
 	for n in range(0, units.size()):
-		var posfx : float = move_toward(units[n].x, 0, time)
-		var posfy : float = move_toward(units[n].y, 0, time)
+		var posfx : float = move_toward(units[n].x, 0, time * _unitMoveSpeed)
+		var posfy : float = move_toward(units[n].y, 0, time * _unitMoveSpeed)
 		var pos : Vector2 = Vector2(posfx, posfy)
 		units[n] = pos
 		
-		# send position data to units (node)
+	# send position data to units (node)
 	for n in range(0, units.size()):
 		var pos : Vector2 = units[n]
 		if unitNodes[n] == null:
 			continue
 		unitNodes[n].position = Vector3(pos.x, 0, pos.y)
+
+func _isDead(id: int) -> bool:
+	return false
