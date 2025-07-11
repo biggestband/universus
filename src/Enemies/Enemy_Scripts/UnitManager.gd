@@ -124,12 +124,8 @@ func _updateUnitPositions(time: float) -> void:
 		# Store previous unit positions
 		prevUnitPositions[n] = unitPositions[n]
 		
-		# Calculate new unit position
-		#var posfx : Vector2 = move_toward(unitPositions[n], Vector2.ZERO, time * _unitMoveSpeed)
-		#var posfy : float = move_toward(unitPositions[n].y, 0, time * _unitMoveSpeed)
-		#var pos : Vector2 = Vector2(posfx, posfy)
-		#var pos : Vector2 = lerp(unitPositions[n], Vector2.ZERO, time * _unitMoveSpeed)
-		var targetPos := Vector2(100, 100)
+		# Step unit pos in the direction of its target over time
+		var targetPos : Vector2 = Vector2(0, 0)
 		unitPositions[n] += (targetPos - unitPositions[n]).normalized() * _unitMoveSpeed * time
 
 func _updateUnitNodes() -> void:
