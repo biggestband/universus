@@ -111,15 +111,14 @@ func _findClosestUnit(unitID: int) -> int:
 	var end: int = unitPositions.size() if unitID < armyASize else armyASize
 	
 	var closestUnit: int
-	var min_distance : float
+	var minDistance: float = INF
 	
 	for u in range(start, end):
 		var dist: float = unitPositions[unitID].distance_to(unitPositions[u])
-		if dist < min_distance:
-			min_distance = dist
+		if dist < minDistance:
+			minDistance = dist
 			closestUnit = u
 	
-	print(closestUnit)
 	return closestUnit
 
 func _updateUnitPositions(time: float) -> void:	
