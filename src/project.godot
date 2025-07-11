@@ -15,6 +15,10 @@ run/main_scene="uid://ty41fgd80gqy"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://Sprites/icon.svg"
 
+[display]
+
+window/vsync/vsync_mode=0
+
 [dotnet]
 
 project/assembly_name="universus"

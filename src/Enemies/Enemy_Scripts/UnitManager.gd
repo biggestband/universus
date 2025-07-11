@@ -3,10 +3,9 @@ class_name UnitManager
 extends Node
 
 var unitPositions: PackedVector2Array
-var startingUnitPositions: PackedVector2Array
+var unitStartingPositions: PackedVector2Array
 var prevUnitPositions: PackedVector2Array
 var unitNodes: Array[Unit]
-var targets: PackedInt32Array
 
 # Movement scalars
 const _unitMoveSpeed: float = 2
@@ -15,6 +14,10 @@ const _unitRotSpeed: float = .5
 # Offset scalars
 const _unitSeparation: float = 2
 const _offsetFromCenter: float = 3 
+
+# Partitions
+var unitPartitions: Array[Array] = [[], [], [], []]
+var numPartitions : int = 4
 
 # Unit Prefabs
 var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
@@ -25,6 +28,8 @@ signal OnBattleBegin
 
 # System vars
 var armyASize: int
+var tickTimer: float = 0
+var currentPartitionIndex : int = 0
 
 #region Extensions
 func _ready() -> void:
@@ -40,14 +45,11 @@ func _ready() -> void:
 	unitPositions.clear()
 	unitPositions.resize(totalUnits)
 	
-	startingUnitPositions.clear()
-	startingUnitPositions.resize(totalUnits)
+	unitStartingPositions.clear()
+	unitStartingPositions.resize(totalUnits)
 	
 	prevUnitPositions.clear()
 	prevUnitPositions.resize(totalUnits)
-	
-	targets.clear()
-	targets.resize(totalUnits)
 	
 	unitNodes.clear()
 	unitNodes.resize(totalUnits)
@@ -65,11 +67,22 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	_updateUnitNodes()
+	
+	tickTimer += delta
+	if tickTimer > 1:
+		# Only update units in the current partition
+		for u in unitPartitions[currentPartitionIndex]:
+			u.UpdateTarget()
+
+		currentPartitionIndex = (currentPartitionIndex + 1) % numPartitions
+		tickTimer = 0
 #endregion
 
 #region Army Generation
 
 func _generateArmies(armySize: int) -> void:
+	var currentPartitionIndex : int= 0
+	
 	var armyBSize := armySize - armyASize
 	_spawnArmyGrid(armyASize, 1, 0)
 	_spawnArmyGrid(armyBSize, -1, armyASize)
@@ -104,8 +117,12 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	instance.OnRequireTarget.connect(_onUnitRequireTarget)
 	
 	unitPositions[id] = Vector2(pos.x, pos.z)
-	startingUnitPositions[id] = Vector2(pos.x, pos.z)
+	unitStartingPositions[id] = Vector2(pos.x, pos.z)
 	unitNodes[id] = instance
+	
+	# Partition assignment
+	var partitionIndex := id % numPartitions
+	unitPartitions[partitionIndex].append(instance)
 
 #endregion
 
@@ -179,7 +196,7 @@ func _onUnitRequireTarget(unitID: int)-> void:
 #region Helper Functions
 
 func _isDead(id: int) -> bool:
-	unitPositions[id] = startingUnitPositions[id]
+	unitPositions[id] = unitStartingPositions[id]
 	return false
 
 func _getRandOffset(pos: Vector3) -> Vector3:
