@@ -224,7 +224,6 @@ void light() {
 
 }
 "
-graph_offset = Vector2(-91.6913, -11.6828)
 flags/fog_disabled = true
 nodes/vertex/0/position = Vector2(640, 160)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_byhh6")
