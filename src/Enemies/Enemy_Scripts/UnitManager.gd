@@ -4,7 +4,7 @@ extends Node
 
 var unitPositions: PackedVector2Array
 var prevUnitPositions: PackedVector2Array
-var unitNodes: Array[Node3D]
+var unitNodes: Array[Unit]
 var targets: PackedInt32Array
 
 # Movement scalars
@@ -22,6 +22,7 @@ var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.t
 # System vars
 var armyASize: int
 
+#region Extensions
 func _ready() -> void:
 	
 	# Get networked values from singleton
@@ -55,6 +56,9 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	_updateUnitNodes()
+#endregion
+
+#region Army Generation
 
 func _generateArmies(armySize: int) -> void:
 	var armyBSize := armySize - armyASize
@@ -91,19 +95,8 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	unitPositions[id] = Vector2(pos.x, pos.z)
 	unitNodes[id] = instance
 
-func _getRandOffset(pos: Vector3) -> Vector3:
-	
-	var offsetX: float = randf() * .5
-	var offsetZ: float = randf() * .5
-	return pos + Vector3(offsetX, 0 , offsetZ)
+#endregion
 
-func _onUnitRequireTarget(id: int)-> void:
-	var closestTarget: int = _findClosestUnit(id)
-	
-	# Set closest target
-	if ! _isDead(closestTarget):
-		targets[id] = closestTarget
-	
 func _findClosestUnit(unitID: int) -> int:
 	var start: int = armyASize if unitID < armyASize else 0
 	var end: int = unitPositions.size() if unitID < armyASize else armyASize
@@ -124,9 +117,13 @@ func _updateUnitPositions(time: float) -> void:
 		# Store previous unit positions
 		prevUnitPositions[n] = unitPositions[n]
 		
+		# Get target position
+		var targetID: int = unitNodes[n].GetTargetID()
+		
 		# Step unit pos in the direction of its target over time
-		var targetPos: Vector2 = Vector2(0, 0)
-		unitPositions[n] += (targetPos - unitPositions[n]).normalized() * _unitMoveSpeed * time
+		if(targetID > -1):
+			var targetPos: Vector2 = unitPositions[targetID]
+			unitPositions[n] += (targetPos - unitPositions[n]).normalized() * _unitMoveSpeed * time
 
 func _updateUnitNodes() -> void:
 	var fract: float = Engine.get_physics_interpolation_fraction()
@@ -153,5 +150,24 @@ func _updateUnitNodes() -> void:
 			unitTransform.basis = unitTransform.basis.slerp(targetBasis, fract * _unitRotSpeed)
 			unit.transform = unitTransform
 
+#region Signal Functions
+
+func _onUnitRequireTarget(id: int)-> void:
+	var closestTarget: int = _findClosestUnit(id)
+	
+	# Set closest target
+	if ! _isDead(closestTarget):
+		targets[id] = closestTarget
+#endregion
+
+#region Helper Functions
+
 func _isDead(id: int) -> bool:
 	return false
+
+func _getRandOffset(pos: Vector3) -> Vector3:
+	
+	var offsetX: float = randf() * .5
+	var offsetZ: float = randf() * .5
+	return pos + Vector3(offsetX, 0 , offsetZ)
+#endregion
