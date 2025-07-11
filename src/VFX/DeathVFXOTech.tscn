@@ -1,14 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://b545553ktofi7"]
+[gd_scene load_steps=25 format=3 uid="uid://b40xrgmajnvso"]
 
-[ext_resource type="Texture2D" uid="uid://dn2h5g5b72hcr" path="res://Pngs/Flare00.PNG" id="1_s4oqa"]
-[ext_resource type="Material" uid="uid://c2go1i1lu2m33" path="res://DeathVFX.tres" id="2_6hjrb"]
+[ext_resource type="Texture2D" uid="uid://dn2h5g5b72hcr" path="res://Pngs/Flare00.PNG" id="1_65elr"]
+[ext_resource type="Material" uid="uid://c2go1i1lu2m33" path="res://Shaders/DeathVFX.tres" id="2_w0nkh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifv6g"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_s4oqa")
+albedo_texture = ExtResource("1_65elr")
 
 [sub_resource type="Curve" id="Curve_er25u"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -39,7 +39,7 @@ gravity = Vector3(0, -20, 0)
 scale_min = 0.15
 scale_max = 0.5
 scale_curve = SubResource("CurveXYZTexture_gbgel")
-color = Color(0.137255, 0.470588, 0.313726, 1)
+color = Color(0.528047, 0.764009, 0.999999, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_gbgel"]
 
@@ -55,7 +55,6 @@ gravity = Vector3(0, 0, 0)
 scale_min = 4.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_imcdy")
-color = Color(0.137255, 0.470588, 0.313726, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_xrikd"]
 
@@ -77,7 +76,7 @@ gravity = Vector3(0, -2, 0)
 scale_min = 0.75
 scale_max = 1.5
 scale_curve = SubResource("CurveTexture_qdiin")
-color = Color(0.0619052, 0.260938, 0.166981, 1)
+color = Color(0.0519851, 0.211886, 0.356208, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_ifv6g"]
 
@@ -86,7 +85,7 @@ transparency = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_s4oqa")
+albedo_texture = ExtResource("1_65elr")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -117,7 +116,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_kxevc")
-color = Color(0.135586, 0.469843, 0.313358, 1)
+color = Color(0.143096, 0.413184, 0.658158, 1)
 color_ramp = SubResource("GradientTexture1D_xrikd")
 
 [sub_resource type="QuadMesh" id="QuadMesh_imcdy"]
@@ -136,7 +135,7 @@ process_material = SubResource("ParticleProcessMaterial_xrikd")
 draw_pass_1 = SubResource("QuadMesh_gbgel")
 
 [node name="Flash" type="GPUParticles3D" parent="."]
-material_override = ExtResource("2_6hjrb")
+material_override = ExtResource("2_w0nkh")
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -147,7 +146,7 @@ process_material = SubResource("ParticleProcessMaterial_ifv6g")
 draw_pass_1 = SubResource("QuadMesh_xrikd")
 
 [node name="Fire" type="GPUParticles3D" parent="."]
-material_override = ExtResource("2_6hjrb")
+material_override = ExtResource("2_w0nkh")
 emitting = false
 amount = 13
 lifetime = 0.55

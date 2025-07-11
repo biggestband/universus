@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=3 uid="uid://bfpdnicmjm5on"]
 
-[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://Pngs/T_PerlinNoise_Tiled.png" id="2_bwoav"]
+[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://Pngs/T_PerlinNoise_Tiled.png" id="1_2agsy"]
 
 [sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_65xgl"]
 default_input_values = [0, 0.2]
@@ -290,7 +290,7 @@ nodes/light/connections = PackedInt32Array(2, 0, 4, 0, 6, 0, 5, 0, 7, 0, 5, 1, 9
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ixvty"]
 render_priority = 0
 shader = SubResource("VisualShader_4i8cw")
-shader_parameter/Vertex_Noise = ExtResource("2_bwoav")
+shader_parameter/Vertex_Noise = ExtResource("1_2agsy")
 shader_parameter/Proximity_Fade = 1.0
 
 [sub_resource type="Gradient" id="Gradient_ovcpr"]
