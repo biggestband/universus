@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+ArgumentHandler="*res://Scripts/ArgumentHandler.cs"
 ArmySyncer="*res://Scripts/ArmySyncer.cs"
 
 [display]
