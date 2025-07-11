@@ -2,22 +2,22 @@ class_name UnitManager
 
 extends Node
 
-var unitPositions : PackedVector2Array
-var prevUnitPositions : PackedVector2Array
-var unitNodes : Array[Node3D]
-var targets : PackedInt32Array
+var unitPositions: PackedVector2Array
+var prevUnitPositions: PackedVector2Array
+var unitNodes: Array[Node3D]
+var targets: PackedInt32Array
 
 # Movement scalars
-const _unitMoveSpeed : float = 2
-const _unitRotSpeed : float = .5
+const _unitMoveSpeed: float = 2
+const _unitRotSpeed: float = .5
 
 # Offset scalars
-const _unitSeparation : float = 2
-const _offsetFromCenter : float = 3 
+const _unitSeparation: float = 2
+const _offsetFromCenter: float = 3 
 
 # Unit Prefabs
-var _armyAUnit : Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
-var _armyBUnit : Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
+var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
+var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
 
 # System vars
 var armyASize: int
@@ -26,8 +26,8 @@ func _ready() -> void:
 	
 	# Get networked values from singleton
 	armyASize = 512
-	var armyBSize : int = 512
-	var randSeed : int = 64
+	var armyBSize: int = 512
+	var randSeed: int = 64
 	
 	# Init ECS arrays
 	var totalUnits: int = armyASize + armyBSize
@@ -63,14 +63,14 @@ func _generateArmies(armySize: int) -> void:
 
 func _spawnArmyGrid(size: int, fieldSide: int, idOffset: int) -> void:
 	var gridSize: int = ceil(sqrt(size))
-	var zOffset : float = gridSize * 0.5
-	var offsetFromCenter : float = _offsetFromCenter * fieldSide
-	var id : int = 0
+	var zOffset: float = gridSize * 0.5
+	var offsetFromCenter: float = _offsetFromCenter * fieldSide
+	var id: int = 0
 	
 	for x in gridSize:
 		for z in gridSize:
 			if id < size:
-				var position : Vector3 = Vector3(
+				var position: Vector3 = Vector3(
 					offsetFromCenter + (x * _unitSeparation) * fieldSide,
 					1,
 					(zOffset - z) * _unitSeparation
@@ -93,8 +93,8 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 
 func _getRandOffset(pos: Vector3) -> Vector3:
 	
-	var offsetX : float = randf() * .5
-	var offsetZ : float = randf() * .5
+	var offsetX: float = randf() * .5
+	var offsetZ: float = randf() * .5
 	return pos + Vector3(offsetX, 0 , offsetZ)
 
 func _onUnitRequireTarget(id: int)-> void:
@@ -125,7 +125,7 @@ func _updateUnitPositions(time: float) -> void:
 		prevUnitPositions[n] = unitPositions[n]
 		
 		# Step unit pos in the direction of its target over time
-		var targetPos : Vector2 = Vector2(0, 0)
+		var targetPos: Vector2 = Vector2(0, 0)
 		unitPositions[n] += (targetPos - unitPositions[n]).normalized() * _unitMoveSpeed * time
 
 func _updateUnitNodes() -> void:
@@ -135,21 +135,21 @@ func _updateUnitNodes() -> void:
 	for n in range(unitPositions.size()):
 		if unitNodes[n] == null:
 			continue
-		var prev : Vector2 = prevUnitPositions[n]
-		var curr : Vector2 = unitPositions[n]
-		var interp : Vector2 = prev.lerp(curr, fract)
+		var prev: Vector2 = prevUnitPositions[n]
+		var curr: Vector2 = unitPositions[n]
+		var interp: Vector2 = prev.lerp(curr, fract)
 		
 		# Set position
 		var unit: Unit = unitNodes[n]
 		unit.position = Vector3(interp.x, 0, interp.y)
 		
 		# Set rotation
-		var moveDir := (curr - prev).normalized()
+		var moveDir: Vector2 = (curr - prev).normalized()
 		
 		if moveDir.length() > 0.1:
-			var targetDir : Vector3 = Vector3(moveDir.x, 0, moveDir.y)
-			var unitTransform : Transform3D = unit.transform
-			var targetBasis : Basis = Basis().looking_at(targetDir, Vector3.UP)
+			var targetDir: Vector3 = Vector3(moveDir.x, 0, moveDir.y)
+			var unitTransform: Transform3D = unit.transform
+			var targetBasis: Basis = Basis().looking_at(targetDir, Vector3.UP)
 			unitTransform.basis = unitTransform.basis.slerp(targetBasis, fract * _unitRotSpeed)
 			unit.transform = unitTransform
 
