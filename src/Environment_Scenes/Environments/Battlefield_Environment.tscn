@@ -1,8 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://ty41fgd80gqy"]
+[gd_scene load_steps=10 format=3 uid="uid://ty41fgd80gqy"]
 
 [ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_aufuh"]
 [ext_resource type="Script" uid="uid://b02n7ag6kuno8" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_tag4l"]
 [ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Environment_Scenes/Environments/FPSCounter.gd" id="3_tag4l"]
+
+[sub_resource type="Environment" id="Environment_01vul"]
+background_mode = 1
+background_color = Color(0.216292, 0.759197, 0.921567, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+tonemap_mode = 3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aufuh"]
 bounce = 1.0
@@ -21,6 +29,9 @@ material = SubResource("StandardMaterial3D_7q213")
 size = Vector2(100, 100)
 
 [node name="BattlefieldEnvironment" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_01vul")
 
 [node name="Level" type="Node" parent="."]
 
@@ -42,10 +53,6 @@ skeleton = NodePath("../../../..")
 
 [node name="Camera3D" type="Camera3D" parent="GFX"]
 transform = Transform3D(1, 0, 0, 0, 0.873789, 0.486305, 0, -0.486305, 0.873789, 0, 12.215, 34.11)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="GFX"]
-transform = Transform3D(0.959668, 0.0941641, 0.264897, -0.281136, 0.321433, 0.904237, 0, -0.942239, 0.334942, 0, 0, 0)
-light_energy = 1.5
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("2_tag4l")
