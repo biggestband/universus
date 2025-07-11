@@ -43,7 +43,7 @@ func _ready() -> void:
 	seed(randSeed)
 	
 	# Generate the armies
-	_generateArmy(units.size())
+	_generateArmies(units.size())
 
 func _process(delta: float) -> void:
 	# calculate positions
@@ -60,37 +60,26 @@ func _process(delta: float) -> void:
 			continue
 		unitNodes[n].position = Vector3(pos.x, 0, pos.y)
 
-func _generateArmy(armySize: int) -> void:
+func _generateArmies(armySize: int) -> void:
+	var armyBSize := armySize - armyASize
+	_spawnArmyGrid(armyASize, 1, 0)
+	_spawnArmyGrid(armyBSize, -1, armyASize)
 
-	var armyBSize = armySize - armyASize
-	
-	# Determine army size as a grid on the field
-	var gridASize: int = ceil(sqrt(armyASize))
-	var gridBSize: int = ceil(sqrt(armyBSize))
-	
-	var aZOffset: float = gridASize * .5
-	var bZOffset: float = gridBSize * .5
-	
-	var fieldSideA: int = 1 
-	var fieldSideB: int = -1
-	
-	var offsetFromCenterA: float = _offsetFromCenter * fieldSideA
-	var offsetFromCenterB: float = _offsetFromCenter * fieldSideB
-	
-	# Create unit instances on each side of the field
+func _spawnArmyGrid(size: int, fieldSide: int, idOffset: int) -> void:
+	var gridSize: int = ceil(sqrt(size))
+	var zOffset : float = gridSize * 0.5
+	var offsetFromCenter : float = _offsetFromCenter * fieldSide
 	var id : int = 0
-	for x in gridASize:
-		for z in gridASize:
-			if id < armyASize:
-				_spawnUnit(id,
-				_getRandOffset(Vector3(offsetFromCenterA + (x * _unitSeparation) * fieldSideA, 1, (aZOffset - z) * _unitSeparation)),)
-				id += 1
-	id = 0
-	for x in gridBSize:
-		for z in gridBSize:
-			if id < armyBSize:
-				_spawnUnit(id + armyASize,
-				_getRandOffset(Vector3(offsetFromCenterB + (x * _unitSeparation) * fieldSideB, 1, (bZOffset - z) * _unitSeparation)),)
+	
+	for x in gridSize:
+		for z in gridSize:
+			if id < size:
+				var position : Vector3 = Vector3(
+					offsetFromCenter + (x * _unitSeparation) * fieldSide,
+					1,
+					(zOffset - z) * _unitSeparation
+				)
+				_spawnUnit(id + idOffset, _getRandOffset(position))
 				id += 1
 
 func _spawnUnit(id: int, pos: Vector3) -> void:
