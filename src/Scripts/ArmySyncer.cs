@@ -10,7 +10,7 @@ public partial class ArmySyncer : Node
     private string clientTeamName;
     private bool areAllClientsNamed = false;
     private bool areAllClientsJoined = false;
-    public int expectedClientCount;
+    private int expectedClientCount;
 
     [Signal]
     public delegate void AllClientNamesChosenEventHandler();
@@ -20,6 +20,7 @@ public partial class ArmySyncer : Node
     public override void _Ready()
     {
         instance = this;
+        expectedClientCount = ArgumentHandler.instance.GetArgumentValue("client-count").ToInt();
         Multiplayer.ConnectedToServer += AskUserForName;
     }
 
@@ -50,6 +51,12 @@ public partial class ArmySyncer : Node
 
     private void AskUserForName()
     {
+        if (ArgumentHandler.instance.IsArgumentIncluded("team-name"))
+        {
+            clientTeamName = ArgumentHandler.instance.GetArgumentValue("team-name");
+            return;
+        }
+
         LineEdit lineEdit = new LineEdit();
         AddChild(lineEdit);
         lineEdit.CustomMinimumSize = new Vector2(GetViewport().GetVisibleRect().Size.X, 80);

@@ -9,20 +9,26 @@ public partial class Boot : Node
 
     public override void _Ready()
     {
-        ArmySyncer.instance.expectedClientCount = expectedClientCount;
-
         if(OS.HasFeature("Server"))
         {
+            expectedClientCount = ArgumentHandler.instance.GetArgumentValue("client-count").ToInt();
             InitializeServer(expectedClientCount);
             Multiplayer.PeerConnected += (val) => {BumpPlayerCount();};
         }
         else
         {
-            LineEdit lineEdit = new LineEdit();
-            AddChild(lineEdit);
-            lineEdit.CustomMinimumSize = new Vector2(GetViewport().GetVisibleRect().Size.X, 80);
-            lineEdit.PlaceholderText = "Server Ip";
-            lineEdit.TextSubmitted += InitializeClient;
+            if (ArgumentHandler.instance.IsArgumentIncluded("server-ip"))
+            {
+                InitializeClient(ArgumentHandler.instance.GetArgumentValue("server-ip"));
+            }
+            else
+            {
+                LineEdit lineEdit = new LineEdit();
+                AddChild(lineEdit);
+                lineEdit.CustomMinimumSize = new Vector2(GetViewport().GetVisibleRect().Size.X, 80);
+                lineEdit.PlaceholderText = "Server Ip";
+                lineEdit.TextSubmitted += InitializeClient;
+            }
 
             ArmySyncer.instance.AllClientNamesChosen += () => 
             {
