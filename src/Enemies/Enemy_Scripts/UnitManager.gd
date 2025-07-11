@@ -2,9 +2,9 @@ class_name UnitManager
 
 extends Node
 
-var units : PackedVector2Array
-var targets : PackedInt32Array
+var unitPositions : PackedVector2Array
 var unitNodes : Array[Node3D]
+var targets : PackedInt32Array
 
 # Movement scalars
 const _unitMoveSpeed : float = 2
@@ -30,8 +30,8 @@ func _ready() -> void:
 	# Init ECS arrays
 	var totalUnits: int = armyASize + armyBSize
 	
-	units.clear()
-	units.resize(totalUnits)
+	unitPositions.clear()
+	unitPositions.resize(totalUnits)
 	
 	targets.clear()
 	targets.resize(totalUnits)
@@ -43,7 +43,7 @@ func _ready() -> void:
 	seed(randSeed)
 	
 	# Generate the armies
-	_generateArmies(units.size())
+	_generateArmies(unitNodes.size())
 
 func _physics_process(delta: float) -> void:
 	_updateUnitPositions(delta)
@@ -80,7 +80,7 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	add_child(instance)
 	instance.position = pos
 	
-	units[id] = Vector2(pos.x, pos.z)
+	unitPositions[id] = Vector2(pos.x, pos.z)
 	unitNodes[id] = instance
 
 func _getRandOffset(pos: Vector3) -> Vector3:
@@ -98,29 +98,29 @@ func _onUnitRequireTarget(id: int)-> void:
 	
 func _findClosestUnit(unitID: int) -> int:
 	var start: int = armyASize if unitID < armyASize else 0
-	var end: int = units.size() if unitID < armyASize else armyASize
+	var end: int = unitPositions.size() if unitID < armyASize else armyASize
 	
 	var closestUnit: int
 	var min_distance : float
 	
 	for u in range(start, end):
-		var dist: float = units[unitID].distance_to(units[u])
+		var dist: float = unitPositions[unitID].distance_to(unitPositions[u])
 		if dist < min_distance:
 			min_distance = dist
 			closestUnit = u
 	return closestUnit
 
 func _updateUnitPositions(time: float):
-	# calculate positions
-	for n in range(0, units.size()):
-		var posfx : float = move_toward(units[n].x, 0, time * _unitMoveSpeed)
-		var posfy : float = move_toward(units[n].y, 0, time * _unitMoveSpeed)
+	# calculate the next position for each unit (step)
+	for n in range(0, unitPositions.size()):
+		var posfx : float = move_toward(unitPositions[n].x, 0, time * _unitMoveSpeed)
+		var posfy : float = move_toward(unitPositions[n].y, 0, time * _unitMoveSpeed)
 		var pos : Vector2 = Vector2(posfx, posfy)
-		units[n] = pos
+		unitPositions[n] = pos
 		
-	# send position data to units (node)
-	for n in range(0, units.size()):
-		var pos : Vector2 = units[n]
+	# send the step data to units and apply to position (node)
+	for n in range(0, unitPositions.size()):
+		var pos : Vector2 = unitPositions[n]
 		if unitNodes[n] == null:
 			continue
 		unitNodes[n].position = Vector3(pos.x, 0, pos.y)
