@@ -3,6 +3,7 @@ class_name UnitManager
 extends Node
 
 var unitPositions : PackedVector2Array
+var prevUnitPositions : PackedVector2Array
 var unitNodes : Array[Node3D]
 var targets : PackedInt32Array
 
@@ -33,6 +34,9 @@ func _ready() -> void:
 	unitPositions.clear()
 	unitPositions.resize(totalUnits)
 	
+	prevUnitPositions.clear()
+	prevUnitPositions.resize(totalUnits)
+	
 	targets.clear()
 	targets.resize(totalUnits)
 	
@@ -47,6 +51,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_updateUnitPositions(delta)
+
+func _process(delta: float) -> void:
+	_updateUnitNodes()
 
 func _generateArmies(armySize: int) -> void:
 	var armyBSize := armySize - armyASize
@@ -110,20 +117,29 @@ func _findClosestUnit(unitID: int) -> int:
 			closestUnit = u
 	return closestUnit
 
-func _updateUnitPositions(time: float):
+func _updateUnitPositions(time: float) -> void:	
 	# calculate the next position for each unit (step)
 	for n in range(0, unitPositions.size()):
+		# Store previous unit positions
+		prevUnitPositions[n] = unitPositions[n]
+		
+		# Calculate new unit position
 		var posfx : float = move_toward(unitPositions[n].x, 0, time * _unitMoveSpeed)
 		var posfy : float = move_toward(unitPositions[n].y, 0, time * _unitMoveSpeed)
 		var pos : Vector2 = Vector2(posfx, posfy)
 		unitPositions[n] = pos
-		
+
+func _updateUnitNodes() -> void:
+	var fract: float = Engine.get_physics_interpolation_fraction()
+	
 	# send the step data to units and apply to position (node)
-	for n in range(0, unitPositions.size()):
-		var pos : Vector2 = unitPositions[n]
+	for n in range(unitPositions.size()):
 		if unitNodes[n] == null:
 			continue
-		unitNodes[n].position = Vector3(pos.x, 0, pos.y)
+		var prev := prevUnitPositions[n]
+		var curr := unitPositions[n]
+		var interp := prev.lerp(curr, fract)
+		unitNodes[n].position = Vector3(interp.x, 0, interp.y)
 
 func _isDead(id: int) -> bool:
 	return false
