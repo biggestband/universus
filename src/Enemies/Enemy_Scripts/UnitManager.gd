@@ -19,6 +19,9 @@ const _offsetFromCenter: float = 3
 var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
 var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
 
+# Signals
+signal OnBattleBegin
+
 # System vars
 var armyASize: int
 
@@ -50,6 +53,8 @@ func _ready() -> void:
 	
 	# Generate the armies
 	_generateArmies(unitNodes.size())
+	
+	OnBattleBegin.emit()
 
 func _physics_process(delta: float) -> void:
 	_updateUnitPositions(delta)
@@ -91,11 +96,15 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	var instance: Unit = unitMesh.instantiate()
 	add_child(instance)
 	instance.position = pos
+	instance.Setup(id, OnBattleBegin)
+	instance.OnRequireTarget.connect(_onUnitRequireTarget)
 	
 	unitPositions[id] = Vector2(pos.x, pos.z)
 	unitNodes[id] = instance
 
 #endregion
+
+#region Unit Positioning
 
 func _findClosestUnit(unitID: int) -> int:
 	var start: int = armyASize if unitID < armyASize else 0
@@ -109,6 +118,8 @@ func _findClosestUnit(unitID: int) -> int:
 		if dist < min_distance:
 			min_distance = dist
 			closestUnit = u
+	
+	print(closestUnit)
 	return closestUnit
 
 func _updateUnitPositions(time: float) -> void:	
@@ -149,15 +160,16 @@ func _updateUnitNodes() -> void:
 			var targetBasis: Basis = Basis().looking_at(targetDir, Vector3.UP)
 			unitTransform.basis = unitTransform.basis.slerp(targetBasis, fract * _unitRotSpeed)
 			unit.transform = unitTransform
+#endregion
 
 #region Signal Functions
 
-func _onUnitRequireTarget(id: int)-> void:
-	var closestTarget: int = _findClosestUnit(id)
+func _onUnitRequireTarget(unitID: int)-> void:
+	var unitNode: Unit = unitNodes[unitID]
 	
-	# Set closest target
-	if ! _isDead(closestTarget):
-		targets[id] = closestTarget
+	var targetID: int = _findClosestUnit(unitID)
+	
+	unitNode.SetTarget(targetID, unitNodes[targetID].OnDie)
 #endregion
 
 #region Helper Functions
