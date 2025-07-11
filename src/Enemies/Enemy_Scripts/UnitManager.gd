@@ -125,10 +125,12 @@ func _updateUnitPositions(time: float) -> void:
 		prevUnitPositions[n] = unitPositions[n]
 		
 		# Calculate new unit position
-		var posfx : float = move_toward(unitPositions[n].x, 0, time * _unitMoveSpeed)
-		var posfy : float = move_toward(unitPositions[n].y, 0, time * _unitMoveSpeed)
-		var pos : Vector2 = Vector2(posfx, posfy)
-		unitPositions[n] = pos
+		#var posfx : Vector2 = move_toward(unitPositions[n], Vector2.ZERO, time * _unitMoveSpeed)
+		#var posfy : float = move_toward(unitPositions[n].y, 0, time * _unitMoveSpeed)
+		#var pos : Vector2 = Vector2(posfx, posfy)
+		#var pos : Vector2 = lerp(unitPositions[n], Vector2.ZERO, time * _unitMoveSpeed)
+		var targetPos := Vector2(100, 100)
+		unitPositions[n] += (targetPos - unitPositions[n]).normalized() * _unitMoveSpeed * time
 
 func _updateUnitNodes() -> void:
 	var fract: float = Engine.get_physics_interpolation_fraction()
