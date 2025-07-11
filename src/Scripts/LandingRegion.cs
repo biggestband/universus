@@ -1,7 +1,6 @@
 using Godot;
 using Utility;
 
-
 [Tool]
 public partial class LandingRegion : Area2D {
     float height = 100f, width = 100f;
@@ -23,6 +22,7 @@ public partial class LandingRegion : Area2D {
             if (Engine.IsEditorHint()) {
                 collisionShape ??= GetNode<CollisionShape2D>("CollisionShape2D");
                 sprite ??= GetNode<Sprite2D>("Sprite2D");
+                if (collisionShape == null || sprite == null) return;
                 var rect = new RectangleShape2D();
                 rect.Size = new(width, height);
                 collisionShape.Shape = rect;
@@ -39,6 +39,7 @@ public partial class LandingRegion : Area2D {
             if (Engine.IsEditorHint()) {
                 collisionShape ??= GetNode<CollisionShape2D>("CollisionShape2D");
                 sprite ??= GetNode<Sprite2D>("Sprite2D");
+                if (collisionShape == null || sprite == null) return;
                 var rect = new RectangleShape2D();
                 rect.Size = new(width, height);
                 collisionShape.Shape = rect;

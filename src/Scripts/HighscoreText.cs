@@ -2,13 +2,13 @@ using Godot;
 
 public partial class HighscoreText : Label {
     public override void _Ready() {
-        ScoreManager.OnScoreChanged += UpdateText;
+        PachinkoEventManager.Instance.OnHighScore += UpdateText;
         UpdateText();
     }
     public override void _ExitTree() {
-        ScoreManager.OnScoreChanged -= UpdateText;
+        PachinkoEventManager.Instance.OnHighScore -= UpdateText;
     }
-    void UpdateText(ScoreData data = default) {
-        Text = $"Highscore:   {ScoreManager.HighScore:F1}";
+    void UpdateText(float score = 0) {
+        Text = $"Highscore:   {score:F1}";
     }
 }
