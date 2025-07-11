@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ArgumentHandler="*res://Scripts/ArgumentHandler.cs"
 ArmySyncer="*res://Scripts/ArmySyncer.cs"
+PachinkoEventManager="*res://Scripts/PachinkoEventManager.cs"
 
 [display]
 
