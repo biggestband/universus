@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://xa27wc42cle6"]
+
+[ext_resource type="PackedScene" uid="uid://xs3m3vvuq4ul" path="res://Assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_73add"]
+[ext_resource type="Material" uid="uid://3t4cnwm18p6o" path="res://Assets/3D/Materials/M_ReflectionProbe_Material_01.tres" id="2_ju1wm"]
+[ext_resource type="LightmapGIData" uid="uid://dmlaurrdxhggk" path="res://Assets/3D/Lighting/Lightmaps/PlinkoMachine_ShaderPlayground.lmbake" id="3_dj0uy"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_dj0uy"]
+
+[sub_resource type="Environment" id="Environment_wlj6p"]
+background_mode = 1
+glow_enabled = true
+glow_hdr_threshold = 0.0
+glow_hdr_scale = 0.0
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_b4nkp"]
+
+[sub_resource type="Compositor" id="Compositor_8w05h"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7ej64"]
+
+[node name="PlinkoMachineShaderPlayground" type="Node3D"]
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+blend_distance = 0.0
+size = Vector3(10, 7.03, 10)
+origin_offset = Vector3(0, 0.25, 0)
+interior = true
+
+[node name="RP_Skydome_Mesh_01" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.199798, 0, -0.00898193, 0, 0.2, 0, 0.00898193, 0, -0.199798, 0.005, 0.25, 0)
+layers = 512
+material_override = ExtResource("2_ju1wm")
+gi_mode = 0
+mesh = SubResource("SphereMesh_dj0uy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wlj6p")
+camera_attributes = SubResource("CameraAttributesPractical_b4nkp")
+compositor = SubResource("Compositor_8w05h")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+visible = false
+interior = true
+environment_mode = 0
+camera_attributes = SubResource("CameraAttributesPractical_7ej64")
+light_data = ExtResource("3_dj0uy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+layers = 0
+light_energy = 0.0
+light_specular = 0.0
+light_bake_mode = 0
+
+[node name="SM_PlinkoMachine_Model_01" parent="." instance=ExtResource("1_73add")]
+
+[editable path="SM_PlinkoMachine_Model_01"]

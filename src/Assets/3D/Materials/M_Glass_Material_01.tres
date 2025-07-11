@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b4me05yowposl"]
+
+[ext_resource type="Shader" uid="uid://dx1dym0jnne8f" path="res://Assets/3D/Materials/Shaders/VS_Glass_Shader_01.tres" id="1_oi8ph"]
+
+[resource]
+resource_name = "M_Glass_Material_01"
+render_priority = 0
+shader = ExtResource("1_oi8ph")

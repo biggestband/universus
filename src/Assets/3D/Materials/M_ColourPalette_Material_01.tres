@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bgayoep0vcbks"]
+
+[ext_resource type="Shader" uid="uid://bos2icgng1u3p" path="res://Assets/3D/Materials/Shaders/VS_ColourPalette_Shader_01.tres" id="1_r6pp8"]
+
+[resource]
+resource_name = "M_ColourPalette_Material_01"
+render_priority = 0
+shader = ExtResource("1_r6pp8")
+shader_parameter/LightmapColour = Color(1, 1, 1, 1)

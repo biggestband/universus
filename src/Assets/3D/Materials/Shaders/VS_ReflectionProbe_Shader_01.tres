@@ -1,0 +1,34 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://ke0u1dg2xdoo"]
+
+[ext_resource type="Texture2D" uid="uid://dbutnti2d85it" path="res://Assets/3D/Lighting/HDRIs/royal_esplanade_2k.exr" id="1_bdla5"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_is7vn"]
+texture = ExtResource("1_bdla5")
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_front, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, fog_disabled;
+
+uniform sampler2D tex_frg_2;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-709.31, -92.366)
+modes/cull = 1
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/fog_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_is7vn")
+nodes/fragment/2/position = Vector2(-360, 120)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)

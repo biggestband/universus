@@ -1,0 +1,40 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://cpdxgfa6qox4y"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_1ltxm"]
+expanded_output_ports = [0]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_gfsie"]
+default_input_values = [0, 0.0, 1, 1.0]
+operator = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_disabled;
+
+
+
+
+void fragment() {
+// ColorConstant:2
+	vec4 n_out2p0 = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+// FloatOp:3
+	float n_in3p1 = 1.00000;
+	float n_out3p0 = n_out2p0.x * n_in3p1;
+
+
+// Output:0
+	EMISSION = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-536.294, 63.0983)
+modes/specular = 2
+nodes/fragment/0/position = Vector2(480, 160)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_1ltxm")
+nodes/fragment/2/position = Vector2(-40, 360)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatOp_gfsie")
+nodes/fragment/3/position = Vector2(239.306, 456.332)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 5)
