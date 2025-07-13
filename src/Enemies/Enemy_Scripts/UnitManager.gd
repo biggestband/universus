@@ -16,8 +16,8 @@ const _unitSeparation: float = 2
 const _offsetFromCenter: float = 3 
 
 # Partitions
-var unitPartitions: Array[Array] = [[], [], [], []]
 var numPartitions : int = 4
+var partitionTick : float = 1.5
 
 # Unit Prefabs
 var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
@@ -29,6 +29,7 @@ signal OnBattleBegin
 # System vars
 var armyASize: int
 var tickTimer: float = 0
+var partitionSize : int = 0
 var currentPartitionIndex : int = 0
 
 #region Extensions
@@ -59,6 +60,7 @@ func _ready() -> void:
 	
 	# Generate the armies
 	_generateArmies(unitNodes.size())
+	partitionSize = unitNodes.size() / numPartitions
 	
 	OnBattleBegin.emit()
 
@@ -68,12 +70,17 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	_updateUnitNodes()
 	
+	# Update unit targets in partitions
 	tickTimer += delta
-	if tickTimer > 1:
+	if tickTimer > partitionTick:
+		var start: int = partitionSize * currentPartitionIndex
+		var end: int = unitNodes.size() if currentPartitionIndex == numPartitions - 1 else start + partitionSize
+		
 		# Only update units in the current partition
-		for u in unitPartitions[currentPartitionIndex]:
-			u.UpdateTarget()
-
+		for u in range(start, end):
+			unitNodes[u].UpdateTarget()
+		
+		# Advance partition
 		currentPartitionIndex = (currentPartitionIndex + 1) % numPartitions
 		tickTimer = 0
 #endregion
@@ -119,10 +126,6 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	unitPositions[id] = Vector2(pos.x, pos.z)
 	unitStartingPositions[id] = Vector2(pos.x, pos.z)
 	unitNodes[id] = instance
-	
-	# Partition assignment
-	var partitionIndex := id % numPartitions
-	unitPartitions[partitionIndex].append(instance)
 
 #endregion
 
