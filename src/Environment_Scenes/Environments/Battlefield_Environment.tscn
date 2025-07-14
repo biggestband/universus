@@ -52,7 +52,7 @@ skeleton = NodePath("../../../..")
 [node name="GFX" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="GFX"]
-transform = Transform3D(1, 0, 0, 0, 0.085417, 0.996345, 0, -0.996345, 0.085417, 0, 65.55, 8.875)
+transform = Transform3D(1, 0, 0, 0, 0.905569, 0.424199, 0, -0.424199, 0.905569, 0, 4.55, 28.875)
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("2_tag4l")

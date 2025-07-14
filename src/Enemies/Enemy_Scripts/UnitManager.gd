@@ -11,7 +11,7 @@ var _unitNodes: Array[Unit]
 const _unitMoveSpeed: float = 2
 const _unitRotSpeed: float = .5
 const _unitStopDist: float = 2
-const _knockbackForce: float = 20
+const _knockbackForce: float = 2
 
 # Offset scalars
 const _unitSeparation: float = 2
@@ -78,9 +78,7 @@ func _process(delta: float) -> void:
 #region Army Generation
 
 func _generateArmies(armySize: int) -> void:
-	var currentPartitionIndex : int= 0
-	
-	var armyBSize := armySize - armyASize
+	var armyBSize: int = armySize - armyASize
 	_spawnArmyGrid(armyASize, 1, 0)
 	_spawnArmyGrid(armyBSize, -1, armyASize)
 
@@ -104,7 +102,7 @@ func _spawnArmyGrid(size: int, fieldSide: int, idOffset: int) -> void:
 func _spawnUnit(id: int, pos: Vector3) -> void:
 	
 	# Find mesh
-	var unitMesh:= _armyAUnit if id < armyASize else _armyBUnit
+	var unitMesh: Resource = _armyAUnit if id < armyASize else _armyBUnit
 	
 	# Spawn and initialize the unit
 	var instance: Unit = unitMesh.instantiate()
@@ -124,17 +122,17 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 func _stepUnitPositions(delta: float) -> void:	
 	# calculate the next position for each unit (step)
 	for n in range(0, _unitPositions.size()):
-		if(_isDead(n)):
-			continue
-		
 		# Store previous unit positions
 		_prevUnitPositions[n] = _unitPositions[n]
+		
+		if(!_isUnitSimulated(n)):
+			continue
 		
 		# Get target position
 		var targetID: int = _unitNodes[n].GetTargetID()
 		
 		# Step unit pos in the direction of its target over time
-		if(!_isStopped(n)):
+		if(!_isUnitAtDestination(n)):
 			var targetPos: Vector2 = _unitPositions[targetID]
 			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * _unitMoveSpeed * delta
 		else: _attackTarget(n, targetID)
@@ -147,8 +145,12 @@ func _stepUnitTargets(delta: float):
 		var end: int = _unitNodes.size() if currentPartitionIndex == numPartitions - 1 else start + partitionSize
 		
 		# Only update units in the current partition
-		for u in range(start, end):
-			var unit: Unit = _unitNodes[u]
+		for n in range(start, end):
+			
+			if(!_isUnitSimulated(n)):
+				continue
+			
+			var unit: Unit = _unitNodes[n]
 			unit.UpdateTarget()
 		
 		# Advance partition
@@ -193,13 +195,18 @@ func _onUnitRequireTarget(unitID: int)-> void:
 
 #region Helper Functions
 
+func _isUnitSimulated(unitID: int) -> bool:
+	var unit: Unit = _unitNodes[unitID]
+	return !_isDead(unitID) && !unit.GetTweening()
+
 func _attackTarget(unitID: int, targetID) -> void:
 	var instegatorPos: Vector2 = _unitPositions[unitID]
 	var victimPos: Vector2 = _unitPositions[targetID]
 	var attackDir: Vector2 = victimPos - instegatorPos
 	
 	var victim: Unit = _unitNodes[targetID]
-	#_unitPositions[targetID] = victimPos + (attackDir * _knockbackForce)
+	victim.SetTweening(true)
+	_unitPositions[targetID] = victimPos + (attackDir * _knockbackForce)
 	victim.TakeDamage()
 
 func _findClosestTarget(unitID: int) -> int:
@@ -209,13 +216,15 @@ func _findClosestTarget(unitID: int) -> int:
 	var closestUnit: int
 	var minDistance: float = INF
 	
-	for u in range(start, end):
-		if(_isDead(u)):
+	for n in range(start, end):
+
+		if(!_isUnitSimulated(n)):
 			continue
-		var dist_sq: float = _unitPositions[unitID].distance_squared_to(_unitPositions[u])
+		
+		var dist_sq: float = _unitPositions[unitID].distance_squared_to(_unitPositions[n])
 		if dist_sq < minDistance:
 			minDistance = dist_sq
-			closestUnit = u
+			closestUnit = n
 	
 	return closestUnit
 
@@ -223,7 +232,7 @@ func _isDead(unitID: int) -> bool:
 	var unit: Unit = _unitNodes[unitID]
 	return unit.currentState == Unit.HealthState.Dead
 
-func _isStopped(unitID: int) -> bool:
+func _isUnitAtDestination(unitID: int) -> bool:
 	var unit: Unit = _unitNodes[unitID]
 	
 	if unit.GetTargetID() >= 0:

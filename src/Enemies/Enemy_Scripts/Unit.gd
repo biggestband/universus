@@ -14,6 +14,9 @@ var _targetObj: Object = null
 signal OnRequireTarget(id: int)
 signal OnDie()
 
+# State
+var _isTweening: bool = false
+
 enum HealthState { Healthy, Dazed, Injured, Dead }
 var currentState = HealthState.Healthy
 
@@ -58,6 +61,12 @@ func _onTargetDie() -> void:
 	
 	OnRequireTarget.emit(_unitID)
 #endregion
+
+func SetTweening(isTweening: bool) -> void:
+	_isTweening = isTweening
+
+func GetTweening() -> bool:
+	return _isTweening
 
 # Increments enemy state each time function is called
 func TakeDamage() -> void:
