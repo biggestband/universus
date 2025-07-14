@@ -1,8 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d3vkn64cv7heg"]
-
-[ext_resource type="Shader" uid="uid://cpdxgfa6qox4y" path="res://Assets/3D/Materials/Shaders/VS_Emissive_Shader_01.tres" id="1_5bkys"]
-
-[resource]
-resource_name = "M_Emissive_Material_01"
-render_priority = 0
-shader = ExtResource("1_5bkys")

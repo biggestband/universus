@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://xs3m3vvuq4ul"
-path="res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-b012a247fd4530b91c79728e46201a52.scn"
+path="res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-0f6cd36bf0771375d71cb91a9cfb28a6.scn"
 
 [deps]
 
-source_file="res://Assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx"
-dest_files=["res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-b012a247fd4530b91c79728e46201a52.scn"]
+source_file="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx"
+dest_files=["res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-0f6cd36bf0771375d71cb91a9cfb28a6.scn"]
 
 [params]
 
@@ -20,7 +20,7 @@ nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
-meshes/generate_lods=true
+meshes/generate_lods=false
 meshes/create_shadow_meshes=true
 meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
