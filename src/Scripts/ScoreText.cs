@@ -9,15 +9,22 @@ public partial class ScoreText : RichTextLabel {
         random = new();
         startColor = Modulate;
         PachinkoEventManager.Instance.OnScore += UpdateScoreText;
+        PachinkoEventManager.Instance.OnFinalScore += FinalScore;
         PachinkoEventManager.Instance.OnHit += TweenText;
         UpdateScoreText(0,0);
     }
     public override void _ExitTree() {
         PachinkoEventManager.Instance.OnScore -= UpdateScoreText;
+        PachinkoEventManager.Instance.OnFinalScore -= FinalScore;
         PachinkoEventManager.Instance.OnHit -= TweenText;
     }
+    void FinalScore(float baseScore, float multiplier) {
+        var finalScore = baseScore * multiplier;
+        Text = $"[b]{finalScore:F0}[/b]";
+        TweenText((int)HitType.NewHit);
+    }
     void UpdateScoreText(float oldScore, float newScore) {
-        Text = $"[b]{newScore:F1}[/b]";
+        Text = $"[b]{newScore:F2}[/b]";
     }
     void TweenText(int type) {
         var hitType = (HitType)type;

@@ -15,6 +15,16 @@ public partial class ScoreManager : Node {
         ReHitScore = reHitScore;
 
         PachinkoEventManager.Instance.OnHit += IncreaseScore;
+        PachinkoEventManager.Instance.OnFinalScore += FinalScore;
+    }
+    
+    public override void _ExitTree() {
+        PachinkoEventManager.Instance.OnHit -= IncreaseScore;
+        PachinkoEventManager.Instance.OnFinalScore += FinalScore;
+    }
+    void FinalScore(float baseScore, float multiplier) {
+        Score = baseScore * multiplier;
+        EvaluateHighScore();
     }
 
     public static void IncreaseScore(int type) {
@@ -31,6 +41,7 @@ public partial class ScoreManager : Node {
 
     public static void EvaluateHighScore() {
         HighScore = Mathf.Max(Score, HighScore);
+        PachinkoEventManager.Instance.HighScore(HighScore);
     }
 }
 
