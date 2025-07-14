@@ -26,15 +26,18 @@ public partial class ScoreManager : Node {
         Score = baseScore * multiplier;
         EvaluateHighScore();
     }
-
+    
     public static void IncreaseScore(int type) {
         var amount = (HitType)type switch {
             HitType.NewHit => NewHitScore,
             HitType.ReHit =>  ReHitScore,
             _ => 0,
         };
-        var oldScore = Score;
-        Score += amount;
+        SetScore(Score, Score + amount);
+    }
+    
+    static void SetScore(float oldScore, float score) {
+        Score = score;
         EvaluateHighScore();
         PachinkoEventManager.Instance.Score(oldScore, Score);
     }
@@ -42,6 +45,10 @@ public partial class ScoreManager : Node {
     public static void EvaluateHighScore() {
         HighScore = Mathf.Max(Score, HighScore);
         PachinkoEventManager.Instance.HighScore(HighScore);
+    }
+
+    public static void ResetScore() {
+        SetScore(0, 0);
     }
 }
 
