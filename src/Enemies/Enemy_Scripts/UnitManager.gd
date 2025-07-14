@@ -2,14 +2,15 @@ class_name UnitManager
 
 extends Node
 
-var unitPositions: PackedVector2Array
-var unitStartingPositions: PackedVector2Array
-var prevUnitPositions: PackedVector2Array
-var unitNodes: Array[Unit]
+var _unitPositions: PackedVector2Array
+var _unitStartingPositions: PackedVector2Array
+var _prevUnitPositions: PackedVector2Array
+var _unitNodes: Array[Unit]
 
 # Movement scalars
 const _unitMoveSpeed: float = 2
 const _unitRotSpeed: float = .5
+const _unitStopDist: float = .5
 
 # Offset scalars
 const _unitSeparation: float = 2
@@ -43,24 +44,24 @@ func _ready() -> void:
 	# Init ECS arrays
 	var totalUnits: int = armyASize + armyBSize
 	
-	unitPositions.clear()
-	unitPositions.resize(totalUnits)
+	_unitPositions.clear()
+	_unitPositions.resize(totalUnits)
 	
-	unitStartingPositions.clear()
-	unitStartingPositions.resize(totalUnits)
+	_unitStartingPositions.clear()
+	_unitStartingPositions.resize(totalUnits)
 	
-	prevUnitPositions.clear()
-	prevUnitPositions.resize(totalUnits)
+	_prevUnitPositions.clear()
+	_prevUnitPositions.resize(totalUnits)
 	
-	unitNodes.clear()
-	unitNodes.resize(totalUnits)
+	_unitNodes.clear()
+	_unitNodes.resize(totalUnits)
 	
 	# Set RNG seed to ensure spawns are the same across both clients
 	seed(randSeed)
 	
 	# Generate the armies
-	_generateArmies(unitNodes.size())
-	partitionSize = unitNodes.size() / numPartitions
+	_generateArmies(_unitNodes.size())
+	partitionSize = _unitNodes.size() / numPartitions
 	
 	OnBattleBegin.emit()
 
@@ -74,11 +75,12 @@ func _process(delta: float) -> void:
 	tickTimer += delta
 	if tickTimer > partitionTick:
 		var start: int = partitionSize * currentPartitionIndex
-		var end: int = unitNodes.size() if currentPartitionIndex == numPartitions - 1 else start + partitionSize
+		var end: int = _unitNodes.size() if currentPartitionIndex == numPartitions - 1 else start + partitionSize
 		
 		# Only update units in the current partition
 		for u in range(start, end):
-			unitNodes[u].UpdateTarget()
+			var unit: Unit = _unitNodes[u]
+			unit.UpdateTarget()
 		
 		# Advance partition
 		currentPartitionIndex = (currentPartitionIndex + 1) % numPartitions
@@ -123,9 +125,9 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	instance.Setup(id, OnBattleBegin)
 	instance.OnRequireTarget.connect(_onUnitRequireTarget)
 	
-	unitPositions[id] = Vector2(pos.x, pos.z)
-	unitStartingPositions[id] = Vector2(pos.x, pos.z)
-	unitNodes[id] = instance
+	_unitPositions[id] = Vector2(pos.x, pos.z)
+	_unitStartingPositions[id] = Vector2(pos.x, pos.z)
+	_unitNodes[id] = instance
 
 #endregion
 
@@ -133,46 +135,46 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 
 func _findClosestUnit(unitID: int) -> int:
 	var start: int = armyASize if unitID < armyASize else 0
-	var end: int = unitPositions.size() if unitID < armyASize else armyASize
+	var end: int = _unitPositions.size() if unitID < armyASize else armyASize
 	
 	var closestUnit: int
 	var minDistance: float = INF
 	
 	for u in range(start, end):
-		var dist: float = unitPositions[unitID].distance_to(unitPositions[u])
-		if dist < minDistance:
-			minDistance = dist
+		var dist_sq: float = _unitPositions[unitID].distance_squared_to(_unitPositions[u])
+		if dist_sq < minDistance:
+			minDistance = dist_sq
 			closestUnit = u
 	
 	return closestUnit
 
 func _updateUnitPositions(time: float) -> void:	
 	# calculate the next position for each unit (step)
-	for n in range(0, unitPositions.size()):
+	for n in range(0, _unitPositions.size()):
 		# Store previous unit positions
-		prevUnitPositions[n] = unitPositions[n]
+		_prevUnitPositions[n] = _unitPositions[n]
 		
 		# Get target position
-		var targetID: int = unitNodes[n].GetTargetID()
+		var targetID: int = _unitNodes[n].GetTargetID()
 		
 		# Step unit pos in the direction of its target over time
-		if(targetID > -1):
-			var targetPos: Vector2 = unitPositions[targetID]
-			unitPositions[n] += (targetPos - unitPositions[n]).normalized() * _unitMoveSpeed * time
+		if(!_isStopped(n)):
+			var targetPos: Vector2 = _unitPositions[targetID]
+			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * _unitMoveSpeed * time
 
 func _updateUnitNodes() -> void:
 	var fract: float = Engine.get_physics_interpolation_fraction()
 	
 	# send the step data to units and apply to position (node)
-	for n in range(unitPositions.size()):
-		if unitNodes[n] == null:
+	for n in range(_unitPositions.size()):
+		if _unitNodes[n] == null:
 			continue
-		var prev: Vector2 = prevUnitPositions[n]
-		var curr: Vector2 = unitPositions[n]
+		var prev: Vector2 = _prevUnitPositions[n]
+		var curr: Vector2 = _unitPositions[n]
 		var interp: Vector2 = prev.lerp(curr, fract)
 		
 		# Set position
-		var unit: Unit = unitNodes[n]
+		var unit: Unit = _unitNodes[n]
 		unit.position = Vector3(interp.x, 0, interp.y)
 		
 		# Set rotation
@@ -189,18 +191,26 @@ func _updateUnitNodes() -> void:
 #region Signal Functions
 
 func _onUnitRequireTarget(unitID: int)-> void:
-	var unitNode: Unit = unitNodes[unitID]
+	var unitNode: Unit = _unitNodes[unitID]
 	
 	var targetID: int = _findClosestUnit(unitID)
 	
-	unitNode.SetTarget(targetID, unitNodes[targetID].OnDie)
+	unitNode.SetTarget(targetID, _unitNodes[targetID].OnDie)
 #endregion
 
 #region Helper Functions
 
 func _isDead(id: int) -> bool:
-	unitPositions[id] = unitStartingPositions[id]
+	_unitPositions[id] = _unitStartingPositions[id]
 	return false
+
+func _isStopped(id: int) -> bool:
+	var unit: Unit = _unitNodes[id]
+	
+	if unit.GetTargetID() >= 0:
+		var sqr_dist: float = _unitPositions[id].distance_squared_to(_unitPositions[unit.GetTargetID()])
+		return sqr_dist < _unitStopDist * _unitStopDist
+	else: return false
 
 func _getRandOffset(pos: Vector3) -> Vector3:
 	

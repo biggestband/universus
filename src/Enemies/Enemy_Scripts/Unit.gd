@@ -3,7 +3,7 @@ class_name Unit
 extends Node3D
 
 # System vars
-var _id: int = -1
+var _unitID: int = -1
 var _targetID: int = -1
 
 # Signals
@@ -14,13 +14,14 @@ enum HealthState { Healthy, Dazed, Injured }
 var currentState = HealthState.Healthy
 
 func Setup(id: int, battleStart: Signal) -> void:
-	_id = id
+	_unitID = id
 	battleStart.connect(_onBattleBegin)
 
 #region Targeting
 
 func SetTarget(id: int, onTargetDie: Signal) -> void:
 	_targetID = id
+	print(_targetID)
 
 func ClearTarget() -> void:
 	_targetID = -1
@@ -29,16 +30,16 @@ func GetTargetID() -> int:
 	return _targetID
 
 func UpdateTarget() -> void:
-	OnRequireTarget.emit(_id)
+	OnRequireTarget.emit(_unitID)
 #endregion
 
 #region Signal Methods
 
 func _onBattleBegin() -> void:
-	OnRequireTarget.emit(_id)
+	OnRequireTarget.emit(_unitID)
 	
 func _onTargetDie() -> void:
-	OnRequireTarget.emit(_id)
+	OnRequireTarget.emit(_unitID)
 #endregion
 
 # Increments enemy state each time function is called
