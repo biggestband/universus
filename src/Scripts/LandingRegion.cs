@@ -20,10 +20,10 @@ public partial class LandingRegion : Area2D {
         get => height;
         set {
             height = value;
-            if (Engine.IsEditorHint()) {
+            if (Engine.IsEditorHint() && HasNode("CollisionShape2D") && HasNode("Sprite2D")) {
                 collisionShape ??= GetNode<CollisionShape2D>("CollisionShape2D");
                 sprite ??= GetNode<Sprite2D>("Sprite2D");
-                if (collisionShape == null || sprite == null) return;
+                if (collisionShape == null || sprite == null) return; // this probably doesnt need to be here but just in case
                 var rect = new RectangleShape2D();
                 rect.Size = new(width, height);
                 collisionShape.Shape = rect;
@@ -37,7 +37,7 @@ public partial class LandingRegion : Area2D {
         get => width;
         set {
             width = value;
-            if (Engine.IsEditorHint()) {
+            if (Engine.IsEditorHint() && HasNode("CollisionShape2D") && HasNode("Sprite2D")) {
                 collisionShape ??= GetNode<CollisionShape2D>("CollisionShape2D");
                 sprite ??= GetNode<Sprite2D>("Sprite2D");
                 if (collisionShape == null || sprite == null) return;
@@ -48,7 +48,7 @@ public partial class LandingRegion : Area2D {
             }
         }
     }
-    
+
     [Export]
     float snapDistance = 50f;
 
@@ -66,19 +66,29 @@ public partial class LandingRegion : Area2D {
         sprite.Scale = collisionShape.Shape.GetRect().Size;
 
         BodyEntered += OnBodyEntered;
+
         active = true;
     }
 
+    public void Setup() {
+        textTween?.Kill();
+        active = true;
+        connectedBall = null;
+        text.Modulate = Colors.Black;
+        text.GetParent<Node2D>().Position = Vector2.Zero;
+        lerpValue = 0f;
+    }
+
     public override void _ExitTree() {
+        if (Engine.IsEditorHint()) return;
         BodyEntered -= OnBodyEntered;
     }
 
     Vector2 initialVelocity;
-    float lerpValue, transformedLerpValue;
+    float lerpValue;
 
     void OnBodyEntered(Node2D body) {
         if (body is not Ball ball) return;
-        ball.GravityScale = 0;
         initialVelocity = ball.LinearVelocity;
         ball.DisablePhysics();
         connectedBall = ball;
@@ -90,7 +100,7 @@ public partial class LandingRegion : Area2D {
         if (lerpValue >= 1f) {
             lerpValue = 1f;
         }
-        transformedLerpValue = 1 - Mathf.Cos(lerpValue * Mathf.Pi / 2); // transform lerp value to ease in
+        var transformedLerpValue = 1 - Mathf.Cos(lerpValue * Mathf.Pi / 2); // transform lerp value to ease in
 
         var ballToSelf = GlobalPosition - connectedBall.GlobalPosition;
         if (ballToSelf.Length() <= snapDistance) {
@@ -107,9 +117,9 @@ public partial class LandingRegion : Area2D {
             active = false;
             return;
         }
-        
+
         var attractionForce =  ballToSelf.Normalized() * 500;
-        
+
         connectedBall.LinearVelocity = new(
             Mathf.Lerp(initialVelocity.X, attractionForce.X, transformedLerpValue),
             Mathf.Lerp(initialVelocity.Y, attractionForce.Y, transformedLerpValue)

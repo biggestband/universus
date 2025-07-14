@@ -22,14 +22,25 @@ public partial class Ball : RigidBody2D {
     Sprite2D sprite;
 
     public bool Enabled;
+
     public override void _Ready() {
         sprite = GetNode<Sprite2D>("Sprite2D");
+        BodyEntered += OnBodyEntered;
         random = new();
         randomAngle = float.DegreesToRadians(randomAngleDegrees);
-        BodyEntered += OnBodyEntered;
-        Enabled = true;
     }
 
+    public void Setup() {
+        pegTween?.Kill();
+        Enabled = true;
+        GravityScale = 0.3f;
+        sprite.Visible = true;
+        Position = Vector2.Zero;
+        Rotation = 0f;
+        LinearVelocity = Vector2.Zero;
+        PhysicsServer2D.Singleton.BodySetState(GetRid(), PhysicsServer2D.BodyState.Transform, GlobalPosition);
+    }
+    
     public override void _ExitTree() {
         BodyEntered -= OnBodyEntered;
     }
@@ -53,6 +64,7 @@ public partial class Ball : RigidBody2D {
     }
     public void DisablePhysics() {
         Enabled = false;
+        GravityScale = 0;
     }
 
     public void Hide() {
