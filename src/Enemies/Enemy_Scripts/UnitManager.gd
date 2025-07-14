@@ -11,6 +11,7 @@ var _unitNodes: Array[Unit]
 const _unitMoveSpeed: float = 2
 const _unitRotSpeed: float = .5
 const _unitStopDist: float = 2
+const _knockbackForce: float = 20
 
 # Offset scalars
 const _unitSeparation: float = 2
@@ -66,25 +67,12 @@ func _ready() -> void:
 	OnBattleBegin.emit()
 
 func _physics_process(delta: float) -> void:
-	_updateUnitPositions(delta)
+	_stepUnitPositions(delta)
 
 func _process(delta: float) -> void:
-	_updateUnitNodes()
+	_updateVisualalizedNodes()
 	
-	# Update unit targets in partitions
-	tickTimer += delta
-	if tickTimer > partitionTick:
-		var start: int = partitionSize * currentPartitionIndex
-		var end: int = _unitNodes.size() if currentPartitionIndex == numPartitions - 1 else start + partitionSize
-		
-		# Only update units in the current partition
-		for u in range(start, end):
-			var unit: Unit = _unitNodes[u]
-			unit.UpdateTarget()
-		
-		# Advance partition
-		currentPartitionIndex = (currentPartitionIndex + 1) % numPartitions
-		tickTimer = 0
+	_stepUnitTargets(delta)
 #endregion
 
 #region Army Generation
@@ -133,24 +121,12 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 
 #region Unit Positioning
 
-func _findClosestUnit(unitID: int) -> int:
-	var start: int = armyASize if unitID < armyASize else 0
-	var end: int = _unitPositions.size() if unitID < armyASize else armyASize
-	
-	var closestUnit: int
-	var minDistance: float = INF
-	
-	for u in range(start, end):
-		var dist_sq: float = _unitPositions[unitID].distance_squared_to(_unitPositions[u])
-		if dist_sq < minDistance:
-			minDistance = dist_sq
-			closestUnit = u
-	
-	return closestUnit
-
-func _updateUnitPositions(time: float) -> void:	
+func _stepUnitPositions(delta: float) -> void:	
 	# calculate the next position for each unit (step)
 	for n in range(0, _unitPositions.size()):
+		if(_isDead(n)):
+			continue
+		
 		# Store previous unit positions
 		_prevUnitPositions[n] = _unitPositions[n]
 		
@@ -160,9 +136,26 @@ func _updateUnitPositions(time: float) -> void:
 		# Step unit pos in the direction of its target over time
 		if(!_isStopped(n)):
 			var targetPos: Vector2 = _unitPositions[targetID]
-			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * _unitMoveSpeed * time
+			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * _unitMoveSpeed * delta
+		else: _attackTarget(n, targetID)
 
-func _updateUnitNodes() -> void:
+func _stepUnitTargets(delta: float):
+	# Update unit targets in partitions
+	tickTimer += delta
+	if tickTimer > partitionTick:
+		var start: int = partitionSize * currentPartitionIndex
+		var end: int = _unitNodes.size() if currentPartitionIndex == numPartitions - 1 else start + partitionSize
+		
+		# Only update units in the current partition
+		for u in range(start, end):
+			var unit: Unit = _unitNodes[u]
+			unit.UpdateTarget()
+		
+		# Advance partition
+		currentPartitionIndex = (currentPartitionIndex + 1) % numPartitions
+		tickTimer = 0
+
+func _updateVisualalizedNodes() -> void:
 	var fract: float = Engine.get_physics_interpolation_fraction()
 	
 	# send the step data to units and apply to position (node)
@@ -193,24 +186,51 @@ func _updateUnitNodes() -> void:
 func _onUnitRequireTarget(unitID: int)-> void:
 	var unitNode: Unit = _unitNodes[unitID]
 	
-	var targetID: int = _findClosestUnit(unitID)
+	var targetID: int = _findClosestTarget(unitID)
 	
-	unitNode.SetTarget(targetID, _unitNodes[targetID].OnDie)
+	unitNode.SetTarget(targetID, _unitNodes[targetID])
 #endregion
 
 #region Helper Functions
 
-func _isDead(id: int) -> bool:
-	_unitPositions[id] = _unitStartingPositions[id]
-	return false
+func _attackTarget(unitID: int, targetID) -> void:
+	var instegatorPos: Vector2 = _unitPositions[unitID]
+	var victimPos: Vector2 = _unitPositions[targetID]
+	var attackDir: Vector2 = victimPos - instegatorPos
+	
+	var victim: Unit = _unitNodes[targetID]
+	#_unitPositions[targetID] = victimPos + (attackDir * _knockbackForce)
+	victim.TakeDamage()
 
-func _isStopped(id: int) -> bool:
-	var unit: Unit = _unitNodes[id]
+func _findClosestTarget(unitID: int) -> int:
+	var start: int = armyASize if unitID < armyASize else 0
+	var end: int = _unitPositions.size() if unitID < armyASize else armyASize
+	
+	var closestUnit: int
+	var minDistance: float = INF
+	
+	for u in range(start, end):
+		if(_isDead(u)):
+			continue
+		var dist_sq: float = _unitPositions[unitID].distance_squared_to(_unitPositions[u])
+		if dist_sq < minDistance:
+			minDistance = dist_sq
+			closestUnit = u
+	
+	return closestUnit
+
+func _isDead(unitID: int) -> bool:
+	var unit: Unit = _unitNodes[unitID]
+	return unit.currentState == Unit.HealthState.Dead
+
+func _isStopped(unitID: int) -> bool:
+	var unit: Unit = _unitNodes[unitID]
 	
 	if unit.GetTargetID() >= 0:
-		var sqr_dist: float = _unitPositions[id].distance_squared_to(_unitPositions[unit.GetTargetID()])
+		var sqr_dist: float = _unitPositions[unitID].distance_squared_to(_unitPositions[unit.GetTargetID()])
 		return sqr_dist < _unitStopDist * _unitStopDist
-	else: return false
+	else: 
+		return true
 
 func _getRandOffset(pos: Vector3) -> Vector3:
 	
