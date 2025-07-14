@@ -37,7 +37,7 @@ public partial class PachinkoEventManager : Node {
 
     public void BallDrop() => EmitSignal(SignalName.OnBallDrop);
 
-    public void FinalScore(int baseScore, int multiplier) {
+    public void FinalScore(float baseScore, float multiplier) {
         variantArr2 ??= new Variant[2];
         variantArr2[0] = baseScore;
         variantArr2[1] = multiplier;
@@ -45,6 +45,12 @@ public partial class PachinkoEventManager : Node {
     }
 
     public void AddScore(float score) {
+        variantArr1 ??= new Variant[1];
+        variantArr1[0] = score;
+        EmitSignal(SignalName.OnHighScore, variantArr1);
+    }
+    
+    public void HighScore(float score) {
         variantArr1 ??= new Variant[1];
         variantArr1[0] = score;
         EmitSignal(SignalName.OnHighScore, variantArr1);
