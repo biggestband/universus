@@ -10,7 +10,7 @@ var _unitNodes: Array[Unit]
 # Movement scalars
 const _unitMoveSpeed: float = 2
 const _unitRotSpeed: float = .5
-const _unitStopDist: float = .5
+const _unitStopDist: float = 2
 
 # Offset scalars
 const _unitSeparation: float = 2
