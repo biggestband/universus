@@ -16,6 +16,11 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="res://Sprites/icon.svg"
 
+[display]
+
+window/size/viewport_width=648
+window/size/viewport_height=1152
+
 [dotnet]
 
 project/assembly_name="universus"

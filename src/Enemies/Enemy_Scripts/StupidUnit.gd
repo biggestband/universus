@@ -70,7 +70,6 @@ func decrementArmyCount():
 		battleManager.unitCountA -= 1
 	else:
 		battleManager.unitCountB -= 1
-		
 
 
 func die():

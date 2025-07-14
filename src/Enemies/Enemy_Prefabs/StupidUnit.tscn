@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://cd2ifp5ei5wd2" path="res://Enemies/Enemy_Materials/ridgebacksprite.png" id="2_k6hfq"]
 [ext_resource type="Texture2D" uid="uid://br2qmacfnrd8e" path="res://Enemies/Enemy_Materials/lorddurham.png" id="3_le2qs"]
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("ridgebackSprite", "durhamSprite")]
+[node name="StupidUnit" type="Node3D" node_paths=PackedStringArray("ridgebackSprite", "durhamSprite")]
 script = ExtResource("1_kqge5")
 sprRidgeback = ExtResource("2_k6hfq")
 sprLordDurham = ExtResource("3_le2qs")
 ridgebackSprite = NodePath("SpriteParent/sprRidgeback")
-durhamSprite = NodePath("SpriteParent/SprDurham")
+durhamSprite = NodePath("SpriteParent/sprDurham")
 
 [node name="SpriteParent" type="Node3D" parent="."]
 transform = Transform3D(0.519807, 0, 0, 0, 0.519807, 0, 0, 0, 0.519807, 0, 0, 0)
@@ -19,7 +19,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.32271, 0)
 billboard = 2
 texture = ExtResource("2_k6hfq")
 
-[node name="SprDurham" type="Sprite3D" parent="SpriteParent"]
+[node name="sprDurham" type="Sprite3D" parent="SpriteParent"]
 transform = Transform3D(1.14772, 0, 0, 0, 1.14772, 0, 0, 0, 1.14772, 0, 3.60173, 0)
 billboard = 2
 texture = ExtResource("3_le2qs")

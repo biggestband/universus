@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://du0uwo0yvwrrl"]
+[gd_scene load_steps=13 format=3 uid="uid://du0uwo0yvwrrl"]
 
 [ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_kc5qu"]
 [ext_resource type="PackedScene" uid="uid://mr3pa3d1uv3d" path="res://Enemies/Enemy_Meshes/RidgebackTest.fbx" id="2_6m1x0"]
 [ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Environment_Scenes/Environments/FPSCounter.gd" id="3_6m1x0"]
 [ext_resource type="Script" uid="uid://yvgf65x4tnum" path="res://Enemies/Enemy_Scripts/BattleManager.gd" id="3_kc5qu"]
 [ext_resource type="PackedScene" uid="uid://xiamj2ywt0mw" path="res://Enemies/Enemy_Prefabs/StupidUnit.tscn" id="4_mt75w"]
+[ext_resource type="PackedScene" uid="uid://tnyexhepw0p6" path="res://Enemies/Enemy_Prefabs/CrowdUnit.tscn" id="5_faoaw"]
 
 [sub_resource type="Environment" id="Environment_01vul"]
 background_mode = 1
@@ -32,9 +33,14 @@ size = Vector2(100, 100)
 
 [node name="BattlefieldEnvironment" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.995854, 0.0909627, 0, -0.0909627, 0.995854, 0, 3.77097, 12.1819)
+[node name="CameraHorizontal" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.995854, 0.0909627, 0, -0.0909627, 0.995854, 0, 3.77097, 23.5879)
 fov = 60.2
+
+[node name="CameraVertical" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.687607, -0.726083, 0, 0.726083, 0.687607, 1, 3.00563e-08, -3.17381e-08, -36.1492, 19.8134, -1.35243)
+fov = 94.0
+size = 30.895
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_01vul")
@@ -88,15 +94,19 @@ horizontal_alignment = 1
 [node name="BattleManager" type="Node3D" parent="." node_paths=PackedStringArray("countLabelA", "countLabelB", "crowdParentA", "crowdParentB")]
 script = ExtResource("3_kc5qu")
 objStupidUnit = ExtResource("4_mt75w")
+objCrowdUnit = ExtResource("5_faoaw")
 objUnitA = ExtResource("2_6m1x0")
 objUnitB = ExtResource("2_6m1x0")
 countLabelA = NodePath("../HUD/UnitCountA")
 countLabelB = NodePath("../HUD/UnitCountB")
-crowdParentA = NodePath("CrowdA")
-crowdParentB = NodePath("CrowdB")
+crowdParentA = NodePath("Crowds/CrowdA")
+crowdParentB = NodePath("Crowds/CrowdB")
 
-[node name="CrowdA" type="Node3D" parent="BattleManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.59837, 0, 0)
+[node name="Crowds" type="Node3D" parent="BattleManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.63855)
 
-[node name="CrowdB" type="Node3D" parent="BattleManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44766, 0, 0)
+[node name="CrowdA" type="Node3D" parent="BattleManager/Crowds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.77124, 0, 0)
+
+[node name="CrowdB" type="Node3D" parent="BattleManager/Crowds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.74337, 0, 0)
