@@ -21,7 +21,6 @@ func Setup(id: int, battleStart: Signal) -> void:
 
 func SetTarget(id: int, onTargetDie: Signal) -> void:
 	_targetID = id
-	print(_targetID)
 
 func ClearTarget() -> void:
 	_targetID = -1
