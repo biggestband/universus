@@ -1,0 +1,102 @@
+[gd_scene load_steps=12 format=3 uid="uid://du0uwo0yvwrrl"]
+
+[ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_kc5qu"]
+[ext_resource type="PackedScene" uid="uid://mr3pa3d1uv3d" path="res://Enemies/Enemy_Meshes/RidgebackTest.fbx" id="2_6m1x0"]
+[ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Environment_Scenes/Environments/FPSCounter.gd" id="3_6m1x0"]
+[ext_resource type="Script" uid="uid://yvgf65x4tnum" path="res://Enemies/Enemy_Scripts/BattleManager.gd" id="3_kc5qu"]
+[ext_resource type="PackedScene" uid="uid://xiamj2ywt0mw" path="res://Enemies/Enemy_Prefabs/StupidUnit.tscn" id="4_mt75w"]
+
+[sub_resource type="Environment" id="Environment_01vul"]
+background_mode = 1
+background_color = Color(0.216292, 0.759197, 0.921567, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+tonemap_mode = 3
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aufuh"]
+bounce = 1.0
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_aufuh"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_tag4l"]
+vertices = PackedVector3Array(-49.5, 0.5, -49.5, -49.5, 0.5, 49.5, 49.5, 0.5, 49.5, 49.5, 0.5, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q213"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1medq"]
+material = SubResource("StandardMaterial3D_7q213")
+size = Vector2(100, 100)
+
+[node name="BattlefieldEnvironment" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.995854, 0.0909627, 0, -0.0909627, 0.995854, 0, 3.77097, 12.1819)
+fov = 60.2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_01vul")
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level"]
+physics_material_override = SubResource("PhysicsMaterial_aufuh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_aufuh")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Level/StaticBody3D"]
+navigation_mesh = SubResource("NavigationMesh_tag4l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D/NavigationRegion3D"]
+material_override = ExtResource("1_kc5qu")
+mesh = SubResource("PlaneMesh_1medq")
+skeleton = NodePath("../../../..")
+
+[node name="GFX" type="Node" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="FPSCounter" type="RichTextLabel" parent="HUD"]
+modulate = Color(0, 1, 0, 1)
+offset_right = 289.0
+offset_bottom = 101.0
+theme_override_font_sizes/normal_font_size = 70
+text = "Balls"
+script = ExtResource("3_6m1x0")
+
+[node name="UnitCountA" type="RichTextLabel" parent="HUD"]
+offset_left = -16.0
+offset_top = 96.0
+offset_right = 536.0
+offset_bottom = 256.0
+theme_override_font_sizes/normal_font_size = 106
+text = "100"
+horizontal_alignment = 1
+
+[node name="UnitCountB" type="RichTextLabel" parent="HUD"]
+offset_left = 576.0
+offset_top = 120.0
+offset_right = 1128.0
+offset_bottom = 280.0
+theme_override_font_sizes/normal_font_size = 106
+text = "100"
+horizontal_alignment = 1
+
+[node name="BattleManager" type="Node3D" parent="." node_paths=PackedStringArray("countLabelA", "countLabelB", "crowdParentA", "crowdParentB")]
+script = ExtResource("3_kc5qu")
+objStupidUnit = ExtResource("4_mt75w")
+objUnitA = ExtResource("2_6m1x0")
+objUnitB = ExtResource("2_6m1x0")
+countLabelA = NodePath("../HUD/UnitCountA")
+countLabelB = NodePath("../HUD/UnitCountB")
+crowdParentA = NodePath("CrowdA")
+crowdParentB = NodePath("CrowdB")
+
+[node name="CrowdA" type="Node3D" parent="BattleManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.59837, 0, 0)
+
+[node name="CrowdB" type="Node3D" parent="BattleManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44766, 0, 0)
