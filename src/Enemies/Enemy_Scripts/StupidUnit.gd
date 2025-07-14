@@ -59,6 +59,7 @@ func _stAttacking(delta: float):
 func _stDying(delta: float):
 	velocity.y -= gravity * delta
 	position += velocity * delta
+	#rotation.z += 10.0 * delta
 	
 	if position.y < -50:
 		print("destroyed guy")
@@ -85,7 +86,7 @@ func die():
 	
 	# Add random force
 	var force := randf_range(20, 35)
-	var dir := Vector3(1, 1, 0).normalized()
+	var dir := Vector3(1, 1, randf_range(-1, 1)).normalized()
 	
 	if type == Type.RIDGEBACK:
 		dir.x *= -1

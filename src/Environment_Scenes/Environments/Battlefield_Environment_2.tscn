@@ -34,7 +34,7 @@ size = Vector2(100, 100)
 [node name="BattlefieldEnvironment" type="Node3D"]
 
 [node name="CameraHorizontal" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.995854, 0.0909627, 0, -0.0909627, 0.995854, 0, 3.77097, 23.5879)
+transform = Transform3D(1, 0, 0, 0, 0.74207, 0.670323, 0, -0.670323, 0.74207, 0, 21.2925, 21.4828)
 fov = 60.2
 
 [node name="CameraVertical" type="Camera3D" parent="."]
@@ -74,10 +74,10 @@ text = "Balls"
 script = ExtResource("3_6m1x0")
 
 [node name="UnitCountA" type="RichTextLabel" parent="HUD"]
-offset_left = -16.0
-offset_top = 96.0
-offset_right = 536.0
-offset_bottom = 256.0
+offset_left = -768.0
+offset_top = 144.0
+offset_right = -216.0
+offset_bottom = 304.0
 theme_override_font_sizes/normal_font_size = 106
 text = "100"
 horizontal_alignment = 1
@@ -106,7 +106,16 @@ crowdParentB = NodePath("Crowds/CrowdB")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.63855)
 
 [node name="CrowdA" type="Node3D" parent="BattleManager/Crowds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.77124, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.78301, -0.901726, -8.87633)
 
 [node name="CrowdB" type="Node3D" parent="BattleManager/Crowds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.74337, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11285, 0, -7.02607)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 88.0
+offset_top = 760.0
+offset_right = 664.0
+offset_bottom = 984.0
+theme_override_font_sizes/normal_font_size = 156
+bbcode_enabled = true
+text = "[shake rate=100 level=40]Fight!!"
