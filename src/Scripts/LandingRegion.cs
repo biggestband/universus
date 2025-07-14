@@ -4,6 +4,7 @@ using Utility;
 [Tool]
 public partial class LandingRegion : Area2D {
     float height = 100f, width = 100f;
+    bool active;
     Ball connectedBall;
 
     Tween textTween;
@@ -55,6 +56,7 @@ public partial class LandingRegion : Area2D {
     Sprite2D sprite;
 
     public override void _Ready() {
+        if (Engine.IsEditorHint()) return;
         collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
         sprite = GetNode<Sprite2D>("Sprite2D");
 
@@ -64,6 +66,7 @@ public partial class LandingRegion : Area2D {
         sprite.Scale = collisionShape.Shape.GetRect().Size;
 
         BodyEntered += OnBodyEntered;
+        active = true;
     }
 
     public override void _ExitTree() {
@@ -82,7 +85,7 @@ public partial class LandingRegion : Area2D {
     }
 
     public override void _PhysicsProcess(double delta) {
-        if (connectedBall == null) return;
+        if (connectedBall == null || !active) return;
         lerpValue += (float)delta;
         if (lerpValue >= 1f) {
             lerpValue = 1f;
@@ -97,7 +100,11 @@ public partial class LandingRegion : Area2D {
             connectedBall = null;
             textTween = CreateTween().SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Back);
             textTween.TweenProperty(text.GetParent<Node2D>(), "global_position", textMovePosition.GlobalPosition.With(x: 0), 1);
-            textTween.TweenCallback(Callable.From(() => { text.Modulate = new(1, 1, 1, 0); }));
+            textTween.TweenCallback(Callable.From(() => {
+                text.Modulate = new(1, 1, 1, 0);
+                PachinkoEventManager.Instance.FinalScore(ScoreManager.Score, 5);
+            }));
+            active = false;
             return;
         }
         
