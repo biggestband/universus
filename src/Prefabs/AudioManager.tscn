@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://chd4enbbv56g5"]
+[gd_scene load_steps=29 format=3 uid="uid://chd4enbbv56g5"]
 
 [ext_resource type="Script" uid="uid://bgufflxqd0mmj" path="res://Scripts/audio_manager.gd" id="1_s3gfx"]
 [ext_resource type="AudioStream" uid="uid://bcjye5jp2at74" path="res://Assets/Audio/SFX/Death/Death Effect Variation 1.wav" id="2_dkurd"]
@@ -37,6 +37,10 @@ stream_1/stream = ExtResource("3_2qwqj")
 stream_2/stream = ExtResource("4_yplee")
 stream_3/stream = ExtResource("5_j57un")
 stream_4/stream = ExtResource("6_uoimk")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bu8ti"]
+streams_count = 1
+stream_0/stream = ExtResource("11_bu8ti")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_a1cns"]
 streams_count = 3
@@ -86,7 +90,7 @@ bus = &"SFX"
 [node name="Army" type="Node" parent="SFX"]
 
 [node name="SpawningTroopSFX" type="AudioStreamPlayer" parent="SFX/Army"]
-stream = ExtResource("11_bu8ti")
+stream = SubResource("AudioStreamRandomizer_bu8ti")
 max_polyphony = 10
 bus = &"SFX"
 
