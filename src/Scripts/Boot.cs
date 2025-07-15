@@ -7,11 +7,15 @@ public partial class Boot : Node
     private int expectedClientCount = 2;
     private int trackedClientCount = 0;
 
+    [Export]
+    private PackedScene launchScene;
+
     public override void _Ready()
     {
         if (OS.HasFeature("Server"))
         {
-            expectedClientCount = ArgumentHandler.instance.GetArgumentValue("client-count").ToInt();
+            if (!ArgumentHandler.instance.IsArgumentIncluded("client-count")) expectedClientCount = 2;
+            else expectedClientCount = ArgumentHandler.instance.GetArgumentValue("client-count").ToInt();
             InitializeServer(expectedClientCount);
             Multiplayer.PeerConnected += (val) => { BumpPlayerCount(); };
         }
@@ -34,6 +38,7 @@ public partial class Boot : Node
             {
                 GD.Print(Multiplayer.GetUniqueId() + ": " + "Finished boot, go to new scene");
                 //Add scene transition here
+                GetTree().ChangeSceneToPacked(launchScene);
             };
         }
 
@@ -72,21 +77,17 @@ public partial class Boot : Node
 
     private void GetIps()
     {
-        if (ArgumentHandler.instance.GetArgumentValue("copy-ip") == "local")
+        switch (ArgumentHandler.instance.GetArgumentValue("copy-ip"))
         {
-            FindLocalIp();
-        }
-        if (ArgumentHandler.instance.GetArgumentValue("copy-ip") == "public")
-        {
-            var httpRequest = new HttpRequest();
-            AddChild(httpRequest);
-            httpRequest.RequestCompleted += ReceivePublicIp;
-
-            Error error = httpRequest.Request("https://api.ipify.org/");
-            if (error != Error.Ok)
-            {
-                GD.PushError("An error occurred in the HTTP request.");
-            }
+            case "self":
+                DisplayServer.ClipboardSet("127.0.0.1");
+                break;
+            case "local":
+                FindLocalIp();
+                break;
+            case "public":
+                FindPublicIp();
+                break;
         }
     }
     
@@ -102,6 +103,19 @@ public partial class Boot : Node
 
         GD.Print("local ip: " + output);
         DisplayServer.ClipboardSet(output);
+    }
+
+    private void FindPublicIp()
+    {
+        var httpRequest = new HttpRequest();
+        AddChild(httpRequest);
+        httpRequest.RequestCompleted += ReceivePublicIp;
+
+        Error error = httpRequest.Request("https://api.ipify.org/");
+        if (error != Error.Ok)
+        {
+            GD.PushError("An error occurred in the HTTP request.");
+        }
     }
 
     private void ReceivePublicIp(long result, long responseCode, string[] headers, byte[] body)

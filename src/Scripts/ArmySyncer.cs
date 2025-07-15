@@ -20,7 +20,8 @@ public partial class ArmySyncer : Node
     public override void _Ready()
     {
         instance = this;
-        expectedClientCount = ArgumentHandler.instance.GetArgumentValue("client-count").ToInt();
+        if (!ArgumentHandler.instance.IsArgumentIncluded("client-count")) expectedClientCount = 2;
+        else expectedClientCount = ArgumentHandler.instance.GetArgumentValue("client-count").ToInt();
         Multiplayer.ConnectedToServer += AskUserForName;
     }
 
@@ -65,6 +66,7 @@ public partial class ArmySyncer : Node
         if (ArgumentHandler.instance.IsArgumentIncluded("team-name"))
         {
             clientTeamName = ArgumentHandler.instance.GetArgumentValue("team-name");
+            Rpc(MethodName.AddTeamToServerRpc, clientTeamName, 0);
             return;
         }
 
@@ -76,7 +78,7 @@ public partial class ArmySyncer : Node
         lineEdit.TextSubmitted += (val) => 
         {
             clientTeamName = val;
-            Rpc(MethodName.AddTeamToServerRpc, val, 0);
+            Rpc(MethodName.AddTeamToServerRpc, clientTeamName, 0);
             lineEdit.QueueFree();
         };
     }

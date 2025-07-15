@@ -32,6 +32,10 @@ window/handheld/orientation=1
 
 project/assembly_name="universus"
 
+[editor]
+
+run/main_run_args="--client-count=2"
+
 [input]
 
 BiggestButton={
