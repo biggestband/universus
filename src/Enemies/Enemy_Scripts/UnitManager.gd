@@ -21,7 +21,6 @@ var partitionTick : float = .2
 
 # System vars
 var armyASize: int
-var unitsSetup: bool = false
 var tickTimer: float = 0
 var partitionSize : int = 0
 var currentPartitionIndex: int = 0
@@ -55,16 +54,16 @@ func _ready() -> void:
 	# Generate the armies
 	_generateArmies(_unitNodes.size())
 	partitionSize = _unitNodes.size() / numPartitions
-	unitsSetup = true
+	
+	for n in range(_unitNodes.size()):
+		_unitNodes[n].SetTarget(_findClosestTarget(n))
 
 func _physics_process(delta: float) -> void:
-	if(unitsSetup):
-		_stepUnitPositions(delta)
+	_stepUnitTargets(delta)
+	_stepUnitPositions(delta)
 
 func _process(delta: float) -> void:
-	if(unitsSetup):
-		_updateVisualalizedNodes()
-		_stepUnitTargets(delta)
+	_updateVisualalizedNodes()
 #endregion
 
 #region Army Generation
