@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ps6p2lfh4xgt"]
+[gd_scene load_steps=3 format=3 uid="uid://bbpnj0n8ckev8"]
 
 [ext_resource type="Script" uid="uid://b52xe5iya21wn" path="res://Enemies/Enemy_Scripts/Unit.gd" id="1_w8jh5"]
 [ext_resource type="PackedScene" uid="uid://cqjmrgnrwppvm" path="res://Enemies/Enemy_Meshes/Lord.fbx" id="2_4itl3"]

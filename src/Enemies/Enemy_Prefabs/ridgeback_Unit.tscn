@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b52xe5iya21wn" path="res://Enemies/Enemy_Scripts/Unit.gd" id="1_ro661"]
 [ext_resource type="PackedScene" uid="uid://dfbxujbr1heo" path="res://Enemies/Enemy_Meshes/Hunter.fbx" id="2_l5d7r"]
 
-[node name="ridgeback_Unit" type="Node3D"]
+[node name="ridgeback_Unit2" type="Node3D"]
 script = ExtResource("1_ro661")
 
 [node name="Mesh" parent="." instance=ExtResource("2_l5d7r")]

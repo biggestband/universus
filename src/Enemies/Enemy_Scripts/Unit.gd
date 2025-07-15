@@ -2,7 +2,9 @@ class_name Unit
 
 extends Node3D
 
-# System vars
+# Signals
+
+signal OnDie
 
 # Components
 @onready var mesh: Node3D = $Mesh
@@ -36,8 +38,26 @@ func _process(delta: float) -> void:
 			_isTweening = false
 			_lerpTimer = 0
 
-func Setup(id: int) -> void:
+#region State
+
+func StopNode() -> void:
+	mesh.hide()
+	process_mode = 0
+
+# Should be called when a unit is first created
+func SetupNode(id: int) -> void:
 	_unitID = id
+	StopNode()
+
+# Should be called when a unit is being sent into battle
+func InitNode() -> void:
+	print("D")
+
+# Should be called when a unit is being sent into battle
+func ResetNode() -> void:
+	StopNode()
+
+#region
 
 #region Targeting
 
@@ -65,8 +85,7 @@ func TakeDamage(endPosition: Vector2) -> void:
 		_die()
 
 func _die() -> void:
-	mesh.hide()
-	process_mode = 0
+	OnDie.emit()
 #endregion
 
 #region Movement

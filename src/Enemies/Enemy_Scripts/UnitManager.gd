@@ -25,9 +25,7 @@ var tickTimer: float = 0
 var partitionSize : int = 0
 var currentPartitionIndex: int = 0
 
-#region Extensions
-func _ready() -> void:
-	
+func _StartBattle() -> void:
 	# Get networked values from singleton
 	armyASize = 16
 	var armyBSize: int = 16
@@ -57,6 +55,11 @@ func _ready() -> void:
 	
 	for n in range(_unitNodes.size()):
 		_unitNodes[n].SetTarget(_findClosestTarget(n))
+
+#region Extensions
+
+func _ready() -> void:
+	_StartBattle()
 
 func _physics_process(delta: float) -> void:
 	_stepUnitTargets(delta)
@@ -90,26 +93,49 @@ func _spawnArmyGrid(size: int, fieldSide: int, idOffset: int) -> void:
 				_spawnUnit(id + idOffset, _getRandOffset(position))
 				id += 1
 
+#endregion
+
+#region Unit Management
+
+# Creates a unit node
 func _spawnUnit(id: int, pos: Vector3) -> void:
 	
 	# Find mesh
 	var unitMesh: Resource = _armyAUnit if id < armyASize else _armyBUnit
 	
-	# Spawn and initialize the unit
+	# Spawn the unit node
 	var instance: Unit = unitMesh.instantiate()
 	add_child(instance)
 	instance.position = pos
-	instance.Setup(id)
+	instance.SetupNode(id)
 	
 	# Define start position
 	_unitStartingPositions[id] = Vector2(pos.x, pos.z)
-	_prevUnitPositions[id] = Vector2(pos.x, pos.z)
-	_unitPositions[id] = Vector2(pos.x, pos.z)
 	_unitNodes[id] = instance
+
+# Pulls a unit node from the pool and initiates them
+func _initUnit(id: int, pos: Vector2) -> void:
+	
+	_prevUnitPositions[id] = Vector2(pos.x, pos.y)
+	_unitPositions[id] = Vector2(pos.x, pos.y)
+	
+	var unit: Unit = _unitNodes[id]
+	unit.InitNode()
+
+# Resets a unit node and adds them back to the pool
+func _resetUnit(id: int) -> void:
+	
+	var unit: Unit = _unitNodes[id]
+	unit.ResetNode()
+	
+	var startPos: Vector2 = _unitStartingPositions[id]
+	_prevUnitPositions[id] = Vector2(startPos.x, startPos.y)
+	_unitPositions[id] = Vector2(startPos.x, startPos.y)
+	pass
 
 #endregion
 
-#region Unit Positioning
+#region Simulation
 
 func _stepUnitPositions(delta: float) -> void:	
 	# calculate the next position for each unit (step)
