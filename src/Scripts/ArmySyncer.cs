@@ -15,7 +15,7 @@ public partial class ArmySyncer : Node
     [Signal]
     public delegate void AllClientNamesChosenEventHandler();
     [Signal]
-    public delegate void ArmyCountChangedEventHandler();
+    public delegate void ArmyCountChangedEventHandler(string team, int newValue);
 
     public override void _Ready()
     {
@@ -33,17 +33,28 @@ public partial class ArmySyncer : Node
         Rpc(MethodName.AddTeamToServerRpc, clientTeamName, newCount);
     }
 
-    public Dictionary<string, int> GetArmyCount()
+    public string GetClientName()
+    {
+        return clientTeamName;
+    }
+
+    public Dictionary<string, int> GetArmyCounts()
     {
         return teamArmyCounts;
     }
 
-    public void AllClientsjoined()
+
+    public int GetArmyCount(string teamName)
     {
-        if(!OS.HasFeature("Server")) return;
+        return teamArmyCounts[teamName];
+    }
+
+    public void AllClientsJoined()
+    {
+        if (!OS.HasFeature("Server")) return;
 
         areAllClientsJoined = true;
-        foreach(KeyValuePair<string, int> ii in teamArmyCounts)
+        foreach (KeyValuePair<string, int> ii in teamArmyCounts)
         {
             Rpc(MethodName.AddTeamToClientRpc, ii.Key, ii.Value);
         }
@@ -87,7 +98,7 @@ public partial class ArmySyncer : Node
         teamArmyCounts[teamName] = armyCount;
         if(teamName != clientTeamName)
         {
-            EmitSignal(SignalName.ArmyCountChanged);
+            EmitSignal(SignalName.ArmyCountChanged, teamName, armyCount);
         }
 
         if(!areAllClientsNamed && teamArmyCounts.Count == expectedClientCount)
