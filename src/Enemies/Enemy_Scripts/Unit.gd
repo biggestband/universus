@@ -7,9 +7,6 @@ extends Node3D
 # Components
 @onready var mesh: Node3D = $Mesh
 
-# Signals
-signal OnRequireTarget(id: int)
-
 # Knockback
 @export var _knockbackDur: float = .2
 var _isTweening: bool = false
@@ -22,6 +19,7 @@ var _lerpValY: float
 # State
 var _unitID: int = -1
 var _targetID: int = -1
+var _moveSpeed: float = 3
 enum HealthState { Healthy, Dazed, Injured, Dead }
 var currentState = HealthState.Healthy
 
@@ -38,28 +36,19 @@ func _process(delta: float) -> void:
 			_isTweening = false
 			_lerpTimer = 0
 
-func Setup(id: int, battleStart: Signal) -> void:
+func Setup(id: int) -> void:
 	_unitID = id
-	battleStart.connect(_onBattleBegin)
 
 #region Targeting
-
-func SetTarget(targetID: int) -> void:
-	_targetID = targetID
 
 func GetTargetID() -> int:
 	return _targetID
 
-func UpdateTarget() -> void:
-	OnRequireTarget.emit(_unitID)
+func SetTarget(targetID: int) -> void:
+	_targetID = targetID
 #endregion
 
-#region Signal Methods
-
-func _onBattleBegin() -> void:
-	OnRequireTarget.emit(_unitID)
-
-#endregion
+#region Combat
 
 # Increments enemy state each time function is called
 func TakeDamage(endPosition: Vector2) -> void:
@@ -78,6 +67,16 @@ func TakeDamage(endPosition: Vector2) -> void:
 func _die() -> void:
 	mesh.hide()
 	process_mode = 0
+#endregion
+
+#region Movement
+
+func GetMovespeed() -> float:
+	return _moveSpeed
+
+func SetMovespeed(newSpeed: float) -> void:
+	_moveSpeed = newSpeed
+#endregion
 
 #region Tweening
 

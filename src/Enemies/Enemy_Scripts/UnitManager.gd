@@ -8,30 +8,23 @@ var _prevUnitPositions: PackedVector2Array
 var _unitNodes: Array[Unit]
 
 # Movement scalars
-const _unitMoveSpeed: float = 2
 const _unitRotSpeed: float = .5
 const _unitStopDist: float = 2
 
-# Offset scalars
+# Generation
+var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
+var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/durham_Unit.tscn")
 const _unitSeparation: float = 2
 const _offsetFromCenter: float = 3 
-
-# Partitions
 var numPartitions : int = 4
 var partitionTick : float = .2
 
-# Unit Prefabs
-var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
-var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/durham_Unit.tscn")
-
-# Signals
-signal OnBattleBegin
-
 # System vars
 var armyASize: int
+var unitsSetup: bool = false
 var tickTimer: float = 0
 var partitionSize : int = 0
-var currentPartitionIndex : int = 0
+var currentPartitionIndex: int = 0
 
 #region Extensions
 func _ready() -> void:
@@ -62,15 +55,16 @@ func _ready() -> void:
 	# Generate the armies
 	_generateArmies(_unitNodes.size())
 	partitionSize = _unitNodes.size() / numPartitions
-	
-	OnBattleBegin.emit()
+	unitsSetup = true
 
 func _physics_process(delta: float) -> void:
-	_stepUnitPositions(delta)
+	if(unitsSetup):
+		_stepUnitPositions(delta)
 
 func _process(delta: float) -> void:
-	_updateVisualalizedNodes()
-	_stepUnitTargets(delta)
+	if(unitsSetup):
+		_updateVisualalizedNodes()
+		_stepUnitTargets(delta)
 #endregion
 
 #region Army Generation
@@ -106,8 +100,7 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	var instance: Unit = unitMesh.instantiate()
 	add_child(instance)
 	instance.position = pos
-	instance.Setup(id, OnBattleBegin)
-	instance.OnRequireTarget.connect(_onUnitRequireTarget)
+	instance.Setup(id)
 	
 	# Define start position
 	_unitStartingPositions[id] = Vector2(pos.x, pos.z)
@@ -122,17 +115,21 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 func _stepUnitPositions(delta: float) -> void:	
 	# calculate the next position for each unit (step)
 	for n in range(0, _unitPositions.size()):
+		
 		# Store previous unit positions
 		_prevUnitPositions[n] = _unitPositions[n]
 		
 		if(!_isUnitSimulated(n)):
 			continue
 		
-		# Step unit pos in the direction of its target over time
-		var targetID: int = _unitNodes[n].GetTargetID()
+		var unit: Unit = _unitNodes[n]
+		var targetID: int = unit.GetTargetID()
+		var moveSpeed: float = unit.GetMovespeed()
+		
 		if(!_isUnitAtDestination(n)):
+			# Step unit pos in the direction of its target over time
 			var targetPos: Vector2 = _unitPositions[targetID]
-			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * _unitMoveSpeed * delta
+			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * moveSpeed * delta
 		else: if (_isUnitSimulated(targetID)): 
 			_attackTarget(n, targetID)
 
@@ -150,7 +147,10 @@ func _stepUnitTargets(delta: float):
 				continue
 			
 			var unit: Unit = _unitNodes[n]
-			unit.UpdateTarget()
+			var targetID: int = _findClosestTarget(n)
+			# Set the units target to the closest unit
+			if(unit.GetTargetID() != targetID):
+				unit.SetTarget(targetID)
 		
 		# Advance partition
 		currentPartitionIndex = (currentPartitionIndex + 1) % numPartitions
@@ -182,23 +182,15 @@ func _updateVisualalizedNodes() -> void:
 			unit.transform = unitTransform
 #endregion
 
-#region Signal Functions
-
-func _onUnitRequireTarget(unitID: int)-> void:
-	var unitNode: Unit = _unitNodes[unitID]
-	var targetID: int = _findClosestTarget(unitID)
-	unitNode.SetTarget(targetID)
-
-#endregion
-
 #region Helper Functions
 
 func _isUnitSimulated(unitID: int) -> bool:
 	var unit: Unit = _unitNodes[unitID]
-	return !_isDead(unitID) && !unit.GetTweening()
+	var isDead: bool = unit.currentState == Unit.HealthState.Dead
+	return !isDead && !unit.GetTweening()
 
 func _attackTarget(unitID: int, targetID) -> void:
-	if(_isUnitSimulated(unitID) && _isUnitSimulated(targetID)):
+	if(_isUnitSimulated(targetID)):
 		var instegatorPos: Vector2 = _unitPositions[unitID]
 		var victimPos: Vector2 = _unitPositions[targetID]
 		var attackDir: Vector2 = (victimPos - instegatorPos).normalized()
@@ -216,7 +208,7 @@ func _findClosestTarget(unitID: int) -> int:
 	var start: int = armyASize if unitID < armyASize else 0
 	var end: int = _unitPositions.size() if unitID < armyASize else armyASize
 	
-	var closestUnit: int
+	var closestUnit: int = -1
 	var minDistance: float = INF
 	
 	for n in range(start, end):
@@ -230,10 +222,6 @@ func _findClosestTarget(unitID: int) -> int:
 			closestUnit = n
 	
 	return closestUnit
-
-func _isDead(unitID: int) -> bool:
-	var unit: Unit = _unitNodes[unitID]
-	return unit.currentState == Unit.HealthState.Dead
 
 func _isUnitAtDestination(unitID: int) -> bool:
 	var unit: Unit = _unitNodes[unitID]
