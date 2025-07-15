@@ -1,19 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ps6p2lfh4xgt"]
+[gd_scene load_steps=3 format=3 uid="uid://bx2ai8qw7mk4a"]
 
 [ext_resource type="Script" uid="uid://b52xe5iya21wn" path="res://Enemies/Enemy_Scripts/Unit.gd" id="1_ro661"]
-[ext_resource type="PackedScene" uid="uid://mr3pa3d1uv3d" path="res://Enemies/Enemy_Meshes/RidgebackTest.fbx" id="2_l5d7r"]
-[ext_resource type="Material" uid="uid://b1rxujtyot8w1" path="res://Enemies/Enemy_Materials/Ridgeback_Material_Temp.tres" id="3_njc77"]
+[ext_resource type="PackedScene" uid="uid://dfbxujbr1heo" path="res://Enemies/Enemy_Meshes/Hunter.fbx" id="2_l5d7r"]
 
 [node name="ridgeback_Unit" type="Node3D"]
 script = ExtResource("1_ro661")
 
 [node name="Mesh" parent="." instance=ExtResource("2_l5d7r")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="_1_0_node_001" parent="Mesh" index="0"]
-material_override = ExtResource("3_njc77")
-cast_shadow = 0
-lod_bias = 0.4
-gi_mode = 0
-
-[editable path="Mesh"]

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://mr3pa3d1uv3d"
-path="res://.godot/imported/RidgebackTest.fbx-676c0c4fb5cc2a5b732e005612ab354b.scn"
+uid="uid://dfbxujbr1heo"
+path="res://.godot/imported/Hunter.fbx-70c5109190a32892685c21b4b98a4e3b.scn"
 
 [deps]
 
-source_file="res://Enemies/Enemy_Meshes/RidgebackTest.fbx"
-dest_files=["res://.godot/imported/RidgebackTest.fbx-676c0c4fb5cc2a5b732e005612ab354b.scn"]
+source_file="res://Enemies/Enemy_Meshes/Hunter.fbx"
+dest_files=["res://.godot/imported/Hunter.fbx-70c5109190a32892685c21b4b98a4e3b.scn"]
 
 [params]
 

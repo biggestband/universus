@@ -13,7 +13,7 @@ const _unitStopDist: float = 2
 
 # Generation
 var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
-var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/durham_Unit.tscn")
+var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/lord_Unit.tscn")
 const _unitSeparation: float = 2
 const _offsetFromCenter: float = 3 
 var numPartitions : int = 4
