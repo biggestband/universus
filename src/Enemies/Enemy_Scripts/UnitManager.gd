@@ -11,7 +11,6 @@ var _unitNodes: Array[Unit]
 const _unitMoveSpeed: float = 2
 const _unitRotSpeed: float = .5
 const _unitStopDist: float = 2
-const _knockbackForce: float = 2
 
 # Offset scalars
 const _unitSeparation: float = 2
@@ -23,7 +22,7 @@ var partitionTick : float = 1.5
 
 # Unit Prefabs
 var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
-var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
+var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/durham_Unit.tscn")
 
 # Signals
 signal OnBattleBegin
@@ -38,8 +37,8 @@ var currentPartitionIndex : int = 0
 func _ready() -> void:
 	
 	# Get networked values from singleton
-	armyASize = 512
-	var armyBSize: int = 512
+	armyASize = 12
+	var armyBSize: int = 12
 	var randSeed: int = 64
 	
 	# Init ECS arrays
@@ -71,7 +70,6 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	_updateVisualalizedNodes()
-	
 	_stepUnitTargets(delta)
 #endregion
 
@@ -187,10 +185,9 @@ func _updateVisualalizedNodes() -> void:
 
 func _onUnitRequireTarget(unitID: int)-> void:
 	var unitNode: Unit = _unitNodes[unitID]
-	
 	var targetID: int = _findClosestTarget(unitID)
-	
-	unitNode.SetTarget(targetID, _unitNodes[targetID])
+	unitNode.SetTarget(targetID)
+
 #endregion
 
 #region Helper Functions
@@ -202,12 +199,15 @@ func _isUnitSimulated(unitID: int) -> bool:
 func _attackTarget(unitID: int, targetID) -> void:
 	var instegatorPos: Vector2 = _unitPositions[unitID]
 	var victimPos: Vector2 = _unitPositions[targetID]
-	var attackDir: Vector2 = victimPos - instegatorPos
+	var attackDir: Vector2 = (victimPos - instegatorPos).normalized()
 	
 	var victim: Unit = _unitNodes[targetID]
+	
+	var randKnockback: float = randf_range(4,7)
+	var endPos2D: Vector2 = victimPos + (attackDir * randKnockback)
+	victim.TakeDamage(endPos2D)
 	victim.SetTweening(true)
-	_unitPositions[targetID] = victimPos + (attackDir * _knockbackForce)
-	victim.TakeDamage()
+	_unitPositions[targetID] = endPos2D
 
 func _findClosestTarget(unitID: int) -> int:
 	var start: int = armyASize if unitID < armyASize else 0
