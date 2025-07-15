@@ -247,7 +247,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-404.553, -153.442)
 modes/cull = 2
 flags/unshaded = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_2mkhg")
@@ -298,7 +297,7 @@ alpha_curve = SubResource("CurveTexture_5s648")
 [sub_resource type="QuadMesh" id="QuadMesh_wwfif"]
 size = Vector2(0.05, 0.3)
 
-[node name="HIT VFX" type="Node3D"]
+[node name="Sparks" type="Node3D"]
 
 [node name="Spark" type="GPUParticles3D" parent="."]
 layers = 4
