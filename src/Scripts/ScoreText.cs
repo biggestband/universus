@@ -26,7 +26,7 @@ public partial class ScoreText : RichTextLabel {
         var finalScore = baseScore * multiplier;
         Text = $"[b]{finalScore:F0}[/b]";
         tween?.Kill();
-        currentValue = 150;
+        currentValue += 75;
         TweenText((int)HitType.NewHit, 0.3f);
     }
     void UpdateScoreText(float oldScore, float newScore) {
