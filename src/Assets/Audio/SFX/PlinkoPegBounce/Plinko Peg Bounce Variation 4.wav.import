@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bo42p7a4vsfav"
+path="res://.godot/imported/Plinko Peg Bounce Variation 4.wav-51807a89e6160f41fd3dc455b1021720.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/PlinkoPegBounce/Plinko Peg Bounce Variation 4.wav"
+dest_files=["res://.godot/imported/Plinko Peg Bounce Variation 4.wav-51807a89e6160f41fd3dc455b1021720.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
