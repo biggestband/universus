@@ -2,10 +2,15 @@ class_name UnitManager
 
 extends Node
 
+# ECS
 var _unitStartingPositions: PackedVector2Array
 var _unitPositions: PackedVector2Array
 var _prevUnitPositions: PackedVector2Array
 var _unitNodes: Array[Unit]
+var _activeNodeIDs: Array[int]
+
+# Simulation variables
+const _maxUnitCount: float = 32 # the maximum count of units that can be present in the fight per side
 
 # Movement scalars
 const _unitRotSpeed: float = .5
@@ -16,23 +21,25 @@ var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.t
 var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/lord_Unit.tscn")
 const _unitSeparation: float = 2
 const _offsetFromCenter: float = 3 
-var numPartitions : int = 4
-var partitionTick : float = .2
 
 # System vars
-var armyASize: int
-var tickTimer: float = 0
-var partitionSize : int = 0
-var currentPartitionIndex: int = 0
+var armyAStartSize: int
+var armyBStartSize: int
+var curArmyASize: int
+var curArmyBSize: int
 
-func _StartBattle() -> void:
+var tickTimer: float = 0
+var partitionTick: float = .2
+
+# SHould be called on start. It creates all of the units and sets them up for later use
+func _initUnitPool() -> void:
 	# Get networked values from singleton
-	armyASize = 16
-	var armyBSize: int = 16
+	armyAStartSize = 16
+	armyBStartSize = 16
 	var randSeed: int = 64
 	
 	# Init ECS arrays
-	var totalUnits: int = armyASize + armyBSize
+	var totalUnits: int = armyAStartSize + armyBStartSize
 	
 	_unitStartingPositions.clear()
 	_unitStartingPositions.resize(totalUnits)
@@ -50,16 +57,21 @@ func _StartBattle() -> void:
 	seed(randSeed)
 	
 	# Generate the armies
-	_generateArmies(_unitNodes.size())
-	partitionSize = _unitNodes.size() / numPartitions
+	_spawnArmyGrid(armyAStartSize, 1, 0)
+	_spawnArmyGrid(armyBStartSize, -1, armyAStartSize)
+	curArmyASize = armyAStartSize
+	curArmyBSize = armyBStartSize
 	
-	for n in range(_unitNodes.size()):
-		_unitNodes[n].SetTarget(_findClosestTarget(n))
+	# Start the first batch of troops
+	for u in curArmyASize:
+		_requestUnit(true)
+	for u in curArmyBSize:
+		_requestUnit(false)
 
 #region Extensions
 
 func _ready() -> void:
-	_StartBattle()
+	_initUnitPool()
 
 func _physics_process(delta: float) -> void:
 	_stepUnitTargets(delta)
@@ -70,11 +82,6 @@ func _process(delta: float) -> void:
 #endregion
 
 #region Army Generation
-
-func _generateArmies(armySize: int) -> void:
-	var armyBSize: int = armySize - armyASize
-	_spawnArmyGrid(armyASize, 1, 0)
-	_spawnArmyGrid(armyBSize, -1, armyASize)
 
 func _spawnArmyGrid(size: int, fieldSide: int, idOffset: int) -> void:
 	var gridSize: int = ceil(sqrt(size))
@@ -101,37 +108,60 @@ func _spawnArmyGrid(size: int, fieldSide: int, idOffset: int) -> void:
 func _spawnUnit(id: int, pos: Vector3) -> void:
 	
 	# Find mesh
-	var unitMesh: Resource = _armyAUnit if id < armyASize else _armyBUnit
+	var unitMesh: Resource = _armyAUnit if id < armyAStartSize else _armyBUnit
 	
 	# Spawn the unit node
 	var instance: Unit = unitMesh.instantiate()
 	add_child(instance)
 	instance.position = pos
-	instance.SetupNode(id)
+	instance.SetupNode(id, id < armyAStartSize)
+	instance.OnDie.connect(_onUnitDie)
 	
 	# Define start position
 	_unitStartingPositions[id] = Vector2(pos.x, pos.z)
 	_unitNodes[id] = instance
 
-# Pulls a unit node from the pool and initiates them
-func _initUnit(id: int, pos: Vector2) -> void:
-	
-	_prevUnitPositions[id] = Vector2(pos.x, pos.y)
-	_unitPositions[id] = Vector2(pos.x, pos.y)
-	
-	var unit: Unit = _unitNodes[id]
-	unit.InitNode()
+# Attempts to pull a unit node from the pool and initiate them
+func _requestUnit(isTeamA: bool) -> void:
+	var remainingOnTeam: int = curArmyASize if isTeamA else curArmyBSize
+	if(remainingOnTeam > 0):
+		var start: int = armyAStartSize if !isTeamA else 0
+		var end: int = _unitPositions.size() if !isTeamA else armyAStartSize
+		
+		# Find the first inactive unit from the team
+		for n in range(start, end):
+			if(_isUnitSimulated(n)):
+				continue
+			
+			var unitNode: Unit = _unitNodes[n]
+			var startPos: Vector2 = _unitStartingPositions[n]
+			_prevUnitPositions[n] = startPos
+			_unitPositions[n] = startPos
+			unitNode.InitNode()
+			
+			if(isTeamA):
+				curArmyASize += 1
+			else: curArmyBSize += 1
+			_activeNodeIDs.push_back(n)
+			break
 
 # Resets a unit node and adds them back to the pool
 func _resetUnit(id: int) -> void:
+	var unitNode: Unit = _unitNodes[id]
+	unitNode.ResetNode()
 	
-	var unit: Unit = _unitNodes[id]
-	unit.ResetNode()
-	
+	# Reset nodes position data and return to pool
 	var startPos: Vector2 = _unitStartingPositions[id]
 	_prevUnitPositions[id] = Vector2(startPos.x, startPos.y)
 	_unitPositions[id] = Vector2(startPos.x, startPos.y)
-	pass
+	_activeNodeIDs.erase(id)
+	
+	# Request a replacement
+	var isArmyA: int = unitNode.IsArmyA()
+	if(isArmyA):
+		curArmyASize -= 1
+	else: curArmyBSize -= 1
+	_requestUnit(isArmyA)
 
 #endregion
 
@@ -162,23 +192,17 @@ func _stepUnitTargets(delta: float):
 	# Update unit targets in partitions
 	tickTimer += delta
 	if tickTimer > partitionTick:
-		var start: int = partitionSize * currentPartitionIndex
-		var end: int = _unitNodes.size() if currentPartitionIndex == numPartitions - 1 else start + partitionSize
-		
 		# Only update units in the current partition
-		for n in range(start, end):
+		for n: int in _activeNodeIDs:
 			
 			if(!_isUnitSimulated(n)):
 				continue
 			
-			var unit: Unit = _unitNodes[n]
+			var unitNode: Unit = _unitNodes[n]
 			var targetID: int = _findClosestTarget(n)
 			# Set the units target to the closest unit
-			if(unit.GetTargetID() != targetID):
-				unit.SetTarget(targetID)
-		
-		# Advance partition
-		currentPartitionIndex = (currentPartitionIndex + 1) % numPartitions
+			if(unitNode.GetTargetID() != targetID):
+				unitNode.SetTarget(targetID)
 		tickTimer = 0
 
 func _updateVisualalizedNodes() -> void:
@@ -207,12 +231,17 @@ func _updateVisualalizedNodes() -> void:
 			unit.transform = unitTransform
 #endregion
 
+func _onUnitDie(unitID: int, isArmyA: bool) -> void:
+	_resetUnit(unitID)
+#endregion
+
 #region Helper Functions
 
 func _isUnitSimulated(unitID: int) -> bool:
 	var unit: Unit = _unitNodes[unitID]
+	var isActive: bool = unit.GetUnitActive()
 	var isDead: bool = unit.currentState == Unit.HealthState.Dead
-	return !isDead && !unit.GetTweening()
+	return isActive && !isDead && !unit.GetTweening()
 
 func _attackTarget(unitID: int, targetID) -> void:
 	if(_isUnitSimulated(targetID)):
@@ -230,8 +259,8 @@ func _attackTarget(unitID: int, targetID) -> void:
 		_unitPositions[targetID] = endPos2D
 
 func _findClosestTarget(unitID: int) -> int:
-	var start: int = armyASize if unitID < armyASize else 0
-	var end: int = _unitPositions.size() if unitID < armyASize else armyASize
+	var start: int = armyAStartSize if unitID < armyAStartSize else 0
+	var end: int = _unitPositions.size() if unitID < armyAStartSize else armyAStartSize
 	
 	var closestUnit: int = -1
 	var minDistance: float = INF

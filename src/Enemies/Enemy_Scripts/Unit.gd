@@ -4,7 +4,7 @@ extends Node3D
 
 # Signals
 
-signal OnDie
+signal OnDie(unitID: int, isArmyA: bool)
 
 # Components
 @onready var mesh: Node3D = $Mesh
@@ -20,6 +20,9 @@ var _lerpValY: float
 
 # State
 var _unitID: int = -1
+var _isArmyA: bool
+
+var _isUnitActive: bool = false
 var _targetID: int = -1
 var _moveSpeed: float = 3
 enum HealthState { Healthy, Dazed, Injured, Dead }
@@ -40,22 +43,28 @@ func _process(delta: float) -> void:
 
 #region State
 
-func StopNode() -> void:
-	mesh.hide()
-	process_mode = 0
+func GetUnitActive() -> bool:
+	return _isUnitActive
+
+func IsArmyA() -> bool:
+	return _isArmyA
 
 # Should be called when a unit is first created
-func SetupNode(id: int) -> void:
+func SetupNode(id: int, isArmyA: bool) -> void:
+	ResetNode()
 	_unitID = id
-	StopNode()
+	_isArmyA = isArmyA
 
 # Should be called when a unit is being sent into battle
 func InitNode() -> void:
-	print("D")
+	_isUnitActive = true
+	mesh.show()
+	process_mode = 1
 
-# Should be called when a unit is being sent into battle
 func ResetNode() -> void:
-	StopNode()
+	_isUnitActive = false
+	mesh.hide()
+	process_mode = 0
 
 #region
 
@@ -85,7 +94,7 @@ func TakeDamage(endPosition: Vector2) -> void:
 		_die()
 
 func _die() -> void:
-	OnDie.emit()
+	OnDie.emit(_unitID, _isArmyA)
 #endregion
 
 #region Movement
