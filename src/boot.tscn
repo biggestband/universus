@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bis033d21tiyq"]
+
+[ext_resource type="Script" uid="uid://dunexd1v6qpuc" path="res://Scripts/Boot.cs" id="1_hjvc4"]
+[ext_resource type="Script" uid="uid://bxswuqt82rojh" path="res://Scripts/DebugArmyBumper.cs" id="2_n76rq"]
+
+[node name="Boot" type="Node"]
+script = ExtResource("1_hjvc4")
+
+[node name="DebugArmyBumper" type="Node" parent="."]
+script = ExtResource("2_n76rq")
+metadata/_custom_type_script = "uid://bxswuqt82rojh"
