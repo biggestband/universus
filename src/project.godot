@@ -24,7 +24,7 @@ buses/default_bus_layout="res://Assets/Audio/default_bus_layout.tres"
 ArgumentHandler="*res://Scripts/ArgumentHandler.cs"
 ArmySyncer="*res://Scripts/ArmySyncer.cs"
 PachinkoEventManager="*res://Scripts/PachinkoEventManager.cs"
-AudioManager="*res://Scripts/audio_manager.gd"
+AudioManager="*res://Prefabs/AudioManager.tscn"
 
 [display]
 
