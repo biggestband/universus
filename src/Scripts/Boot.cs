@@ -65,7 +65,7 @@ public partial class Boot : Node
 
         if (trackedClientCount == expectedClientCount)
         {
-            ArmySyncer.instance.AllClientsjoined();
+            ArmySyncer.instance.AllClientsJoined();
             GD.Print("All Clients joined");
         }
     }
