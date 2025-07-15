@@ -113,9 +113,9 @@ public partial class LandingRegion : Area2D {
             lerpValue = 0;
             return State.Shake;
         }
-        
+
         var attractionForce =  ballToSelf.Normalized() * 500;
-        
+
         lerpValue += delta;
         if (lerpValue >= 1f) {
             lerpValue = 1f;
@@ -126,20 +126,21 @@ public partial class LandingRegion : Area2D {
             Mathf.Lerp(initialVelocity.X, attractionForce.X, transformedLerpValue),
             Mathf.Lerp(initialVelocity.Y, attractionForce.Y, transformedLerpValue)
         );
-        
+
         return State.Attracting;
     }
     State ProcessShake(double delta) {
         lerpValue += delta;
+        var transformedLerpValue = EaseOutExpo(lerpValue + 0.2);
         connectedBall.GlobalPosition = GlobalPosition;
         connectedBall.LinearVelocity = Vector2.Zero;
         connectedBall.Hide();
-        if (lerpValue >= 1) {
+        if (lerpValue >= 0.6) {
             connectedBall = null;
             textParent.Position = Vector2.Zero;
             return State.Move;
         }
-        var range = (float)((1 - lerpValue) * 25);
+        var range = (float)((1 - transformedLerpValue) * 60);
         var x = (GD.Randf() - 0.5f) * range;
         var y = (GD.Randf() - 0.5f) * range;
         textParent.Position = new(x, y);
@@ -154,6 +155,10 @@ public partial class LandingRegion : Area2D {
             PachinkoEventManager.Instance.FinalScore(ScoreManager.Score, 5);
         }));
         return State.Idle;
+    }
+
+    double EaseOutExpo(double x) {
+        return x >= 1 ? 1 : 1 - Mathf.Pow(2, -10 * x);
     }
 
     enum State {
