@@ -94,6 +94,7 @@ public partial class LandingRegion : Area2D {
         initialVelocity = ball.LinearVelocity;
         ball.DisablePhysics();
         connectedBall = ball;
+        lerpValue = 0;
         currentState = State.Attracting;
     }
 

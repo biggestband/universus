@@ -7,6 +7,7 @@ public partial class ScoreText : RichTextLabel {
     Random random;
     Color startColor;
     int currentValue;
+    Vector2 startPosition;
 
     public override void _Ready() {
         random = new();
@@ -16,6 +17,7 @@ public partial class ScoreText : RichTextLabel {
         PachinkoEventManager.Instance.OnHit += TweenText;
         UpdateScoreText(0, 0);
         currentValue = DEFAULT_FONT_SIZE;
+        startPosition = Position;
     }
     public override void _ExitTree() {
         PachinkoEventManager.Instance.OnScore -= UpdateScoreText;
@@ -52,7 +54,7 @@ public partial class ScoreText : RichTextLabel {
         currentValue += fontSize;
         ChangeFontSize(currentValue);
         tween.TweenMethod(Callable.From<int>(ChangeFontSize), currentValue, DEFAULT_FONT_SIZE, 0.5f).SetDelay(delay);
-        tween.TweenProperty(this, "position", Vector2.Zero, 0.75f)
+        tween.TweenProperty(this, "position", startPosition, 0.75f)
             .From(new Vector2(random.Next(-POSITION_OFFSET, POSITION_OFFSET), random.Next(-POSITION_OFFSET, POSITION_OFFSET)));
         Modulate = color;
         tween.TweenProperty(this, "modulate", startColor,  0.75).SetDelay(0.1f);
