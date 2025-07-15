@@ -2,8 +2,8 @@ class_name UnitManager
 
 extends Node
 
-var _unitPositions: PackedVector2Array
 var _unitStartingPositions: PackedVector2Array
+var _unitPositions: PackedVector2Array
 var _prevUnitPositions: PackedVector2Array
 var _unitNodes: Array[Unit]
 
@@ -18,7 +18,7 @@ const _offsetFromCenter: float = 3
 
 # Partitions
 var numPartitions : int = 4
-var partitionTick : float = 1.5
+var partitionTick : float = .2
 
 # Unit Prefabs
 var _armyAUnit: Resource = preload("res://Enemies/Enemy_Prefabs/ridgeback_Unit.tscn")
@@ -37,18 +37,18 @@ var currentPartitionIndex : int = 0
 func _ready() -> void:
 	
 	# Get networked values from singleton
-	armyASize = 12
-	var armyBSize: int = 12
+	armyASize = 16
+	var armyBSize: int = 16
 	var randSeed: int = 64
 	
 	# Init ECS arrays
 	var totalUnits: int = armyASize + armyBSize
 	
-	_unitPositions.clear()
-	_unitPositions.resize(totalUnits)
-	
 	_unitStartingPositions.clear()
 	_unitStartingPositions.resize(totalUnits)
+	
+	_unitPositions.clear()
+	_unitPositions.resize(totalUnits)
 	
 	_prevUnitPositions.clear()
 	_prevUnitPositions.resize(totalUnits)
@@ -109,8 +109,10 @@ func _spawnUnit(id: int, pos: Vector3) -> void:
 	instance.Setup(id, OnBattleBegin)
 	instance.OnRequireTarget.connect(_onUnitRequireTarget)
 	
-	_unitPositions[id] = Vector2(pos.x, pos.z)
+	# Define start position
 	_unitStartingPositions[id] = Vector2(pos.x, pos.z)
+	_prevUnitPositions[id] = Vector2(pos.x, pos.z)
+	_unitPositions[id] = Vector2(pos.x, pos.z)
 	_unitNodes[id] = instance
 
 #endregion
@@ -126,14 +128,13 @@ func _stepUnitPositions(delta: float) -> void:
 		if(!_isUnitSimulated(n)):
 			continue
 		
-		# Get target position
-		var targetID: int = _unitNodes[n].GetTargetID()
-		
 		# Step unit pos in the direction of its target over time
+		var targetID: int = _unitNodes[n].GetTargetID()
 		if(!_isUnitAtDestination(n)):
 			var targetPos: Vector2 = _unitPositions[targetID]
 			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * _unitMoveSpeed * delta
-		else: _attackTarget(n, targetID)
+		else: if (_isUnitSimulated(targetID)): 
+			_attackTarget(n, targetID)
 
 func _stepUnitTargets(delta: float):
 	# Update unit targets in partitions
@@ -197,17 +198,19 @@ func _isUnitSimulated(unitID: int) -> bool:
 	return !_isDead(unitID) && !unit.GetTweening()
 
 func _attackTarget(unitID: int, targetID) -> void:
-	var instegatorPos: Vector2 = _unitPositions[unitID]
-	var victimPos: Vector2 = _unitPositions[targetID]
-	var attackDir: Vector2 = (victimPos - instegatorPos).normalized()
+	if(_isUnitSimulated(unitID) && _isUnitSimulated(targetID)):
+		var instegatorPos: Vector2 = _unitPositions[unitID]
+		var victimPos: Vector2 = _unitPositions[targetID]
+		var attackDir: Vector2 = (victimPos - instegatorPos).normalized()
 	
-	var victim: Unit = _unitNodes[targetID]
+		var victim: Unit = _unitNodes[targetID]
 	
-	var randKnockback: float = randf_range(4,7)
-	var endPos2D: Vector2 = victimPos + (attackDir * randKnockback)
-	victim.TakeDamage(endPos2D)
-	victim.SetTweening(true)
-	_unitPositions[targetID] = endPos2D
+		var randKnockback: float = randf_range(4,7)
+		var endPos2D: Vector2 = victimPos + (attackDir * randKnockback)
+		victim.TakeDamage(endPos2D)
+		victim.SetTweening(true)
+		_prevUnitPositions[targetID] = endPos2D
+		_unitPositions[targetID] = endPos2D
 
 func _findClosestTarget(unitID: int) -> int:
 	var start: int = armyASize if unitID < armyASize else 0
