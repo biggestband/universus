@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://blfoyworu7gdm"]
+
+[ext_resource type="Script" uid="uid://ygv2uiv8pdxq" path="res://Scripts/FpsLabel.cs" id="1_phdv7"]
+
+[node name="FPS Label" type="RichTextLabel"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_colors/default_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "60.0"
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("1_phdv7")

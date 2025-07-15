@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://6qy1hcogkdih"]
+[gd_scene load_steps=18 format=3 uid="uid://6qy1hcogkdih"]
 
 [ext_resource type="Script" uid="uid://bhu0skt2crass" path="res://Scripts/PegSpawner.cs" id="1_7v7sl"]
 [ext_resource type="PackedScene" uid="uid://tiabcg0wvd6p" path="res://Prefabs/peg.tscn" id="2_dn3v3"]
@@ -12,13 +12,14 @@
 [ext_resource type="Script" uid="uid://drhvbk4j4b65t" path="res://Scripts/ScoreText.cs" id="8_oxjyi"]
 [ext_resource type="Script" uid="uid://dalxnqq33ph8s" path="res://Scripts/HighscoreText.cs" id="9_vqhnx"]
 [ext_resource type="Script" uid="uid://cpifuqhrmnvyh" path="res://Scripts/LandingRegion.cs" id="10_32jtq"]
+[ext_resource type="PackedScene" uid="uid://blfoyworu7gdm" path="res://Prefabs/fps-label.tscn" id="10_wdyx6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ax1vs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dn3v3"]
 size = Vector2(434, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuxwr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdyx6"]
 size = Vector2(400, 100)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_vqhnx"]
@@ -453,6 +454,24 @@ randomAngleDegrees = 30.0
 bounceFactor = 1.2
 minSpeed = 80.0
 
+[node name="Ball2" parent="Ball Holder" instance=ExtResource("4_bs7w1")]
+gravity_scale = 0.3
+randomAngleDegrees = 30.0
+bounceFactor = 1.2
+minSpeed = 80.0
+
+[node name="Ball3" parent="Ball Holder" instance=ExtResource("4_bs7w1")]
+gravity_scale = 0.3
+randomAngleDegrees = 30.0
+bounceFactor = 1.2
+minSpeed = 80.0
+
+[node name="Ball4" parent="Ball Holder" instance=ExtResource("4_bs7w1")]
+gravity_scale = 0.3
+randomAngleDegrees = 30.0
+bounceFactor = 1.2
+minSpeed = 80.0
+
 [node name="Left Bound" type="StaticBody2D" parent="."]
 position = Vector2(-183, 0)
 
@@ -487,7 +506,7 @@ snapDistance = 10.0
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Landing Region"]
-shape = SubResource("RectangleShape2D_xuxwr")
+shape = SubResource("RectangleShape2D_wdyx6")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Landing Region"]
@@ -557,6 +576,9 @@ text = "Highscore:  0"
 horizontal_alignment = 2
 vertical_alignment = 1
 script = ExtResource("9_vqhnx")
+
+[node name="FPS Label" parent="CanvasLayer/Control" instance=ExtResource("10_wdyx6")]
+layout_mode = 0
 
 [node name="Pachinko" type="Node" parent="." node_paths=PackedStringArray("ballHolder", "pegContainer", "landingRegion")]
 script = ExtResource("5_53us7")
