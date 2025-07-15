@@ -12,6 +12,9 @@ enum State
 	DYING,
 }
 
+@export_group("Objects")
+@export var objOtDeathVfx: PackedScene
+
 @export_group("Nodes")
 @export var sprRidgeback: Texture2D
 @export var sprLordDurham: Texture2D
@@ -59,7 +62,8 @@ func _stAttacking(delta: float):
 func _stDying(delta: float):
 	velocity.y -= gravity * delta
 	position += velocity * delta
-	#rotation.z += 10.0 * delta
+	currentSprite.rotation.z += 10.0 * delta
+	currentSprite.rotation.y += 10.0 * delta
 	
 	if position.y < -50:
 		print("destroyed guy")
@@ -75,6 +79,11 @@ func decrementArmyCount():
 
 func die():
 	decrementArmyCount()
+	
+	# Death effect
+	var inst: Vfx3D = objOtDeathVfx.instantiate()
+	add_child(inst)
+	inst.global_position = global_position
 	
 	# Cancel tween and move to target
 	if moveTw and moveTw.is_running():
