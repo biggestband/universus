@@ -2,18 +2,19 @@ class_name Unit
 
 extends Node3D
 
-# Signals
+# --- System vars ---
 
+# Signals
 signal OnDie(unitID: int, isArmyA: bool)
 
 # Components
 @onready var mesh: Node3D = $Mesh
 
 # Knockback
-@export var _knockbackDur: float = .2
+@export var _knockbackDur: float = .4
 var _isTweening: bool = false
-var _startPosition: Vector3
-var _endPosition: Vector3
+var _lerpStartPos: Vector3
+var _lerpEndPos: Vector3
 var _lerpTimer: float
 var _lerpValXZ: float
 var _lerpValY: float
@@ -24,7 +25,6 @@ var _isArmyA: bool
 
 var _isUnitActive: bool = false
 var _targetID: int = -1
-var _moveSpeed: float = 3
 enum HealthState { Healthy, Dazed, Injured, Dead }
 var currentState = HealthState.Healthy
 
@@ -34,12 +34,21 @@ func _process(delta: float) -> void:
 		var scaledLerp: float = _lerpTimer * (1 / _knockbackDur)
 		_lerpValY = easeOutInCubic(scaledLerp)
 		_lerpValXZ = easeOutCubic(scaledLerp)
-		var horiz: Vector3 = lerp(_startPosition, _endPosition, _lerpValXZ)
-		var vert: float = _endPosition.y + (_lerpValY * 2)
+		var horiz: Vector3 = lerp(_lerpStartPos, _lerpEndPos, _lerpValXZ)
+		var vert: float = _lerpEndPos.y + (_lerpValY * 2)
 		self.position = Vector3(horiz.x, vert, horiz.z)
 		if(_lerpTimer >= _knockbackDur):
 			_isTweening = false
 			_lerpTimer = 0
+			_lerpValXZ = 0.0
+			_lerpValY = 0.0
+			
+			# Ticks health state
+			currentState += 1
+			
+			# Kill unit after lerp
+			if(currentState == HealthState.Dead):
+				_die()
 
 #region State
 
@@ -50,36 +59,34 @@ func IsArmyA() -> bool:
 	return _isArmyA
 
 # Should be called when a unit is first created
-func SetupNode(id: int, isArmyA: bool) -> void:
+func SetupNode(unitID: int, isArmyA: bool) -> void:
 	ResetNode()
-	_unitID = id
+	_unitID = unitID
 	_isArmyA = isArmyA
 
 # Should be called when a unit is being sent into battle
 func InitNode() -> void:
 	_isUnitActive = true
+	currentState = HealthState.Healthy
+	
 	mesh.show()
 	process_mode = 1
 
 func ResetNode() -> void:
 	_isUnitActive = false
-	
-	# Reset processing logic
 	mesh.hide()
 	process_mode = 0
-
-# Reset system vars related to knockback tweening
+	
+	# Reset system vars related to knockback tweening
 	_isTweening = false
 	_lerpTimer = 0.0
 	_lerpValXZ = 0.0
 	_lerpValY = 0.0
-	_startPosition = Vector3.ZERO
-	_endPosition = Vector3.ZERO
+	_lerpStartPos = Vector3.ZERO
+	_lerpEndPos = Vector3.ZERO
 	
 	# Reset state vars
 	_targetID = -1
-	_moveSpeed = 3
-	currentState = HealthState.Healthy
 
 #region
 
@@ -90,41 +97,30 @@ func GetTargetID() -> int:
 
 func SetTarget(targetID: int) -> void:
 	_targetID = targetID
+
 #endregion
 
 #region Combat
 
 # Increments enemy state each time function is called
 func TakeDamage(endPosition: Vector2) -> void:
-	_startPosition = self.position;
-	_endPosition = Vector3(endPosition.x, 1, endPosition.y)
 	
 	if(currentState == HealthState.Dead):
-		print("Tried to kill a dead enemy")
+		return
 	
-	# Ticks health state
-	currentState += 1
-	
-	if(currentState == HealthState.Dead):
-		_die()
+	_isTweening = true
+	_lerpStartPos = self.position;
+	_lerpEndPos = Vector3(endPosition.x, 1, endPosition.y)
 
 func _die() -> void:
+	ResetNode()
+	
+	await get_tree().process_frame
 	OnDie.emit(_unitID, _isArmyA)
-#endregion
 
-#region Movement
-
-func GetMovespeed() -> float:
-	return _moveSpeed
-
-func SetMovespeed(newSpeed: float) -> void:
-	_moveSpeed = newSpeed
 #endregion
 
 #region Tweening
-
-func SetTweening(isTweening: bool) -> void:
-	_isTweening = isTweening
 
 func GetTweening() -> bool:
 	return _isTweening
