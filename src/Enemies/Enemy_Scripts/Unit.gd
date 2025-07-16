@@ -63,8 +63,23 @@ func InitNode() -> void:
 
 func ResetNode() -> void:
 	_isUnitActive = false
+	
+	# Reset processing logic
 	mesh.hide()
 	process_mode = 0
+
+# Reset system vars related to knockback tweening
+	_isTweening = false
+	_lerpTimer = 0.0
+	_lerpValXZ = 0.0
+	_lerpValY = 0.0
+	_startPosition = Vector3.ZERO
+	_endPosition = Vector3.ZERO
+	
+	# Reset state vars
+	_targetID = -1
+	_moveSpeed = 3
+	currentState = HealthState.Healthy
 
 #region
 
