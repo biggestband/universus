@@ -454,24 +454,6 @@ randomAngleDegrees = 30.0
 bounceFactor = 1.2
 minSpeed = 80.0
 
-[node name="Ball2" parent="Ball Holder" instance=ExtResource("4_bs7w1")]
-gravity_scale = 0.3
-randomAngleDegrees = 30.0
-bounceFactor = 1.2
-minSpeed = 80.0
-
-[node name="Ball3" parent="Ball Holder" instance=ExtResource("4_bs7w1")]
-gravity_scale = 0.3
-randomAngleDegrees = 30.0
-bounceFactor = 1.2
-minSpeed = 80.0
-
-[node name="Ball4" parent="Ball Holder" instance=ExtResource("4_bs7w1")]
-gravity_scale = 0.3
-randomAngleDegrees = 30.0
-bounceFactor = 1.2
-minSpeed = 80.0
-
 [node name="Left Bound" type="StaticBody2D" parent="."]
 position = Vector2(-183, 0)
 
