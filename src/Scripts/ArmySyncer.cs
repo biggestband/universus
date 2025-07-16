@@ -1,6 +1,8 @@
 using Godot;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 public partial class ArmySyncer : Node
 {
@@ -27,8 +29,8 @@ public partial class ArmySyncer : Node
 
     public void SetArmyCount(int newCount)
     {
-        if(OS.HasFeature("Server")) return;
-        if(clientTeamName == null || clientTeamName == string.Empty) return;
+        if (OS.HasFeature("Server")) return;
+        if (clientTeamName == null || clientTeamName == string.Empty) return;
 
         teamArmyCounts[clientTeamName] = newCount;
         Rpc(MethodName.AddTeamToServerRpc, clientTeamName, newCount);
@@ -75,7 +77,7 @@ public partial class ArmySyncer : Node
         lineEdit.CustomMinimumSize = new Vector2(GetViewport().GetVisibleRect().Size.X, 80);
         lineEdit.PlaceholderText = "Team Name";
         lineEdit.Position = new Vector2(0, 100);
-        lineEdit.TextSubmitted += (val) => 
+        lineEdit.TextSubmitted += (val) =>
         {
             clientTeamName = val;
             Rpc(MethodName.AddTeamToServerRpc, clientTeamName, 0);
@@ -88,7 +90,7 @@ public partial class ArmySyncer : Node
     {
         teamArmyCounts[teamName] = armyCount;
 
-        if(areAllClientsJoined)
+        if (areAllClientsJoined)
         {
             Rpc(MethodName.AddTeamToClientRpc, teamName, armyCount);
         }
@@ -98,17 +100,30 @@ public partial class ArmySyncer : Node
     private void AddTeamToClientRpc(string teamName, int armyCount)
     {
         teamArmyCounts[teamName] = armyCount;
-        if(teamName != clientTeamName)
+        if (teamName != clientTeamName)
         {
             EmitSignal(SignalName.ArmyCountChanged, teamName, armyCount);
         }
 
-        if(!areAllClientsNamed && teamArmyCounts.Count == expectedClientCount)
+        if (!areAllClientsNamed && teamArmyCounts.Count == expectedClientCount)
         {
             areAllClientsNamed = true;
             EmitSignal(SignalName.AllClientNamesChosen);
         }
 
         GD.Print(Multiplayer.GetUniqueId() + ": " + teamName + " " + armyCount.ToString());
+    }
+
+    public void SaveCurrentBattle()
+    {
+        SaveBattle(teamArmyCounts);
+    }
+
+    public void SaveBattle(Dictionary<string, int> battleData)
+    {
+        using FileAccess saveFile = FileAccess.Open("user://history" + Time.GetDateStringFromSystem() + ".save", FileAccess.ModeFlags.Write);
+        string json = JsonConvert.SerializeObject(battleData, Formatting.Indented);
+        GD.Print(json);
+        saveFile.StoreLine(json);
     }
 }
