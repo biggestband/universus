@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://bidrib3fcmkfq"]
+[gd_scene load_steps=25 format=3 uid="uid://bidrib3fcmkfq"]
 
 [ext_resource type="Texture2D" uid="uid://qieor3wmtf55" path="res://Pngs/FlashMaterial.png" id="1_6l55g"]
+[ext_resource type="Script" path="res://Scripts/Vfx3D.gd" id="1_c7sx2"]
 [ext_resource type="Texture2D" uid="uid://cde0ytnqthhlr" path="res://Pngs/FlashMaterial2.png" id="2_e6g10"]
 [ext_resource type="Texture2D" uid="uid://d4do4a2s87nka" path="res://Pngs/FlashMaterial3.png" id="3_oqer6"]
 
@@ -129,7 +130,9 @@ scale_curve = SubResource("CurveTexture_taf7d")
 color = Color(3.5, 2, 0.8, 0.1)
 alpha_curve = SubResource("CurveTexture_d10r6")
 
-[node name="HitVFX" type="Node3D"]
+[node name="HitVFX" type="Node3D" node_paths=PackedStringArray("emitters")]
+script = ExtResource("1_c7sx2")
+emitters = [NodePath("Sparks"), NodePath("Flare"), NodePath("Flash"), NodePath("Shockwave")]
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0112891, 0.0294812, 0.000126541)

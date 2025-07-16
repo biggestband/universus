@@ -1,5 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://4gy2bbfqym7x"]
+[gd_scene load_steps=36 format=3 uid="uid://4gy2bbfqym7x"]
 
+[ext_resource type="Script" path="res://Scripts/Vfx3D.gd" id="1_87w8w"]
 [ext_resource type="Texture2D" uid="uid://cj0t7xony6e4r" path="res://Pngs/T_fl81_vfx.png" id="2_3136b"]
 [ext_resource type="Texture2D" uid="uid://cdga0j4g0dlx3" path="res://Pngs/T_basic1_vfx.PNG" id="3_mjt65"]
 
@@ -297,7 +298,9 @@ alpha_curve = SubResource("CurveTexture_5s648")
 [sub_resource type="QuadMesh" id="QuadMesh_wwfif"]
 size = Vector2(0.05, 0.3)
 
-[node name="Sparks" type="Node3D"]
+[node name="Sparks" type="Node3D" node_paths=PackedStringArray("emitters")]
+script = ExtResource("1_87w8w")
+emitters = [NodePath("Spark"), NodePath("Sparks2")]
 
 [node name="Spark" type="GPUParticles3D" parent="."]
 layers = 4

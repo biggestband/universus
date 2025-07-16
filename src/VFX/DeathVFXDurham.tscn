@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://b545553ktofi7"]
+[gd_scene load_steps=26 format=3 uid="uid://b545553ktofi7"]
 
 [ext_resource type="Texture2D" uid="uid://dn2h5g5b72hcr" path="res://Pngs/Flare00.PNG" id="1_aolwa"]
+[ext_resource type="Script" uid="uid://d2bxxlybjai3a" path="res://Scripts/Vfx3D.gd" id="1_yx6li"]
 [ext_resource type="Material" uid="uid://c2go1i1lu2m33" path="res://Shaders/DeathVFX.tres" id="2_yx6li"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifv6g"]
@@ -122,7 +123,9 @@ color_ramp = SubResource("GradientTexture1D_xrikd")
 
 [sub_resource type="QuadMesh" id="QuadMesh_imcdy"]
 
-[node name="DeathVfx" type="Node3D"]
+[node name="DeathVfx" type="Node3D" node_paths=PackedStringArray("emitters")]
+script = ExtResource("1_yx6li")
+emitters = [NodePath("Sparkks"), NodePath("Flash"), NodePath("Fire"), NodePath("Smoke")]
 
 [node name="Sparkks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_ifv6g")

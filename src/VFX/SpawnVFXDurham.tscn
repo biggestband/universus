@@ -1,5 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://bfpdnicmjm5on"]
+[gd_scene load_steps=37 format=3 uid="uid://bfpdnicmjm5on"]
 
+[ext_resource type="Script" path="res://Scripts/Vfx3D.gd" id="1_0mew3"]
 [ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://Pngs/T_PerlinNoise_Tiled.png" id="1_2agsy"]
 
 [sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_65xgl"]
@@ -329,7 +330,9 @@ color_ramp = SubResource("GradientTexture1D_rux5j")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ex5j0"]
 
-[node name="Spawn VFX" type="Node3D"]
+[node name="Spawn VFX" type="Node3D" node_paths=PackedStringArray("emitters")]
+script = ExtResource("1_0mew3")
+emitters = [NodePath("SpawnVFX")]
 
 [node name="SpawnVFX" type="GPUParticles3D" parent="."]
 material_override = SubResource("ShaderMaterial_ixvty")
