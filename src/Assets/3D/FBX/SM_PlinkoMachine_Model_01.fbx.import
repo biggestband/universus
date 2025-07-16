@@ -1,0 +1,75 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://xs3m3vvuq4ul"
+path="res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-0f6cd36bf0771375d71cb91a9cfb28a6.scn"
+
+[deps]
+
+source_file="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx"
+dest_files=["res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-0f6cd36bf0771375d71cb91a9cfb28a6.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=false
+meshes/create_shadow_meshes=false
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=false
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"materials": {
+"M_ColourPalette_Material_01": {
+"use_external/enabled": true,
+"use_external/path": "uid://bgayoep0vcbks"
+},
+"M_Emissive_Material_01": {
+"use_external/enabled": true,
+"use_external/path": "uid://d3vkn64cv7heg"
+},
+"M_Glass_Material_01": {
+"use_external/enabled": true,
+"use_external/path": "uid://b4me05yowposl"
+},
+"M_Metallic_Material_01": {
+"use_external/enabled": true,
+"use_external/path": "uid://54rbipl8538f"
+}
+},
+"meshes": {
+"SM_Plinko_Mesh_01": {
+"generate/lightmap_uv": 2,
+"generate/lods": 2,
+"generate/shadow_meshes": 2,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": false,
+"save_to_file/path": ""
+},
+"SM_Plinko_Mesh_01_002": {
+"generate/lightmap_uv": 2,
+"generate/lods": 2,
+"generate/shadow_meshes": 2,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": false,
+"save_to_file/path": ""
+}
+}
+}
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1

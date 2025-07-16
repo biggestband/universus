@@ -3,6 +3,7 @@ using Godot;
 public partial class BallHolder : Node2D {
     Tween tween;
     Ball[] balls;
+    bool active;
 
     [Export]
     float range = 100;
@@ -21,14 +22,15 @@ public partial class BallHolder : Node2D {
         tween = CreateTween().SetLoops().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Quad);
         tween.TweenProperty(this, "position:x", range, tweenTime).From(-range);
         tween.TweenProperty(this, "position:x", -range, tweenTime).From(range);
+        active = true;
     }
 
     public override void _Process(double delta) {
-        if (Input.IsActionPressed("BiggestButton")) {
-            tween.Kill();
-            foreach (var ball in balls) {
-                ball.Freeze = false;
-            }
+        if (!active || !Input.IsActionPressed("BiggestButton")) return;
+        tween.Kill();
+        foreach (var ball in balls) {
+            ball.Freeze = false;
         }
+        active = false;
     }
 }
