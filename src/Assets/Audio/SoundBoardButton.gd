@@ -2,34 +2,34 @@ extends Node2D
 
 #region SFX
 func _on_pressed() -> void:
-	AudioManager.play_sfx(AudioManager.SFX.Confetti)
+	AudioManager.playSFX.emit(AudioManager.SFX.Confetti)
 
 func _on_button_2_pressed() -> void:
-	AudioManager.play_sfx(AudioManager.SFX.DeathPoof)
+	AudioManager.playSFX.emit(AudioManager.SFX.DeathPoof)
 
 func _on_button_3_pressed() -> void:
-	AudioManager.play_sfx(AudioManager.SFX.PlinkoGameScoring)
+	AudioManager.playSFX.emit(AudioManager.SFX.PlinkoGameScoring)
 
 func _on_button_4_pressed() -> void:
-	AudioManager.play_sfx(AudioManager.SFX.PlinkoPeg)
+	AudioManager.playSFX.emit(AudioManager.SFX.PlinkoPeg)
 
 func _on_button_5_pressed() -> void:
-	AudioManager.play_sfx(AudioManager.SFX.Punch)
+	AudioManager.playSFX.emit(AudioManager.SFX.Punch)
 
 func _on_button_6_pressed() -> void:
-	AudioManager.play_sfx(AudioManager.SFX.SpawningTroop)
+	AudioManager.playSFX.emit(AudioManager.SFX.SpawningTroop)
 #endregion
 
 #region BGM
 func _on_BGM_button_pressed() -> void:
-	AudioManager.change_bgm(AudioManager.BGM.Plinko)
+	AudioManager.changeBGM.emit(AudioManager.BGM.Plinko)
 
 func _on_BGM_button_2_pressed() -> void:
-	AudioManager.change_bgm(AudioManager.BGM.NormalBattle)
+	AudioManager.changeBGM.emit(AudioManager.BGM.NormalBattle)
 
 func _on_BGM_button_3_pressed() -> void:
-	AudioManager.change_bgm(AudioManager.BGM.AmpedBattle)
+	AudioManager.changeBGM.emit(AudioManager.BGM.AmpedBattle)
 
 func _on_BGM_button_4_pressed() -> void:
-	AudioManager.toggle_bgm()
+	AudioManager.toggleBGM.emit()
 #endregion

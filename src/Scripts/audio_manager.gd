@@ -1,5 +1,11 @@
 extends Node
 
+# signals
+signal initAudioSystem
+signal changeBGM(song: BGM)
+signal playSFX(sound: SFX)
+signal toggleBGM
+
 # variables
 var backgroundMusicOn = false
 var currentSong
