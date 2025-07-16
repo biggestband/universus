@@ -1,12 +1,14 @@
 [gd_resource type="VisualShader" load_steps=42 format=3 uid="uid://cshvwo4k4laf6"]
 
+[ext_resource type="Texture2D" uid="uid://beb0pkhju3yep" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="1_ukw3y"]
+[ext_resource type="Texture2D" uid="uid://5gw8ali1jk4j" path="res://Assets/3D/Textures/T_PlinkoMachine_Bake_06.png" id="2_3nrba"]
+[ext_resource type="Texture2D" uid="uid://dmamcqkgemjip" path="res://Assets/3D/Textures/T_UniVersusColorPalette_basecolor.png" id="3_p1hu4"]
+[ext_resource type="Texture2D" uid="uid://cjvt4oeyq1thn" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png" id="4_yq65h"]
+
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_21xbi"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p80dy"]
-load_path = "res://.godot/imported/T_PlinkoMachineMaps_basecolor.png-295795114fe85f8d81c13ef9829962ee.s3tc.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_874ga"]
-texture = SubResource("CompressedTexture2D_p80dy")
+texture = ExtResource("1_ukw3y")
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_shffj"]
 default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0.1, 0.1, 0.1)]
@@ -57,17 +59,11 @@ parameter_name = "LightmapColour"
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ukw3y"]
 input_name = "uv"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gjjvj"]
-load_path = "res://.godot/imported/T_PlinkoMachine_Bake_06.png-29f8ff50897f46fb91ebe26d80fe0e6b.s3tc.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3nrba"]
-texture = SubResource("CompressedTexture2D_gjjvj")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2xiw0"]
-load_path = "res://.godot/imported/T_UniVersusColorPalette_basecolor.png-000ac40a8d33a9b25f8ec224d00d0e19.s3tc.ctex"
+texture = ExtResource("2_3nrba")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gc6ks"]
-texture = SubResource("CompressedTexture2D_2xiw0")
+texture = ExtResource("3_p1hu4")
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_d1abg"]
 operator = 2
@@ -98,12 +94,9 @@ constant = 1.0
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_kcgt3"]
 constant = 0.3
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_owgm8"]
-load_path = "res://.godot/imported/T_PlinkoMachineMaps_normal.png-1da6ecd4e9e83e69cbb4f0ec961d47b4.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8jrsg"]
 output_port_for_preview = 0
-texture = SubResource("CompressedTexture2D_owgm8")
+texture = ExtResource("4_yq65h")
 texture_type = 2
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_h10je"]
@@ -301,8 +294,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1432.48, -586.833)
-nodes/fragment/-1/position = Vector2(0, 0)
 nodes/fragment/0/position = Vector2(2000, -220)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_gc6ks")
 nodes/fragment/2/position = Vector2(-1220, -440)

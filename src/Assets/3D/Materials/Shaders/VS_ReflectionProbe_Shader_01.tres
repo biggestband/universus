@@ -1,10 +1,9 @@
 [gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://ke0u1dg2xdoo"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yaerk"]
-load_path = "res://.godot/imported/royal_esplanade_2k.hdr-822ea9fbe5b1b37cb6ace136b25e5dc5.ctex"
+[ext_resource type="Texture2D" uid="uid://bjhbd6ajulh5p" path="res://Assets/3D/Lighting/HDRIs/royal_esplanade_2k.hdr" id="1_bdla5"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_c5rv7"]
-texture = SubResource("CompressedTexture2D_yaerk")
+texture = ExtResource("1_bdla5")
 
 [resource]
 code = "shader_type spatial;
@@ -25,7 +24,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-791, -398)
 modes/cull = 1
 flags/unshaded = true
 flags/fog_disabled = true
