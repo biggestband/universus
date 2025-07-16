@@ -24,12 +24,12 @@ default_input_values = [0, 2.0, 1, 1.0, 2, 0.0]
 linked_parent_graph_frame = 85
 op_type = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_owgm8"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0oy23"]
 load_path = "res://.godot/imported/royal_esplanade_2k.hdr-822ea9fbe5b1b37cb6ace136b25e5dc5.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ij6xl"]
 linked_parent_graph_frame = 85
-texture = SubResource("CompressedTexture2D_owgm8")
+texture = SubResource("CompressedTexture2D_0oy23")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_n8a3g"]
@@ -114,7 +114,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 
 
 "
-graph_offset = Vector2(-1174.45, -457.545)
+graph_offset = Vector2(-1520.45, -600.545)
 nodes/fragment/45/position = Vector2(0, 0)
 nodes/fragment/51/position = Vector2(0, 0)
 nodes/fragment/85/position = Vector2(0, 0)

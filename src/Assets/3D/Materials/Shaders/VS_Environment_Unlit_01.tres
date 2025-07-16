@@ -1,17 +1,10 @@
 [gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://dy3uaex154icp"]
 
-<<<<<<< Updated upstream
-[ext_resource type="Texture2D" uid="uid://bhxuil1ibce85" path="res://assets/3D/Textures/T_UniVersusColorPalette_basecolor.png" id="1_tb3e1"]
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_1wd4u"]
-texture = ExtResource("1_tb3e1")
-=======
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8k6jc"]
 load_path = "res://.godot/imported/T_UniVersusColorPalette_basecolor.png-000ac40a8d33a9b25f8ec224d00d0e19.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_1wd4u"]
 texture = SubResource("CompressedTexture2D_8k6jc")
->>>>>>> Stashed changes
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_nurp7"]
@@ -200,10 +193,7 @@ void light() {
 
 }
 "
-<<<<<<< Updated upstream
-=======
-graph_offset = Vector2(-1603.1, -154.2)
->>>>>>> Stashed changes
+graph_offset = Vector2(-1589.1, -329.2)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_1wd4u")
 nodes/fragment/2/position = Vector2(-560, 20)
 nodes/fragment/3/node = SubResource("VisualShaderNodeInput_nurp7")

@@ -1,17 +1,10 @@
 [gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://ke0u1dg2xdoo"]
 
-<<<<<<< Updated upstream
-[ext_resource type="Texture2D" uid="uid://ir4obc304shg" path="res://assets/3D/Lighting/HDRIs/royal_esplanade_2k.hdr" id="1_40xbs"]
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_c5rv7"]
-texture = ExtResource("1_40xbs")
-=======
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yaerk"]
 load_path = "res://.godot/imported/royal_esplanade_2k.hdr-822ea9fbe5b1b37cb6ace136b25e5dc5.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_c5rv7"]
 texture = SubResource("CompressedTexture2D_yaerk")
->>>>>>> Stashed changes
 
 [resource]
 code = "shader_type spatial;
@@ -32,10 +25,7 @@ void fragment() {
 
 }
 "
-<<<<<<< Updated upstream
-=======
 graph_offset = Vector2(-791, -398)
->>>>>>> Stashed changes
 modes/cull = 1
 flags/unshaded = true
 flags/fog_disabled = true

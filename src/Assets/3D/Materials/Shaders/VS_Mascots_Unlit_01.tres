@@ -192,11 +192,7 @@ void light() {
 
 }
 "
-<<<<<<< Updated upstream
-graph_offset = Vector2(-435, -318)
-=======
 graph_offset = Vector2(-1664, -236.837)
->>>>>>> Stashed changes
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_1wd4u")
 nodes/fragment/2/position = Vector2(-560, 20)
 nodes/fragment/3/node = SubResource("VisualShaderNodeInput_nurp7")
