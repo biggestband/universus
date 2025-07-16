@@ -7,11 +7,10 @@ var _unitStartingPositions: PackedVector2Array
 var _unitPositions: PackedVector2Array
 var _prevUnitPositions: PackedVector2Array
 var _unitNodes: Array[Unit]
-var _activeNodeIDs: Array[int]
 
 # Simulation variables
 const _maxUnitsPerTeam: int = 32
-const partitionTick: float = 4
+const partitionTick: float = .2
 
 # Movement scalars
 const _unitRotSpeed: float = .5
@@ -73,8 +72,6 @@ func _initUnitPool() -> void:
 		_requestUnit(true)
 	for u in armyBStartSize:
 		_requestUnit(false)
-	
-	print(_activeNodeIDs.size())
 
 #region Extensions
 
@@ -152,15 +149,12 @@ func _requestUnit(isTeamA: bool) -> void:
 				_armyAActiveUnits += 1
 			else: 
 				_armyBActiveUnits += 1
-
-			_activeNodeIDs.push_back(nodeID)
 			break
 
 # Resets a unit node and adds them back to the pool
 func _resetUnit(id: int) -> void:
 	var unitNode: Unit = _unitNodes[id]
 	unitNode.ResetNode()
-	_activeNodeIDs.erase(id)
 	
 	# Reset nodes position data and return to pool
 	var startPos: Vector2 = _unitStartingPositions[id]
@@ -197,7 +191,7 @@ func _stepUnitTargets(delta: float):
 	tickTimer += delta
 	if tickTimer > partitionTick:
 		# Only update units in the current partition
-		for n: int in _activeNodeIDs:
+		for n: int in _unitPositions.size():
 			
 			if(!_isUnitSimulated(n)):
 				continue
@@ -280,17 +274,19 @@ func _findClosestTarget(unitID: int) -> int:
 	var minDistance: float = INF
 	var instegatorNode: Unit = _unitNodes[unitID]
 	
-	for targetID in _activeNodeIDs:
+	for targetID in _unitPositions.size():
+		var targetNode: Unit = _unitNodes[targetID]
+		
 		# Ignore units that are not simulated or on the same team
-		var sameTeam: bool = instegatorNode.IsArmyA() != _unitNodes[targetID].IsArmyA()
-		if(!_isUnitSimulated(targetID) || sameTeam):
+		var sameTeam: bool = instegatorNode.IsArmyA() == targetNode.IsArmyA()
+		if(!_isUnitSimulated(targetNode.GetTargetID()) || sameTeam):
 			continue
 		
 		# Find squared dist to potential target
-		var dist_sq: float = _unitPositions[unitID].distance_squared_to(_unitPositions[targetID])
+		var dist_sq: float = _unitPositions[unitID].distance_squared_to(_unitPositions[targetNode])
 		if dist_sq < minDistance:
 			minDistance = dist_sq
-			closestUnit = targetID
+			closestUnit = targetNode.GetTargetID()
 	
 	return closestUnit
 
