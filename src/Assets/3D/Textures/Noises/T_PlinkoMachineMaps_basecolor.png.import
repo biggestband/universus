@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chseits8ywk16"
-path.s3tc="res://.godot/imported/T_PlinkoMachineMaps_basecolor.png-95b509f3bd4a469b64505e6dd1a9a743.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_PlinkoMachineMaps_basecolor.png-295795114fe85f8d81c13ef9829962ee.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png"
-dest_files=["res://.godot/imported/T_PlinkoMachineMaps_basecolor.png-95b509f3bd4a469b64505e6dd1a9a743.s3tc.ctex"]
+source_file="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png"
+dest_files=["res://.godot/imported/T_PlinkoMachineMaps_basecolor.png-295795114fe85f8d81c13ef9829962ee.s3tc.ctex"]
 
 [params]
 
