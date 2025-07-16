@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://df5vh55flwbvp"]
+
+[ext_resource type="PackedScene" uid="uid://c716qq73f6jg0" path="res://Assets/3D/FBX/SM_PlinkoBall_Model_01.fbx" id="1_gwdqq"]
+[ext_resource type="PackedScene" uid="uid://dpshft7gh1ec4" path="res://Assets/3D/FBX/SM_Peg_Model_01.fbx" id="1_o4qib"]
+[ext_resource type="PackedScene" uid="uid://dwemxhsfjril6" path="res://Assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="2_gwdqq"]
+[ext_resource type="PackedScene" uid="uid://cbejppxbinapl" path="res://Prefabs/reflections.tscn" id="3_pwivi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gwdqq"]
+radius = 0.10161
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gwdqq"]
+radius = 0.011305
+height = 0.058663
+
+[node name="Node3D" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75, 2.294, 0)
+gravity_scale = 0.1
+
+[node name="SM_PlinkoBall_Model_01" parent="RigidBody3D" instance=ExtResource("1_gwdqq")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_gwdqq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75, 1.575, 0)
+
+[node name="SM_Peg_Model_01" parent="StaticBody3D" instance=ExtResource("1_o4qib")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.0266416)
+shape = SubResource("CapsuleShape3D_gwdqq")
+
+[node name="SM_PlinkoMachine_Model_01" parent="." instance=ExtResource("2_gwdqq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0175669, 1.19209e-07, 0.0343075)
+
+[node name="Reflection" parent="." instance=ExtResource("3_pwivi")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.78823, 2.25028, 1.30749)
