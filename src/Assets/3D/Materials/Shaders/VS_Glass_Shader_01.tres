@@ -1,7 +1,11 @@
+<<<<<<< Updated upstream
 [gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://dx1dym0jnne8f"]
 
 [ext_resource type="Texture2D" uid="uid://c25yv7nqfgb6m" path="res://assets/3D/Textures/Noises/T_DirtNoise_Large_01.tres" id="1_xt1gr"]
 [ext_resource type="Texture2D" uid="uid://do18oy0fd5m7k" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png" id="2_f7i3t"]
+=======
+[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://dx1dym0jnne8f"]
+>>>>>>> Stashed changes
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_f7i3t"]
 constant = 2.0
@@ -18,9 +22,28 @@ constant = Color(0.775063, 0.775063, 0.775063, 1)
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_jgo8w"]
 constant = Color(0.255659, 0.255659, 0.255659, 1)
 
+<<<<<<< Updated upstream
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ggmhd"]
 output_port_for_preview = 0
 texture = ExtResource("1_xt1gr")
+=======
+[sub_resource type="Gradient" id="Gradient_v0vk8"]
+offsets = PackedFloat32Array(0.213559, 0.630508)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5q7hh"]
+noise_type = 3
+frequency = 0.0445
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nu7ai"]
+seamless = true
+color_ramp = SubResource("Gradient_v0vk8")
+noise = SubResource("FastNoiseLite_5q7hh")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ggmhd"]
+output_port_for_preview = 0
+texture = SubResource("NoiseTexture2D_nu7ai")
+>>>>>>> Stashed changes
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ydc4n"]
 input_name = "uv2"
@@ -29,9 +52,18 @@ input_name = "uv2"
 
 [sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_5idwp"]
 
+<<<<<<< Updated upstream
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3irvs"]
 output_port_for_preview = 0
 texture = ExtResource("2_f7i3t")
+=======
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_irjl1"]
+load_path = "res://.godot/imported/T_PlinkoMachineMaps_normal.png-1da6ecd4e9e83e69cbb4f0ec961d47b4.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3irvs"]
+output_port_for_preview = 0
+texture = SubResource("CompressedTexture2D_irjl1")
+>>>>>>> Stashed changes
 texture_type = 2
 
 [resource]
@@ -98,6 +130,10 @@ void fragment() {
 
 }
 "
+<<<<<<< Updated upstream
+=======
+graph_offset = Vector2(-1640.89, -401.427)
+>>>>>>> Stashed changes
 nodes/fragment/0/position = Vector2(520, 140)
 nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_jgo8w")
 nodes/fragment/2/position = Vector2(20, 200)

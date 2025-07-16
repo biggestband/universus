@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 [gd_resource type="VisualShader" load_steps=66 format=3 uid="uid://bos2icgng1u3p"]
 
 [ext_resource type="Texture2D" uid="uid://chseits8ywk16" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="1_1h43u"]
@@ -10,6 +11,17 @@
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_874ga"]
 texture = ExtResource("1_1h43u")
+=======
+[gd_resource type="VisualShader" load_steps=42 format=3 uid="uid://bos2icgng1u3p"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_21xbi"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p80dy"]
+load_path = "res://.godot/imported/T_PlinkoMachineMaps_basecolor.png-295795114fe85f8d81c13ef9829962ee.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_874ga"]
+texture = SubResource("CompressedTexture2D_p80dy")
+>>>>>>> Stashed changes
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_shffj"]
 default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0.1, 0.1, 0.1)]
@@ -60,11 +72,25 @@ parameter_name = "LightmapColour"
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ukw3y"]
 input_name = "uv"
 
+<<<<<<< Updated upstream
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3nrba"]
 texture = ExtResource("2_1h43u")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gc6ks"]
 texture = ExtResource("1_6m6eo")
+=======
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gjjvj"]
+load_path = "res://.godot/imported/T_PlinkoMachine_Bake_06.png-29f8ff50897f46fb91ebe26d80fe0e6b.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3nrba"]
+texture = SubResource("CompressedTexture2D_gjjvj")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2xiw0"]
+load_path = "res://.godot/imported/T_UniVersusColorPalette_basecolor.png-000ac40a8d33a9b25f8ec224d00d0e19.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gc6ks"]
+texture = SubResource("CompressedTexture2D_2xiw0")
+>>>>>>> Stashed changes
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_d1abg"]
 operator = 2
@@ -80,6 +106,7 @@ constant = 1.1
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_6m6eo"]
 
+<<<<<<< Updated upstream
 [sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_aqqvp"]
 linked_parent_graph_frame = 45
 
@@ -205,6 +232,29 @@ op_type = 0
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8jrsg"]
 output_port_for_preview = 0
 texture = ExtResource("6_wm8us")
+=======
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_gc6ks"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_dkhg1"]
+input_name = "uv2"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_ojgdu"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_d1abg"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_kcgt3"]
+constant = 0.3
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xmv5v"]
+load_path = "res://.godot/imported/T_PlinkoMachineMaps_normal.png-1da6ecd4e9e83e69cbb4f0ec961d47b4.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8jrsg"]
+output_port_for_preview = 0
+texture = SubResource("CompressedTexture2D_xmv5v")
+>>>>>>> Stashed changes
 texture_type = 2
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_h10je"]
@@ -402,7 +452,12 @@ void fragment() {
 
 }
 "
+<<<<<<< Updated upstream
 graph_offset = Vector2(-1333.17, 356.635)
+=======
+graph_offset = Vector2(-732.2, -855.398)
+nodes/fragment/-1/position = Vector2(0, 0)
+>>>>>>> Stashed changes
 nodes/fragment/0/position = Vector2(2000, -220)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_gc6ks")
 nodes/fragment/2/position = Vector2(-1220, -440)
@@ -436,6 +491,7 @@ nodes/fragment/26/node = SubResource("VisualShaderNodeFloatConstant_3nrba")
 nodes/fragment/26/position = Vector2(-280, -220)
 nodes/fragment/29/node = SubResource("VisualShaderNodeFloatConstant_p1hu4")
 nodes/fragment/29/position = Vector2(-620, 1000)
+<<<<<<< Updated upstream
 nodes/fragment/37/node = SubResource("VisualShaderNodeVectorFunc_aqqvp")
 nodes/fragment/37/position = Vector2(-2600, -2200)
 nodes/fragment/38/node = SubResource("VisualShaderNodeInput_1h43u")
@@ -504,6 +560,8 @@ nodes/fragment/90/node = SubResource("VisualShaderNodeVectorCompose_8w48k")
 nodes/fragment/90/position = Vector2(-1340, -1380)
 nodes/fragment/91/node = SubResource("VisualShaderNodeVectorOp_kv0iw")
 nodes/fragment/91/position = Vector2(1020, -740)
+=======
+>>>>>>> Stashed changes
 nodes/fragment/92/node = SubResource("VisualShaderNodeTexture_8jrsg")
 nodes/fragment/92/position = Vector2(834.926, 261.824)
 nodes/fragment/93/node = SubResource("VisualShaderNodeInput_h10je")
@@ -546,4 +604,8 @@ nodes/fragment/116/node = SubResource("VisualShaderNodeFloatParameter_874ga")
 nodes/fragment/116/position = Vector2(-1960, -140)
 nodes/fragment/117/node = SubResource("VisualShaderNodeVectorCompose_20jsj")
 nodes/fragment/117/position = Vector2(-1680, -140)
+<<<<<<< Updated upstream
 nodes/fragment/connections = PackedInt32Array(4, 0, 7, 0, 2, 0, 10, 0, 14, 0, 13, 1, 8, 0, 0, 4, 17, 0, 13, 0, 6, 0, 17, 0, 13, 0, 24, 0, 9, 0, 0, 3, 2, 0, 22, 0, 26, 0, 22, 1, 49, 0, 50, 0, 38, 0, 41, 0, 41, 0, 37, 0, 74, 0, 75, 0, 75, 0, 77, 0, 78, 0, 77, 1, 77, 0, 81, 1, 82, 0, 81, 0, 81, 0, 64, 0, 64, 0, 83, 0, 84, 0, 83, 1, 83, 0, 89, 0, 87, 0, 89, 1, 90, 0, 75, 1, 89, 0, 91, 0, 94, 0, 97, 0, 97, 0, 99, 0, 98, 0, 97, 1, 99, 0, 100, 0, 22, 0, 0, 0, 92, 0, 106, 0, 107, 0, 0, 9, 106, 1, 107, 1, 106, 0, 107, 0, 93, 0, 92, 0, 106, 2, 108, 0, 109, 0, 108, 1, 108, 0, 0, 10, 96, 0, 99, 1, 10, 0, 4, 0, 7, 0, 0, 5, 24, 0, 7, 1, 110, 0, 4, 1, 112, 0, 102, 1, 104, 0, 113, 1, 100, 0, 113, 0, 113, 0, 102, 0, 102, 0, 10, 1, 114, 0, 0, 2, 15, 0, 115, 0, 115, 0, 2, 0, 117, 0, 115, 1, 116, 0, 117, 0, 29, 0, 24, 1)
+=======
+nodes/fragment/connections = PackedInt32Array(4, 0, 7, 0, 2, 0, 10, 0, 14, 0, 13, 1, 8, 0, 0, 4, 17, 0, 13, 0, 6, 0, 17, 0, 13, 0, 24, 0, 9, 0, 0, 3, 2, 0, 22, 0, 26, 0, 22, 1, 94, 0, 97, 0, 97, 0, 99, 0, 98, 0, 97, 1, 99, 0, 100, 0, 22, 0, 0, 0, 92, 0, 106, 0, 107, 0, 0, 9, 106, 1, 107, 1, 106, 0, 107, 0, 93, 0, 92, 0, 106, 2, 108, 0, 109, 0, 108, 1, 108, 0, 0, 10, 96, 0, 99, 1, 10, 0, 4, 0, 7, 0, 0, 5, 24, 0, 7, 1, 110, 0, 4, 1, 112, 0, 102, 1, 104, 0, 113, 1, 100, 0, 113, 0, 113, 0, 102, 0, 102, 0, 10, 1, 114, 0, 0, 2, 15, 0, 115, 0, 115, 0, 2, 0, 117, 0, 115, 1, 116, 0, 117, 0, 29, 0, 24, 1)
+>>>>>>> Stashed changes

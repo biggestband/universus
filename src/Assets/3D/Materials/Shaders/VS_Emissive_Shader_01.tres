@@ -160,7 +160,11 @@ void fragment() {
 
 }
 "
+<<<<<<< Updated upstream
 graph_offset = Vector2(-2155.53, -1084.69)
+=======
+graph_offset = Vector2(-1808.5, 104.312)
+>>>>>>> Stashed changes
 modes/specular = 2
 flags/unshaded = true
 varyings/PegEmission = "0,0"
