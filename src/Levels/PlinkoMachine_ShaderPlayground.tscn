@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://drrm4mva7g5o8"]
 
-[ext_resource type="PackedScene" uid="uid://xs3m3vvuq4ul" path="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_73add"]
-[ext_resource type="Material" uid="uid://3t4cnwm18p6o" path="res://assets/3D/Materials/M_ReflectionProbe_Material_01.tres" id="2_ju1wm"]
-[ext_resource type="PackedScene" uid="uid://kbf2g21sf334" path="res://assets/3D/FBX/SM_Peg_Model_01.fbx" id="3_wlj6p"]
-[ext_resource type="Material" uid="uid://bdy63ayvmn0x5" path="res://assets/3D/Materials/M_DCEmissive_Material_01.tres" id="4_8w05h"]
-[ext_resource type="PackedScene" uid="uid://c0jaifjejo5a0" path="res://assets/3D/FBX/SM_PlinkoBall_Model_01.fbx" id="4_b4nkp"]
-[ext_resource type="Material" uid="uid://341fsq0eieyx" path="res://assets/3D/Materials/M_DCColourPalette_Material_01.tres" id="5_7ej64"]
-[ext_resource type="PackedScene" uid="uid://hj8eqs6our68" path="res://assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx" id="5_b4nkp"]
+[ext_resource type="PackedScene" uid="uid://dwemxhsfjril6" path="res://Assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_73add"]
+[ext_resource type="Material" uid="uid://3t4cnwm18p6o" path="res://Assets/3D/Materials/M_ReflectionProbe_Material_01.tres" id="2_ju1wm"]
+[ext_resource type="PackedScene" uid="uid://dpshft7gh1ec4" path="res://Assets/3D/FBX/SM_Peg_Model_01.fbx" id="3_wlj6p"]
+[ext_resource type="Material" uid="uid://bdy63ayvmn0x5" path="res://Assets/3D/Materials/M_DCEmissive_Material_01.tres" id="4_8w05h"]
+[ext_resource type="PackedScene" uid="uid://c716qq73f6jg0" path="res://Assets/3D/FBX/SM_PlinkoBall_Model_01.fbx" id="4_b4nkp"]
+[ext_resource type="Material" uid="uid://341fsq0eieyx" path="res://Assets/3D/Materials/M_DCColourPalette_Material_01.tres" id="5_7ej64"]
+[ext_resource type="PackedScene" uid="uid://chbrnxb41i65c" path="res://Assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx" id="5_b4nkp"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dj0uy"]
 
@@ -24,7 +24,6 @@ adjustment_enabled = true
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7ej64"]
 
 [sub_resource type="CompressedTexture2DArray" id="CompressedTexture2DArray_b4nkp"]
-load_path = "res://.godot/imported/PlinkoMachine_ShaderPlayground.exr-9c9700da5339eb13fe45f6b3c7d47cab.bptc.ctexarray"
 
 [sub_resource type="LightmapGIData" id="LightmapGIData_8w05h"]
 lightmap_textures = Array[TextureLayered]([SubResource("CompressedTexture2DArray_b4nkp")])
