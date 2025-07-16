@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://xa27wc42cle6"]
+[gd_scene load_steps=15 format=3 uid="uid://xa27wc42cle6"]
 
 [ext_resource type="PackedScene" uid="uid://xs3m3vvuq4ul" path="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_73add"]
 [ext_resource type="Material" uid="uid://3t4cnwm18p6o" path="res://assets/3D/Materials/M_ReflectionProbe_Material_01.tres" id="2_ju1wm"]
+[ext_resource type="Script" uid="uid://c62qfamwny8ft" path="res://assets/3D/Scripts/MeshInstancer.gd" id="3_8w05h"]
 [ext_resource type="Material" uid="uid://bdy63ayvmn0x5" path="res://assets/3D/Materials/M_DCEmissive_Material_01.tres" id="4_8w05h"]
 [ext_resource type="Material" uid="uid://341fsq0eieyx" path="res://assets/3D/Materials/M_DCColourPalette_Material_01.tres" id="5_7ej64"]
 [ext_resource type="Material" uid="uid://54rbipl8538f" path="res://assets/3D/Materials/M_Metallic_Material_01.tres" id="6_5mrtw"]
@@ -48,6 +49,7 @@ size = Vector3(10, 7.03, 10)
 origin_offset = Vector3(0, 0.25, 0)
 box_projection = true
 interior = true
+ambient_mode = 0
 
 [node name="RP_Skydome_Mesh_01" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.199797, 0, 0, 0, 0.199796, 0, 0, 0, 0.199797, 0.005, 0.25, -0.000991568)
@@ -71,6 +73,22 @@ light_data = SubResource("LightmapGIData_8w05h")
 
 [node name="SM_PlinkoMachine_Model_01" parent="." instance=ExtResource("1_73add")]
 
+[node name="SM_Plinko_Mesh_01" parent="SM_PlinkoMachine_Model_01" index="0"]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0)
+
+[node name="GP_PlinkoPieces_Group_01_002" parent="SM_PlinkoMachine_Model_01/SM_Plinko_Mesh_01" index="0"]
+script = ExtResource("3_8w05h")
+
+[node name="SM_Peg_Instance_01" parent="SM_PlinkoMachine_Model_01/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="0"]
+instance_shader_parameters/null = 0.0
+instance_shader_parameters/null1 = 0.0
+instance_shader_parameters/null2 = 0.0
+instance_shader_parameters/peg_brightness = 0.0
+instance_shader_parameters/peg_emission = 1.0
+instance_shader_parameters/peg_size = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="SM_PlinkoMachine_Model_01/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="90"]
+
 [node name="SM_PlinkoMachine_Model_02" parent="." instance=ExtResource("1_73add")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43192, 0, 0)
 
@@ -78,8 +96,278 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43192, 0, 0)
 surface_material_override/1 = ExtResource("4_8w05h")
 surface_material_override/3 = ExtResource("5_7ej64")
 
+[node name="SM_Peg_Instance_01" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="0"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_001" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="1"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_002" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="2"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_003" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="3"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_004" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="4"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_005" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="5"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_006" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="6"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_007" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="7"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_008" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="8"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_009" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="9"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_010" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="10"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_011" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="11"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_012" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="12"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_013" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="13"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_014" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="14"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_015" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="15"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_016" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="16"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_017" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="17"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_018" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="18"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_019" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="19"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_020" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="20"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_021" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="21"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_022" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="22"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_023" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="23"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_024" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="24"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_025" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="25"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_026" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="26"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_027" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="27"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_028" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="28"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_029" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="29"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_030" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="30"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_031" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="31"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_032" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="32"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_033" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="33"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_034" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="34"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_035" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="35"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_036" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="36"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_037" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="37"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_038" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="38"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_039" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="39"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_040" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="40"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_041" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="41"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_042" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="42"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_043" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="43"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_044" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="44"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_045" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="45"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_046" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="46"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_047" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="47"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_048" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="48"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_049" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="49"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_050" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="50"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_051" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="51"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_052" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="52"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_053" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="53"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_054" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="54"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_055" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="55"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_056" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="56"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_057" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="57"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_058" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="58"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_059" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="59"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_060" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="60"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_061" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="61"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_062" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="62"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_063" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="63"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_064" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="64"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_065" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="65"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_066" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="66"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_067" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="67"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_068" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="68"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_069" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="69"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_070" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="70"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_071" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="71"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_072" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="72"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_073" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="73"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_074" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="74"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_075" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="75"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_076" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="76"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_077" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="77"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_078" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="78"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_079" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="79"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_080" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="80"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_081" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="81"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_082" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="82"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_083" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="83"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_084" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="84"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_085" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="85"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_086" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="86"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_087" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="87"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_088" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="88"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
+[node name="SM_Peg_Instance_01_089" parent="SM_PlinkoMachine_Model_02/SM_Plinko_Mesh_01/GP_PlinkoPieces_Group_01_002" index="89"]
+surface_material_override/1 = ExtResource("4_8w05h")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.575342, 0, 0, 0, 0.575342, 0, 0, 0, 0.575342, -1.63492, 2.16545, -0.176188)
+transform = Transform3D(0.047761, 0, 0, 0, 0.047761, 0, 0, 0, 0.047761, -0.028055, 2.21858, -0.176188)
 material_override = ExtResource("6_5mrtw")
 mesh = SubResource("SphereMesh_b4nkp")
 

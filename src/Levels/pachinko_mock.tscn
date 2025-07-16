@@ -5,11 +5,11 @@
 [ext_resource type="Script" uid="uid://mnnxl1j7bwy7" path="res://Scripts/Restarter.cs" id="3_bs7w1"]
 [ext_resource type="Script" uid="uid://olh6s7hhmjlp" path="res://Scripts/BallHolder.cs" id="3_rc3no"]
 [ext_resource type="PackedScene" uid="uid://bwdqmoopixmik" path="res://Prefabs/ball.tscn" id="4_bs7w1"]
-[ext_resource type="Script" path="res://Scripts/ScoreManager.cs" id="4_oxjyi"]
+[ext_resource type="Script" uid="uid://bvwkdmcspwu2y" path="res://Scripts/ScoreManager.cs" id="4_oxjyi"]
 [ext_resource type="PackedScene" uid="uid://b7rmsfy01hvyy" path="res://Prefabs/killzone.tscn" id="5_dn3v3"]
-[ext_resource type="Script" path="res://Scripts/ScoreText.cs" id="8_oxjyi"]
-[ext_resource type="Script" path="res://Scripts/HighscoreText.cs" id="9_vqhnx"]
-[ext_resource type="Script" path="res://Scripts/LandingRegion.cs" id="10_32jtq"]
+[ext_resource type="Script" uid="uid://drhvbk4j4b65t" path="res://Scripts/ScoreText.cs" id="8_oxjyi"]
+[ext_resource type="Script" uid="uid://dalxnqq33ph8s" path="res://Scripts/HighscoreText.cs" id="9_vqhnx"]
+[ext_resource type="Script" uid="uid://cpifuqhrmnvyh" path="res://Scripts/LandingRegion.cs" id="10_32jtq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ax1vs"]
 
@@ -474,11 +474,11 @@ shape = SubResource("RectangleShape2D_dn3v3")
 position = Vector2(-4, 276)
 collision_mask = 2
 script = ExtResource("10_32jtq")
+text = NodePath("Node2D/RichTextLabel")
+textMovePosition = NodePath("../Ball Holder")
 Height = 102.22
 Width = 294.0
 snapDistance = 10.0
-text = NodePath("Node2D/RichTextLabel")
-textMovePosition = NodePath("../Ball Holder")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Landing Region"]

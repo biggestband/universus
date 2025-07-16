@@ -5,4 +5,3 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_xxm64")
-shader_parameter/Albedo = Color(0.18359, 0.18359, 0.18359, 1)
