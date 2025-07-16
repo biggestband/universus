@@ -6,7 +6,7 @@ var currentSong
 
 # enums
 enum BGM { Plinko, NormalBattle, AmpedBattle }
-enum SFX { PlinkoPeg, PlinkoGameScoring, SpawningTroop, Punch, DeathPoof }
+enum SFX { PlinkoPeg, PlinkoGameScoring, SpawningTroop, Punch, DeathPoof, Confetti }
 
 # audio Busses
 var master_bus
@@ -17,47 +17,35 @@ var sfx_bus
 @export var backgroundMusic: Dictionary[BGM, AudioStreamPlayer]
 @export var soundEffects: Dictionary[SFX, AudioStreamPlayer]
 
-func _ready():	
-	init_audio_system()
-	
-	# temp testing
-	toggle_bgm()
-	change_bgm(BGM.Plinko)
-
+# call this function to get the audio busses
 func init_audio_system():
 	master_bus = AudioServer.get_bus_index("Master")
 	music_bus = AudioServer.get_bus_index("Music")
 	sfx_bus = AudioServer.get_bus_index("SFX")
 	
 func _process(delta):
-	
-	# for temp debug
-	if Input.is_action_just_pressed("LeftMouse"):
-		play_sfx(SFX.Punch)
-		
-		#AudioServer.set_bus_mute(music_bus, true)
-		
-		change_bgm(BGM.NormalBattle)
+	handle_bgm_change()
 
 # enable/disable background music
 func toggle_bgm():
 	backgroundMusicOn = !backgroundMusicOn
 
-# switch between background music tracks
-func change_bgm(song: BGM):
-	# stops current playing song
-	if currentSong != null:
+# handles music toggle logic
+func handle_bgm_change():
+	if currentSong == null:
+		return
+	if backgroundMusicOn:
+		if !currentSong.playing:
+			currentSong.play()
+	else:
 		currentSong.stop()
 
-	var musicPlayer := backgroundMusic[song]
+# switch between background music tracks
+func change_bgm(song: BGM):
+	if currentSong != null:
+		currentSong.stop()
+		
 	currentSong	= backgroundMusic[song]
-	
-	# handles music toggle logic
-	if backgroundMusicOn:
-		if !musicPlayer.playing:
-			musicPlayer.play()
-	else:
-		musicPlayer.stop()
 
 # plays sound effect
 func play_sfx(sound: SFX):

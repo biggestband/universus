@@ -1,0 +1,129 @@
+[gd_scene load_steps=2 format=3 uid="uid://l70pc005qy8p"]
+
+[ext_resource type="Script" uid="uid://dn5xekuj2gt5p" path="res://Assets/Audio/SoundBoardButton.gd" id="1_3lw8g"]
+
+[node name="SoundBoard" type="Node2D"]
+script = ExtResource("1_3lw8g")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_top = 190.0
+offset_right = 1080.0
+offset_bottom = 451.0
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[wave freq=8 amp=48] Background Music"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BGM Layout" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 434.0
+offset_right = -22.0
+offset_bottom = -1249.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/BGM Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Plinko Theme"
+icon_alignment = 1
+
+[node name="Button2" type="Button" parent="CanvasLayer/BGM Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Normal Battle"
+icon_alignment = 1
+
+[node name="Button3" type="Button" parent="CanvasLayer/BGM Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Amped Battle"
+icon_alignment = 1
+
+[node name="Button4" type="Button" parent="CanvasLayer/BGM Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Toggle BGM"
+icon_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+offset_top = 866.0
+offset_right = 1080.0
+offset_bottom = 1127.0
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[wave freq=8 amp=48] Sound Effects"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFX Layout" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 140.0
+offset_top = 1114.0
+offset_right = -145.0
+offset_bottom = -443.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/SFX Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Confetti"
+icon_alignment = 1
+
+[node name="Button2" type="Button" parent="CanvasLayer/SFX Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Death"
+icon_alignment = 1
+
+[node name="Button3" type="Button" parent="CanvasLayer/SFX Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Score"
+icon_alignment = 1
+
+[node name="Button4" type="Button" parent="CanvasLayer/SFX Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Peg Bounce"
+icon_alignment = 1
+
+[node name="Button5" type="Button" parent="CanvasLayer/SFX Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Punch"
+icon_alignment = 1
+
+[node name="Button6" type="Button" parent="CanvasLayer/SFX Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Spawn Troop"
+icon_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/BGM Layout/Button" to="." method="_on_BGM_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BGM Layout/Button2" to="." method="_on_BGM_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/BGM Layout/Button3" to="." method="_on_BGM_button_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/BGM Layout/Button4" to="." method="_on_BGM_button_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/SFX Layout/Button" to="." method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/SFX Layout/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/SFX Layout/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/SFX Layout/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/SFX Layout/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="CanvasLayer/SFX Layout/Button6" to="." method="_on_button_6_pressed"]
