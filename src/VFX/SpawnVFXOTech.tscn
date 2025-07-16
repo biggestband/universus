@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://bj3cgi2csord"]
+
+[ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="1_xg6ux"]
+[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://Pngs/T_PerlinNoise_Tiled.png" id="2_l5d83"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ixvty"]
+render_priority = 0
+shader = ExtResource("1_xg6ux")
+shader_parameter/Vertex_Noise = ExtResource("2_l5d83")
+shader_parameter/Proximity_Fade = 1.0
+
+[sub_resource type="Gradient" id="Gradient_q8o10"]
+offsets = PackedFloat32Array(0, 0.379464, 0.386161, 0.685268, 0.689732, 1)
+colors = PackedColorArray(0, 0.235294, 0.443137, 1, 0, 0.235294, 0.443137, 1, 0.905882, 0.364706, 0.164706, 1, 0.905882, 0.364706, 0.164706, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_plsk1"]
+gradient = SubResource("Gradient_q8o10")
+
+[sub_resource type="Curve" id="Curve_kdo7j"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rgrqb"]
+curve = SubResource("Curve_kdo7j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcf0s"]
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 1.0
+emission_ring_cone_angle = 90.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+radial_velocity_min = 1.0
+radial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_rgrqb")
+color_ramp = SubResource("GradientTexture1D_plsk1")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ex5j0"]
+
+[node name="Spawn VFX" type="Node3D"]
+
+[node name="SpawnVFX" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_ixvty")
+emitting = false
+amount = 12
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.85
+process_material = SubResource("ParticleProcessMaterial_hcf0s")
+draw_pass_1 = SubResource("SphereMesh_ex5j0")
