@@ -109,10 +109,6 @@ func die():
 	tw.tween_property(currentSprite, "modulate:r", 1.0, 0.2)
 	tw.chain().tween_property(currentSprite, "modulate:a", 0.0, 0.4)
 	tw.finished.connect(queue_free)
-	
-	#await tw.finished
-	#queue_free()
-	#print("Killed guy")
 
 
 func startAttacking():

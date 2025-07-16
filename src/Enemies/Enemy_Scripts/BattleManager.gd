@@ -25,7 +25,6 @@ var unitsB: Array
 @export var crowdParentB: Node3D
 
 
-
 func _ready() -> void:
 	createCrowds()
 	debugCreateGuys()
