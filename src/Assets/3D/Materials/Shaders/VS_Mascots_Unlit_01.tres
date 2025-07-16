@@ -1,7 +1,6 @@
 [gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://bw2s6qe15rdja"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ygk1r"]
-load_path = "res://.godot/imported/Hunter DONE_2.png-16cb228362c6d8e6e0ca9c54e41f198c.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_1wd4u"]
 texture = SubResource("CompressedTexture2D_ygk1r")
@@ -193,6 +192,7 @@ void light() {
 
 }
 "
+graph_offset = Vector2(-435, -318)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_1wd4u")
 nodes/fragment/2/position = Vector2(-560, 20)
 nodes/fragment/3/node = SubResource("VisualShaderNodeInput_nurp7")

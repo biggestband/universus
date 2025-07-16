@@ -57,10 +57,10 @@ expression = "EMISSION = peg_emission;"
 varying_name = "PegEmission"
 
 [sub_resource type="VisualShaderNodeGlobalExpression" id="VisualShaderNodeGlobalExpression_egwuy"]
-size = Vector2(580, 160)
+size = Vector2(600, 200)
 expression = "instance uniform float null;
 instance uniform float null1;
-instance uniform float null2;
+
 
 instance uniform float peg_emission = 1.0;"
 
@@ -79,7 +79,7 @@ uniform sampler2D LEDTexture : source_color;
 // GlobalExpression:0
 	instance uniform float null;
 	instance uniform float null1;
-	instance uniform float null2;
+	
 	
 	instance uniform float peg_emission = 1.0;
 
@@ -160,6 +160,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-2155.53, -1084.69)
 modes/specular = 2
 flags/unshaded = true
 varyings/PegEmission = "0,0"
@@ -172,13 +173,13 @@ nodes/vertex/2/expression = "EMISSION = peg_emission;"
 nodes/vertex/4/node = SubResource("VisualShaderNodeVaryingSetter_akerl")
 nodes/vertex/4/position = Vector2(140, 40)
 nodes/vertex/6/node = SubResource("VisualShaderNodeGlobalExpression_egwuy")
-nodes/vertex/6/position = Vector2(-960, -320)
-nodes/vertex/6/size = Vector2(580, 160)
+nodes/vertex/6/position = Vector2(-980, -380)
+nodes/vertex/6/size = Vector2(600, 200)
 nodes/vertex/6/input_ports = ""
 nodes/vertex/6/output_ports = ""
 nodes/vertex/6/expression = "instance uniform float null;
 instance uniform float null1;
-instance uniform float null2;
+
 
 instance uniform float peg_emission = 1.0;"
 nodes/vertex/connections = PackedInt32Array(2, 0, 4, 0)
