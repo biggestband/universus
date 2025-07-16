@@ -15,13 +15,13 @@
 [ext_resource type="AudioStream" uid="uid://du3n4pd0tu68y" path="res://Assets/Audio/SFX/PlinkoScore/Plinko Score Variation 4.wav" id="5_j57un"]
 [ext_resource type="AudioStream" uid="uid://bo42p7a4vsfav" path="res://Assets/Audio/SFX/PlinkoPegBounce/Plinko Peg Bounce Variation 4.wav" id="5_usvpx"]
 [ext_resource type="AudioStream" uid="uid://85eai7apna20" path="res://Assets/Audio/SFX/PlinkoScore/Plinko Score Variation 5.wav" id="6_uoimk"]
-[ext_resource type="AudioStream" uid="uid://bfih60d7dotm" path="res://Assets/Audio/Music/Test Your Luck first draft.mp3" id="7_dkurd"]
 [ext_resource type="AudioStream" uid="uid://1j3fxmfxljs3" path="res://Assets/Audio/Music/Normal_Battle.mp3" id="8_vl7fk"]
 [ext_resource type="AudioStream" uid="uid://bt37e07ps8gbr" path="res://Assets/Audio/Music/Amped_Battle.mp3" id="9_t0gev"]
 [ext_resource type="AudioStream" uid="uid://mgy4cactb346" path="res://Assets/Audio/SFX/SpawnTroopPlop/Spawning Troop Plop.wav" id="11_bu8ti"]
 [ext_resource type="AudioStream" uid="uid://ct5dx5vsac2dc" path="res://Assets/Audio/SFX/Punch/Punch Variation 1.wav" id="11_usvpx"]
 [ext_resource type="AudioStream" uid="uid://b6o1qkepvgx70" path="res://Assets/Audio/SFX/Punch/Punch Variation 2.wav" id="12_bu8ti"]
 [ext_resource type="AudioStream" uid="uid://ca4kstmi1sxng" path="res://Assets/Audio/SFX/Punch/Punch Variation 3.wav" id="13_fw64e"]
+[ext_resource type="AudioStream" uid="uid://cqln1p44mhdmr" path="res://Assets/Audio/Music/Test Your Luck.wav" id="20_bu8ti"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xwx3r"]
 streams_count = 4
@@ -71,7 +71,8 @@ soundEffects = {
 1: NodePath("SFX/Plinko/PlinkoScoreSFX"),
 2: NodePath("SFX/Army/SpawningTroopSFX"),
 3: NodePath("SFX/Army/PunchSFX"),
-4: NodePath("SFX/Army/DeathPoofSFX")
+4: NodePath("SFX/Army/DeathPoofSFX"),
+5: NodePath("SFX/Army/ConfettiSFX")
 }
 
 [node name="SFX" type="Node" parent="."]
@@ -112,13 +113,15 @@ bus = &"SFX"
 [node name="Music" type="Node" parent="."]
 
 [node name="PlinkoBGM" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("7_dkurd")
+stream = ExtResource("20_bu8ti")
 bus = &"Music"
 
 [node name="NormalBattleBGM" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("8_vl7fk")
+volume_db = -15.0
 bus = &"Music"
 
 [node name="AmpedBattleBGM" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("9_t0gev")
+volume_db = -15.0
 bus = &"Music"
