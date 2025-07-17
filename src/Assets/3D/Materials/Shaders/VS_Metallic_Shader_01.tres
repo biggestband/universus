@@ -283,7 +283,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1530.51, 191.475)
 varyings/PegBrightness = "0,0"
 varyings/PegEmission = "0,0"
 nodes/vertex/4/node = SubResource("VisualShaderNodeInput_qwprm")

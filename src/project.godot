@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="universus"
-run/main_scene="uid://6qy1hcogkdih"
+run/main_scene="uid://sbe0muoe1d3c"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 

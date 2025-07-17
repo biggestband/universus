@@ -1,15 +1,21 @@
 using Godot;
 
-public partial class Peg : Node2D {
-    Sprite2D sprite;
+public partial class Peg : StaticBody3D {
     Color startColor;
     Tween punchTween;
 
+    const string BRIGHTNESS = "peg_brightness";
+    const string EMISSION = "peg_emission";
+    const string SIZE = "peg_size";
+
     bool alreadyHit;
 
+    [Export]
+    MeshInstance3D mesh;
 
     [Export]
-    Color hitColor;
+    float hitEmission,
+          initialEmission = 0.1f;
 
     [Export]
     float hitScale = 1.5f,
@@ -20,17 +26,11 @@ public partial class Peg : Node2D {
     float hitDuration = 0.25f,
           hitDelay = 0.05f;
 
-    public override void _Ready() {
-        sprite = GetNode<Sprite2D>("Sprite2D");
-        startColor = sprite.Modulate;
-    }
-
     public void Setup() {
         punchTween?.Kill();
         alreadyHit = false;
-        
-        sprite.Modulate = startColor;
-        sprite.Scale = Vector2.One * unHitScale;
+        mesh.SetInstanceShaderParameter(BRIGHTNESS, initialEmission);
+        mesh.SetInstanceShaderParameter(SIZE, unHitScale);
     }
 
     public void Punch() {
@@ -40,12 +40,15 @@ public partial class Peg : Node2D {
             .SetTrans(Tween.TransitionType.Back)
             .SetParallel();
 
-        var targetScale = Vector2.One * reHitScale;
-        sprite.Scale = hitScale * targetScale;
-        sprite.Modulate = hitColor;
+        mesh.SetInstanceShaderParameter(SIZE, hitScale);
+        mesh.SetInstanceShaderParameter(BRIGHTNESS, hitEmission);
 
-        punchTween.TweenProperty(sprite, "scale", targetScale, hitDuration).SetDelay(hitDelay);
-        punchTween.TweenProperty(sprite, "modulate", startColor, hitDuration).SetDelay(hitDelay);
+        punchTween.TweenMethod(Callable.From<float>(x => {
+            mesh.SetInstanceShaderParameter(SIZE, x);
+        }), hitScale, reHitScale, hitDuration);
+        punchTween.TweenMethod(Callable.From<float>(x => {
+            mesh.SetInstanceShaderParameter(BRIGHTNESS, x);
+        }), hitEmission, initialEmission, hitDuration).SetDelay(hitDelay);
 
         PachinkoEventManager.Instance.Hit(alreadyHit ? HitType.ReHit : HitType.NewHit);
         alreadyHit = true;

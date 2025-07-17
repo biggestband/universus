@@ -7,15 +7,18 @@ public partial class Pachinko : Node {
     BallHolder ballHolder;
 
     [Export]
-    PegContainer pegContainer;
+    PegManager pegContainer;
     
     [Export]
-    LandingRegion landingRegion;
+    Node landingRegionContainer;
     
     public void Setup() {
-        ballHolder.Setup();
-        pegContainer.Setup();
-        landingRegion.Setup();
+        ballHolder?.Setup();
+        pegContainer?.Setup();
+        foreach (var node in landingRegionContainer.GetChildren()) {
+            var landingRegion = node as LandingRegion;
+            landingRegion?.Setup();
+        }
         ScoreManager.ResetScore();
     }
 

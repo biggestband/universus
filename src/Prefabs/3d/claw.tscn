@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo4xmggntaref"]
+
+[ext_resource type="Script" uid="uid://olh6s7hhmjlp" path="res://Scripts/BallHolder.cs" id="1_wlkxh"]
+[ext_resource type="PackedScene" uid="uid://chbrnxb41i65c" path="res://Assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx" id="2_xm6p0"]
+
+[node name="Ball Holder" type="Node3D"]
+script = ExtResource("1_wlkxh")
+
+[node name="SM_PlinkoClaw_Model_01" parent="." instance=ExtResource("2_xm6p0")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.0393877, 0)
+
+[node name="SM_PlinkoClaw_Mesh_01" parent="SM_PlinkoClaw_Model_01" index="0"]
+instance_shader_parameters/peg_brightness = 0.3
+instance_shader_parameters/peg_size = 0.02
+blend_shapes/Open = -0.1875
+
+[editable path="SM_PlinkoClaw_Model_01"]

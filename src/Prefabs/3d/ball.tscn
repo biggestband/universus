@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://8k21bko7q7em"]
+
+[ext_resource type="Script" uid="uid://rq62r0c7akut" path="res://Scripts/Ball.cs" id="1_km0ep"]
+[ext_resource type="PackedScene" uid="uid://c716qq73f6jg0" path="res://Assets/3D/FBX/SM_PlinkoBall_Model_01.fbx" id="2_km0ep"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_347ys"]
+radius = 0.03
+
+[node name="Ball" type="RigidBody3D" node_paths=PackedStringArray("mesh")]
+gravity_scale = 0.069
+custom_integrator = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_km0ep")
+randomAngleDegrees = 30.0
+bounceFactor = 1.0
+minSpeed = 2.0
+gravityTiltAngle = -4.5
+Enabled = true
+mesh = NodePath("SM_PlinkoBall_Model_01/SM_PlinkoBall_Mesh_01")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_347ys")
+
+[node name="SM_PlinkoBall_Model_01" parent="." instance=ExtResource("2_km0ep")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[editable path="SM_PlinkoBall_Model_01"]
