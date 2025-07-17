@@ -126,4 +126,13 @@ public partial class ArmySyncer : Node
         GD.Print(json);
         saveFile.StoreLine(json);
     }
+
+    private void LoadSaveFile(string fileName)
+    {
+        if (!FileAccess.FileExists("user://" + fileName)) return;
+
+        using FileAccess saveFile = FileAccess.Open("user://" + fileName, FileAccess.ModeFlags.Read);
+        string json = saveFile.GetAsText();
+        JsonConvert.DeserializeObject<Dictionary<string, int>>(json);
+    }
 }
