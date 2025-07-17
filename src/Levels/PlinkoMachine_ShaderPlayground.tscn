@@ -1,6 +1,5 @@
 [gd_scene load_steps=15 format=3 uid="uid://drrm4mva7g5o8"]
 
-<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://xs3m3vvuq4ul" path="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_73add"]
 [ext_resource type="Material" uid="uid://3t4cnwm18p6o" path="res://assets/3D/Materials/M_ReflectionProbe_Material_01.tres" id="2_ju1wm"]
 [ext_resource type="PackedScene" uid="uid://kbf2g21sf334" path="res://assets/3D/FBX/SM_Peg_Model_01.fbx" id="3_wlj6p"]
@@ -8,15 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://c0jaifjejo5a0" path="res://assets/3D/FBX/SM_PlinkoBall_Model_01.fbx" id="4_b4nkp"]
 [ext_resource type="Material" uid="uid://341fsq0eieyx" path="res://assets/3D/Materials/M_DCColourPalette_Material_01.tres" id="5_7ej64"]
 [ext_resource type="PackedScene" uid="uid://hj8eqs6our68" path="res://assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx" id="5_b4nkp"]
-=======
-[ext_resource type="PackedScene" uid="uid://c8ienxil3pp1p" path="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_73add"]
-[ext_resource type="Material" uid="uid://3t4cnwm18p6o" path="res://assets/3D/Materials/M_ReflectionProbe_Material_01.tres" id="2_ju1wm"]
-[ext_resource type="PackedScene" uid="uid://b8a6a18n3ssvm" path="res://Assets/3D/FBX/SM_Peg_Model_01.fbx" id="3_wlj6p"]
-[ext_resource type="Material" uid="uid://bdy63ayvmn0x5" path="res://assets/3D/Materials/M_DCEmissive_Material_01.tres" id="4_8w05h"]
-[ext_resource type="PackedScene" uid="uid://wp2ea7fotscy" path="res://Assets/3D/FBX/SM_PlinkoBall_Model_01.fbx" id="4_b4nkp"]
-[ext_resource type="Material" uid="uid://341fsq0eieyx" path="res://assets/3D/Materials/M_DCColourPalette_Material_01.tres" id="5_7ej64"]
-[ext_resource type="PackedScene" uid="uid://dtkk2l8bwbgte" path="res://assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx" id="5_b4nkp"]
->>>>>>> Stashed changes
 
 [sub_resource type="SphereMesh" id="SphereMesh_dj0uy"]
 

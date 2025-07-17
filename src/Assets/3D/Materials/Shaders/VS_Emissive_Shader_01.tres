@@ -1,10 +1,6 @@
 [gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://cpdxgfa6qox4y"]
 
-<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://chseits8ywk16" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="1_whpu8"]
-=======
-[ext_resource type="Texture2D" uid="uid://6m88nj8bkh3y" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="1_whpu8"]
->>>>>>> Stashed changes
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_akerl"]
 parameter_name = "LightMoveSpeed"
@@ -124,11 +120,7 @@ void fragment() {
 
 }
 "
-<<<<<<< Updated upstream
-graph_offset = Vector2(-1004.94, -232.985)
-=======
 graph_offset = Vector2(-1169.64, -81.7442)
->>>>>>> Stashed changes
 modes/specular = 2
 flags/unshaded = true
 varyings/PegEmission = "0,0"

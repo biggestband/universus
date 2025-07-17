@@ -1,10 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bmbh4lbslu4mv"]
 
-<<<<<<< Updated upstream:src/Assets/3D/Materials/M_Environment_Unlit.tres
-[ext_resource type="Shader" uid="uid://dy3uaex154icp" path="res://assets/3D/Materials/Shaders/VS_Environment_Unlit_01.tres" id="1_77shf"]
-=======
 [ext_resource type="Shader" uid="uid://dy3uaex154icp" path="res://assets/3D/Materials/Shaders/VS_Environment_Shader_01.tres" id="1_c20oq"]
->>>>>>> Stashed changes:src/Assets/3D/Materials/M_Environment_Material_01.tres
 
 [sub_resource type="Gradient" id="Gradient_se6cg"]
 interpolation_mode = 1

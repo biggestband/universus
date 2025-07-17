@@ -1,11 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d3vkn64cv7heg"]
 
 [ext_resource type="Shader" uid="uid://cpdxgfa6qox4y" path="res://assets/3D/Materials/Shaders/VS_Emissive_Shader_01.tres" id="1_i5ejg"]
-<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://chseits8ywk16" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="2_2yov2"]
-=======
-[ext_resource type="Texture2D" uid="uid://6m88nj8bkh3y" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="2_2yov2"]
->>>>>>> Stashed changes
 
 [resource]
 resource_name = "M_Emissive_Material_01"
