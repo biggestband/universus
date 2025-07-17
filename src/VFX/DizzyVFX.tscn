@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk7kx0qcypx68"]
+[gd_scene load_steps=3 format=3 uid="uid://dk7kx0qcypx68"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3uhnj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_3uhnj"]
 
 [node name="DizzyVfx" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_3uhnj")
+draw_pass_1 = SubResource("QuadMesh_3uhnj")
