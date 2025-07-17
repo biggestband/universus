@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://sbe0muoe1d3c"]
+[gd_scene load_steps=15 format=3 uid="uid://sbe0muoe1d3c"]
 
 [ext_resource type="PackedScene" uid="uid://df5vh55flwbvp" path="res://Prefabs/3d-pachinko.tscn" id="1_0qtnl"]
 [ext_resource type="Script" uid="uid://dc7a88xb3g0ta" path="res://Scripts/Pachinko.cs" id="1_347ys"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bvwkdmcspwu2y" path="res://Scripts/ScoreManager.cs" id="3_3ib7k"]
 [ext_resource type="Script" uid="uid://mnnxl1j7bwy7" path="res://Scripts/Restarter.cs" id="4_s8dmq"]
 [ext_resource type="PackedScene" uid="uid://8k21bko7q7em" path="res://Prefabs/3d/ball.tscn" id="5_cukox"]
+[ext_resource type="Script" uid="uid://fnhp4fgxnd6b" path="res://Scripts/PachinkoCamera.cs" id="5_k2ryw"]
 [ext_resource type="Script" uid="uid://be7tv36g88d88" path="res://Levels/Modules/PegManager.cs" id="6_gucno"]
 [ext_resource type="PackedScene" uid="uid://bmdnm2wum40gx" path="res://Prefabs/3d/peg.tscn" id="6_v7c2q"]
 [ext_resource type="PackedScene" uid="uid://b23ymdl1p2omx" path="res://Prefabs/reflection_probe.tscn" id="7_gucno"]
@@ -28,17 +29,20 @@ script = ExtResource("3_3ib7k")
 [node name="Events" type="Node" parent="Systems"]
 script = ExtResource("2_x8vij")
 
-[node name="Pachinko" type="Node" parent="Systems" node_paths=PackedStringArray("ballHolder", "pegContainer", "landingRegionContainer")]
+[node name="Pachinko" type="Node" parent="Systems" node_paths=PackedStringArray("ballHolder", "pegContainer", "landingRegionContainer", "camera")]
 script = ExtResource("1_347ys")
 ballHolder = NodePath("../../Pachinko/Ball Holder")
 pegContainer = NodePath("../../Pachinko/Pegs")
 landingRegionContainer = NodePath("../../Pachinko/Rewards")
+camera = NodePath("../../Camera3D")
 
 [node name="Restarter" type="Node" parent="Systems"]
 script = ExtResource("4_s8dmq")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04368, 1.3876)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971126, 1.60018)
+script = ExtResource("5_k2ryw")
+zoomInPosition = Vector3(0, 1.044, 0.997)
 
 [node name="Pachinko" type="Node3D" parent="."]
 

@@ -23,12 +23,20 @@ public partial class BallHolder : Node3D {
         // }
     }
 
+    public override void _EnterTree() {
+        Pachinko.Events.OnBallDrop += DropBall;
+    }
+    
+    public override void _ExitTree() {
+        Pachinko.Events.OnBallDrop -= DropBall;
+        tween?.Kill();
+    }
+
     public override void _Process(double delta) {
         if (!active) return;
-        if (!Input.IsActionPressed("BiggestButton")) {
-            ball.GlobalPosition = GlobalPosition;
-            return;
-        }
+        ball.GlobalPosition = GlobalPosition;
+    }
+    void DropBall() {
         tween.Kill();
         ball.Freeze = false;
         active = false;

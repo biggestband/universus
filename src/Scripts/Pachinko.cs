@@ -2,6 +2,8 @@ using Godot;
 public partial class Pachinko : Node {
     public static Pachinko Instance { get; private set; } 
     public static PachinkoEventManager Events => PachinkoEventManager.Instance;
+
+    State state;
     
     [Export]
     BallHolder ballHolder;
@@ -11,8 +13,13 @@ public partial class Pachinko : Node {
     
     [Export]
     Node landingRegionContainer;
+
+    [Export]
+    PachinkoCamera camera;
     
     public void Setup() {
+        state = State.Wait;
+        camera?.Setup();
         ballHolder?.Setup();
         pegContainer?.Setup();
         foreach (var node in landingRegionContainer.GetChildren()) {
@@ -20,6 +27,17 @@ public partial class Pachinko : Node {
             landingRegion?.Setup();
         }
         ScoreManager.ResetScore();
+    }
+
+    public override void _Process(double delta) {
+        if (Input.IsActionJustPressed("BiggestButton")) {
+            if (state == State.Wait) {
+                state = State.Play;
+                Events.PachinkoStart();
+            } else if (state == State.Play) {
+                Events.BallDrop();
+            }
+        }
     }
 
     public override void _Ready() {
@@ -32,5 +50,10 @@ public partial class Pachinko : Node {
             return;
         }
         Instance = this;
+    }
+
+    enum State {
+        Wait,
+        Play,
     }
 }
