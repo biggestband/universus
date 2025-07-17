@@ -119,20 +119,66 @@ public partial class ArmySyncer : Node
         SaveBattle(teamArmyCounts);
     }
 
-    public void SaveBattle(Dictionary<string, int> battleData)
+    public static void SaveBattle(Dictionary<string, int> battleData)
     {
+        if (!OS.HasFeature("Server")) return;
+
         using FileAccess saveFile = FileAccess.Open("user://history" + Time.GetDateStringFromSystem() + ".save", FileAccess.ModeFlags.Write);
         string json = JsonConvert.SerializeObject(battleData, Formatting.Indented);
         GD.Print(json);
         saveFile.StoreLine(json);
     }
 
-    private void LoadSaveFile(string fileName)
+    public static Dictionary<string, int> LoadSaveFile(string fileName)
     {
-        if (!FileAccess.FileExists("user://" + fileName)) return;
+        if (!OS.HasFeature("Server")) return null;
+        if (!FileAccess.FileExists("user://" + fileName)) return null;
 
         using FileAccess saveFile = FileAccess.Open("user://" + fileName, FileAccess.ModeFlags.Read);
         string json = saveFile.GetAsText();
-        JsonConvert.DeserializeObject<Dictionary<string, int>>(json);
+        return JsonConvert.DeserializeObject<Dictionary<string, int>>(json);
+    }
+
+    public static List<string> GetSaveFileNames()
+    {
+        if (!OS.HasFeature("Server")) return null;
+
+        List<string> files = new List<string>();
+        DirAccess dir = DirAccess.Open("user://");
+
+        if (dir == null) return files;
+
+        dir.ListDirBegin();
+        string fileName = dir.GetNext();
+        while (fileName != "")
+        {
+            if (!dir.CurrentIsDir() && fileName.StartsWith("history") && fileName.EndsWith(".save")) files.Add(fileName);
+            fileName = dir.GetNext();
+        }
+        dir.ListDirEnd();
+
+        return files;
+    }
+
+    public static string DisplayHistory(string fileName)
+    {
+        if (!OS.HasFeature("Server")) return null;
+
+        string output = "";
+        string winner = "";
+        int winnerScore = -1;
+        output += "For the battle played on the day of " + fileName.TrimPrefix("history").TrimSuffix(".save") + ":\n";
+        foreach (KeyValuePair<string, int> ii in LoadSaveFile(fileName))
+        {
+            output += "\t" + ii.Key + ": " + ii.Value + "\n";
+            if (ii.Value > winnerScore)
+            {
+                winnerScore = ii.Value;
+                winner = ii.Key;
+            }
+        }
+        output += "The winner was " + winner + "!\n";
+
+        return output;
     }
 }

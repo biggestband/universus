@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.ComponentModel;
+using static ArmySyncer;
 
 /// <summary>
 /// Used for quickly debugging by allowing you to change the army count without plalying plinko.
@@ -18,29 +19,46 @@ public partial class DebugArmyBumper : Node
         AddInput("countdecrement", Key.Bracketleft);
         AddInput("countincrement10", Key.Backslash);
         AddInput("countreset", Key.Backspace);
+
+        AddInput("savebattle", Key.S);
+        AddInput("displayallhistory", Key.D);
     }
 
     public override void _Process(double delta)
     {
-        if(Input.IsActionJustReleased("countincrement"))
+        if (!OS.HasFeature("Server"))
         {
-            armyCount += 1;
-            ArmySyncer.instance.SetArmyCount(armyCount);
+            if (Input.IsActionJustReleased("countincrement"))
+            {
+                armyCount += 1;
+                instance.SetArmyCount(armyCount);
+            }
+            if (Input.IsActionJustReleased("countdecrement"))
+            {
+                armyCount -= 1;
+                instance.SetArmyCount(armyCount);
+            }
+            if (Input.IsActionJustReleased("countincrement10"))
+            {
+                armyCount += 10;
+                instance.SetArmyCount(armyCount);
+            }
+            if (Input.IsActionJustReleased("countreset"))
+            {
+                armyCount = 0;
+                instance.SetArmyCount(armyCount);
+            }
         }
-        if(Input.IsActionJustReleased("countdecrement"))
+        else
         {
-            armyCount -= 1;
-            ArmySyncer.instance.SetArmyCount(armyCount);
-        }
-        if(Input.IsActionJustReleased("countincrement10"))
-        {
-            armyCount += 10;
-            ArmySyncer.instance.SetArmyCount(armyCount);
-        }
-        if(Input.IsActionJustReleased("countreset"))
-        {
-            armyCount = 0;
-            ArmySyncer.instance.SetArmyCount(armyCount);
+            if (Input.IsActionJustReleased("savebattle"))
+            {
+                instance.SaveCurrentBattle();
+            }
+            if (Input.IsActionJustReleased("displayallhistory"))
+            {
+                foreach (string ii in GetSaveFileNames()) GD.Print(DisplayHistory(ii));
+            }
         }
     }
 
