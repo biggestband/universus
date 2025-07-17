@@ -1,0 +1,132 @@
+[gd_scene load_steps=29 format=3 uid="uid://chd4enbbv56g5"]
+
+[ext_resource type="Script" uid="uid://bgufflxqd0mmj" path="res://Scripts/audio_manager.gd" id="1_s3gfx"]
+[ext_resource type="AudioStream" uid="uid://bcjye5jp2at74" path="res://Assets/Audio/SFX/Death/Death Effect Variation 1.wav" id="2_dkurd"]
+[ext_resource type="AudioStream" uid="uid://ck8fkg07eqs6c" path="res://Assets/Audio/SFX/Confetti/Confetti Variation 1.wav" id="2_h08v0"]
+[ext_resource type="AudioStream" uid="uid://b4ryf1inbdtop" path="res://Assets/Audio/SFX/PlinkoPegBounce/Plinko Peg Bounce Variation 1.wav" id="2_uoimk"]
+[ext_resource type="AudioStream" uid="uid://bhakjgfspyvbh" path="res://Assets/Audio/SFX/PlinkoScore/Plinko Score Variation 1.wav" id="2_xwx3r"]
+[ext_resource type="AudioStream" uid="uid://6snk2a2egbs8" path="res://Assets/Audio/SFX/PlinkoScore/Plinko Score Variation 2.wav" id="3_2qwqj"]
+[ext_resource type="AudioStream" uid="uid://lkgn26oaeuvv" path="res://Assets/Audio/SFX/Confetti/Confetti Variation 2.wav" id="3_be5wh"]
+[ext_resource type="AudioStream" uid="uid://in72j6fxocce" path="res://Assets/Audio/SFX/PlinkoPegBounce/Plinko Peg Bounce Variation 2.wav" id="3_jxngg"]
+[ext_resource type="AudioStream" uid="uid://6436o1uhr8tq" path="res://Assets/Audio/SFX/Death/Death Effect Variation 2.wav" id="3_vl7fk"]
+[ext_resource type="AudioStream" uid="uid://cak7g0ujmakvy" path="res://Assets/Audio/SFX/PlinkoPegBounce/Plinko Peg Bounce Variation 3.wav" id="4_ibvei"]
+[ext_resource type="AudioStream" uid="uid://bxw4k1q142ovm" path="res://Assets/Audio/SFX/Death/Death Effect Variation 3.wav" id="4_t0gev"]
+[ext_resource type="AudioStream" uid="uid://dwsw15njl7sy3" path="res://Assets/Audio/SFX/PlinkoScore/Plinko Score Variation 3.wav" id="4_yplee"]
+[ext_resource type="AudioStream" uid="uid://du3n4pd0tu68y" path="res://Assets/Audio/SFX/PlinkoScore/Plinko Score Variation 4.wav" id="5_j57un"]
+[ext_resource type="AudioStream" uid="uid://bo42p7a4vsfav" path="res://Assets/Audio/SFX/PlinkoPegBounce/Plinko Peg Bounce Variation 4.wav" id="5_usvpx"]
+[ext_resource type="AudioStream" uid="uid://85eai7apna20" path="res://Assets/Audio/SFX/PlinkoScore/Plinko Score Variation 5.wav" id="6_uoimk"]
+[ext_resource type="AudioStream" uid="uid://1j3fxmfxljs3" path="res://Assets/Audio/Music/Normal_Battle.mp3" id="8_vl7fk"]
+[ext_resource type="AudioStream" uid="uid://bt37e07ps8gbr" path="res://Assets/Audio/Music/Amped_Battle.mp3" id="9_t0gev"]
+[ext_resource type="AudioStream" uid="uid://mgy4cactb346" path="res://Assets/Audio/SFX/SpawnTroopPlop/Spawning Troop Plop.wav" id="11_bu8ti"]
+[ext_resource type="AudioStream" uid="uid://ct5dx5vsac2dc" path="res://Assets/Audio/SFX/Punch/Punch Variation 1.wav" id="11_usvpx"]
+[ext_resource type="AudioStream" uid="uid://b6o1qkepvgx70" path="res://Assets/Audio/SFX/Punch/Punch Variation 2.wav" id="12_bu8ti"]
+[ext_resource type="AudioStream" uid="uid://ca4kstmi1sxng" path="res://Assets/Audio/SFX/Punch/Punch Variation 3.wav" id="13_fw64e"]
+[ext_resource type="AudioStream" uid="uid://cqln1p44mhdmr" path="res://Assets/Audio/Music/Test Your Luck.wav" id="20_bu8ti"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xwx3r"]
+streams_count = 4
+stream_0/stream = ExtResource("2_uoimk")
+stream_1/stream = ExtResource("3_jxngg")
+stream_2/stream = ExtResource("4_ibvei")
+stream_3/stream = ExtResource("5_usvpx")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jxngg"]
+streams_count = 5
+stream_0/stream = ExtResource("2_xwx3r")
+stream_1/stream = ExtResource("3_2qwqj")
+stream_2/stream = ExtResource("4_yplee")
+stream_3/stream = ExtResource("5_j57un")
+stream_4/stream = ExtResource("6_uoimk")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bu8ti"]
+streams_count = 1
+stream_0/stream = ExtResource("11_bu8ti")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_a1cns"]
+streams_count = 3
+stream_0/stream = ExtResource("11_usvpx")
+stream_1/stream = ExtResource("12_bu8ti")
+stream_2/stream = ExtResource("13_fw64e")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dkurd"]
+streams_count = 3
+stream_0/stream = ExtResource("2_dkurd")
+stream_1/stream = ExtResource("3_vl7fk")
+stream_2/stream = ExtResource("4_t0gev")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_be5wh"]
+streams_count = 2
+stream_0/stream = ExtResource("2_h08v0")
+stream_1/stream = ExtResource("3_be5wh")
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("backgroundMusic", "soundEffects")]
+script = ExtResource("1_s3gfx")
+backgroundMusic = {
+0: NodePath("Music/PlinkoBGM"),
+1: NodePath("Music/NormalBattleBGM"),
+2: NodePath("Music/AmpedBattleBGM")
+}
+soundEffects = {
+0: NodePath("SFX/Plinko/PlinkoPegBounceSFX"),
+1: NodePath("SFX/Plinko/PlinkoScoreSFX"),
+2: NodePath("SFX/Army/SpawningTroopSFX"),
+3: NodePath("SFX/Army/PunchSFX"),
+4: NodePath("SFX/Army/DeathPoofSFX"),
+5: NodePath("SFX/Army/ConfettiSFX")
+}
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Plinko" type="Node" parent="SFX"]
+
+[node name="PlinkoPegBounceSFX" type="AudioStreamPlayer" parent="SFX/Plinko"]
+stream = SubResource("AudioStreamRandomizer_xwx3r")
+max_polyphony = 5
+bus = &"SFX"
+
+[node name="PlinkoScoreSFX" type="AudioStreamPlayer" parent="SFX/Plinko"]
+stream = SubResource("AudioStreamRandomizer_jxngg")
+bus = &"SFX"
+
+[node name="Army" type="Node" parent="SFX"]
+
+[node name="SpawningTroopSFX" type="AudioStreamPlayer" parent="SFX/Army"]
+stream = SubResource("AudioStreamRandomizer_bu8ti")
+max_polyphony = 10
+bus = &"SFX"
+
+[node name="PunchSFX" type="AudioStreamPlayer" parent="SFX/Army"]
+stream = SubResource("AudioStreamRandomizer_a1cns")
+max_polyphony = 20
+bus = &"SFX"
+
+[node name="DeathPoofSFX" type="AudioStreamPlayer" parent="SFX/Army"]
+stream = SubResource("AudioStreamRandomizer_dkurd")
+max_polyphony = 20
+bus = &"SFX"
+
+[node name="ConfettiSFX" type="AudioStreamPlayer" parent="SFX/Army"]
+stream = SubResource("AudioStreamRandomizer_be5wh")
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="Music" type="Node" parent="."]
+
+[node name="PlinkoBGM" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("20_bu8ti")
+bus = &"Music"
+
+[node name="NormalBattleBGM" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("8_vl7fk")
+volume_db = -15.0
+bus = &"Music"
+
+[node name="AmpedBattleBGM" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("9_t0gev")
+volume_db = -15.0
+bus = &"Music"
+
+[connection signal="changeBGM" from="." to="." method="change_bgm"]
+[connection signal="initAudioSystem" from="." to="." method="init_audio_system"]
+[connection signal="playSFX" from="." to="." method="play_sfx"]
+[connection signal="toggleBGM" from="." to="." method="toggle_bgm"]

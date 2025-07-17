@@ -23,6 +23,13 @@ public partial class Peg : Node2D {
     public override void _Ready() {
         sprite = GetNode<Sprite2D>("Sprite2D");
         startColor = sprite.Modulate;
+    }
+
+    public void Setup() {
+        punchTween?.Kill();
+        alreadyHit = false;
+        
+        sprite.Modulate = startColor;
         sprite.Scale = Vector2.One * unHitScale;
     }
 
@@ -40,7 +47,7 @@ public partial class Peg : Node2D {
         punchTween.TweenProperty(sprite, "scale", targetScale, hitDuration).SetDelay(hitDelay);
         punchTween.TweenProperty(sprite, "modulate", startColor, hitDuration).SetDelay(hitDelay);
 
-        ScoreManager.IncreaseScore(alreadyHit ? HitType.ReHit : HitType.NewHit);
+        PachinkoEventManager.Instance.Hit(alreadyHit ? HitType.ReHit : HitType.NewHit);
         alreadyHit = true;
     }
 }

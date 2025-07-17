@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cqln1p44mhdmr"
+path="res://.godot/imported/Test Your Luck.wav-bcc6d55ffc280cc18e0252a4181a1d0f.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/Test Your Luck.wav"
+dest_files=["res://.godot/imported/Test Your Luck.wav-bcc6d55ffc280cc18e0252a4181a1d0f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
