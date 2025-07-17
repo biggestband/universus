@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://3t4cnwm18p6o"]
+
+[ext_resource type="Shader" uid="uid://ke0u1dg2xdoo" path="res://assets/3D/Materials/Shaders/VS_ReflectionProbe_Shader_01.tres" id="1_sp2k3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_sp2k3")

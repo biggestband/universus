@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwdqmoopixmik"]
 
 [ext_resource type="Script" uid="uid://rq62r0c7akut" path="res://Scripts/Ball.cs" id="1_f6quk"]
-[ext_resource type="Texture2D" uid="uid://8gpqvobyt6qn" path="res://Assets/2D/circle16.png" id="2_f6quk"]
+[ext_resource type="Texture2D" uid="uid://c3bogfsntncek" path="res://Assets/2D/circle8.png" id="2_n88cj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_10x6a"]
 radius = 8.0
@@ -14,7 +14,8 @@ script = ExtResource("1_f6quk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.27, 0.476833, 1)
-texture = ExtResource("2_f6quk")
+scale = Vector2(2, 2)
+texture = ExtResource("2_n88cj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_10x6a")

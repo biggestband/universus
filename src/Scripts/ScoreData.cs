@@ -1,0 +1,1 @@
+public readonly record struct ScoreData(float Score, float Amount, HitType Type = HitType.NoHit);

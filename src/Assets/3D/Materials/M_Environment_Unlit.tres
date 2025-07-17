@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bmbh4lbslu4mv"]
+
+[ext_resource type="Shader" uid="uid://dy3uaex154icp" path="res://assets/3D/Materials/Shaders/VS_Environment_Unlit_01.tres" id="1_77shf"]
+
+[sub_resource type="Gradient" id="Gradient_se6cg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.528517)
+colors = PackedColorArray(0, 0.0022409, 0.0112165, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_krgw0"]
+gradient = SubResource("Gradient_se6cg")
+fill_to = Vector2(1, 1)
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_77shf")
+shader_parameter/SpecularColor = Color(1, 1, 1, 1)
+shader_parameter/shadow_texture = SubResource("GradientTexture2D_krgw0")
+shader_parameter/shadow_threshold = 0.3
+shader_parameter/specular_threshold = 0.91
+shader_parameter/specular_strenght = 0.5
+shader_parameter/highlight_threshold = 1.0
+shader_parameter/only_colored_specular = true
