@@ -19,10 +19,15 @@ public partial class Ball : RigidBody2D {
     float randomAngle;
 
     Tween pegTween;
+    Sprite2D sprite;
+
+    public bool Enabled;
     public override void _Ready() {
+        sprite = GetNode<Sprite2D>("Sprite2D");
         random = new();
         randomAngle = float.DegreesToRadians(randomAngleDegrees);
         BodyEntered += OnBodyEntered;
+        Enabled = true;
     }
 
     public override void _ExitTree() {
@@ -34,7 +39,7 @@ public partial class Ball : RigidBody2D {
     }
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state) {
-        if (state.GetContactCount() == 0) return;
+        if (!Enabled || state.GetContactCount() == 0) return;
         var normal = state.GetContactLocalNormal(0);
         var incomingVelocity = state.LinearVelocity.Normalized();
         var bounceDirection = incomingVelocity.Bounce(normal);
@@ -45,5 +50,12 @@ public partial class Ball : RigidBody2D {
         var currentSpeed = state.LinearVelocity.Length();
         currentSpeed = Math.Max(currentSpeed, minSpeed); // this could be combined with the above line but im separating it for clarity
         state.LinearVelocity = bounceAngle * bounceFactor * currentSpeed;
+    }
+    public void DisablePhysics() {
+        Enabled = false;
+    }
+
+    public void Hide() {
+        sprite.Visible = false;
     }
 }

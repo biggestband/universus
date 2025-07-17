@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://nsi0x3iyao2j"]
+
+[ext_resource type="Script" uid="uid://c1bsvw53s8prq" path="res://Scripts/Vfx2D.gd" id="1_mppvl"]
+
+[sub_resource type="Curve" id="Curve_mudft"]
+_data = [Vector2(0.00972763, 0.218682), 0.0, 0.196005, 0, 1, Vector2(0.850195, 0.383418), 0.0, 0.0, 0, 0, Vector2(1, 0.374004), 0.231984, 0.0, 0, 0]
+point_count = 3
+
+[node name="Confetti" type="Node2D" node_paths=PackedStringArray("emitters")]
+script = ExtResource("1_mppvl")
+emitters = [NodePath("Blue"), NodePath("RedOrange"), NodePath("White")]
+
+[node name="Blue" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 65.04
+initial_velocity_max = 130.08
+angular_velocity_min = 280.97
+angular_velocity_max = 280.97
+linear_accel_min = 11.38
+linear_accel_max = 11.38
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_mudft")
+color = Color(0, 0.466667, 0.792157, 1)
+
+[node name="RedOrange" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 65.04
+initial_velocity_max = 130.08
+angular_velocity_min = 280.97
+angular_velocity_max = 280.97
+linear_accel_min = 11.38
+linear_accel_max = 11.38
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_mudft")
+color = Color(0.905882, 0.364706, 0.164706, 1)
+
+[node name="White" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.6
+randomness = 0.2
+local_coords = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 65.04
+initial_velocity_max = 130.08
+angular_velocity_min = 280.97
+angular_velocity_max = 280.97
+linear_accel_min = 11.38
+linear_accel_max = 11.38
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_mudft")

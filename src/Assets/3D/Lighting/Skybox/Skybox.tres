@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://1tefvjvq4dgi"]
+
+[sub_resource type="Shader" id="Shader_hsi75"]
+code = "shader_type sky;
+
+uniform samplerCube source_panorama : filter_linear, source_color, hint_default_black;
+uniform float exposure : hint_range(0, 128) = 1.0;
+
+void sky() {
+    // If importing a cubemap from another engine, you may need to flip one of the `EYEDIR` components below
+    // by replacing it with `-EYEDIR`.
+    vec3 eyedir = vec3(EYEDIR.x, EYEDIR.y, EYEDIR.z);
+    COLOR = texture(source_panorama, eyedir).rgb * exposure;
+}"
+
+[sub_resource type="Cubemap" id="Cubemap_hsi75"]
+
+[resource]
+shader = SubResource("Shader_hsi75")
+shader_parameter/source_panorama = SubResource("Cubemap_hsi75")
+shader_parameter/exposure = 1.0
