@@ -84,11 +84,11 @@ func _endBattle():
 func _ready() -> void:
 	_initUnitPool()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
 	_stepUnitTargets(delta)
 	_stepUnitPositions(delta)
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void:	
 	_updateVisualalizedNodes()
 
 #endregion
@@ -157,17 +157,18 @@ func _stepUnitPositions(delta: float) -> void:
 		# Store previous unit positions
 		_prevUnitPositions[n] = _unitPositions[n]
 		
-		if(!_isUnitSimulated(n)):
+		var unit: Unit = _unitNodes[n]
+		
+		if(!_isUnitSimulated(n) || unit.GetCoolingDown()):
 			continue
 		
-		var unit: Unit = _unitNodes[n]
 		var targetID: int = unit.GetTargetID()
 		
 		if(!_isUnitAtDestination(n)):
 			# Step unit pos in the direction of its target over time
 			var targetPos: Vector2 = _unitPositions[targetID]
-			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * 6 * delta
-		else: if (_isUnitSimulated(targetID)): 
+			_unitPositions[n] += (targetPos - _unitPositions[n]).normalized() * unit.GetMovementSpeed() * delta
+		else: if (_isUnitSimulated(targetID) && !unit.GetCoolingDown()): 
 			_attackTarget(n, targetID)
 
 func _stepUnitTargets(delta: float):
@@ -182,6 +183,7 @@ func _stepUnitTargets(delta: float):
 			
 			if(!_isUnitSimulated(unitID)):
 				continue
+			
 			var unit: Unit = _unitNodes[unitID]
 			var targetID: int = _findClosestTarget(unitID, unit.IsArmyA())
 			# Set the units target to the closest unit
@@ -232,10 +234,10 @@ func _attackTarget(unitID: int, targetID) -> void:
 		var victimPos: Vector2 = _unitPositions[targetID]
 		var attackDir: Vector2 = (victimPos - instegatorPos).normalized()
 	
-		var instegator: Unit = _unitNodes[targetID]
+		var instegator: Unit = _unitNodes[unitID]
 		var victim: Unit = _unitNodes[targetID]
 	
-		var randKnockback: float = randf_range(4,7)
+		var randKnockback: float = randf_range(9,12)
 		var endPos2D: Vector2 = victimPos + (attackDir * randKnockback)
 		var attackPos: Vector3 = instegator.position + Vector3(attackDir.x, 0, attackDir.y)
 		instegator.Attack(attackPos)
