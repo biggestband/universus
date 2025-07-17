@@ -12,8 +12,7 @@ const _unitRotSpeed: float = .5
 const _unitStopDist: float = 2
 
 # Unit Placement
-const _unitSeparation: float = 2
-const _offsetFromCenter: float = 20
+const _offsetFromCenter: float = 40
 
 # --- System vars ---
 
