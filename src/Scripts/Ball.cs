@@ -10,6 +10,7 @@ public partial class Ball : RigidBody3D {
           gravityTiltAngle = 0.1f;
 
     float gravityTileRad;
+    float gravityScale = 0;
 
     [Export]
     float preferDownwardAngleFactor = 0.2f;
@@ -25,20 +26,21 @@ public partial class Ball : RigidBody3D {
 
     Tween pegTween;
 
-    public override void _Ready() {
-        //sprite = GetNode<Sprite2D>("Sprite2D");
+    public override void _EnterTree() {
         BodyEntered += OnBodyEntered;
         random = new();
         randomAngle = float.DegreesToRadians(randomAngleDegrees);
         gravityTileRad = float.DegreesToRadians(gravityTiltAngle);
+        gravityScale = GravityScale;
     }
 
     public void Setup() {
         pegTween?.Kill();
         Enabled = true;
-        // Position = Vector3.Zero;
+        mesh.Visible = true;
         Rotation = Vector3.Zero;
         LinearVelocity = Vector3.Zero;
+        GravityScale = gravityScale;
         OverridePhysicsPosition(GlobalPosition);
     }
 

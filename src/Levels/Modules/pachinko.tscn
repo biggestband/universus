@@ -457,8 +457,10 @@ textMovePosition = NodePath("../../../MovePosition")
 snapDistance = 0.1
 
 [node name="Ball" parent="Pachinko" instance=ExtResource("5_cukox")]
+physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131743, 1.60061, 0)
 gravity_scale = 0.8
+continuous_cd = true
 minSpeed = 0.5
 
 [node name="Ball Holder" parent="Pachinko" node_paths=PackedStringArray("ball") instance=ExtResource("10_1g62i")]
