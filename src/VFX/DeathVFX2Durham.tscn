@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://5bip8qcxc4qb"]
 
 [ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="1_28pi5"]
-[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://VFX2/Textures/T_PerlinNoise_Tiled.png" id="2_rin58"]
+[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://Pngs/T_PerlinNoise_Tiled.png" id="2_rin58"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bx2os"]
 render_priority = 0

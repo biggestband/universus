@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bmbh4lbslu4mv"]
 
-[ext_resource type="Shader" uid="uid://dy3uaex154icp" path="res://assets/3D/Materials/Shaders/VS_Environment_Unlit_01.tres" id="1_77shf"]
+[ext_resource type="Shader" uid="uid://dy3uaex154icp" path="res://Assets/3D/Materials/Shaders/VS_Environment_Unlit_01.tres" id="1_77shf"]
 
 [sub_resource type="Gradient" id="Gradient_se6cg"]
 interpolation_mode = 1
