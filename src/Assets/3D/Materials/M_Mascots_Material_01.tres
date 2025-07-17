@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c86men5vw8dth"]
+
+[ext_resource type="Shader" uid="uid://dy3uaex154icp" path="res://assets/3D/Materials/Shaders/VS_Environment_Shader_01.tres" id="1_wdes5"]
+[ext_resource type="Texture2D" uid="uid://8hftg4occuc7" path="res://assets/3D/Textures/Mascot_texture_main.png" id="2_nxp41"]
+
+[sub_resource type="Gradient" id="Gradient_se6cg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.72973)
+colors = PackedColorArray(0.0144187, 0.0132122, 0.0247938, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_krgw0"]
+gradient = SubResource("Gradient_se6cg")
+fill_to = Vector2(1, 1)
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wdes5")
+shader_parameter/Albedo = true
+shader_parameter/Texture2DParameter = ExtResource("2_nxp41")
+shader_parameter/DefaultColour = Color(0, 0, 0, 1)
+shader_parameter/SpecularColor = Color(0.126624, 0.126624, 0.126624, 1)
+shader_parameter/shadow_texture = SubResource("GradientTexture2D_krgw0")
+shader_parameter/shadow_threshold = 0.3
+shader_parameter/specular_threshold = 0.91
+shader_parameter/specular_strenght = 0.5
+shader_parameter/highlight_threshold = 1.0
+shader_parameter/only_colored_specular = true

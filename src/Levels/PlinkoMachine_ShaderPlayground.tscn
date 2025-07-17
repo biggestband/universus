@@ -1,5 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://drrm4mva7g5o8"]
 
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://xs3m3vvuq4ul" path="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_73add"]
 [ext_resource type="Material" uid="uid://3t4cnwm18p6o" path="res://assets/3D/Materials/M_ReflectionProbe_Material_01.tres" id="2_ju1wm"]
 [ext_resource type="PackedScene" uid="uid://kbf2g21sf334" path="res://assets/3D/FBX/SM_Peg_Model_01.fbx" id="3_wlj6p"]
@@ -7,6 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://c0jaifjejo5a0" path="res://assets/3D/FBX/SM_PlinkoBall_Model_01.fbx" id="4_b4nkp"]
 [ext_resource type="Material" uid="uid://341fsq0eieyx" path="res://assets/3D/Materials/M_DCColourPalette_Material_01.tres" id="5_7ej64"]
 [ext_resource type="PackedScene" uid="uid://hj8eqs6our68" path="res://assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx" id="5_b4nkp"]
+=======
+[ext_resource type="PackedScene" uid="uid://c8ienxil3pp1p" path="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_73add"]
+[ext_resource type="Material" uid="uid://3t4cnwm18p6o" path="res://assets/3D/Materials/M_ReflectionProbe_Material_01.tres" id="2_ju1wm"]
+[ext_resource type="PackedScene" uid="uid://b8a6a18n3ssvm" path="res://Assets/3D/FBX/SM_Peg_Model_01.fbx" id="3_wlj6p"]
+[ext_resource type="Material" uid="uid://bdy63ayvmn0x5" path="res://assets/3D/Materials/M_DCEmissive_Material_01.tres" id="4_8w05h"]
+[ext_resource type="PackedScene" uid="uid://wp2ea7fotscy" path="res://Assets/3D/FBX/SM_PlinkoBall_Model_01.fbx" id="4_b4nkp"]
+[ext_resource type="Material" uid="uid://341fsq0eieyx" path="res://assets/3D/Materials/M_DCColourPalette_Material_01.tres" id="5_7ej64"]
+[ext_resource type="PackedScene" uid="uid://dtkk2l8bwbgte" path="res://assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx" id="5_b4nkp"]
+>>>>>>> Stashed changes
 
 [sub_resource type="SphereMesh" id="SphereMesh_dj0uy"]
 
@@ -70,15 +80,6 @@ environment_mode = 0
 camera_attributes = SubResource("CameraAttributesPractical_7ej64")
 light_data = SubResource("LightmapGIData_8w05h")
 
-[node name="SM_PlinkoMachine_Model_01" parent="." instance=ExtResource("1_73add")]
-
-[node name="SM_PlinkoMachine_Model_02" parent="." instance=ExtResource("1_73add")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43192, 0, 0)
-
-[node name="SM_Plinko_mesh_01" parent="SM_PlinkoMachine_Model_02" index="0"]
-surface_material_override/0 = ExtResource("4_8w05h")
-surface_material_override/2 = ExtResource("5_7ej64")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 layers = 0
 
@@ -87,16 +88,20 @@ layers = 0
 [node name="SM_Peg_Model_01" parent="." instance=ExtResource("3_wlj6p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0450789, 0.0535676, -0.00106914)
 
-[node name="SM_Peg_Instance_01" parent="SM_Peg_Model_01" index="0"]
-instance_shader_parameters/peg_brightness = 0.0
-instance_shader_parameters/peg_emission = 1.0
-instance_shader_parameters/peg_size = 0.0
-
 [node name="SM_PlinkoBall_Model_01" parent="." instance=ExtResource("4_b4nkp")]
 
 [node name="SM_PlinkoClaw_Model_01" parent="." instance=ExtResource("5_b4nkp")]
 
-[editable path="SM_PlinkoMachine_Model_01"]
-[editable path="SM_PlinkoMachine_Model_02"]
+[node name="SM_PlinkoMachine_Model_01" parent="." instance=ExtResource("1_73add")]
+
+[node name="SM_PlinkoMachine_Model_02" parent="." instance=ExtResource("1_73add")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+
+[node name="SM_Plinko_mesh_01" parent="SM_PlinkoMachine_Model_02" index="0"]
+surface_material_override/0 = ExtResource("4_8w05h")
+surface_material_override/2 = ExtResource("5_7ej64")
+
 [editable path="SM_Peg_Model_01"]
 [editable path="SM_PlinkoClaw_Model_01"]
+[editable path="SM_PlinkoMachine_Model_01"]
+[editable path="SM_PlinkoMachine_Model_02"]

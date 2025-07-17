@@ -301,8 +301,12 @@ void fragment() {
 
 }
 "
+<<<<<<< Updated upstream
 graph_offset = Vector2(-1432.48, -586.833)
 nodes/fragment/-1/position = Vector2(0, 0)
+=======
+graph_offset = Vector2(100.149, -197.331)
+>>>>>>> Stashed changes
 nodes/fragment/0/position = Vector2(2000, -220)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_gc6ks")
 nodes/fragment/2/position = Vector2(-1220, -440)
