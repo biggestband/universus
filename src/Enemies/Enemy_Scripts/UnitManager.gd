@@ -30,10 +30,6 @@ var _armyBUnit: Resource = preload("res://Enemies/Enemy_Prefabs/lord_Unit.tscn")
 var _armyAReserves: int 
 var _armyBReserves: int 
 
- # The amount of troops on the field
-var _armyAActiveUnits: int
-var _armyBActiveUnits: int
-
 var _totalUnits: int
 var _currentPartitionIndex: int
 var _partitionSize: int
@@ -59,6 +55,7 @@ func _initUnitPool() -> void:
 	# Generate the armies
 	_spawnArmy(_maxActiveUnitsPerTeam, true, 0)
 	_spawnArmy(_maxActiveUnitsPerTeam, false, _maxActiveUnitsPerTeam)
+	_updateVisualalizedNodes()
 	
 	_startBattle()
 
@@ -74,10 +71,8 @@ func _startBattle() -> void:
 	seed(randSeed)
 	
 		# Start the first batch of troops
-	for u in _maxActiveUnitsPerTeam:
-		_requestUnit(true)
-	for u in _maxActiveUnitsPerTeam:
-		_requestUnit(false)
+	for u in _unitNodes:
+		_respawnUnit(u._unitID)
 
 func _endBattle():
 	pass
@@ -102,14 +97,14 @@ func _process(_delta: float) -> void:
 
 func _spawnArmy(size: int, isArmyA: bool, idOffset: int) -> void:	
 	for i in size:
-		_spawnUnit(i + idOffset, isArmyA)
+		_createUnitInstance(i + idOffset, isArmyA)
 
 #endregion
 
 #region Unit Management
 
 # Creates a unit node
-func _spawnUnit(unitID: int, isArmyA: bool) -> void:
+func _createUnitInstance(unitID: int, isArmyA: bool) -> void:
 	
 	# Find mesh
 	var unitMesh: Resource = _armyAUnit if isArmyA else _armyBUnit
@@ -117,50 +112,39 @@ func _spawnUnit(unitID: int, isArmyA: bool) -> void:
 	# Spawn the unit node
 	var instance: Unit = unitMesh.instantiate()
 	_unitNodes[unitID] = instance
-	add_child(instance)
-	instance.OnDie.connect(_onUnitDie)
-	instance.SetupNode(unitID, isArmyA)
-
-# Attempts to pull a unit node from the pool and initiate them
-func _requestUnit(isArmyA: bool) -> void:
-	var teamHealth: int = _armyAReserves if isArmyA else _armyBReserves
-	var activeUnits: int = _armyAActiveUnits if isArmyA else _armyBActiveUnits
 	
-	if(teamHealth >= 1 && activeUnits < _maxActiveUnitsPerTeam):
-		var start: int = 0 if isArmyA else _maxActiveUnitsPerTeam
-		var end: int = _maxActiveUnitsPerTeam if isArmyA else _totalUnits
-		var unitSpawned: bool = false
+	# Choose field side
+	var fieldSide: int = 1 if isArmyA else -1
+	var offsetFromCenter: float = _offsetFromCenter * fieldSide
+	var startPos: Vector2 = _getRandOffset(Vector2(offsetFromCenter, 1))
+	_prevUnitPositions[unitID] = startPos
+	_unitPositions[unitID] = startPos
+	
+	add_child(instance)
+	instance.OnDie.connect(_respawnUnit)
+	instance.SetupUnit(unitID, isArmyA)
+
+# Resets a unit and moves it back to its teams spawn
+func _respawnUnit(unitID: int) -> void:
+	var unitNode: Unit = _unitNodes[unitID]
+	var isArmyA: bool = unitNode.IsArmyA()
+	var teamHealth: int = _armyAReserves if isArmyA else _armyBReserves
+	
+	# Replace the unit if the team has units in reserves
+	if(teamHealth >= 1):
 		
-		# Find the first inactive unit from the team
-		for nodeID in range(start, end):
-			if(_isUnitSimulated(nodeID)):
-				continue
-			var unitNode: Unit = _unitNodes[nodeID]
-			
-			# Choose field side
-			var fieldSide: int = 1 if isArmyA else -1
-			var offsetFromCenter: float = _offsetFromCenter * fieldSide
-			var startPos: Vector2 = _getRandOffset(Vector2(offsetFromCenter, 1))
-			_prevUnitPositions[nodeID] = startPos
-			_unitPositions[nodeID] = startPos
-			
-			if(isArmyA):
-				_armyAReserves = max(0, _armyAReserves - 1)
-				_armyAActiveUnits = clamp(_armyAActiveUnits + 1, 0, _maxActiveUnitsPerTeam)
-				print("A reserves: " + str(_armyAReserves))
-				print("Army A Active Units" + str(_armyAActiveUnits))
-			else:
-				_armyBReserves = max(0, _armyBReserves - 1)
-				_armyBActiveUnits = clamp(_armyBActiveUnits + 1, 0, _maxActiveUnitsPerTeam)
-				print("B reserves:" + str(_armyBReserves))
-				print("Army B Active Units" + str(_armyBActiveUnits))
-			
-			unitNode.InitNode()	
-			unitSpawned = true
-			break
+		# Choose field side
+		var fieldSide: int = 1 if isArmyA else -1
+		var offsetFromCenter: float = _offsetFromCenter * fieldSide
+		var startPos: Vector2 = _getRandOffset(Vector2(offsetFromCenter, 1))
+		_prevUnitPositions[unitID] = startPos
+		_unitPositions[unitID] = startPos
 		
-		if  !unitSpawned:
-			print("No available unit to spawn for team: ", isArmyA)
+		if(isArmyA):
+			_armyAReserves = max(0, _armyAReserves - 1)
+		else:
+			_armyBReserves = max(0, _armyBReserves - 1)
+		unitNode.InitUnit()
 
 #endregion
 
@@ -234,27 +218,13 @@ func _updateVisualalizedNodes() -> void:
 			unit.transform = unitTransform
 #endregion
 
-#region Signals
-
-# Should be called on a units death after it resets itself
-func _onUnitDie(_unitID: int, isArmyA: bool) -> void:
-	
-	if(isArmyA):
-		_armyAActiveUnits -= 1
-	else:
-		_armyBActiveUnits -= 1
-	
-	# Request a replacemnt
-	_requestUnit(isArmyA)
-#endregion
-
 #region Helper Functions
 
 func _isUnitSimulated(unitID: int) -> bool:
 	var unit: Unit = _unitNodes[unitID]
 	var isActive: bool = unit.GetUnitActive()
 	var isDead: bool = unit.currentState == Unit.HealthState.Dead
-	return unitID != -1 &&  isActive && !isDead
+	return unitID != -1 && isActive && !isDead && !unit._isTweening
 
 func _attackTarget(unitID: int, targetID) -> void:
 	if(_isUnitSimulated(targetID)):
@@ -262,10 +232,13 @@ func _attackTarget(unitID: int, targetID) -> void:
 		var victimPos: Vector2 = _unitPositions[targetID]
 		var attackDir: Vector2 = (victimPos - instegatorPos).normalized()
 	
+		var instegator: Unit = _unitNodes[targetID]
 		var victim: Unit = _unitNodes[targetID]
 	
 		var randKnockback: float = randf_range(4,7)
 		var endPos2D: Vector2 = victimPos + (attackDir * randKnockback)
+		var attackPos: Vector3 = instegator.position + Vector3(attackDir.x, 0, attackDir.y)
+		instegator.Attack(attackPos)
 		victim.TakeDamage(endPos2D)
 		_prevUnitPositions[targetID] = endPos2D
 		_unitPositions[targetID] = endPos2D

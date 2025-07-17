@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://b545553ktofi7"]
 
 [ext_resource type="Texture2D" uid="uid://dn2h5g5b72hcr" path="res://Pngs/Flare00.PNG" id="1_aolwa"]
-[ext_resource type="Script" uid="uid://d2bxxlybjai3a" path="res://Scripts/Vfx3D.gd" id="1_yx6li"]
+[ext_resource type="Script" path="res://Scripts/Vfx3D.gd" id="1_yx6li"]
 [ext_resource type="Material" uid="uid://c2go1i1lu2m33" path="res://Shaders/DeathVFX.tres" id="2_yx6li"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifv6g"]
@@ -161,6 +161,7 @@ process_material = SubResource("ParticleProcessMaterial_er25u")
 draw_pass_1 = SubResource("QuadMesh_ifv6g")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_xrikd")
 emitting = false
 amount = 10

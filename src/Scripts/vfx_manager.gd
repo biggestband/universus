@@ -26,7 +26,3 @@ func _spawnParticles2D(particle: VFX2D, _pos: Vector2) -> void:
 	var particle_2d = particles2D[particle].instantiate()
 	add_child(particle_2d)
 	particle_2d.position = _pos
-	
-	# temp for testing
-	particle_2d.scale.x = 10
-	particle_2d.scale.y = 10

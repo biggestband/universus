@@ -2,6 +2,9 @@ class_name Unit
 
 extends Node3D
 
+const _knockbackDur: float = .5
+const _stunDur: float = 1
+
 # --- System vars ---
 
 # Signals
@@ -11,17 +14,19 @@ signal OnDie(unitID: int, isArmyA: bool)
 @onready var mesh: Node3D = $Mesh
 
 # Knockback
-@export var _knockbackDur: float = .4
 var _isTweening: bool = false
-var _lerpStartPos: Vector3
-var _lerpEndPos: Vector3
-var _lerpTimer: float
-var _lerpValXZ: float
-var _lerpValY: float
+var _lerpStartPos: Vector3 = Vector3.ZERO
+var _lerpEndPos: Vector3 = Vector3.ZERO
+var _lerpStartRot: Vector3 = Vector3.ZERO
+var _lerpEndRot: Vector3 = Vector3.ZERO
+var _knockbackTimer: float = 0
+var _lerpValXZ: float = 0
+var _lerpValY: float = 0
 
 # State
 var _unitID: int = -1
 var _isArmyA: bool
+var _stunTimer: float = 0
 
 var _isUnitActive: bool = false
 var _targetID: int = -1
@@ -29,17 +34,33 @@ enum HealthState { Healthy, Dazed, Injured, Dead }
 var currentState = HealthState.Healthy
 
 func _process(delta: float) -> void:
-	if(_isTweening && _lerpTimer <= _knockbackDur):
-		_lerpTimer += delta
-		var scaledLerp: float = _lerpTimer * (1 / _knockbackDur)
+	# Knockback timer
+	if(_isTweening && _knockbackTimer <= _knockbackDur):
+		# Scale to duration
+		_knockbackTimer += delta
+		var scaledLerp: float = _knockbackTimer * (1 / _knockbackDur)
 		_lerpValY = easeOutInCubic(scaledLerp)
 		_lerpValXZ = easeOutCubic(scaledLerp)
+		
+		# Pos interpolation
 		var horiz: Vector3 = lerp(_lerpStartPos, _lerpEndPos, _lerpValXZ)
 		var vert: float = _lerpEndPos.y + (_lerpValY * 2)
 		self.position = Vector3(horiz.x, vert, horiz.z)
-		if(_lerpTimer >= _knockbackDur):
+		
+		# Rot interpolation
+		if(currentState == HealthState.Injured):
+			var new_rot: Vector3 = lerp(_lerpStartRot, _lerpEndRot, _lerpValXZ)
+			self.rotation = new_rot
+	
+	# Stun Timer
+	if(_isTweening && _knockbackTimer >= _knockbackDur && _stunTimer <= _stunDur):
+		_stunTimer += delta
+		
+		# Stop tweening
+		if(_stunTimer >= _stunDur):
 			_isTweening = false
-			_lerpTimer = 0
+			_knockbackTimer = 0
+			_stunTimer = 0
 			_lerpValXZ = 0.0
 			_lerpValY = 0.0
 			
@@ -59,36 +80,41 @@ func IsArmyA() -> bool:
 	return _isArmyA
 
 # Should be called when a unit is first created
-func SetupNode(unitID: int, isArmyA: bool) -> void:
-	ResetNode()
+func SetupUnit(unitID: int, isArmyA: bool) -> void:
+	ResetUnit()
 	_unitID = unitID
 	_isArmyA = isArmyA
 
 # Should be called when a unit is being sent into battle
-func InitNode() -> void:
+func InitUnit() -> void:
 	_isUnitActive = true
 	currentState = HealthState.Healthy
 	
 	mesh.show()
 	process_mode = 1
+	
+	await get_tree().process_frame
+	VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.SpawnOTU if _isArmyA else VfxManager.VFX3D.SpawnDurham, self.position)
 
-func ResetNode() -> void:
+func ResetUnit() -> void:
 	_isUnitActive = false
 	mesh.hide()
 	process_mode = 0
+	self.rotation = Vector3(0,0,0)
 	
 	# Reset system vars related to knockback tweening
 	_isTweening = false
-	_lerpTimer = 0.0
+	_knockbackTimer = 0.0
 	_lerpValXZ = 0.0
 	_lerpValY = 0.0
 	_lerpStartPos = Vector3.ZERO
 	_lerpEndPos = Vector3.ZERO
+	_lerpStartRot = Vector3.ZERO
+	_lerpEndRot = Vector3.ZERO
 	
 	# Reset state vars
 	_targetID = -1
-
-#region
+#endregion
 
 #region Targeting
 
@@ -111,12 +137,19 @@ func TakeDamage(endPosition: Vector2) -> void:
 	_isTweening = true
 	_lerpStartPos = self.position;
 	_lerpEndPos = Vector3(endPosition.x, 1, endPosition.y)
+	_lerpStartRot = self.rotation
+	_lerpEndRot = _lerpStartRot + Vector3(1, 0, 0) * deg_to_rad(90)
+
+# Should be called when a unit attempts to attack another
+func Attack(attackPosition: Vector3) -> void:
+	VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.Hit, attackPosition)
 
 func _die() -> void:
-	ResetNode()
+	ResetUnit()
+	OnDie.emit(_unitID)
 	
-	await get_tree().process_frame
-	OnDie.emit(_unitID, _isArmyA)
+	await get_tree().process_frame	
+	VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.DeathOTU if _isArmyA else VfxManager.VFX3D.DeathDurham, self.position)
 
 #endregion
 
