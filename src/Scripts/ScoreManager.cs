@@ -4,7 +4,6 @@ using Godot;
 public partial class ScoreManager : Node {
     [Export]
     float newHitScore = 0.2f, reHitScore = 0.1f;
-    public static event Action<ScoreData> OnScoreChanged = delegate { };
     public static float Score { get; private set; }
     public static float HighScore { get; private set; }
 
@@ -14,21 +13,42 @@ public partial class ScoreManager : Node {
         Score = 0;
         NewHitScore = newHitScore;
         ReHitScore = reHitScore;
-    }
 
-    public static void IncreaseScore(HitType type) {
-        var amount = type switch {
+        PachinkoEventManager.Instance.OnHit += IncreaseScore;
+        PachinkoEventManager.Instance.OnFinalScore += FinalScore;
+    }
+    
+    public override void _ExitTree() {
+        PachinkoEventManager.Instance.OnHit -= IncreaseScore;
+        PachinkoEventManager.Instance.OnFinalScore += FinalScore;
+    }
+    void FinalScore(float baseScore, float multiplier) {
+        Score = baseScore * multiplier;
+        EvaluateHighScore();
+    }
+    
+    public static void IncreaseScore(int type) {
+        var amount = (HitType)type switch {
             HitType.NewHit => NewHitScore,
             HitType.ReHit =>  ReHitScore,
             _ => 0,
         };
-        Score += amount;
+        SetScore(Score, Score + amount);
+    }
+    
+    static void SetScore(float oldScore, float score) {
+        Score = score;
         EvaluateHighScore();
-        OnScoreChanged.Invoke(new(Score, amount, type));
+        PachinkoEventManager.Instance.Score(oldScore, Score);
     }
 
     public static void EvaluateHighScore() {
         HighScore = Mathf.Max(Score, HighScore);
+        PachinkoEventManager.Instance.HighScore(HighScore);
+    }
+
+    public static void ResetScore() {
+        SetScore(0, 0);
     }
 }
 

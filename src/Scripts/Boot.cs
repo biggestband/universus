@@ -7,13 +7,17 @@ public partial class Boot : Node
     private int expectedClientCount = 2;
     private int trackedClientCount = 0;
 
+    [Export]
+    private PackedScene launchScene;
+
     public override void _Ready()
     {
-        if(OS.HasFeature("Server"))
+        if (OS.HasFeature("Server"))
         {
-            expectedClientCount = ArgumentHandler.instance.GetArgumentValue("client-count").ToInt();
+            if (!ArgumentHandler.instance.IsArgumentIncluded("client-count")) expectedClientCount = 2;
+            else expectedClientCount = ArgumentHandler.instance.GetArgumentValue("client-count").ToInt();
             InitializeServer(expectedClientCount);
-            Multiplayer.PeerConnected += (val) => {BumpPlayerCount();};
+            Multiplayer.PeerConnected += (val) => { BumpPlayerCount(); };
         }
         else
         {
@@ -30,11 +34,17 @@ public partial class Boot : Node
                 lineEdit.TextSubmitted += InitializeClient;
             }
 
-            ArmySyncer.instance.AllClientNamesChosen += () => 
+            ArmySyncer.instance.AllClientNamesChosen += () =>
             {
                 GD.Print(Multiplayer.GetUniqueId() + ": " + "Finished boot, go to new scene");
                 //Add scene transition here
+                GetTree().ChangeSceneToPacked(launchScene);
             };
+        }
+
+        if (ArgumentHandler.instance.IsArgumentIncluded("copy-ip"))
+        {
+            GetIps();
         }
     }
 
@@ -58,10 +68,60 @@ public partial class Boot : Node
     {
         trackedClientCount += 1;
 
-        if(trackedClientCount == expectedClientCount)
+        if (trackedClientCount == expectedClientCount)
         {
-            ArmySyncer.instance.AllClientsjoined();
+            ArmySyncer.instance.AllClientsJoined();
             GD.Print("All Clients joined");
         }
+    }
+
+    private void GetIps()
+    {
+        switch (ArgumentHandler.instance.GetArgumentValue("copy-ip"))
+        {
+            case "self":
+                DisplayServer.ClipboardSet("127.0.0.1");
+                break;
+            case "local":
+                FindLocalIp();
+                break;
+            case "public":
+                FindPublicIp();
+                break;
+        }
+    }
+    
+    private void FindLocalIp()
+    {
+        string output = "";
+        string environment = "";
+
+        if (OS.HasFeature("windows")) environment = "COMPUTERNAME";
+        else if (OS.HasFeature("linux")) environment = "HOSTNAME";
+
+        if (OS.HasEnvironment(environment)) output = IP.ResolveHostname(OS.GetEnvironment(environment), IP.Type.Ipv4);
+
+        GD.Print("local ip: " + output);
+        DisplayServer.ClipboardSet(output);
+    }
+
+    private void FindPublicIp()
+    {
+        var httpRequest = new HttpRequest();
+        AddChild(httpRequest);
+        httpRequest.RequestCompleted += ReceivePublicIp;
+
+        Error error = httpRequest.Request("https://api.ipify.org/");
+        if (error != Error.Ok)
+        {
+            GD.PushError("An error occurred in the HTTP request.");
+        }
+    }
+
+    private void ReceivePublicIp(long result, long responseCode, string[] headers, byte[] body)
+    {
+        string output = body.GetStringFromUtf8();
+        GD.Print("public ip: " + output);
+        DisplayServer.ClipboardSet(output);
     }
 }

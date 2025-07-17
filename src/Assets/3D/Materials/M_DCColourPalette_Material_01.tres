@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://341fsq0eieyx"]
 
-[ext_resource type="Shader" uid="uid://bos2icgng1u3p" path="res://assets/3D/Materials/Shaders/VS_ColourPalette_Shader_01.tres" id="1_iv5py"]
+[ext_resource type="Shader" uid="uid://cshvwo4k4laf6" path="res://assets/3D/Materials/Shaders/VS_ColourPalette_Shader_01.tres" id="1_iv5py"]
 
 [resource]
 resource_name = "M_ColourPalette_Material_01"

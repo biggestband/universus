@@ -1,7 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://54rbipl8538f"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bp0otcrbr7cw5"]
 
 [ext_resource type="Shader" uid="uid://c3xidudujjlcu" path="res://assets/3D/Materials/Shaders/VS_Metallic_Shader_01.tres" id="1_xxm64"]
+[ext_resource type="Texture2D" uid="uid://ckng8i6e6ntl3" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor_1.png" id="2_h7tji"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_xxm64")
+shader_parameter/LightMoveSpeed = 0.1
+shader_parameter/LEDTexture = ExtResource("2_h7tji")

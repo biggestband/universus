@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj8offd7hxtll"]
+[gd_scene load_steps=4 format=3 uid="uid://bf4t0of5pjkbp"]
 
-[ext_resource type="PackedScene" uid="uid://chxmgqolu0gtr" path="res://Assets/3D/FBX/LV_UniversusPolonskyCommons.fbx" id="1_uw3to"]
-[ext_resource type="Material" uid="uid://bmbh4lbslu4mv" path="res://Assets/3D/Materials/M_Environment_Unlit.tres" id="2_ge031"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_hotkd"]
+[ext_resource type="PackedScene" uid="uid://chxmgqolu0gtr" path="res://assets/3D/FBX/LV_UniversusPolonskyCommons.fbx" id="1_uw3to"]
+[ext_resource type="PackedScene" uid="uid://bljaoodv6citb" path="res://assets/3D/FBX/Mascots/Hunter DONE (2).fbx" id="2_ge031"]
+[ext_resource type="PackedScene" uid="uid://cfh1wn0bdeqf0" path="res://assets/3D/FBX/Mascots/Lord DONE (1).fbx" id="3_hotkd"]
 
 [node name="Environments" type="Node3D"]
 
 [node name="LV_UniversusPolonskyCommons" parent="." instance=ExtResource("1_uw3to")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.4956, 3.47692, 3.06617)
-material_override = ExtResource("2_ge031")
-mesh = SubResource("SphereMesh_hotkd")
+[node name="Hunter DONE (2)" parent="." instance=ExtResource("2_ge031")]
+transform = Transform3D(-0.163153, 0.000964674, -0.9866, 0.00130176, 0.999999, 0.000762499, 0.9866, -0.00115991, -0.163154, -50.6416, -1.36282, 4.09481)
+
+[node name="Lord DONE (1)" parent="." instance=ExtResource("3_hotkd")]
+transform = Transform3D(-0.98585, 0, 0.167629, 0, 1, 0, -0.167629, 0, -0.98585, -56.775, -2.05359, 4.22914)

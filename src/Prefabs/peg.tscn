@@ -9,6 +9,7 @@ radius = 4.0
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_4sk7o")
 hitColor = Color(1, 1, 1, 1)
+unHitScale = 2.0
 hitDuration = 0.4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

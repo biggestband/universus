@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://6qy1hcogkdih"]
+[gd_scene load_steps=18 format=3 uid="uid://6qy1hcogkdih"]
 
 [ext_resource type="Script" uid="uid://bhu0skt2crass" path="res://Scripts/PegSpawner.cs" id="1_7v7sl"]
 [ext_resource type="PackedScene" uid="uid://tiabcg0wvd6p" path="res://Prefabs/peg.tscn" id="2_dn3v3"]
@@ -6,18 +6,21 @@
 [ext_resource type="Script" uid="uid://olh6s7hhmjlp" path="res://Scripts/BallHolder.cs" id="3_rc3no"]
 [ext_resource type="PackedScene" uid="uid://bwdqmoopixmik" path="res://Prefabs/ball.tscn" id="4_bs7w1"]
 [ext_resource type="Script" uid="uid://bvwkdmcspwu2y" path="res://Scripts/ScoreManager.cs" id="4_oxjyi"]
+[ext_resource type="Script" uid="uid://dc7a88xb3g0ta" path="res://Scripts/Pachinko.cs" id="5_53us7"]
 [ext_resource type="PackedScene" uid="uid://b7rmsfy01hvyy" path="res://Prefabs/killzone.tscn" id="5_dn3v3"]
+[ext_resource type="Script" uid="uid://bm4xvye1jbi5k" path="res://Scripts/PegContainer.cs" id="6_xuxwr"]
 [ext_resource type="Script" uid="uid://drhvbk4j4b65t" path="res://Scripts/ScoreText.cs" id="8_oxjyi"]
 [ext_resource type="Script" uid="uid://dalxnqq33ph8s" path="res://Scripts/HighscoreText.cs" id="9_vqhnx"]
 [ext_resource type="Script" uid="uid://cpifuqhrmnvyh" path="res://Scripts/LandingRegion.cs" id="10_32jtq"]
+[ext_resource type="PackedScene" uid="uid://blfoyworu7gdm" path="res://Prefabs/fps-label.tscn" id="10_wdyx6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ax1vs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dn3v3"]
 size = Vector2(434, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_32jtq"]
-size = Vector2(294, 102.22)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdyx6"]
+size = Vector2(400, 100)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_vqhnx"]
 
@@ -39,12 +42,15 @@ script = ExtResource("3_bs7w1")
 
 [node name="ScoreManager" type="Node" parent="Systems"]
 script = ExtResource("4_oxjyi")
+newHitScore = 0.1
+reHitScore = 0.05
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 
 [node name="Peg Container" type="Node2D" parent="."]
 position = Vector2(0, -15)
+script = ExtResource("6_xuxwr")
 
 [node name="Peg 0x0" parent="Peg Container" instance=ExtResource("2_dn3v3")]
 position = Vector2(-181.25, -210)
@@ -465,29 +471,29 @@ shape = SubResource("WorldBoundaryShape2D_ax1vs")
 [node name="Killzone" parent="." instance=ExtResource("5_dn3v3")]
 position = Vector2(-1, 535)
 scale = Vector2(3.25714, 3)
-collision_mask = 2
+collision_layer = 128
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("RectangleShape2D_dn3v3")
 
 [node name="Landing Region" type="Area2D" parent="." node_paths=PackedStringArray("text", "textMovePosition")]
-position = Vector2(-4, 276)
+position = Vector2(0, 278)
 collision_mask = 2
 script = ExtResource("10_32jtq")
 text = NodePath("Node2D/RichTextLabel")
 textMovePosition = NodePath("../Ball Holder")
-Height = 102.22
-Width = 294.0
+Width = 400.0
 snapDistance = 10.0
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Landing Region"]
-shape = SubResource("RectangleShape2D_32jtq")
+shape = SubResource("RectangleShape2D_wdyx6")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Landing Region"]
 z_index = -1
-scale = Vector2(294, 102.22)
+scale = Vector2(400, 100)
 texture = SubResource("CanvasTexture_vqhnx")
 metadata/_edit_lock_ = true
 
@@ -495,14 +501,14 @@ metadata/_edit_lock_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Landing Region/Node2D"]
 modulate = Color(0, 0, 0, 1)
-offset_left = -26.12
+offset_left = -37.0
 offset_top = -34.53
-offset_right = 32.88
+offset_right = 34.0
 offset_bottom = 34.47
 pivot_offset = Vector2(100.02, 50.79)
 theme_override_font_sizes/bold_font_size = 50
 bbcode_enabled = true
-text = "[b]20[/b]"
+text = "[b]x 5[/b]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -524,17 +530,21 @@ metadata/_edit_lock_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.07
-offset_bottom = 153.0
+anchor_bottom = 0.311
+offset_top = 56.0
+offset_bottom = 2556.88
 theme_override_font_sizes/normal_font_size = 75
 theme_override_font_sizes/bold_font_size = 75
 bbcode_enabled = true
 text = "[b]0[/b]"
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
 horizontal_alignment = 1
-vertical_alignment = 1
 script = ExtResource("8_oxjyi")
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -548,3 +558,12 @@ text = "Highscore:  0"
 horizontal_alignment = 2
 vertical_alignment = 1
 script = ExtResource("9_vqhnx")
+
+[node name="FPS Label" parent="CanvasLayer/Control" instance=ExtResource("10_wdyx6")]
+layout_mode = 0
+
+[node name="Pachinko" type="Node" parent="." node_paths=PackedStringArray("ballHolder", "pegContainer", "landingRegion")]
+script = ExtResource("5_53us7")
+ballHolder = NodePath("../Ball Holder")
+pegContainer = NodePath("../Peg Container")
+landingRegion = NodePath("../Landing Region")

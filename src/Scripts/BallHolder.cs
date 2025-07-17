@@ -17,12 +17,7 @@ public partial class BallHolder : Node2D {
         for (int i = 0; i < children.Count; i++) {
             if (children[i] is not Ball ball) continue;
             balls[i] = ball;
-            ball.Freeze = true;
         }
-        tween = CreateTween().SetLoops().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Quad);
-        tween.TweenProperty(this, "position:x", range, tweenTime).From(-range);
-        tween.TweenProperty(this, "position:x", -range, tweenTime).From(range);
-        active = true;
     }
 
     public override void _Process(double delta) {
@@ -32,5 +27,17 @@ public partial class BallHolder : Node2D {
             ball.Freeze = false;
         }
         active = false;
+    }
+    public void Setup() {
+        tween?.Kill();
+        tween = CreateTween().SetLoops().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Quad);
+        tween.TweenProperty(this, "position:x", range, tweenTime).From(-range);
+        tween.TweenProperty(this, "position:x", -range, tweenTime).From(range);
+        active = true;
+
+        foreach (Ball ball in balls) {
+            ball.Freeze = true;
+            ball.Setup();
+        }
     }
 }

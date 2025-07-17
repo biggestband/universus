@@ -45,28 +45,6 @@ _subresources={
 "M_Glass_Material_01": {
 "use_external/enabled": true,
 "use_external/path": "uid://b4me05yowposl"
-},
-"M_Metallic_Material_01": {
-"use_external/enabled": true,
-"use_external/path": "uid://54rbipl8538f"
-}
-},
-"meshes": {
-"SM_Plinko_Mesh_01": {
-"generate/lightmap_uv": 2,
-"generate/lods": 2,
-"generate/shadow_meshes": 2,
-"lods/normal_merge_angle": 60.0,
-"save_to_file/enabled": false,
-"save_to_file/path": ""
-},
-"SM_Plinko_Mesh_01_002": {
-"generate/lightmap_uv": 2,
-"generate/lods": 2,
-"generate/shadow_meshes": 2,
-"lods/normal_merge_angle": 60.0,
-"save_to_file/enabled": false,
-"save_to_file/path": ""
 }
 }
 }
