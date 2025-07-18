@@ -477,14 +477,13 @@ collision_mask = 128
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("RectangleShape2D_dn3v3")
 
-[node name="Landing Region" type="Area2D" parent="." node_paths=PackedStringArray("text", "textMovePosition")]
+[node name="Landing Region" type="Area2D" parent="." node_paths=PackedStringArray("textMovePosition", "text")]
 position = Vector2(0, 278)
 collision_mask = 2
 script = ExtResource("10_32jtq")
-text = NodePath("Node2D/RichTextLabel")
 textMovePosition = NodePath("../Ball Holder")
-Width = 400.0
 snapDistance = 10.0
+text = NodePath("Node2D/RichTextLabel")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Landing Region"]
@@ -562,8 +561,7 @@ script = ExtResource("9_vqhnx")
 [node name="FPS Label" parent="CanvasLayer/Control" instance=ExtResource("10_wdyx6")]
 layout_mode = 0
 
-[node name="Pachinko" type="Node" parent="." node_paths=PackedStringArray("ballHolder", "pegContainer", "landingRegion")]
+[node name="Pachinko" type="Node" parent="." node_paths=PackedStringArray("ballHolder", "pegContainer")]
 script = ExtResource("5_53us7")
 ballHolder = NodePath("../Ball Holder")
 pegContainer = NodePath("../Peg Container")
-landingRegion = NodePath("../Landing Region")

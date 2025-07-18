@@ -26,6 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://c6onv53dpu8ef" path="res://Assets/Audio/SFX/Dizzy/Dizzy SFX.wav" id="21_bwidg"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xwx3r"]
+random_pitch = 2.0
 streams_count = 4
 stream_0/stream = ExtResource("2_uoimk")
 stream_1/stream = ExtResource("3_jxngg")
@@ -89,6 +90,7 @@ soundEffects = {
 
 [node name="PlinkoPegBounceSFX" type="AudioStreamPlayer" parent="SFX/Plinko"]
 stream = SubResource("AudioStreamRandomizer_xwx3r")
+volume_db = 1.0
 max_polyphony = 5
 
 [node name="PlinkoScoreSFX" type="AudioStreamPlayer" parent="SFX/Plinko"]

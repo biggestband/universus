@@ -166,6 +166,8 @@ func TakeDamage(endPosition: Vector2) -> void:
 	_lerpEndPos = Vector3(endPosition.x, 1, endPosition.y)
 	_lerpStartRot = self.rotation
 	_lerpEndRot = _lerpStartRot + Vector3(1, 0, 0) * deg_to_rad(90)
+	
+	AudioManager.playSFX.emit(AudioManager.SFX.Dizzy)
 
 # Should be called when a unit attempts to attack another
 func Attack(attackPosition: Vector3) -> void:
@@ -180,6 +182,7 @@ func _die() -> void:
 	
 	await get_tree().process_frame	
 	VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.DeathOTU if _isArmyA else VfxManager.VFX3D.DeathDurham, self.position)
+	AudioManager.playSFX.emit(AudioManager.SFX.DeathPoof)
 
 #endregion
 

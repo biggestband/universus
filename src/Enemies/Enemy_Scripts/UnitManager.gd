@@ -92,6 +92,7 @@ func _ready() -> void:
 	
 	PachinkoEventManager.OnFinalScore.connect(_on_events_on_final_score)
 	PachinkoEventManager.OnPachinkoStart.connect(startPachinking)
+	PachinkoEventManager.OnHit.connect(hitSound)
 
 func _physics_process(delta: float) -> void:	
 	_stepUnitTargets(delta)
@@ -153,6 +154,8 @@ func _respawnUnit(unitID: int) -> void:
 			_armyBReserves = max(0, _armyBReserves - 1)
 		
 		unitNode.InitUnit()
+		
+		AudioManager.playSFX.emit(AudioManager.SFX.SpawningTroop)
 
 #endregion
 
@@ -252,6 +255,8 @@ func _attackTarget(unitID: int, targetID) -> void:
 		victim.TakeDamage(endPos2D)
 		_prevUnitPositions[targetID] = endPos2D
 		_unitPositions[targetID] = endPos2D
+		
+		AudioManager.playSFX.emit(AudioManager.SFX.Punch)
 
 func _findClosestTarget(unitID: int, isArmyA: bool) -> int:
 	var start: int = _maxActiveUnitsPerTeam if isArmyA else 0
@@ -289,15 +294,19 @@ func _getRandOffset(pos: Vector2) -> Vector2:
 
 
 func _on_events_on_final_score(baseScore: float, multiplier: float) -> void:
+	AudioManager.playSFX.emit(AudioManager.SFX.PlinkoGameScoring)
 	await get_tree().create_timer(1.0).timeout
 	plinkCam.current = false
 	fightCam.current = true
 	_startBattle(int(baseScore * multiplier), 32)
+	
+	AudioManager.changeBGM.emit(AudioManager.BGM.NormalBattle)
 
 func startPachinking() -> void:
 	fightCam.current = false
 	plinkCam.current = true
+	
+	AudioManager.change_bgm(AudioManager.BGM.Plinko)
 
-
-func _on_events_on_hit(hitType: int) -> void:
-	print("BALLS?")
+func hitSound(hitType: int):
+	AudioManager.playSFX.emit(AudioManager.SFX.PlinkoPeg)
