@@ -25,7 +25,7 @@ constant = 0.4
 operator = 2
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_8hiap"]
-constant = 0.5
+constant = 2.0
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_1h43u"]
 constant = 1.0
@@ -275,7 +275,7 @@ void fragment() {
 
 
 // FloatConstant:109
-	float n_out109p0 = 0.500000;
+	float n_out109p0 = 2.000000;
 
 
 // FloatOp:108
@@ -294,6 +294,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(1164.53, -219.579)
 nodes/fragment/0/position = Vector2(2000, -220)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_gc6ks")
 nodes/fragment/2/position = Vector2(-1220, -440)
@@ -369,4 +370,4 @@ nodes/fragment/116/node = SubResource("VisualShaderNodeFloatParameter_874ga")
 nodes/fragment/116/position = Vector2(-1960, -140)
 nodes/fragment/117/node = SubResource("VisualShaderNodeVectorCompose_20jsj")
 nodes/fragment/117/position = Vector2(-1680, -140)
-nodes/fragment/connections = PackedInt32Array(4, 0, 7, 0, 2, 0, 10, 0, 14, 0, 13, 1, 8, 0, 0, 4, 17, 0, 13, 0, 6, 0, 17, 0, 13, 0, 24, 0, 9, 0, 0, 3, 2, 0, 22, 0, 26, 0, 22, 1, 94, 0, 97, 0, 97, 0, 99, 0, 98, 0, 97, 1, 99, 0, 100, 0, 22, 0, 0, 0, 92, 0, 106, 0, 107, 0, 0, 9, 106, 1, 107, 1, 106, 0, 107, 0, 93, 0, 92, 0, 106, 2, 108, 0, 109, 0, 108, 1, 108, 0, 0, 10, 96, 0, 99, 1, 10, 0, 4, 0, 7, 0, 0, 5, 24, 0, 7, 1, 110, 0, 4, 1, 112, 0, 102, 1, 104, 0, 113, 1, 100, 0, 113, 0, 113, 0, 102, 0, 102, 0, 10, 1, 114, 0, 0, 2, 15, 0, 115, 0, 115, 0, 2, 0, 117, 0, 115, 1, 116, 0, 117, 0, 29, 0, 24, 1)
+nodes/fragment/connections = PackedInt32Array(4, 0, 7, 0, 2, 0, 10, 0, 14, 0, 13, 1, 8, 0, 0, 4, 17, 0, 13, 0, 6, 0, 17, 0, 13, 0, 24, 0, 9, 0, 0, 3, 2, 0, 22, 0, 26, 0, 22, 1, 94, 0, 97, 0, 97, 0, 99, 0, 98, 0, 97, 1, 99, 0, 100, 0, 22, 0, 0, 0, 92, 0, 106, 0, 106, 1, 107, 1, 106, 0, 107, 0, 93, 0, 92, 0, 106, 2, 108, 0, 109, 0, 108, 1, 96, 0, 99, 1, 10, 0, 4, 0, 7, 0, 0, 5, 24, 0, 7, 1, 110, 0, 4, 1, 112, 0, 102, 1, 104, 0, 113, 1, 100, 0, 113, 0, 113, 0, 102, 0, 102, 0, 10, 1, 114, 0, 0, 2, 15, 0, 115, 0, 115, 0, 2, 0, 117, 0, 115, 1, 116, 0, 117, 0, 29, 0, 24, 1, 108, 0, 0, 10, 107, 0, 0, 9)

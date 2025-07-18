@@ -12,7 +12,7 @@ script = ExtResource("1_0aqjv")
 mesh = NodePath("SM_Peg_Model_01/SM_Peg_Instance_01")
 hitEmission = 1.0
 hitScale = 3.0
-unHitScale = 1.0
+unHitScale = 0.46
 reHitScale = 0.0
 hitDuration = 0.4
 hitDelay = 0.1
@@ -26,8 +26,5 @@ transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 
 [node name="SM_Peg_Instance_01" parent="SM_Peg_Model_01" index="0"]
 transform = Transform3D(1, 0, 0, 0, -1.19209e-07, 1, 0, -1, -1.19209e-07, 0.000399843, -0.000408816, 0.000149071)
-instance_shader_parameters/peg_brightness = 0.15
-instance_shader_parameters/peg_emission = 1.0
-instance_shader_parameters/peg_size = 0.0
 
 [editable path="SM_Peg_Model_01"]

@@ -7,10 +7,13 @@ public partial class LandingRegion : Area3D {
     State currentState;
 
     [Export]
+    int multiplier = 0;
+
+    [Export]
     Node3D textMovePosition;
 
     [Export]
-    float snapDistance = 50f, attractionForce = 500f, shakeDistance = 60f;
+    float snapDistance = 50f, attractionForce = 500f, shakeDistance = 60f, moveRange = 0.01f, minMoveDuration = 0.75f, maxMoveDuration = 1.5f;
 
     [Export]
     CollisionShape3D collisionShape;
@@ -20,6 +23,7 @@ public partial class LandingRegion : Area3D {
 
     public override void _Ready() {
         var offset = collisionShape.Position;
+        text.Text = $"x{multiplier}";
         BodyEntered += OnBodyEntered;
     }
 
@@ -29,6 +33,10 @@ public partial class LandingRegion : Area3D {
         ResetTextState();
         lerpValue = 0f;
         currentState = State.Idle;
+        var duration = GD.Randf() * (maxMoveDuration - minMoveDuration) + minMoveDuration;
+        textTween = CreateTween().SetLoops().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Quad);
+        textTween.TweenProperty(text, "position:y", moveRange, duration);
+        textTween.TweenProperty(text, "position:y", -moveRange, duration);
     }
     void ResetTextState() {
         text.Visible = true;
@@ -117,7 +125,7 @@ public partial class LandingRegion : Area3D {
         textTween.TweenProperty(text, "global_position", textMovePosition.GlobalPosition.With(x: 0), 0.6f);
         textTween.TweenCallback(Callable.From(() => {
             text.Visible = false;
-            PachinkoEventManager.Instance.FinalScore(ScoreManager.Score, 5);
+            PachinkoEventManager.Instance.FinalScore(ScoreManager.Score, multiplier);
         }));
         return State.Idle;
     }

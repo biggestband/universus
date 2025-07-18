@@ -9,6 +9,7 @@ radius = 0.03
 [node name="Ball" type="RigidBody3D" node_paths=PackedStringArray("mesh")]
 gravity_scale = 0.069
 custom_integrator = true
+continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_km0ep")
@@ -24,5 +25,8 @@ shape = SubResource("SphereShape3D_347ys")
 
 [node name="SM_PlinkoBall_Model_01" parent="." instance=ExtResource("2_km0ep")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="SM_PlinkoBall_Mesh_01" parent="SM_PlinkoBall_Model_01" index="0"]
+instance_shader_parameters/peg_brightness = 3.0
 
 [editable path="SM_PlinkoBall_Model_01"]

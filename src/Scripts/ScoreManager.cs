@@ -4,6 +4,12 @@ using Godot;
 public partial class ScoreManager : Node {
     [Export]
     float newHitScore = 0.2f, reHitScore = 0.1f;
+
+    static bool logging;
+    
+    [Export]
+    bool logging_backing = false;
+    
     public static float Score { get; private set; }
     public static float HighScore { get; private set; }
 
@@ -13,6 +19,8 @@ public partial class ScoreManager : Node {
         Score = 0;
         NewHitScore = newHitScore;
         ReHitScore = reHitScore;
+        
+        logging = logging_backing;
 
         PachinkoEventManager.Instance.OnHit += IncreaseScore;
         PachinkoEventManager.Instance.OnFinalScore += FinalScore;
@@ -24,6 +32,7 @@ public partial class ScoreManager : Node {
     }
     void FinalScore(float baseScore, float multiplier) {
         Score = baseScore * multiplier;
+        if (logging) GD.Print($"Final Score: {Score} (Base: {baseScore}, Multiplier: {multiplier})");
         EvaluateHighScore();
     }
     
@@ -39,11 +48,15 @@ public partial class ScoreManager : Node {
     static void SetScore(float oldScore, float score) {
         Score = score;
         EvaluateHighScore();
+        if (logging) GD.Print($"Earned {score - oldScore} points, new score: {Score}");
         PachinkoEventManager.Instance.Score(oldScore, Score);
     }
 
     public static void EvaluateHighScore() {
-        HighScore = Mathf.Max(Score, HighScore);
+        if (Score <= HighScore) return;
+        
+        HighScore = Score;
+        if (logging) GD.Print($"New High Score: {HighScore}");
         PachinkoEventManager.Instance.HighScore(HighScore);
     }
 
