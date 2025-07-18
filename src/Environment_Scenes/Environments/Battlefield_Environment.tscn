@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ty41fgd80gqy"]
 
+[ext_resource type="PackedScene" uid="uid://wha41tlb0xqk" path="res://Assets/3D/FBX/LV_PC_Optimized_02.fbx" id="2_8xidx"]
 [ext_resource type="Script" uid="uid://b02n7ag6kuno8" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_tag4l"]
-[ext_resource type="PackedScene" uid="uid://chxmgqolu0gtr" path="res://Assets/3D/FBX/LV_UniversusPolonskyCommons.fbx" id="3_8vr15"]
 [ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Scripts/FPSCounter.gd" id="3_tag4l"]
 [ext_resource type="PackedScene" uid="uid://2ytmb52f6sth" path="res://Enemies/Enemy_Prefabs/ridgeback_Unit_Stupid.tscn" id="4_8vr15"]
 [ext_resource type="PackedScene" uid="uid://d2rtouugigcfo" path="res://Enemies/Enemy_Prefabs/lord_Unit _Stupid.tscn" id="5_01vul"]
@@ -24,8 +24,8 @@ environment = SubResource("Environment_01vul")
 
 [node name="Level" type="Node" parent="."]
 
-[node name="LV_UniversusPolonskyCommons" parent="Level" instance=ExtResource("3_8vr15")]
-transform = Transform3D(-3.93403e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, -3.93403e-08, -4.28005, 0, 56.7372)
+[node name="LV_PC_Optimized_02" parent="Level" instance=ExtResource("2_8xidx")]
+transform = Transform3D(-3.93403e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, -3.93403e-08, -4.28, 0, 56.737)
 
 [node name="GFX" type="Node" parent="."]
 
