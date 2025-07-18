@@ -15,11 +15,11 @@ public partial class Pachinko : Node {
     Node landingRegionContainer;
 
     [Export]
-    PachinkoCamera camera;
+    PachinkoMachine machine;
     
     public void Setup() {
         state = State.Wait;
-        camera?.Setup();
+        machine?.Setup();
         ballHolder?.Setup();
         pegContainer?.Setup();
         foreach (var node in landingRegionContainer.GetChildren()) {

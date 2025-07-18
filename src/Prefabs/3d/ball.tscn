@@ -26,7 +26,4 @@ shape = SubResource("SphereShape3D_347ys")
 [node name="SM_PlinkoBall_Model_01" parent="." instance=ExtResource("2_km0ep")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
-[node name="SM_PlinkoBall_Mesh_01" parent="SM_PlinkoBall_Model_01" index="0"]
-instance_shader_parameters/peg_brightness = 3.0
-
 [editable path="SM_PlinkoBall_Model_01"]
