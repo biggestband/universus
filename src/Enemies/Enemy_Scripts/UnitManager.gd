@@ -89,6 +89,8 @@ func _ready() -> void:
 	fightCam.current = false
 	plinkCam.current = true
 	_initUnitPool()
+	
+	PachinkoEventManager.OnFinalScore.connect(_on_events_on_final_score)
 
 func _physics_process(delta: float) -> void:	
 	_stepUnitTargets(delta)
@@ -286,6 +288,11 @@ func _getRandOffset(pos: Vector2) -> Vector2:
 
 
 func _on_events_on_final_score(baseScore: float, multiplier: float) -> void:
-	fightCam.current = true
+	await get_tree().create_timer(1.0).timeout
 	plinkCam.current = false
+	fightCam.current = true
 	_startBattle()
+
+
+func _on_events_on_hit(hitType: int) -> void:
+	print("BALLS?")
