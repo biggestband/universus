@@ -12,7 +12,7 @@ var currentSong
 
 # enums
 enum BGM { Plinko, NormalBattle, AmpedBattle }
-enum SFX { PlinkoPeg, PlinkoGameScoring, SpawningTroop, Punch, DeathPoof, Confetti }
+enum SFX { PlinkoPeg, PlinkoGameScoring, SpawningTroop, Punch, DeathPoof, Confetti, Dizzy }
 
 # audio Busses
 var master_bus
