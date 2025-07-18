@@ -5,7 +5,7 @@ signal _spawnParticle3D(particle: VFX3D, pos: Vector3)
 signal _spawnParticle2D(particle: VFX2D, pos: Vector2)
 
 #variables
-enum VFX3D { DeathDurham, DeathOTU, Spark, SpawnDurham, SpawnOTU, Hit, Dizzy}
+enum VFX3D { DeathDurham, DeathOTU, Spark, Hit, Dizzy}
 enum VFX2D { DurhamConfetti, OTUConfetti }
 
 @export var particles3D: Dictionary[VFX3D, PackedScene]

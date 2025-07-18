@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5k76qx5c3pau"]
+[gd_scene load_steps=10 format=3 uid="uid://ho0ihrnjkbah"]
 
 [ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="1_oihdf"]
 

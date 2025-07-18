@@ -36,7 +36,7 @@ initial_velocity_max = 8.0
 gravity = Vector3(0, 2, 0)
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_q7i3a")
-color = Color(0.0431373, 0.509804, 0.380392, 1)
+color = Color(0.628985, 0.628985, 0.628985, 1)
 alpha_curve = SubResource("CurveTexture_k81j1")
 
 [sub_resource type="SphereMesh" id="SphereMesh_28623"]
@@ -46,7 +46,7 @@ script = ExtResource("1_1diqk")
 emitters = [NodePath("DeathVFX2")]
 
 [node name="DeathVFX2" type="GPUParticles3D" parent="."]
-transform = Transform3D(0.999999, 0.00159036, 0.000501377, -1.95653e-05, 0.31184, -0.950135, -0.0016674, 0.950133, 0.31184, 0, 0, 0)
+transform = Transform3D(0.999999, 0.00159036, 0.000501377, -1.95653e-05, 0.31184, -0.950135, -0.0016674, 0.950133, 0.31184, 0, -1.5, 0)
 material_override = SubResource("ShaderMaterial_bx2os")
 emitting = false
 amount = 10

@@ -1,13 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c81xn1ltoybw1"]
+[gd_scene load_steps=9 format=3 uid="uid://c81xn1ltoybw1"]
 
 [ext_resource type="Script" uid="uid://dp4edbp1onph4" path="res://Scripts/vfx_manager.gd" id="1_ycwnj"]
 [ext_resource type="PackedScene" uid="uid://8fqqqbi61c53" path="res://VFX/Durham_Death.tscn" id="2_kcmox"]
 [ext_resource type="PackedScene" uid="uid://npcka1bos5nc" path="res://VFX/OTU_Death.tscn" id="3_fh5y4"]
 [ext_resource type="PackedScene" uid="uid://4gy2bbfqym7x" path="res://VFX/SparkVFX.tscn" id="4_kcmox"]
 [ext_resource type="PackedScene" uid="uid://dtyjepa7ptgga" path="res://VFX/DurhamConfettiVFX.tscn" id="5_ebur2"]
-[ext_resource type="PackedScene" uid="uid://bfpdnicmjm5on" path="res://VFX/SpawnVFXDurham.tscn" id="5_fh5y4"]
 [ext_resource type="PackedScene" uid="uid://nsi0x3iyao2j" path="res://VFX/OTUConfettiVFX.tscn" id="6_ebur2"]
-[ext_resource type="PackedScene" uid="uid://bj3cgi2csord" path="res://VFX/SpawnVFXOTech.tscn" id="6_vwa6h"]
 [ext_resource type="PackedScene" uid="uid://bidrib3fcmkfq" path="res://VFX/HitVFX.tscn" id="7_71ugq"]
 [ext_resource type="PackedScene" uid="uid://dk7kx0qcypx68" path="res://VFX/DizzyVFX.tscn" id="8_qmurs"]
 
@@ -17,10 +15,8 @@ particles3D = Dictionary[int, PackedScene]({
 0: ExtResource("2_kcmox"),
 1: ExtResource("3_fh5y4"),
 2: ExtResource("4_kcmox"),
-3: ExtResource("5_fh5y4"),
-4: ExtResource("6_vwa6h"),
-5: ExtResource("7_71ugq"),
-6: ExtResource("8_qmurs")
+3: ExtResource("7_71ugq"),
+4: ExtResource("8_qmurs")
 })
 particles2D = Dictionary[int, PackedScene]({
 0: ExtResource("5_ebur2"),

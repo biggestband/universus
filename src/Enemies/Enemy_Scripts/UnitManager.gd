@@ -144,7 +144,6 @@ func _respawnUnit(unitID: int) -> void:
 			_armyBReserves = max(0, _armyBReserves - 1)
 		
 		unitNode.InitUnit()
-		VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.SpawnOTU if isArmyA else VfxManager.VFX3D.SpawnDurham, spawnPos)
 
 #endregion
 
@@ -239,7 +238,7 @@ func _attackTarget(unitID: int, targetID) -> void:
 	
 		var randKnockback: float = randf_range(9,12)
 		var endPos2D: Vector2 = victimPos + (attackDir * randKnockback)
-		var attackPos: Vector3 = instegator.position + Vector3(attackDir.x, 0, attackDir.y)
+		var attackPos: Vector3 = instegator.position + Vector3(attackDir.x, 1, attackDir.y)
 		instegator.Attack(attackPos)
 		victim.TakeDamage(endPos2D)
 		_prevUnitPositions[targetID] = endPos2D

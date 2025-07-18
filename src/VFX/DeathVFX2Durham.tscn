@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://du2x8h6nms27o"]
+[gd_scene load_steps=10 format=3 uid="uid://cd11cbf4p2df1"]
 
 [ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="1_28pi5"]
 [ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://Pngs/T_PerlinNoise_Tiled.png" id="2_rin58"]

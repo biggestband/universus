@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bj3cgi2csord"]
+[gd_scene load_steps=11 format=3 uid="uid://r4d40bpes3k8"]
 
 [ext_resource type="Script" uid="uid://d2bxxlybjai3a" path="res://Scripts/Vfx3D.gd" id="1_l5d83"]
 [ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="1_xg6ux"]

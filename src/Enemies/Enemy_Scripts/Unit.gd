@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 				self.rotation = new_rot
 			
 			if(_knockbackTimer >= _knockbackDur):
-				VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.Dizzy, Vector3(self.position.x, 2, self.position.z))
+				VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.Dizzy, Vector3(self.position.x, 4.25, self.position.z))
 		
 		# Stun Timer
 		if(_isTweening && _knockbackTimer >= _knockbackDur && _stunTimer <= _stunDur):
