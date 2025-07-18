@@ -23,12 +23,12 @@ environment = SubResource("Environment_01vul")
 [node name="Level" type="Node" parent="."]
 
 [node name="LV_UniversusPolonskyCommons" parent="Level" instance=ExtResource("3_8vr15")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.26839, 0, 56.9403)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.28005, 0, 52.637)
 
 [node name="GFX" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="GFX"]
-transform = Transform3D(-4.37114e-08, -0.66523, 0.746638, 0, 0.746638, 0.66523, -1, 2.90781e-08, -3.26366e-08, 61.8667, 22.274, 0)
+transform = Transform3D(-0.000853135, -0.769251, 0.638946, -0.000737416, 0.638947, 0.769251, -0.999999, 0.000185096, -0.00111237, 46.1765, 25.165, 0)
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("2_tag4l")

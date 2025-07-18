@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c81xn1ltoybw1"]
+[gd_scene load_steps=11 format=3 uid="uid://c81xn1ltoybw1"]
 
 [ext_resource type="Script" uid="uid://dp4edbp1onph4" path="res://Scripts/vfx_manager.gd" id="1_ycwnj"]
 [ext_resource type="PackedScene" uid="uid://b545553ktofi7" path="res://VFX/DeathVFXDurham.tscn" id="2_ew1l3"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://nsi0x3iyao2j" path="res://VFX/OTUConfettiVFX.tscn" id="6_ebur2"]
 [ext_resource type="PackedScene" uid="uid://bfpdnicmjm5on" path="res://VFX/SpawnVFXDurham.tscn" id="6_kcmox"]
 [ext_resource type="PackedScene" uid="uid://bj3cgi2csord" path="res://VFX/SpawnVFXOTech.tscn" id="7_fh5y4"]
+[ext_resource type="PackedScene" uid="uid://dk7kx0qcypx68" path="res://VFX/DizzyVFX.tscn" id="8_kcmox"]
 
 [node name="VFXManager" type="Node"]
 script = ExtResource("1_ycwnj")
@@ -18,7 +19,8 @@ particles3D = Dictionary[int, PackedScene]({
 2: ExtResource("5_iasp0"),
 3: ExtResource("6_kcmox"),
 4: ExtResource("7_fh5y4"),
-5: ExtResource("4_3xrjv")
+5: ExtResource("4_3xrjv"),
+6: ExtResource("8_kcmox")
 })
 particles2D = Dictionary[int, PackedScene]({
 0: ExtResource("5_ebur2"),

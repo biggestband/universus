@@ -58,6 +58,9 @@ func _process(delta: float) -> void:
 			if(currentState == HealthState.Injured):
 				var new_rot: Vector3 = lerp(_lerpStartRot, _lerpEndRot, _lerpValXZ)
 				self.rotation = new_rot
+			
+			if(_knockbackTimer >= _knockbackDur):
+				VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.Dizzy, Vector3(self.position.x, 2, self.position.z))
 		
 		# Stun Timer
 		if(_isTweening && _knockbackTimer >= _knockbackDur && _stunTimer <= _stunDur):

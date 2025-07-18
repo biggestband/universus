@@ -64,7 +64,7 @@ func _startBattle() -> void:
 	_armyBReserves = 76
 	
 	# Get networked values from singleton
-	var randSeed: int = 64
+	var randSeed: int = 98127391273891
 	
 	# Set RNG seed to ensure spawns are the same across both clients
 	seed(randSeed)
@@ -135,7 +135,7 @@ func _respawnUnit(unitID: int) -> void:
 		# Choose field side
 		var fieldSide: int = 1 if isArmyA else -1
 		var offsetFromCenter: float = _offsetFromCenter * fieldSide
-		var startPos: Vector2 = _getRandOffset(Vector2(offsetFromCenter, 1))
+		var startPos: Vector2 = _getRandOffset(Vector2(offsetFromCenter, 0))
 		_prevUnitPositions[unitID] = startPos
 		_unitPositions[unitID] = startPos
 		
@@ -274,6 +274,6 @@ func _isUnitAtDestination(unitID: int) -> bool:
 
 func _getRandOffset(pos: Vector2) -> Vector2:
 	var offsetX: float = randf() * 10
-	var offsetY: float = randf() * 10
+	var offsetY: float = randf() * 2
 	return pos + Vector2(offsetX, offsetY)
 #endregion

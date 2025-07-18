@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c86men5vw8dth"]
 
-[ext_resource type="Shader" uid="uid://c4ugud6fuu72a" path="res://assets/3D/Materials/Shaders/VS_Environment_Shader_01.tres" id="1_nxp41"]
+[ext_resource type="Shader" uid="uid://c4ugud6fuu72a" path="res://Assets/3D/Materials/Shaders/VS_Environment_Shader_01.tres" id="1_nxp41"]
 [ext_resource type="Texture2D" uid="uid://8hftg4occuc7" path="res://Assets/3D/Textures/Mascot_texture_main.png" id="2_nxp41"]
 
 [sub_resource type="Gradient" id="Gradient_se6cg"]
