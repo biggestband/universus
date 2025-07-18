@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://sbe0muoe1d3c"]
+[gd_scene load_steps=16 format=3 uid="uid://sbe0muoe1d3c"]
 
 [ext_resource type="PackedScene" uid="uid://df5vh55flwbvp" path="res://Prefabs/3d/3d-pachinko.tscn" id="1_0qtnl"]
 [ext_resource type="Script" uid="uid://dc7a88xb3g0ta" path="res://Scripts/Pachinko.cs" id="1_347ys"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b23ymdl1p2omx" path="res://Prefabs/reflection_probe.tscn" id="7_gucno"]
 [ext_resource type="PackedScene" uid="uid://xw4fuv8xsvh1" path="res://Prefabs/3d/reward.tscn" id="8_vrj8h"]
 [ext_resource type="PackedScene" uid="uid://bo4xmggntaref" path="res://Prefabs/3d/claw.tscn" id="10_1g62i"]
+[ext_resource type="Script" uid="uid://diygrlc8g8rjb" path="res://Scripts/ScoreText2.cs" id="13_tm0ac"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v7c2q"]
 size = Vector3(0.182861, 1.5983, 0.322021)
@@ -302,6 +303,13 @@ transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 
 size = Vector3(10, 10, 10)
 origin_offset = Vector3(0, -2, 0)
 metadata/_edit_lock_ = true
+
+[node name="Label3D" type="Label3D" parent="Pachinko"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91781, 0)
+pixel_size = 0.002
+text = "69"
+font_size = 97
+script = ExtResource("13_tm0ac")
 
 [node name="MovePosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7903, 0)

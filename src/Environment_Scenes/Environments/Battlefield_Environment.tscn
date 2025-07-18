@@ -165,10 +165,8 @@ current = true
 transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, 0, -1.08, -1.218)
 
 [node name="Pachinko" parent="Camera3D/Pachinko" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1912, 0)
 outPosY = -3.0
-
-[node name="Ball" parent="Camera3D/Pachinko/Pachinko" index="4"]
-preferDownwardAngleFactor = 0.8
 
 [connection signal="OnFinalScore" from="Camera3D/Pachinko/Systems/Events" to="EnemyManager" method="_on_events_on_final_score"]
 [connection signal="OnHit" from="Camera3D/Pachinko/Systems/Events" to="EnemyManager" method="_on_events_on_hit"]

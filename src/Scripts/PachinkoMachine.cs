@@ -15,12 +15,12 @@ public partial class PachinkoMachine : Node3D {
 	public void Setup() {
 		tween?.Kill();
 		tween = CreateTween().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Quad);
-		tween.TweenProperty(this, "position:y", outPosY, 1.5f).From(inPosY);
+		tween.TweenProperty(this, "position:y", outPosY, 1.5f);
 	}
 	
 	void Enter() {
 		tween?.Kill();
 		tween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Quad);
-		tween.TweenProperty(this, "position:y", inPosY, 1.5f).From(outPosY);
+		tween.TweenProperty(this, "position:y", inPosY, 1.5f);
 	}
 }

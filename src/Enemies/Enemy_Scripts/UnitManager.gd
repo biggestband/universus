@@ -65,10 +65,10 @@ func _initUnitPool() -> void:
 	#_startBattle()
 
 # Should be called when a new battle is started
-func _startBattle() -> void:
+func _startBattle(armyASize: int, armyBSize: int) -> void:
 	# Get networked values from singleton
-	_armyAReserves = 76
-	_armyBReserves = 76
+	_armyAReserves = armyASize
+	_armyBReserves = armyBSize
 	var randSeed: int = 98127391273891
 	
 	# Set RNG seed to ensure spawns are the same across both clients
@@ -91,6 +91,7 @@ func _ready() -> void:
 	_initUnitPool()
 	
 	PachinkoEventManager.OnFinalScore.connect(_on_events_on_final_score)
+	PachinkoEventManager.OnPachinkoStart.connect(startPachinking)
 
 func _physics_process(delta: float) -> void:	
 	_stepUnitTargets(delta)
@@ -291,7 +292,11 @@ func _on_events_on_final_score(baseScore: float, multiplier: float) -> void:
 	await get_tree().create_timer(1.0).timeout
 	plinkCam.current = false
 	fightCam.current = true
-	_startBattle()
+	_startBattle(int(baseScore * multiplier), 32)
+
+func startPachinking() -> void:
+	fightCam.current = false
+	plinkCam.current = true
 
 
 func _on_events_on_hit(hitType: int) -> void:
