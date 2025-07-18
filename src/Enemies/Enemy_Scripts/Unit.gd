@@ -75,6 +75,7 @@ func _process(delta: float) -> void:
 				_lerpValY = 0.0
 				
 				# Ticks health state
+				@warning_ignore("int_as_enum_without_cast")
 				currentState += 1
 			
 				# Kill unit after lerp
@@ -114,15 +115,12 @@ func InitUnit() -> void:
 	currentState = HealthState.Healthy
 	
 	mesh.show()
-	process_mode = 1
-	
-	await get_tree().process_frame
-	VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.SpawnOTU if _isArmyA else VfxManager.VFX3D.SpawnDurham, self.position)
+	set_process(true)
 
 func ResetUnit() -> void:
 	_isUnitActive = false
 	mesh.hide()
-	process_mode = 0
+	set_process(false)
 	self.rotation = Vector3(0,0,0)
 	
 	_moveSpeed = 0

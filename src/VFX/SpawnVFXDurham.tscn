@@ -1,6 +1,6 @@
 [gd_scene load_steps=37 format=3 uid="uid://bfpdnicmjm5on"]
 
-[ext_resource type="Script" path="res://Scripts/Vfx3D.gd" id="1_0mew3"]
+[ext_resource type="Script" uid="uid://d2bxxlybjai3a" path="res://Scripts/Vfx3D.gd" id="1_0mew3"]
 [ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://Pngs/T_PerlinNoise_Tiled.png" id="1_2agsy"]
 
 [sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_65xgl"]

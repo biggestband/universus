@@ -142,7 +142,9 @@ func _respawnUnit(unitID: int) -> void:
 			_armyAReserves = max(0, _armyAReserves - 1)
 		else:
 			_armyBReserves = max(0, _armyBReserves - 1)
+		
 		unitNode.InitUnit()
+		VfxManager._spawnParticle3D.emit(VfxManager.VFX3D.SpawnOTU if isArmyA else VfxManager.VFX3D.SpawnDurham, spawnPos)
 
 #endregion
 

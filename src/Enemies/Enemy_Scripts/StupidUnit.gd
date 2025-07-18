@@ -10,5 +10,5 @@ func _ready() -> void:
 	sinOffset = randf_range(0, PI)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position.y = abs(sin(Time.get_ticks_msec() * sinSpeed + sinOffset)) 

@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5k76qx5c3pau"]
+[gd_scene load_steps=11 format=3 uid="uid://npcka1bos5nc"]
 
-[ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="1_oihdf"]
+[ext_resource type="Script" uid="uid://d2bxxlybjai3a" path="res://Scripts/Vfx3D.gd" id="1_j0y05"]
+[ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="2_wl3av"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy3wh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bx2os"]
 render_priority = 0
-shader = ExtResource("1_oihdf")
+shader = ExtResource("2_wl3av")
 shader_parameter/Vertex_Noise = SubResource("CompressedTexture2D_jy3wh")
 shader_parameter/Proximity_Fade = 0.5
 
@@ -41,7 +42,11 @@ alpha_curve = SubResource("CurveTexture_k81j1")
 
 [sub_resource type="SphereMesh" id="SphereMesh_28623"]
 
-[node name="DeathVFX2" type="GPUParticles3D"]
+[node name="OtuDeath" type="Node3D" node_paths=PackedStringArray("emitters")]
+script = ExtResource("1_j0y05")
+emitters = [NodePath("DeathVFX2")]
+
+[node name="DeathVFX2" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.999999, 0.00159036, 0.000501377, -1.95653e-05, 0.31184, -0.950135, -0.0016674, 0.950133, 0.31184, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_bx2os")
 emitting = false

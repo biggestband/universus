@@ -1,13 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5k76qx5c3pau"]
+[gd_scene load_steps=11 format=3 uid="uid://8fqqqbi61c53"]
 
-[ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="1_oihdf"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy3wh"]
+[ext_resource type="Script" uid="uid://d2bxxlybjai3a" path="res://Scripts/Vfx3D.gd" id="1_1diqk"]
+[ext_resource type="Shader" uid="uid://cbctxpf3ajcpc" path="res://Shaders/SpawnEffect.tres" id="2_q02x3"]
+[ext_resource type="Texture2D" uid="uid://4yxd0gw486dx" path="res://Pngs/T_PerlinNoise_Tiled.png" id="3_qhksq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bx2os"]
 render_priority = 0
-shader = ExtResource("1_oihdf")
-shader_parameter/Vertex_Noise = SubResource("CompressedTexture2D_jy3wh")
+shader = ExtResource("2_q02x3")
+shader_parameter/Vertex_Noise = ExtResource("3_qhksq")
 shader_parameter/Proximity_Fade = 0.5
 
 [sub_resource type="Curve" id="Curve_mkfny"]
@@ -36,12 +36,16 @@ initial_velocity_max = 8.0
 gravity = Vector3(0, 2, 0)
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_q7i3a")
-color = Color(0, 0.466667, 0.792157, 1)
+color = Color(0.0431373, 0.509804, 0.380392, 1)
 alpha_curve = SubResource("CurveTexture_k81j1")
 
 [sub_resource type="SphereMesh" id="SphereMesh_28623"]
 
-[node name="DeathVFX2" type="GPUParticles3D"]
+[node name="DurhamDeath" type="Node3D" node_paths=PackedStringArray("emitters")]
+script = ExtResource("1_1diqk")
+emitters = [NodePath("DeathVFX2")]
+
+[node name="DeathVFX2" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.999999, 0.00159036, 0.000501377, -1.95653e-05, 0.31184, -0.950135, -0.0016674, 0.950133, 0.31184, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_bx2os")
 emitting = false
