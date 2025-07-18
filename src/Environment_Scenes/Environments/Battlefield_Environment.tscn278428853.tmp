@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://ty41fgd80gqy"]
+[gd_scene load_steps=7 format=3 uid="uid://ty41fgd80gqy"]
 
-[ext_resource type="PackedScene" uid="uid://sbe0muoe1d3c" path="res://Levels/Modules/pachinko.tscn" id="1_8xidx"]
 [ext_resource type="PackedScene" uid="uid://wha41tlb0xqk" path="res://Assets/3D/FBX/LV_PC_Optimized_02.fbx" id="2_8xidx"]
 [ext_resource type="Script" uid="uid://b02n7ag6kuno8" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_tag4l"]
 [ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Scripts/FPSCounter.gd" id="3_tag4l"]
@@ -54,7 +53,6 @@ offset_bottom = 101.0
 theme_override_font_sizes/normal_font_size = 70
 text = "Balls"
 script = ExtResource("3_tag4l")
-metadata/_edit_use_anchors_ = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.0270173, 0.94589, 0.323362, -0.00704811, -0.323653, 0.94615, 0.99961, 0.0232833, 0.015411, 0, 0, 0)
@@ -156,17 +154,3 @@ transform = Transform3D(0.470781, 0, -0.88225, 0, 1, 0, 0.88225, 0, 0.470781, -2
 
 [node name="lord_Unit_Stupid16" parent="Crowd" instance=ExtResource("5_01vul")]
 transform = Transform3D(0.292288, 0, -0.95633, 0, 1, 0, 0.95633, 0, 0.292288, -26.5695, -1.52619, 9.33941)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.654, 0.99, 9.457)
-current = true
-
-[node name="Pachinko" parent="Camera3D" instance=ExtResource("1_8xidx")]
-transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, 0, -1.08, -1.218)
-
-[node name="Pachinko" parent="Camera3D/Pachinko" index="1"]
-outPosY = -3.0
-
-[connection signal="OnFinalScore" from="Camera3D/Pachinko/Systems/Events" to="EnemyManager" method="_on_events_on_final_score"]
-
-[editable path="Camera3D/Pachinko"]

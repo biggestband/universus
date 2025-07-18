@@ -14,6 +14,11 @@ const _unitStopDist: float = 2
 # Unit Placement
 @onready var ridgeback_spawn: Node3D = $RidgebackSpawn
 @onready var durham_spawn: Node3D = $DurhamSpawn
+@onready var pachinko: Node3D = $"../Camera3D/Pachinko/Pachinko"
+
+# Cleanup later
+@onready var plinkCam: Camera3D = $"../Camera3D"
+@onready var fightCam: Camera3D = $"../GFX/Camera3D"
 
 # --- System vars ---
 
@@ -57,14 +62,13 @@ func _initUnitPool() -> void:
 	_spawnArmy(_maxActiveUnitsPerTeam, false, _maxActiveUnitsPerTeam)
 	_updateVisualalizedNodes()
 	
-	_startBattle()
+	#_startBattle()
 
 # Should be called when a new battle is started
 func _startBattle() -> void:
+	# Get networked values from singleton
 	_armyAReserves = 76
 	_armyBReserves = 76
-	
-	# Get networked values from singleton
 	var randSeed: int = 98127391273891
 	
 	# Set RNG seed to ensure spawns are the same across both clients
@@ -82,6 +86,8 @@ func _endBattle():
 #region Extensions
 
 func _ready() -> void:
+	fightCam.current = false
+	plinkCam.current = true
 	_initUnitPool()
 
 func _physics_process(delta: float) -> void:	
@@ -277,3 +283,9 @@ func _getRandOffset(pos: Vector2) -> Vector2:
 	var offsetY: float = randf() * 2
 	return pos + Vector2(offsetX, offsetY)
 #endregion
+
+
+func _on_events_on_final_score(baseScore: float, multiplier: float) -> void:
+	fightCam.current = true
+	plinkCam.current = false
+	_startBattle()

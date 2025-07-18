@@ -1,9 +1,9 @@
 [gd_resource type="VisualShader" load_steps=42 format=3 uid="uid://cshvwo4k4laf6"]
 
-[ext_resource type="Texture2D" uid="uid://beb0pkhju3yep" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="1_ukw3y"]
-[ext_resource type="Texture2D" uid="uid://5gw8ali1jk4j" path="res://Assets/3D/Textures/T_PlinkoMachine_Bake_06.png" id="2_3nrba"]
-[ext_resource type="Texture2D" uid="uid://dmamcqkgemjip" path="res://Assets/3D/Textures/T_UniVersusColorPalette_basecolor.png" id="3_p1hu4"]
-[ext_resource type="Texture2D" uid="uid://cjvt4oeyq1thn" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png" id="4_yq65h"]
+[ext_resource type="Texture2D" uid="uid://chseits8ywk16" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="1_ukw3y"]
+[ext_resource type="Texture2D" uid="uid://uglj15otvg3n" path="res://Assets/3D/Textures/T_PlinkoMachine_Bake_06.png" id="2_3nrba"]
+[ext_resource type="Texture2D" uid="uid://bhxuil1ibce85" path="res://Assets/3D/Textures/T_UniVersusColorPalette_basecolor.png" id="3_p1hu4"]
+[ext_resource type="Texture2D" uid="uid://do18oy0fd5m7k" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png" id="4_yq65h"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_21xbi"]
 

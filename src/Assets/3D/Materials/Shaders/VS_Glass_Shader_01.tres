@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://dkjlncl646vvm"]
 
-[ext_resource type="Texture2D" uid="uid://cjvt4oeyq1thn" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png" id="1_xt1gr"]
+[ext_resource type="Texture2D" uid="uid://do18oy0fd5m7k" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png" id="1_xt1gr"]
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_f7i3t"]
 constant = 2.0

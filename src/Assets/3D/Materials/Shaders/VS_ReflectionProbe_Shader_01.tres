@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://ke0u1dg2xdoo"]
 
-[ext_resource type="Texture2D" uid="uid://bjhbd6ajulh5p" path="res://Assets/3D/Lighting/HDRIs/royal_esplanade_2k.hdr" id="1_bdla5"]
+[ext_resource type="Texture2D" uid="uid://ir4obc304shg" path="res://Assets/3D/Lighting/HDRIs/royal_esplanade_2k.hdr" id="1_bdla5"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_c5rv7"]
 texture = ExtResource("1_bdla5")
