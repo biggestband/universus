@@ -12,7 +12,8 @@ const _unitRotSpeed: float = .5
 const _unitStopDist: float = 2
 
 # Unit Placement
-const _offsetFromCenter: float = 40
+@onready var ridgeback_spawn: Node3D = $RidgebackSpawn
+@onready var durham_spawn: Node3D = $DurhamSpawn
 
 # --- System vars ---
 
@@ -113,9 +114,8 @@ func _createUnitInstance(unitID: int, isArmyA: bool) -> void:
 	_unitNodes[unitID] = instance
 	
 	# Choose field side
-	var fieldSide: int = 1 if isArmyA else -1
-	var offsetFromCenter: float = _offsetFromCenter * fieldSide
-	var startPos: Vector2 = _getRandOffset(Vector2(offsetFromCenter, 1))
+	var spawnPos: Vector3 = ridgeback_spawn.position if isArmyA else durham_spawn.position
+	var startPos: Vector2 = _getRandOffset(Vector2(spawnPos.x, spawnPos.z))
 	_prevUnitPositions[unitID] = startPos
 	_unitPositions[unitID] = startPos
 	
@@ -133,9 +133,8 @@ func _respawnUnit(unitID: int) -> void:
 	if(teamHealth >= 1):
 		
 		# Choose field side
-		var fieldSide: int = 1 if isArmyA else -1
-		var offsetFromCenter: float = _offsetFromCenter * fieldSide
-		var startPos: Vector2 = _getRandOffset(Vector2(offsetFromCenter, 0))
+		var spawnPos: Vector3 = ridgeback_spawn.position if isArmyA else durham_spawn.position
+		var startPos: Vector2 = _getRandOffset(Vector2(spawnPos.x, spawnPos.z))
 		_prevUnitPositions[unitID] = startPos
 		_unitPositions[unitID] = startPos
 		
@@ -273,7 +272,7 @@ func _isUnitAtDestination(unitID: int) -> bool:
 		return true
 
 func _getRandOffset(pos: Vector2) -> Vector2:
-	var offsetX: float = randf() * 10
+	var offsetX: float = randf() * 2
 	var offsetY: float = randf() * 2
 	return pos + Vector2(offsetX, offsetY)
 #endregion

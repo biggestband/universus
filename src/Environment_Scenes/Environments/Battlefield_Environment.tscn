@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ty41fgd80gqy"]
+[gd_scene load_steps=7 format=3 uid="uid://ty41fgd80gqy"]
 
 [ext_resource type="Script" uid="uid://b02n7ag6kuno8" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_tag4l"]
 [ext_resource type="PackedScene" uid="uid://chxmgqolu0gtr" path="res://Assets/3D/FBX/LV_UniversusPolonskyCommons.fbx" id="3_8vr15"]
 [ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Scripts/FPSCounter.gd" id="3_tag4l"]
+[ext_resource type="PackedScene" uid="uid://2ytmb52f6sth" path="res://Enemies/Enemy_Prefabs/ridgeback_Unit_Stupid.tscn" id="4_8vr15"]
+[ext_resource type="PackedScene" uid="uid://d2rtouugigcfo" path="res://Enemies/Enemy_Prefabs/lord_Unit _Stupid.tscn" id="5_01vul"]
 
 [sub_resource type="Environment" id="Environment_01vul"]
 background_mode = 1
@@ -23,15 +25,24 @@ environment = SubResource("Environment_01vul")
 [node name="Level" type="Node" parent="."]
 
 [node name="LV_UniversusPolonskyCommons" parent="Level" instance=ExtResource("3_8vr15")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.28005, 0, 52.637)
+transform = Transform3D(-3.93403e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, -3.93403e-08, -4.28005, 0, 56.7372)
 
 [node name="GFX" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="GFX"]
-transform = Transform3D(-0.000853135, -0.769251, 0.638946, -0.000737416, 0.638947, 0.769251, -0.999999, 0.000185096, -0.00111237, 46.1765, 25.165, 0)
+transform = Transform3D(-0.455545, -0.447795, 0.769389, 0, 0.864275, 0.50302, -0.890213, 0.229148, -0.393716, 71.23, 52.865, -25.8)
+projection = 1
+fov = 105.4
+size = 73.535
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("2_tag4l")
+
+[node name="RidgebackSpawn" type="Node3D" parent="EnemyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.39, -1, 6.542)
+
+[node name="DurhamSpawn" type="Node3D" parent="EnemyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2, -2, 13.0019)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -45,3 +56,101 @@ script = ExtResource("3_tag4l")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.0270173, 0.94589, 0.323362, -0.00704811, -0.323653, 0.94615, 0.99961, 0.0232833, 0.015411, 0, 0, 0)
+
+[node name="Crowd" type="Node" parent="."]
+
+[node name="ridgeback_Unit_Stupid" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.317967, 0, 0.948102, 0, 1, 0, -0.948102, 0, -0.317967, 27.0031, -1.57362, 5.69382)
+
+[node name="ridgeback_Unit_Stupid2" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.463915, 0, 0.88588, 0, 1, 0, -0.88588, 0, -0.463915, 24.5204, -1.54949, -0.201662)
+
+[node name="ridgeback_Unit_Stupid3" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.0833648, 0, 0.996519, 0, 1, 0, -0.996519, 0, -0.0833648, 23.9322, -1.54949, 6.26302)
+
+[node name="ridgeback_Unit_Stupid4" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.406864, 0, 0.913489, 0, 1, 0, -0.913489, 0, -0.406864, 27.8749, -1.54949, 2.54023)
+
+[node name="ridgeback_Unit_Stupid5" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.0941778, 0, 0.995555, 0, 1, 0, -0.995555, 0, -0.0941778, 29.0674, -1.54949, 5.92353)
+
+[node name="ridgeback_Unit_Stupid6" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.590944, 0, 0.806713, 0, 1, 0, -0.806713, 0, -0.590944, 29.7035, -1.54949, -0.951537)
+
+[node name="ridgeback_Unit_Stupid7" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(0.0111873, 0, 0.999937, 0, 1, 0, -0.999937, 0, 0.0111873, 31.4554, -1.54949, 3.05399)
+
+[node name="ridgeback_Unit_Stupid8" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.338262, 0, 0.941052, 0, 1, 0, -0.941052, 0, -0.338262, 24.9758, -1.54949, 3.02615)
+
+[node name="ridgeback_Unit_Stupid9" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.155745, 0, 0.987797, 0, 1, 0, -0.987797, 0, -0.155745, 25.3734, -1.54949, 9.61242)
+
+[node name="ridgeback_Unit_Stupid10" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(0.0139097, 0, 0.999903, 0, 1, 0, -0.999903, 0, 0.0139097, 27.9286, -1.54949, 11.7785)
+
+[node name="ridgeback_Unit_Stupid11" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.0368008, 0, 0.999323, 0, 1, 0, -0.999323, 0, -0.0368008, 28.1603, -1.54949, 8.52002)
+
+[node name="ridgeback_Unit_Stupid12" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(0.2356, 0, 0.97185, 0, 1, 0, -0.97185, 0, 0.2356, 24.2591, -1.54949, 12.4515)
+
+[node name="ridgeback_Unit_Stupid13" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.277348, 0, 0.960769, 0, 1, 0, -0.960769, 0, -0.277348, 30.5809, -1.54949, 9.57038)
+
+[node name="ridgeback_Unit_Stupid14" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.0491986, 0, 0.998789, 0, 1, 0, -0.998789, 0, -0.0491986, 21.8147, -1.54949, 8.29281)
+
+[node name="ridgeback_Unit_Stupid15" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.277348, 0, 0.960769, 0, 1, 0, -0.960769, 0, -0.277348, 31.9392, -1.54949, 7.10443)
+
+[node name="ridgeback_Unit_Stupid16" parent="Crowd" instance=ExtResource("4_8vr15")]
+transform = Transform3D(-0.113221, 0, 0.99357, 0, 1, 0, -0.99357, 0, -0.113221, 34.3505, -1.55435, 8.83167)
+
+[node name="lord_Unit_Stupid" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.433533, 0, -0.901137, 0, 1, 0, 0.901137, 0, 0.433533, -34.3791, -1.52619, 15.4777)
+
+[node name="lord_Unit_Stupid2" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.205521, 0, -0.978653, 0, 1, 0, 0.978653, 0, 0.205521, -35.5681, -1.52619, 10.882)
+
+[node name="lord_Unit_Stupid3" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.217394, 0, -0.976084, 0, 1, 0, 0.976084, 0, 0.217394, -33.0614, -1.52619, 12.9079)
+
+[node name="lord_Unit_Stupid4" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.205521, 0, -0.978653, 0, 1, 0, 0.978653, 0, 0.205521, -33.6242, -1.52619, 8.93532)
+
+[node name="lord_Unit_Stupid5" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.477159, 0, -0.878817, 0, 1, 0, 0.878817, 0, 0.477159, -32.546, -1.52619, 18.9234)
+
+[node name="lord_Unit_Stupid6" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.37404, 0, -0.927413, 0, 1, 0, 0.927413, 0, 0.37404, -30.722, -1.52619, 15.05)
+
+[node name="lord_Unit_Stupid7" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.385278, 0, -0.9228, 0, 1, 0, 0.9228, 0, 0.385278, -30.4835, -1.52619, 17.4308)
+
+[node name="lord_Unit_Stupid8" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.37404, 0, -0.927413, 0, 1, 0, 0.927413, 0, 0.37404, -28.8072, -1.52619, 12.8983)
+
+[node name="lord_Unit_Stupid9" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.433533, 0, -0.901137, 0, 1, 0, 0.901137, 0, 0.433533, -30.4453, -1.52619, 10.213)
+
+[node name="lord_Unit_Stupid10" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.205521, 0, -0.978653, 0, 1, 0, 0.978653, 0, 0.205521, -29.3732, -1.52619, 20.041)
+
+[node name="lord_Unit_Stupid11" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.217394, 0, -0.976084, 0, 1, 0, 0.976084, 0, 0.217394, -29.1277, -1.52619, 7.64324)
+
+[node name="lord_Unit_Stupid12" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.205521, 0, -0.978653, 0, 1, 0, 0.978653, 0, 0.205521, -31.8937, -1.52619, 5.90201)
+
+[node name="lord_Unit_Stupid13" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.303883, 0, -0.952709, 0, 1, 0, 0.952709, 0, 0.303883, -26.71, -1.52619, 15.3245)
+
+[node name="lord_Unit_Stupid14" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.209073, 0, -0.9779, 0, 1, 0, 0.9779, 0, 0.209073, -26.5411, -1.52619, 12.4822)
+
+[node name="lord_Unit_Stupid15" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.470781, 0, -0.88225, 0, 1, 0, 0.88225, 0, 0.470781, -26.6145, -1.52619, 18.1403)
+
+[node name="lord_Unit_Stupid16" parent="Crowd" instance=ExtResource("5_01vul")]
+transform = Transform3D(0.292288, 0, -0.95633, 0, 1, 0, 0.95633, 0, 0.292288, -26.5695, -1.52619, 9.33941)
