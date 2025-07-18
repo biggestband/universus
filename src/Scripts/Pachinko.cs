@@ -28,7 +28,7 @@ public partial class Pachinko : Node {
 		}
 		ScoreManager.ResetScore();
 	}
-
+	
 	public override void _Process(double delta) {
 		if (Input.IsActionJustPressed("BiggestButton")) {
 			if (state == State.Wait) {
@@ -50,7 +50,15 @@ public partial class Pachinko : Node {
 			return;
 		}
 		Instance = this;
+		Events.OnFinalScore += FinalScore;
 	}
+	public override void _ExitTree() {
+		Events.OnFinalScore -= FinalScore;
+	}
+	void FinalScore(float baseScore, float multiplier) {
+		machine?.Setup();
+	}
+
 
 	enum State {
 		Wait,
