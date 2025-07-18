@@ -22,6 +22,7 @@ public partial class DebugArmyBumper : Node
 
         AddInput("savebattle", Key.S);
         AddInput("displayallhistory", Key.D);
+        AddInput("limitsaves", Key.F);
     }
 
     public override void _Process(double delta)
@@ -54,10 +55,15 @@ public partial class DebugArmyBumper : Node
             if (Input.IsActionJustReleased("savebattle"))
             {
                 instance.SaveCurrentBattle();
+                LimitSavedFiles(10);
             }
             if (Input.IsActionJustReleased("displayallhistory"))
             {
                 foreach (string ii in GetSaveFileNames()) GD.Print(DisplayHistory(ii));
+            }
+            if (Input.IsActionJustReleased("limitsaves"))
+            {
+                LimitSavedFiles(2);
             }
         }
     }

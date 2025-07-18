@@ -129,6 +129,17 @@ public partial class ArmySyncer : Node
         saveFile.StoreLine(json);
     }
 
+    public static void LimitSavedFiles(int maximum)
+    {
+        List<string> files = GetSaveFileNames();
+        files.Sort();
+        if (files.Count > maximum)
+        {
+            GD.Print("Oldest save file removed: " + "user://" + files[0]);
+            DirAccess.RemoveAbsolute("user://" + files[0]);
+        }
+    }
+
     public static Dictionary<string, int> LoadSaveFile(string fileName)
     {
         if (!OS.HasFeature("Server")) return null;
