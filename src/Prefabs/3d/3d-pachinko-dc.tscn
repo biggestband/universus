@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq1sbglh6naxu"]
+
+[ext_resource type="PackedScene" uid="uid://dwemxhsfjril6" path="res://Assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="1_yeue7"]
+[ext_resource type="Material" uid="uid://bdy63ayvmn0x5" path="res://Assets/3D/Materials/M_DCEmissive_Material_01.tres" id="2_0e03p"]
+[ext_resource type="Material" uid="uid://341fsq0eieyx" path="res://Assets/3D/Materials/M_DCColourPalette_Material_01.tres" id="3_t7msm"]
+
+[node name="Pachinko Machine" type="Node3D"]
+
+[node name="SM_PlinkoMachine_Model_01" parent="." instance=ExtResource("1_yeue7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.624852, 0)
+
+[node name="SM_Plinko_mesh_01" parent="SM_PlinkoMachine_Model_01" index="0"]
+transform = Transform3D(1, 0.000558179, 0.00029516, -0.000295037, -0.000203148, 1, 0.000558244, -1, -0.000202969, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_0e03p")
+surface_material_override/2 = ExtResource("3_t7msm")
+
+[editable path="SM_PlinkoMachine_Model_01"]

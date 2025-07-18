@@ -1,5 +1,7 @@
 [gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://dkjlncl646vvm"]
 
+[ext_resource type="Texture2D" uid="uid://cjvt4oeyq1thn" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png" id="1_xt1gr"]
+
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_f7i3t"]
 constant = 2.0
 
@@ -7,10 +9,10 @@ constant = 2.0
 operator = 2
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_fpco6"]
-constant = Color(0.144063, 0.144063, 0.144063, 1)
+constant = Color(0, 0, 0, 1)
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_f7i3t"]
-constant = Color(0.775063, 0.775063, 0.775063, 1)
+constant = Color(0.678943, 0.678944, 0.678943, 1)
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_jgo8w"]
 constant = Color(0.255659, 0.255659, 0.255659, 1)
@@ -39,12 +41,9 @@ input_name = "uv2"
 
 [sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_5idwp"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_irjl1"]
-load_path = "res://.godot/imported/T_PlinkoMachineMaps_normal.png-1da6ecd4e9e83e69cbb4f0ec961d47b4.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3irvs"]
 output_port_for_preview = 0
-texture = SubResource("CompressedTexture2D_irjl1")
+texture = ExtResource("1_xt1gr")
 texture_type = 2
 
 [resource]
@@ -70,11 +69,11 @@ void fragment() {
 
 
 // ColorConstant:13
-	vec4 n_out13p0 = vec4(0.775063, 0.775063, 0.775063, 1.000000);
+	vec4 n_out13p0 = vec4(0.678943, 0.678944, 0.678943, 1.000000);
 
 
 // ColorConstant:12
-	vec4 n_out12p0 = vec4(0.144063, 0.144063, 0.144063, 1.000000);
+	vec4 n_out12p0 = vec4(0.000000, 0.000000, 0.000000, 1.000000);
 
 
 // Texture2D:9

@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=35 format=3 uid="uid://c3xidudujjlcu"]
 
-[ext_resource type="Texture2D" uid="uid://vr1n7q5kxeyx" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_PegMask.png" id="1_4sagy"]
-[ext_resource type="Texture2D" uid="uid://chseits8ywk16" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="2_1y8vf"]
+[ext_resource type="Texture2D" uid="uid://rlb88a4g2piv" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_PegMask.png" id="1_4sagy"]
+[ext_resource type="Texture2D" uid="uid://beb0pkhju3yep" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="2_1y8vf"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ll1fd"]
 default_input_values = [0, 0.0, 1, 0.1]
@@ -283,7 +283,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-569.038, -281.505)
 varyings/PegBrightness = "0,0"
 varyings/PegEmission = "0,0"
 nodes/vertex/4/node = SubResource("VisualShaderNodeInput_qwprm")

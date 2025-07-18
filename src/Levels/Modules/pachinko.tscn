@@ -1,0 +1,307 @@
+[gd_scene load_steps=15 format=3 uid="uid://sbe0muoe1d3c"]
+
+[ext_resource type="PackedScene" uid="uid://df5vh55flwbvp" path="res://Prefabs/3d/3d-pachinko.tscn" id="1_0qtnl"]
+[ext_resource type="Script" uid="uid://dc7a88xb3g0ta" path="res://Scripts/Pachinko.cs" id="1_347ys"]
+[ext_resource type="Script" uid="uid://b82d3c58rbwbm" path="res://Scripts/PachinkoEventManager.cs" id="2_x8vij"]
+[ext_resource type="Script" uid="uid://bvwkdmcspwu2y" path="res://Scripts/ScoreManager.cs" id="3_3ib7k"]
+[ext_resource type="Script" uid="uid://mnnxl1j7bwy7" path="res://Scripts/Restarter.cs" id="4_s8dmq"]
+[ext_resource type="PackedScene" uid="uid://8k21bko7q7em" path="res://Prefabs/3d/ball.tscn" id="5_cukox"]
+[ext_resource type="Script" uid="uid://bsjmnr37e1m6i" path="res://Scripts/PachinkoMachine.cs" id="5_k2ryw"]
+[ext_resource type="Script" uid="uid://be7tv36g88d88" path="res://Levels/Modules/PegManager.cs" id="6_gucno"]
+[ext_resource type="PackedScene" uid="uid://bmdnm2wum40gx" path="res://Prefabs/3d/peg.tscn" id="6_v7c2q"]
+[ext_resource type="PackedScene" uid="uid://b23ymdl1p2omx" path="res://Prefabs/reflection_probe.tscn" id="7_gucno"]
+[ext_resource type="PackedScene" uid="uid://xw4fuv8xsvh1" path="res://Prefabs/3d/reward.tscn" id="8_vrj8h"]
+[ext_resource type="PackedScene" uid="uid://bo4xmggntaref" path="res://Prefabs/3d/claw.tscn" id="10_1g62i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v7c2q"]
+size = Vector3(0.182861, 1.5983, 0.322021)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gucno"]
+size = Vector3(1.12305, 0.23999, 0.439941)
+
+[node name="Pachinko" type="Node3D"]
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="Score Manager" type="Node" parent="Systems"]
+script = ExtResource("3_3ib7k")
+
+[node name="Events" type="Node" parent="Systems"]
+script = ExtResource("2_x8vij")
+
+[node name="Pachinko" type="Node" parent="Systems" node_paths=PackedStringArray("ballHolder", "pegContainer", "landingRegionContainer", "machine")]
+script = ExtResource("1_347ys")
+ballHolder = NodePath("../../Pachinko/Ball Holder")
+pegContainer = NodePath("../../Pachinko/Pegs")
+landingRegionContainer = NodePath("../../Pachinko/Rewards")
+machine = NodePath("../../Pachinko")
+
+[node name="Restarter" type="Node" parent="Systems"]
+script = ExtResource("4_s8dmq")
+
+[node name="Pachinko" type="Node3D" parent="."]
+script = ExtResource("5_k2ryw")
+
+[node name="Machine" parent="Pachinko" instance=ExtResource("1_0qtnl")]
+
+[node name="Pegs" type="Node3D" parent="Pachinko"]
+transform = Transform3D(1, 0, 0, 0, 0.996917, 0.0784591, 0, -0.0784591, 0.996917, -0.771825, 1.46736, -0.173841)
+script = ExtResource("6_gucno")
+rowSpacing = 0.125
+columnSpacing = 0.175
+evenRowOffset = 0.075
+
+[node name="Row 1" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, 0, 0)
+
+[node name="Peg3" parent="Pachinko/Pegs/Row 1" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.431403, -0.00647771, 0.000843339)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 1" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.6, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 1" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.775, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 1" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.95, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 1" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.125, 0, 0)
+
+[node name="Row 2" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0, -0.125, 0)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 2" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.525, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 2" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.7, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 2" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.875, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 2" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.05, 0, 0)
+
+[node name="Row 3" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="Peg3" parent="Pachinko/Pegs/Row 3" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.425, 0, 0)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 3" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.6, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 3" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.775, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 3" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.95, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 3" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.125, 0, 0)
+
+[node name="Row 4" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, -0.375, 0)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 4" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.525, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 4" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.7, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 4" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.875, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 4" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.05, 0, 0)
+
+[node name="Row 5" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -0.5, 0)
+
+[node name="Peg3" parent="Pachinko/Pegs/Row 5" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.425, 0, 0)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 5" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.6, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 5" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.775, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 5" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.95, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 5" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.125, 0, 0)
+
+[node name="Row 6" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, -0.625, 0)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 6" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.525, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 6" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.7, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 6" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.875, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 6" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.05, 0, 0)
+
+[node name="Row 7" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, -0.75, 0)
+
+[node name="Peg3" parent="Pachinko/Pegs/Row 7" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.425, 0, 0)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 7" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.6, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 7" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.775, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 7" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.95, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 7" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.125, 0, 0)
+
+[node name="Row 8" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 3.72529e-08, 0, -3.72529e-08, 1, 0, -0.875, 0)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 8" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.525, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 8" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.7, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 8" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.875, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 8" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.05, 0, 0)
+
+[node name="Row 9" type="Node3D" parent="Pachinko/Pegs"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, -1, 0)
+
+[node name="Peg3" parent="Pachinko/Pegs/Row 9" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.425, 0, 0)
+
+[node name="Peg4" parent="Pachinko/Pegs/Row 9" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.6, 0, 0)
+
+[node name="Peg5" parent="Pachinko/Pegs/Row 9" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.775, 0, 0)
+
+[node name="Peg6" parent="Pachinko/Pegs/Row 9" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 0.95, 0, 0)
+
+[node name="Peg7" parent="Pachinko/Pegs/Row 9" instance=ExtResource("6_v7c2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.23517e-08, 0, -2.23517e-08, 1, 1.125, 0, 0)
+
+[node name="Walls" type="Node3D" parent="Pachinko"]
+
+[node name="Left" type="StaticBody3D" parent="Pachinko/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.502718, 1.04228, -0.132025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pachinko/Walls/Left"]
+shape = SubResource("BoxShape3D_v7c2q")
+
+[node name="Right" type="StaticBody3D" parent="Pachinko/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.504978, 1.04228, -0.132025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pachinko/Walls/Right"]
+shape = SubResource("BoxShape3D_v7c2q")
+
+[node name="Top" type="StaticBody3D" parent="Pachinko/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0110939, 1.92461, -0.132025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pachinko/Walls/Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0166476, 0)
+shape = SubResource("BoxShape3D_gucno")
+
+[node name="Bottom" type="StaticBody3D" parent="Pachinko/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0110939, 0.026769, -0.132025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pachinko/Walls/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0110987, 0.0539551)
+shape = SubResource("BoxShape3D_gucno")
+
+[node name="Rewards" type="Node3D" parent="Pachinko"]
+
+[node name="Reward" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.359579, 0.324414, -0.0465427)
+multiplier = 5
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Reward2" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.262528, 0.324414, -0.0465427)
+multiplier = 4
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Reward3" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.175371, 0.324414, -0.0465427)
+multiplier = 3
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Reward4" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0873421, 0.324414, -0.0465427)
+multiplier = 2
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Reward5" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00105676, 0.324414, -0.0465427)
+multiplier = 1
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Reward6" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0878433, 0.324414, -0.0465427)
+multiplier = 2
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Reward7" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175872, 0.324414, -0.0465427)
+multiplier = 3
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Reward8" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.263029, 0.324414, -0.0465427)
+multiplier = 4
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Reward9" parent="Pachinko/Rewards" node_paths=PackedStringArray("textMovePosition") instance=ExtResource("8_vrj8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3528, 0.324414, -0.0465427)
+multiplier = 5
+textMovePosition = NodePath("../../../MovePosition")
+snapDistance = 0.1
+
+[node name="Ball" parent="Pachinko" instance=ExtResource("5_cukox")]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131743, 1.60061, 0)
+gravity_scale = 0.8
+minSpeed = 0.4
+
+[node name="Ball Holder" parent="Pachinko" node_paths=PackedStringArray("ball") instance=ExtResource("10_1g62i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.572, -0.175)
+ball = NodePath("../Ball")
+range = 0.359
+tweenTime = 2.0
+
+[node name="ReflectionProbe" parent="Pachinko" instance=ExtResource("7_gucno")]
+transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 0, 1.75, 0)
+size = Vector3(10, 10, 10)
+origin_offset = Vector3(0, -2, 0)
+metadata/_edit_lock_ = true
+
+[node name="MovePosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7903, 0)

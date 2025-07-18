@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://cpdxgfa6qox4y"]
 
-[ext_resource type="Texture2D" uid="uid://chseits8ywk16" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="1_whpu8"]
+[ext_resource type="Texture2D" uid="uid://beb0pkhju3yep" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="1_whpu8"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_akerl"]
 parameter_name = "LightMoveSpeed"

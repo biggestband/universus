@@ -17,10 +17,13 @@ public partial class PachinkoEventManager : Node {
 
     [Signal]
     public delegate void OnBallDropEventHandler();
+    
+    [Signal]
+    public delegate void OnPachinkoStartEventHandler();
 
     [Signal]
     public delegate void OnFinalScoreEventHandler(float baseScore, float multiplier);
-
+    
 
     public void Hit(HitType hitType) {
         variantArr1 ??= new Variant[1];
@@ -36,6 +39,7 @@ public partial class PachinkoEventManager : Node {
     }
 
     public void BallDrop() => EmitSignal(SignalName.OnBallDrop);
+    public void PachinkoStart() => EmitSignal(SignalName.OnPachinkoStart);
 
     public void FinalScore(float baseScore, float multiplier) {
         variantArr2 ??= new Variant[2];

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://df5vh55flwbvp"]
+
+[ext_resource type="PackedScene" uid="uid://dwemxhsfjril6" path="res://Assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx" id="2_gwdqq"]
+
+[node name="Pachinko Machine" type="Node3D"]
+
+[node name="SM_PlinkoMachine_Model_01" parent="." instance=ExtResource("2_gwdqq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.624852, 0)

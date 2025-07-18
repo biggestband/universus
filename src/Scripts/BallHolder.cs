@@ -1,8 +1,9 @@
 using Godot;
 
-public partial class BallHolder : Node2D {
+public partial class BallHolder : Node3D {
     Tween tween;
-    Ball[] balls;
+    [Export]
+    Ball ball;
     bool active;
 
     [Export]
@@ -12,20 +13,32 @@ public partial class BallHolder : Node2D {
     float tweenTime = 1;
 
     public override void _Ready() {
-        var children = GetChildren();
-        balls = new Ball[children.Count];
-        for (int i = 0; i < children.Count; i++) {
-            if (children[i] is not Ball ball) continue;
-            balls[i] = ball;
-        }
+        // below is legacy code for multiple balls
+
+        // var children = ballContainer.GetChildren();
+        // balls = new Ball[children.Count];
+        // for (int i = 0; i < children.Count; i++) {
+        //     if (children[i] is not Ball ball) continue;
+        //     balls[i] = ball;
+        // }
+    }
+
+    public override void _EnterTree() {
+        Pachinko.Events.OnBallDrop += DropBall;
+    }
+    
+    public override void _ExitTree() {
+        Pachinko.Events.OnBallDrop -= DropBall;
+        tween?.Kill();
     }
 
     public override void _Process(double delta) {
-        if (!active || !Input.IsActionPressed("BiggestButton")) return;
+        if (!active) return;
+        ball.GlobalPosition = GlobalPosition;
+    }
+    void DropBall() {
         tween.Kill();
-        foreach (var ball in balls) {
-            ball.Freeze = false;
-        }
+        ball.Freeze = false;
         active = false;
     }
     public void Setup() {
@@ -35,9 +48,7 @@ public partial class BallHolder : Node2D {
         tween.TweenProperty(this, "position:x", -range, tweenTime).From(range);
         active = true;
 
-        foreach (Ball ball in balls) {
-            ball.Freeze = true;
-            ball.Setup();
-        }
+        ball.Freeze = true;
+        ball.Setup();
     }
 }

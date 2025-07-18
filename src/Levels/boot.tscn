@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4f01si8kdqv8"]
+
+[ext_resource type="Script" uid="uid://dunexd1v6qpuc" path="res://Scripts/Boot.cs" id="1_hjvc4"]
+[ext_resource type="PackedScene" uid="uid://6qy1hcogkdih" path="res://Levels/pachinko_mock.tscn" id="2_t5imi"]
+
+[node name="Boot" type="Node"]
+script = ExtResource("1_hjvc4")
+launchScene = ExtResource("2_t5imi")

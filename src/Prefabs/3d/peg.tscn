@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmdnm2wum40gx"]
+
+[ext_resource type="Script" uid="uid://cmqqg21hfeote" path="res://Scripts/Peg.cs" id="1_0aqjv"]
+[ext_resource type="PackedScene" uid="uid://dpshft7gh1ec4" path="res://Assets/3D/FBX/SM_Peg_Model_01.fbx" id="1_i7fid"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i7fid"]
+radius = 0.0104072
+height = 0.0620496
+
+[node name="Peg" type="StaticBody3D" node_paths=PackedStringArray("mesh")]
+script = ExtResource("1_0aqjv")
+mesh = NodePath("SM_Peg_Model_01/SM_Peg_Instance_01")
+hitEmission = 1.0
+hitScale = 3.0
+unHitScale = 0.46
+reHitScale = 0.0
+hitDuration = 0.4
+hitDelay = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.034321)
+shape = SubResource("CapsuleShape3D_i7fid")
+
+[node name="SM_Peg_Model_01" parent="." instance=ExtResource("1_i7fid")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
+
+[node name="SM_Peg_Instance_01" parent="SM_Peg_Model_01" index="0"]
+transform = Transform3D(1, 0, 0, 0, -1.19209e-07, 1, 0, -1, -1.19209e-07, 0.000399843, -0.000408816, 0.000149071)
+
+[editable path="SM_Peg_Model_01"]

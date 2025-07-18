@@ -25,7 +25,6 @@ linked_parent_graph_frame = 85
 op_type = 0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0oy23"]
-load_path = "res://.godot/imported/royal_esplanade_2k.hdr-822ea9fbe5b1b37cb6ace136b25e5dc5.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ij6xl"]
 linked_parent_graph_frame = 85
