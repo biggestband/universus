@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ytmb52f6sth"]
+
+[ext_resource type="Script" path="res://Enemies/Enemy_Scripts/StupidUnit.gd" id="1_ameb4"]
+[ext_resource type="PackedScene" uid="uid://bljaoodv6citb" path="res://Assets/3D/FBX/Mascots/Hunter DONE (2).fbx" id="2_l5d7r"]
+
+[node name="ridgeback_Unit_Stupid" type="Node3D"]
+script = ExtResource("1_ameb4")
+
+[node name="Mesh" parent="." instance=ExtResource("2_l5d7r")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://chxmgqolu0gtr"
-path="res://.godot/imported/LV_UniversusPolonskyCommons.fbx-cce0d66f1b0817af0fac7cd074978b76.scn"
+path="res://.godot/imported/LV_UniversusPolonskyCommons.fbx-93c10d91d552ba32c8ac97f846fb09a7.scn"
 
 [deps]
 
-source_file="res://assets/3D/FBX/LV_UniversusPolonskyCommons.fbx"
-dest_files=["res://.godot/imported/LV_UniversusPolonskyCommons.fbx-cce0d66f1b0817af0fac7cd074978b76.scn"]
+source_file="res://Assets/3D/FBX/LV_UniversusPolonskyCommons.fbx"
+dest_files=["res://.godot/imported/LV_UniversusPolonskyCommons.fbx-93c10d91d552ba32c8ac97f846fb09a7.scn"]
 
 [params]
 

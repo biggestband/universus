@@ -1,0 +1,185 @@
+[gd_resource type="VisualShader" load_steps=25 format=3 uid="uid://c1pqxf1sxpbjh"]
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_0oy23"]
+linked_parent_graph_frame = 85
+constant = 1.5
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_ygoju"]
+linked_parent_graph_frame = 85
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_7p5ao"]
+linked_parent_graph_frame = 85
+parameter_name = "ReflectionColour"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_b2ljw"]
+linked_parent_graph_frame = 85
+parameter_name = "ReflectionBrightnessMax"
+
+[sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_48pl0"]
+operator = 6
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_ole31"]
+default_input_values = [0, 2.0, 1, 1.0, 2, 0.0]
+linked_parent_graph_frame = 85
+op_type = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0oy23"]
+load_path = "res://.godot/imported/royal_esplanade_2k.hdr-822ea9fbe5b1b37cb6ace136b25e5dc5.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ij6xl"]
+linked_parent_graph_frame = 85
+texture = SubResource("CompressedTexture2D_0oy23")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_n8a3g"]
+size = Vector2(780, 560)
+expression = "vec3 view_dir = normalize(VIEW_DIR);
+vec3 normal = WORLD_NORMAL;
+vec3 reflect_vec = reflect(view_dir, normal);
+REFLECT = reflect_vec;
+"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_d8tuk"]
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_y8xnh"]
+size = Vector2(864, 333)
+title = "view_dir"
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_epttj"]
+size = Vector2(684, 233)
+title = "World Space Normal"
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_0t8vv"]
+size = Vector2(2245, 1088)
+title = "Reflections"
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_d3bsh"]
+linked_parent_graph_frame = 45
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_52v2e"]
+linked_parent_graph_frame = 45
+input_name = "view"
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_t5rhs"]
+linked_parent_graph_frame = 45
+function = 32
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_eliob"]
+linked_parent_graph_frame = 51
+input_name = "normal"
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_3s5x2"]
+linked_parent_graph_frame = 51
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_elju3"]
+linked_parent_graph_frame = 85
+input_name = "uv2"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_706rm"]
+linked_parent_graph_frame = 85
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_neqow"]
+linked_parent_graph_frame = 85
+constant = 2.0
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_hjflt"]
+output_port_for_preview = 0
+linked_parent_graph_frame = 85
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_un4fn"]
+linked_parent_graph_frame = 85
+constant = Vector3(0.1, -2, 0)
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_hyyx6"]
+linked_parent_graph_frame = 85
+size = Vector2(472, 200)
+expression = "// Input 'translated_uv' (vec2) - UVs shifted to origin (UV - 0.5)
+// Input 'angle' (float) - The rotation angle in radians
+
+float cos_angle = cos(angle);
+float sin_angle = sin(angle);
+
+vec2 rotated_uv_out;
+rotated_uv_out.x = translated_uv.x * cos_angle - translated_uv.y * sin_angle;
+rotated_uv_out.y = translated_uv.x * sin_angle + translated_uv.y * cos_angle;
+
+ROTATION = rotated_uv_out;"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+
+"
+nodes/fragment/86/node = SubResource("VisualShaderNodeFrame_y8xnh")
+nodes/fragment/86/position = Vector2(-4561.86, -80.4998)
+nodes/fragment/87/node = SubResource("VisualShaderNodeFrame_epttj")
+nodes/fragment/87/position = Vector2(-4481.86, 339.5)
+nodes/fragment/88/node = SubResource("VisualShaderNodeFrame_0t8vv")
+nodes/fragment/88/position = Vector2(-2701.86, -279.5)
+nodes/fragment/89/node = SubResource("VisualShaderNodeVectorFunc_d3bsh")
+nodes/fragment/89/position = Vector2(-3901.86, 60.5002)
+nodes/fragment/90/node = SubResource("VisualShaderNodeInput_52v2e")
+nodes/fragment/90/position = Vector2(-4521.86, 120.5)
+nodes/fragment/91/node = SubResource("VisualShaderNodeVectorFunc_t5rhs")
+nodes/fragment/91/position = Vector2(-4201.86, -39.4998)
+nodes/fragment/92/node = SubResource("VisualShaderNodeInput_eliob")
+nodes/fragment/92/position = Vector2(-4441.86, 400.5)
+nodes/fragment/93/node = SubResource("VisualShaderNodeVectorFunc_3s5x2")
+nodes/fragment/93/position = Vector2(-4001.86, 380.5)
+nodes/fragment/94/node = SubResource("VisualShaderNodeInput_elju3")
+nodes/fragment/94/position = Vector2(-2461.86, 20.5002)
+nodes/fragment/95/node = SubResource("VisualShaderNodeVectorOp_706rm")
+nodes/fragment/95/position = Vector2(-2101.86, -39.4998)
+nodes/fragment/96/node = SubResource("VisualShaderNodeFloatConstant_neqow")
+nodes/fragment/96/position = Vector2(-2661.86, 160.5)
+nodes/fragment/97/node = SubResource("VisualShaderNodeVectorOp_hjflt")
+nodes/fragment/97/position = Vector2(-1841.86, 60.5002)
+nodes/fragment/98/node = SubResource("VisualShaderNodeVec3Constant_un4fn")
+nodes/fragment/98/position = Vector2(-2241.86, 340.5)
+nodes/fragment/99/node = SubResource("VisualShaderNodeExpression_hyyx6")
+nodes/fragment/99/position = Vector2(-1621.86, -159.5)
+nodes/fragment/99/size = Vector2(472, 200)
+nodes/fragment/99/input_ports = "0,0,angle;1,3,translated_uv;"
+nodes/fragment/99/output_ports = "0,3,ROTATION;"
+nodes/fragment/99/expression = "// Input 'translated_uv' (vec2) - UVs shifted to origin (UV - 0.5)
+// Input 'angle' (float) - The rotation angle in radians
+
+float cos_angle = cos(angle);
+float sin_angle = sin(angle);
+
+vec2 rotated_uv_out;
+rotated_uv_out.x = translated_uv.x * cos_angle - translated_uv.y * sin_angle;
+rotated_uv_out.y = translated_uv.x * sin_angle + translated_uv.y * cos_angle;
+
+ROTATION = rotated_uv_out;"
+nodes/fragment/100/node = SubResource("VisualShaderNodeFloatConstant_0oy23")
+nodes/fragment/100/position = Vector2(-2281.86, -239.5)
+nodes/fragment/101/node = SubResource("VisualShaderNodeVectorOp_ygoju")
+nodes/fragment/101/position = Vector2(-701.858, 340.5)
+nodes/fragment/102/node = SubResource("VisualShaderNodeColorParameter_7p5ao")
+nodes/fragment/102/position = Vector2(-1121.86, 440.5)
+nodes/fragment/103/node = SubResource("VisualShaderNodeFloatParameter_b2ljw")
+nodes/fragment/103/position = Vector2(-741.858, 580.5)
+nodes/fragment/104/node = SubResource("VisualShaderNodeColorOp_48pl0")
+nodes/fragment/104/position = Vector2(-321.858, 560.5)
+nodes/fragment/105/node = SubResource("VisualShaderNodeVectorCompose_ole31")
+nodes/fragment/105/position = Vector2(-2361.86, 140.5)
+nodes/fragment/106/node = SubResource("VisualShaderNodeTexture_ij6xl")
+nodes/fragment/106/position = Vector2(-1061.86, 60.5002)
+nodes/fragment/107/node = SubResource("VisualShaderNodeExpression_n8a3g")
+nodes/fragment/107/position = Vector2(-3541.86, -159.5)
+nodes/fragment/107/size = Vector2(780, 560)
+nodes/fragment/107/input_ports = "0,4,VIEW_DIR;1,4,WORLD_NORMAL;2,5,my_custom_hdri_cubemap;"
+nodes/fragment/107/output_ports = "0,4,ALBEDO;1,4,REFLECT;"
+nodes/fragment/107/expression = "vec3 view_dir = normalize(VIEW_DIR);
+vec3 normal = WORLD_NORMAL;
+vec3 reflect_vec = reflect(view_dir, normal);
+REFLECT = reflect_vec;
+"
+nodes/fragment/108/node = SubResource("VisualShaderNodeVectorOp_d8tuk")
+nodes/fragment/108/position = Vector2(-21.8578, 580.5)
+nodes/fragment/connections = PackedInt32Array(92, 0, 93, 0, 90, 0, 91, 0, 91, 0, 89, 0, 94, 0, 95, 0, 95, 0, 97, 0, 98, 0, 97, 1, 97, 0, 99, 1, 100, 0, 99, 0, 99, 0, 106, 0, 106, 0, 101, 0, 102, 0, 101, 1, 101, 0, 104, 0, 103, 0, 104, 1, 105, 0, 95, 1, 104, 0, 108, 0)

@@ -1,7 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bdy63ayvmn0x5"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://8rc7nu5ohmkb"]
 
 [ext_resource type="Shader" uid="uid://cpdxgfa6qox4y" path="res://assets/3D/Materials/Shaders/VS_Emissive_Shader_01.tres" id="1_sk3dr"]
-[ext_resource type="Texture2D" uid="uid://8c6gxmchf3x1" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor_2.png" id="2_t5cbg"]
+[ext_resource type="Texture2D" uid="uid://chseits8ywk16" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_basecolor.png" id="2_t5cbg"]
 
 [resource]
 resource_name = "M_Emissive_Material_01"

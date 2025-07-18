@@ -72,10 +72,13 @@ public partial class LandingRegion : Area2D {
     public void Setup() {
         textTween?.Kill();
         connectedBall = null;
-        text.Modulate = Colors.Black;
-        textParent.Position = Vector2.Zero;
+        ResetTextState();
         lerpValue = 0f;
         currentState = State.Idle;
+    }
+    void ResetTextState() {
+        text.Modulate = Colors.Black;
+        textParent.Position = Vector2.Zero;
     }
 
     public override void _ExitTree() {
@@ -91,6 +94,7 @@ public partial class LandingRegion : Area2D {
         initialVelocity = ball.LinearVelocity;
         ball.DisablePhysics();
         connectedBall = ball;
+        lerpValue = 0;
         currentState = State.Attracting;
     }
 
@@ -111,6 +115,7 @@ public partial class LandingRegion : Area2D {
         var ballToSelf = GlobalPosition - connectedBall.GlobalPosition;
         if (ballToSelf.Length() <= snapDistance) {
             lerpValue = 0;
+            ResetTextState();
             return State.Shake;
         }
 

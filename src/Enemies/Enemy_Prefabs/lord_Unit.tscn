@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbpnj0n8ckev8"]
+
+[ext_resource type="Script" uid="uid://b52xe5iya21wn" path="res://Enemies/Enemy_Scripts/Unit.gd" id="1_w8jh5"]
+[ext_resource type="PackedScene" uid="uid://cfh1wn0bdeqf0" path="res://Assets/3D/FBX/Mascots/Lord DONE (1).fbx" id="2_w8jh5"]
+
+[node name="lord_Unit" type="Node3D"]
+script = ExtResource("1_w8jh5")
+
+[node name="Mesh" parent="." instance=ExtResource("2_w8jh5")]
+transform = Transform3D(-0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, -0.984808, 0, 0, 0)

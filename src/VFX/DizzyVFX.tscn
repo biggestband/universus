@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://dk7kx0qcypx68"]
+
+[ext_resource type="Script" uid="uid://d2bxxlybjai3a" path="res://Scripts/Vfx3D.gd" id="1_a6vsi"]
+[ext_resource type="Texture2D" uid="uid://cbn6il0o8yema" path="res://Pngs/IMG_0594.PNG" id="1_ijhu8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6vsi"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.547893, 0.479619, 0.305042, 1)
+albedo_texture = ExtResource("1_ijhu8")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+use_particle_trails = true
+
+[sub_resource type="Curve" id="Curve_pvwmp"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+
+[sub_resource type="Curve" id="Curve_vk1np"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+
+[sub_resource type="Curve" id="Curve_m5tjd"]
+_data = [Vector2(0, 0.994845), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_rre6k"]
+curve_x = SubResource("Curve_pvwmp")
+curve_y = SubResource("Curve_vk1np")
+curve_z = SubResource("Curve_m5tjd")
+
+[sub_resource type="Curve" id="Curve_303kw"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 2.10309), 0.0, 0.0, 0, 0, Vector2(1, 0.850516), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0rtbb"]
+curve = SubResource("Curve_303kw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wksf5"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 0.4
+emission_ring_inner_radius = 0.5
+emission_ring_cone_angle = 90.0
+orbit_velocity_min = 0.3
+orbit_velocity_max = 0.4
+orbit_velocity_curve = SubResource("CurveXYZTexture_rre6k")
+radial_velocity_min = 0.999978
+radial_velocity_max = 0.999978
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_over_velocity_curve = SubResource("CurveTexture_0rtbb")
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_oxu8d"]
+
+[node name="Dizzy" type="Node3D" node_paths=PackedStringArray("emitters")]
+script = ExtResource("1_a6vsi")
+emitters = [NodePath("Dizzy")]
+
+[node name="Dizzy" type="GPUParticles3D" parent="."]
+transform = Transform3D(1.00429, 0, 0, 0, -0.016651, 2.49966, 0, -1.00415, -0.0414497, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_a6vsi")
+emitting = false
+amount = 1
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
+process_material = SubResource("ParticleProcessMaterial_wksf5")
+draw_pass_1 = SubResource("QuadMesh_oxu8d")

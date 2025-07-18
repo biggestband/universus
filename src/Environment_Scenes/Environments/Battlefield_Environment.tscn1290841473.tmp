@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://ty41fgd80gqy"]
+
+[ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_aufuh"]
+[ext_resource type="Script" uid="uid://b02n7ag6kuno8" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_tag4l"]
+[ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Environment_Scenes/Environments/FPSCounter.gd" id="3_tag4l"]
+
+[sub_resource type="Environment" id="Environment_01vul"]
+background_mode = 1
+background_color = Color(0.216292, 0.759197, 0.921567, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+tonemap_mode = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q213"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1medq"]
+material = SubResource("StandardMaterial3D_7q213")
+size = Vector2(100, 100)
+
+[node name="BattlefieldEnvironment" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_01vul")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level"]
+material_override = ExtResource("1_aufuh")
+mesh = SubResource("PlaneMesh_1medq")
+skeleton = NodePath("../..")
+
+[node name="GFX" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="GFX"]
+transform = Transform3D(1, 0, 0, 0, 0.905569, 0.424199, 0, -0.424199, 0.905569, 0, 4.55, 28.875)
+
+[node name="EnemyManager" type="Node" parent="."]
+script = ExtResource("2_tag4l")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="FPSCounter" type="RichTextLabel" parent="HUD"]
+modulate = Color(0, 1, 0, 1)
+offset_right = 289.0
+offset_bottom = 101.0
+theme_override_font_sizes/normal_font_size = 70
+text = "Balls"
+script = ExtResource("3_tag4l")

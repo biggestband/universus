@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://do18oy0fd5m7k"
-path="res://.godot/imported/T_PlinkoMachineMaps_normal.png-1da6ecd4e9e83e69cbb4f0ec961d47b4.ctex"
+path="res://.godot/imported/T_PlinkoMachineMaps_normal.png-2eef0e93e76004fb97bd6d500f3685a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png"
-dest_files=["res://.godot/imported/T_PlinkoMachineMaps_normal.png-1da6ecd4e9e83e69cbb4f0ec961d47b4.ctex"]
+source_file="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_normal.png"
+dest_files=["res://.godot/imported/T_PlinkoMachineMaps_normal.png-2eef0e93e76004fb97bd6d500f3685a1.ctex"]
 
 [params]
 

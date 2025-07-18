@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2rtouugigcfo"]
+
+[ext_resource type="Script" uid="uid://doi8h4s8safss" path="res://Enemies/Enemy_Scripts/StupidUnit.gd" id="1_uxcic"]
+[ext_resource type="PackedScene" uid="uid://cfh1wn0bdeqf0" path="res://Assets/3D/FBX/Mascots/Lord DONE (1).fbx" id="2_w8jh5"]
+
+[node name="lord_Unit_Stupid" type="Node3D"]
+script = ExtResource("1_uxcic")
+
+[node name="Mesh" parent="." instance=ExtResource("2_w8jh5")]
+transform = Transform3D(-0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, -0.984808, 0, 0, 0)

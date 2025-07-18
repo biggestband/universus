@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://xs3m3vvuq4ul"
-path="res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-0f6cd36bf0771375d71cb91a9cfb28a6.scn"
+path="res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-b012a247fd4530b91c79728e46201a52.scn"
 
 [deps]
 
-source_file="res://assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx"
-dest_files=["res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-0f6cd36bf0771375d71cb91a9cfb28a6.scn"]
+source_file="res://Assets/3D/FBX/SM_PlinkoMachine_Model_01.fbx"
+dest_files=["res://.godot/imported/SM_PlinkoMachine_Model_01.fbx-b012a247fd4530b91c79728e46201a52.scn"]
 
 [params]
 
@@ -45,28 +45,6 @@ _subresources={
 "M_Glass_Material_01": {
 "use_external/enabled": true,
 "use_external/path": "uid://b4me05yowposl"
-},
-"M_Metallic_Material_01": {
-"use_external/enabled": true,
-"use_external/path": "uid://54rbipl8538f"
-}
-},
-"meshes": {
-"SM_Plinko_Mesh_01": {
-"generate/lightmap_uv": 2,
-"generate/lods": 2,
-"generate/shadow_meshes": 2,
-"lods/normal_merge_angle": 60.0,
-"save_to_file/enabled": false,
-"save_to_file/path": ""
-},
-"SM_Plinko_Mesh_01_002": {
-"generate/lightmap_uv": 2,
-"generate/lods": 2,
-"generate/shadow_meshes": 2,
-"lods/normal_merge_angle": 60.0,
-"save_to_file/enabled": false,
-"save_to_file/path": ""
 }
 }
 }
