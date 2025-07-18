@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://dyqqova0spy0o"
+path="res://.godot/imported/Durham_numbers-export.png-d7b3bb48c1d809a5651f2c0b27898998.fontdata"
+
+[deps]
+
+source_file="res://Assets/2D/Durham_numbers-export.png"
+dest_files=["res://.godot/imported/Durham_numbers-export.png-d7b3bb48c1d809a5651f2c0b27898998.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("48-57")
+kerning_pairs=PackedStringArray()
+columns=10
+rows=1
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=2

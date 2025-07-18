@@ -1,0 +1,117 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhpe5n0at6dfp"]
+
+[ext_resource type="FontFile" uid="uid://du7q8cntm12tc" path="res://Assets/2D/OTU_numbers-export.png" id="1_calj8"]
+[ext_resource type="FontFile" uid="uid://dyqqova0spy0o" path="res://Assets/2D/Durham_numbers-export.png" id="2_calj8"]
+[ext_resource type="Texture2D" uid="uid://bq3uaebibqa0w" path="res://Assets/2D/Logos.png" id="3_calj8"]
+
+[sub_resource type="GDScript" id="GDScript_3dpd8"]
+script/source = "extends Control
+
+# call signal from global UI_Plinko
+signal incrementScore(team: Team, increase)
+signal resetScore(team: Team)
+
+enum Team {OTU, Durham}
+
+var scoreOTU = 0
+var scoreDurham = 0
+
+@export var teamLabel: Dictionary[Team, Label]
+
+# Increments score for specified team
+func _incrementScore(team: Team, increase):
+	if team == Team.OTU:
+		scoreOTU += increase
+		_updateScore(Team.OTU, scoreOTU)
+	else:
+		scoreDurham += increase
+		_updateScore(Team.Durham, scoreDurham)
+
+# Resets score for specified team
+func _resetScore(team: Team):
+	if team == Team.OTU:
+		scoreOTU = 0
+		_updateScore(Team.OTU, scoreOTU)
+	else:
+		scoreDurham = 0
+		_updateScore(Team.Durham, scoreDurham)
+
+# Updates label
+func _updateScore(team: Team, teamScore):
+	teamLabel[team].text = str(teamScore)
+"
+
+[node name="UiPlinko" type="Control" node_paths=PackedStringArray("teamLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_3dpd8")
+teamLabel = {
+0: NodePath("OTU/Label"),
+1: NodePath("Durham/Label")
+}
+
+[node name="OTU" type="HBoxContainer" parent="."]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 279.0
+offset_right = 540.0
+offset_bottom = 232.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="OTU"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_calj8")
+theme_override_font_sizes/font_size = 90
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Durham" type="HBoxContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 280.0
+offset_right = 540.0
+offset_bottom = 232.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Durham"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_calj8")
+theme_override_font_sizes/font_size = 90
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -297.0
+offset_top = -1.0
+offset_right = 2103.0
+offset_bottom = 943.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(-2.14, 0)
+texture = ExtResource("3_calj8")
+
+[connection signal="incrementScore" from="." to="." method="_incrementScore"]
+[connection signal="resetScore" from="." to="." method="_resetScore"]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqd72pr8bu3ev"]
+
+[ext_resource type="PackedScene" uid="uid://bhpe5n0at6dfp" path="res://Levels/UI_Plinko.tscn" id="1_qnwwv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3h1ii"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_qnwwv"]
+sky_material = SubResource("ProceduralSkyMaterial_3h1ii")
+
+[sub_resource type="Environment" id="Environment_30ou4"]
+background_mode = 2
+sky = SubResource("Sky_qnwwv")
+tonemap_mode = 2
+
+[node name="UiTestScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_30ou4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.679851, 0.505352, -0.531433, 0, 0.724665, 0.689101, 0.73335, -0.468486, 0.492664, 0, 0, 0)
+
+[node name="UiPlinko" parent="." node_paths=PackedStringArray("teamLabel") instance=ExtResource("1_qnwwv")]
+teamLabel = {
+0: NodePath("OTU/Label"),
+1: NodePath("Durham/Label")
+}
+
+[node name="Button" type="Button" parent="."]
+offset_left = 102.0
+offset_top = 770.0
+offset_right = 593.0
+offset_bottom = 881.0
+theme_override_font_sizes/font_size = 75
+text = "Increase OTU"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 95.0
+offset_top = 931.0
+offset_right = 586.0
+offset_bottom = 1042.0
+theme_override_font_sizes/font_size = 75
+text = "Increase Durham"
+
+[connection signal="pressed" from="Button" to="UiPlinko" method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="UiPlinko" method="_on_button_2_pressed"]
