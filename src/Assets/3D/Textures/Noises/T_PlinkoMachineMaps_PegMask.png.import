@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://vr1n7q5kxeyx"
-path.s3tc="res://.godot/imported/T_PlinkoMachineMaps_PegMask.png-54c7eb1ea295b52863c69ff94add578e.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_PlinkoMachineMaps_PegMask.png-89626a2d408bb0f8e9e4874d5e4634e4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_PegMask.png"
-dest_files=["res://.godot/imported/T_PlinkoMachineMaps_PegMask.png-54c7eb1ea295b52863c69ff94add578e.s3tc.ctex"]
+source_file="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_PegMask.png"
+dest_files=["res://.godot/imported/T_PlinkoMachineMaps_PegMask.png-89626a2d408bb0f8e9e4874d5e4634e4.s3tc.ctex"]
 
 [params]
 

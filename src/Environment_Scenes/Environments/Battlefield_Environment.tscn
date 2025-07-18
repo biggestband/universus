@@ -1,22 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://ty41fgd80gqy"]
+[gd_scene load_steps=5 format=3 uid="uid://ty41fgd80gqy"]
 
-[ext_resource type="Material" uid="uid://oolickkdavxb" path="res://Materials/Ground_Temp.tres" id="1_aufuh"]
 [ext_resource type="Script" uid="uid://b02n7ag6kuno8" path="res://Enemies/Enemy_Scripts/UnitManager.gd" id="2_tag4l"]
+[ext_resource type="PackedScene" uid="uid://chxmgqolu0gtr" path="res://Assets/3D/FBX/LV_UniversusPolonskyCommons.fbx" id="3_8vr15"]
 [ext_resource type="Script" uid="uid://c14m5hv3rgin6" path="res://Scripts/FPSCounter.gd" id="3_tag4l"]
 
 [sub_resource type="Environment" id="Environment_01vul"]
 background_mode = 1
 background_color = Color(0.216292, 0.759197, 0.921567, 1)
 ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_color = Color(0.988783, 0.898337, 0.819529, 1)
 reflected_light_source = 1
 tonemap_mode = 3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q213"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_1medq"]
-material = SubResource("StandardMaterial3D_7q213")
-size = Vector2(100, 100)
+adjustment_enabled = true
+adjustment_contrast = 0.9
+adjustment_saturation = 1.25
 
 [node name="BattlefieldEnvironment" type="Node3D"]
 
@@ -25,15 +22,13 @@ environment = SubResource("Environment_01vul")
 
 [node name="Level" type="Node" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level"]
-material_override = ExtResource("1_aufuh")
-mesh = SubResource("PlaneMesh_1medq")
-skeleton = NodePath("../..")
+[node name="LV_UniversusPolonskyCommons" parent="Level" instance=ExtResource("3_8vr15")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.26839, 0, 56.9403)
 
 [node name="GFX" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="GFX"]
-transform = Transform3D(1, 0, 0, 0, 0.572146, 0.820152, 0, -0.820152, 0.572146, 0, 19.55, 18.875)
+transform = Transform3D(-4.37114e-08, -0.66523, 0.746638, 0, 0.746638, 0.66523, -1, 2.90781e-08, -3.26366e-08, 61.8667, 22.274, 0)
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("2_tag4l")
@@ -47,3 +42,6 @@ offset_bottom = 101.0
 theme_override_font_sizes/normal_font_size = 70
 text = "Balls"
 script = ExtResource("3_tag4l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0270173, 0.94589, 0.323362, -0.00704811, -0.323653, 0.94615, 0.99961, 0.0232833, 0.015411, 0, 0, 0)

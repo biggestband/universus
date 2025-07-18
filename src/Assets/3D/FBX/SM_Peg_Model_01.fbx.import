@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://kbf2g21sf334"
-path="res://.godot/imported/SM_Peg_Model_01.fbx-1458285d72f1a19bb07dca9c4f0c6397.scn"
+path="res://.godot/imported/SM_Peg_Model_01.fbx-e1273372fe2fe67ccddaf19b375f2ec1.scn"
 
 [deps]
 
-source_file="res://assets/3D/FBX/SM_Peg_Model_01.fbx"
-dest_files=["res://.godot/imported/SM_Peg_Model_01.fbx-1458285d72f1a19bb07dca9c4f0c6397.scn"]
+source_file="res://Assets/3D/FBX/SM_Peg_Model_01.fbx"
+dest_files=["res://.godot/imported/SM_Peg_Model_01.fbx-e1273372fe2fe67ccddaf19b375f2ec1.scn"]
 
 [params]
 

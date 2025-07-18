@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cfh1wn0bdeqf0"
-path="res://.godot/imported/Lord DONE (1).fbx-a4bbab95430539af1174ed2bde1e27d7.scn"
+path="res://.godot/imported/Lord DONE (1).fbx-47748a10b28d843733e6ace20541e993.scn"
 
 [deps]
 
-source_file="res://assets/3D/FBX/Mascots/Lord DONE (1).fbx"
-dest_files=["res://.godot/imported/Lord DONE (1).fbx-a4bbab95430539af1174ed2bde1e27d7.scn"]
+source_file="res://Assets/3D/FBX/Mascots/Lord DONE (1).fbx"
+dest_files=["res://.godot/imported/Lord DONE (1).fbx-47748a10b28d843733e6ace20541e993.scn"]
 
 [params]
 

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://hj8eqs6our68"
-path="res://.godot/imported/SM_PlinkoClaw_Model_01.fbx-65397f70085a35e47123f2ceb3009f1c.scn"
+path="res://.godot/imported/SM_PlinkoClaw_Model_01.fbx-308b41dad2c32240ee465908fb44a3b1.scn"
 
 [deps]
 
-source_file="res://assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx"
-dest_files=["res://.godot/imported/SM_PlinkoClaw_Model_01.fbx-65397f70085a35e47123f2ceb3009f1c.scn"]
+source_file="res://Assets/3D/FBX/SM_PlinkoClaw_Model_01.fbx"
+dest_files=["res://.godot/imported/SM_PlinkoClaw_Model_01.fbx-308b41dad2c32240ee465908fb44a3b1.scn"]
 
 [params]
 

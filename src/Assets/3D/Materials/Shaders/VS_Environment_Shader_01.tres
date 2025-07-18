@@ -1,8 +1,8 @@
-[gd_resource type="VisualShader" load_steps=36 format=3 uid="uid://dy3uaex154icp"]
+[gd_resource type="VisualShader" load_steps=36 format=3 uid="uid://c4ugud6fuu72a"]
 
-[ext_resource type="Texture2D" uid="uid://vr1n7q5kxeyx" path="res://assets/3D/Textures/Noises/T_PlinkoMachineMaps_PegMask.png" id="1_7gcry"]
-[ext_resource type="Texture2D" uid="uid://ip7ol2ypklaa" path="res://assets/3D/Textures/Noises/T_Envrionment_grass.png" id="1_mtek0"]
-[ext_resource type="Texture2D" uid="uid://setvdx1euye7" path="res://assets/3D/Textures/Noises/T_Envrionment_brick.png" id="2_mtek0"]
+[ext_resource type="Texture2D" uid="uid://vr1n7q5kxeyx" path="res://Assets/3D/Textures/Noises/T_PlinkoMachineMaps_PegMask.png" id="1_7gcry"]
+[ext_resource type="Texture2D" uid="uid://ip7ol2ypklaa" path="res://Assets/3D/Textures/Noises/T_Envrionment_grass.png" id="1_mtek0"]
+[ext_resource type="Texture2D" uid="uid://setvdx1euye7" path="res://Assets/3D/Textures/Noises/T_Envrionment_brick.png" id="2_mtek0"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_nurp7"]
 texture = ExtResource("1_mtek0")
@@ -30,7 +30,6 @@ texture = ExtResource("1_7gcry")
 input_name = "uv"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8k6jc"]
-load_path = "res://.godot/imported/T_UniVersusColorPalette_basecolor.png-000ac40a8d33a9b25f8ec224d00d0e19.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_1wd4u"]
 source = 5
